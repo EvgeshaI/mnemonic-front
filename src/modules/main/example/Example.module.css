@@ -1,0 +1,231 @@
+.exampleContainer {
+    margin: 0 auto;
+}
+.wordTranslation {
+    cursor: pointer;
+    margin: 5px 2px;
+    padding: 5px 10px;
+    border: 1px solid gray;
+    border-radius: 15px;
+}
+
+.wordTranslation:hover {
+    text-decoration: underline;
+}
+.exampleMnemonic {
+    cursor: pointer;
+    margin: 5px;
+    padding: 5px;
+    border: 1px solid gray;
+    border-radius: 15px;
+}
+
+.translationPart {
+    color: blue;
+}
+
+.addExampleButton {
+    text-align: center;
+    padding: 10px;
+    margin: 25px auto;
+    background-color: #d0d6dc;
+    box-shadow: 1px 1px 2px lightslategray;
+    width: 200px;
+    border-radius: 15px;
+    cursor: pointer;
+}
+.addExampleButton:hover {
+    background-color: lightgray;
+}
+
+.exampleComponent {
+    padding: 15px 25px 15px 25px;
+    border-bottom: 1px solid #cccccc;
+    margin: 10px 0;
+}
+
+.exampleComponent:first-child {
+    padding: 0 25px 15px 25px;
+}
+
+.example {
+    font-size: 25px;
+    text-align: left;
+    /*border-radius: 15px;*/
+    /*box-shadow: 10px 10px 5px lightslategray;*/
+    /*margin: 0 auto;*/
+    /*width: 70%;*/
+}
+.newExampleSentence {
+    font-size: 25px;
+    text-align: center;
+    border-bottom: 1px solid #bdbdbd;
+}
+.createExample {
+    margin: 25px auto;
+    padding: 15px 15px 5px 15px;
+    border: 1px solid #bdbdbd;
+    border-radius: 5px;
+}
+.inputNewExample {
+    width: 90%;
+    margin: 5px auto;
+}
+.newExampleTextArea {
+    width: 100%;
+    text-align: center;
+    border: none;
+    color: black;
+    outline: none;
+    box-sizing: border-box;
+    font-size: 24px;
+    border-bottom: 1px solid darkgrey;
+    overflow:auto;
+}
+.newExampleTextArea::placeholder {
+    font-size: 14px;
+    font-style: italic;
+}
+.chooseTranslationHeader {
+    margin: 10px 0 5px 0;
+    font-size: 14px;
+    font-style: italic;
+    color: #bdbdbd;
+}
+.translationSelect {
+    width: 100%;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.translationSelect li {
+    display: inline-block;
+}
+.mnemonicSelect {
+    width: 100%;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.mnemonicSelect li {
+    display: inline-block;
+}
+.b {
+    display: flex;
+}
+.author {
+    font-size: 15px;
+    margin: 5px;
+    font-style: normal;
+    color: #bdbdbd;
+}
+
+.buttonIcons {
+    display: flex;
+    cursor: pointer;
+    margin-left: auto;
+}
+
+.buttonIcons svg {
+    padding: 0 4px;
+    width: 20px;
+}
+.deleteIcon svg {
+    fill: #A52A2A;
+}
+.likeCountContainer {
+    display: table;
+}
+.likeCount {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.buttonStyle {
+    text-align: center;
+    width: 30%;
+    margin: 15px auto;
+    font-size: 15px;
+    border-radius: 10px;
+    padding: 10px 5px;
+    color: black;
+    background-color: #d0d6dc;
+    border: 0;
+    box-shadow: 1px 1px 2px lightslategray;
+    cursor: pointer;
+}
+.buttonStyle:hover {
+    background-color: #bdbdbd;
+}
+
+.newExample {
+    font-size: 25px;
+    text-align: center;
+    padding: 10px;
+    border-radius: 25px;
+    background-color: #cccccc
+}
+.mnemonicPart {
+    font-weight: bold;
+}
+
+.buttonLike{
+    border: 0;
+    font-size: 15px;
+    border-radius: 25px;
+    background-color: white;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    margin: 5px 40px ;
+}
+.buttonAddLike {
+    border: 0;
+    font-size: 15px;
+    border-radius: 25px;
+    background-color: yellow;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    margin: 5px 40px ;
+}
+.buttonLike:hover {
+    background-color: lightslategray
+}
+.buttonLike:active
+{
+    background-color: #3e8e41;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+}
+
+/* UPDATE EXAMPLE COMPONENT*/
+.updateExample {
+    margin: 0 auto;
+}
+.closeButtonBox {
+    display: flex;
+    justify-content: flex-end;
+    height: 15px;
+}
+.closeButtonBox svg {
+    fill: #666666;
+}
+.closeButtonBox svg:hover {
+    fill: black;
+    cursor: pointer;
+}
+.updateCheckButton {
+    text-align: center;
+    width: 30%;
+    margin: 15px auto 0 auto;
+    font-size: 15px;
+    border-radius: 10px;
+    padding: 10px 5px;
+    color: black;
+    background-color: #d0d6dc;
+    border: 0;
+    box-shadow: 1px 1px 2px lightslategray;
+    cursor: pointer;
+}
+.updateCheckButton:hover {
+    background-color: #bdbdbd;
+}
+/* UPDATE EXAMPLE COMPONENT END!*/
+

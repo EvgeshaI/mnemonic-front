@@ -1,0 +1,65 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    background-color: lightsteelblue;
+    height: 80px;
+    border-radius: 15px;
+    margin: 5px 0 5px;
+    box-shadow: 1px 1px 2px lightslategray;
+}
+.search {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
+}
+
+
+
+.inputAndIcon {
+    position: relative;
+    width: 500px;
+    margin: 10px auto;
+    background: white;
+    border-radius: 10px;
+
+}
+.searchInput,
+.searchIcon {
+    border: none;
+    outline: none;
+    background: transparent;
+
+}
+.searchInput {
+    width: 100%;
+    height: 42px;
+    padding-left: 15px;
+
+}
+.searchIcon {
+    width: 30px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+    margin: 5px 5px 0;
+}
+
+
+
+
+
+.logo {
+    margin: 30px 15px;
+    cursor: pointer;
+}
+
+.profile {
+
+    cursor: pointer;
+}
+
+.profile svg {
+    padding: 0 15px;
+    width: 50px;
+}

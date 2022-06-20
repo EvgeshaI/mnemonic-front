@@ -1,0 +1,125 @@
+.engWordContainer {
+    padding: 10px 10px 25px 10px;
+    width: 50%;
+    margin: 0 auto;
+}
+
+.engWordComponent {
+    padding: 10px 0;
+}
+
+.engWord {
+    padding: 10px;
+    font-size: 30px;
+    text-align: left;
+    font-weight: bold;
+}
+.word {
+    font-style: oblique;
+    font-size: 16px;
+}
+.nav {
+    text-align: center;
+}
+.translate {
+    font-size: 25px;
+    padding: 0 0 10px 0;
+    margin: 0 0 10px 0;
+    border-bottom: 1px solid #cccccc;
+}
+.translateWord {
+    margin: 0 0 15px 15px;
+    font-size: 20px;
+    font-style: italic;
+}
+.mnemonicComponent {
+    padding: 10px 25px 15px 25px;
+    border-bottom: 1px solid #cccccc;
+}
+.highlightWord {
+    text-align: left;
+    font-size: 20px;
+
+}
+.mnemo {
+    font-size: 25px;
+    text-align: left;
+
+    /*box-shadow: 5px 5px 5px lightslategray;*/
+    /*border-radius: 15px;*/
+    /*margin: 0 auto;*/
+    /*width: 60%;*/
+}
+
+.author {
+    font-size: 15px;
+    margin: 5px;
+    font-style: normal;
+    color: #bdbdbd;
+}
+.mnemonicBottom {
+    display: flex;
+}
+
+.buttonIcons {
+    display: flex;
+    cursor: pointer;
+    margin-left: auto;
+}
+
+.buttonIcons svg {
+    padding: 0 4px;
+    width: 20px;
+}
+.likeCountContainer {
+    display: table;
+}
+.likeCount {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.trans {
+    font-style: italic;
+    font-size: 16px;
+    text-align: left;
+}
+
+.buttonLike{
+    border: 0;
+    font-size: 15px;
+    border-radius: 25px;
+    background-color: white;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    margin: 5px 40px ;
+}
+.buttonAddLike {
+    border: 0;
+    font-size: 15px;
+    border-radius: 25px;
+    background-color: yellow;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    margin: 5px 40px ;
+}
+.buttonLike:hover {
+    background-color: lightslategray
+}
+.buttonLike:active
+ {
+    background-color: #3e8e41;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+}
+.buttonDelete {
+    background-image: linear-gradient(to bottom right, gainsboro, white);
+    border: 0;
+    font-size: 15px;
+    border-radius: 25px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+.buttonDelete:active {
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+
+}
+

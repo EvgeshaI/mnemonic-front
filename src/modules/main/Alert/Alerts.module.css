@@ -1,0 +1,24 @@
+.alert {
+    margin: 0 auto;
+    width: 40%;
+    position: sticky;
+    bottom: 10px;
+    background: linear-gradient(130deg, #cccccc, #bdbdbd);
+    border-radius: 15px;
+
+}
+.closeButtonBox {
+    display: flex;
+    justify-content: flex-end;
+    padding: 7px;
+    height: 15px;
+}
+.closeButtonBox svg:hover {
+    fill: white;
+    cursor: pointer;
+}
+
+.alertMessage {
+    font-weight: 500;
+    padding: 0px 30px 20px 30px;
+}
