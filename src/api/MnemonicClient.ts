@@ -1,5 +1,5 @@
 //обращение к серверу
-import {IEngWord, IExample, IMnemonic, IPageExample, IPageMnemonic, ITranslation} from "../shared/models/engWordTypes";
+import {IAuthResponse, IEngWord, IExample, IMnemonic, IPageElements, IStudy,} from "../shared/models/engWordTypes";
 import {BaseClient} from "./BaseClient";
 
 export class MnemonicClient extends BaseClient {
@@ -9,11 +9,11 @@ export class MnemonicClient extends BaseClient {
 
     static async getMnemonic (id: number) {
         const params = { engWordId: id };
-        return this.get<IPageMnemonic>(`mnemonic`, {params})
+        return this.get<IPageElements<IMnemonic>>(`mnemonic`, {params})
     }
     static async getExample (id: number) {
         const params = { engWordId: id };
-        return this.get<IPageExample>(`mnemonic/example`, {params})
+        return this.get<IPageElements<IExample>>(`example`, {params})
     }
 
     static async postMnemonicLike (id: number) {
@@ -26,11 +26,11 @@ export class MnemonicClient extends BaseClient {
 
     static async postExampleLike (id: number) {
         const params = {exampleId: id};
-        return this.post<undefined> (`mnemonic/example/like/`, undefined, {params})
+        return this.post<undefined> (`example/like/`, undefined, {params})
     }
     static async deleteExampleLike (id: number) {
         const params = {exampleId: id};
-        return this.delete(`mnemonic/example/like/`, {params})
+        return this.delete(`example/like/`, {params})
     }
 
     static async addMnemonic (engWordId: number, phrase: string, hl:Array<number>) {
@@ -61,11 +61,11 @@ export class MnemonicClient extends BaseClient {
     };
 
     static async saveExample (newExample: IExample) {
-        return this.post (`mnemonic/example`, newExample)
+        return this.post<IExample> (`example`, newExample)
     }
 
     static async updateExample (example: IExample) {
-        return this.put<IExample>(`mnemonic/example`, example)
+        return this.put<IExample>(`example`, example)
     }
 
     static async checkExample (exampleId: number | null, engWordId: number, sentence: string, translationId?: number | null, mnemonicId?: number | null) {
@@ -76,70 +76,47 @@ export class MnemonicClient extends BaseClient {
             mnemonicId: mnemonicId,
             sentence: sentence
         };
-        return this.post<IExample>(`mnemonic/example/check`, body)
+        return this.post<IExample>(`example/check`, body)
     }
 
     static async deleteExample (id: number) {
-        return this.delete(`mnemonic/example/${id}`)
+        return this.delete(`example/${id}`)
     };
 
-
-
-
-
-   // getEngWord
-   static async addTranslation (id: number, word:string) {
-        return addTranslationResponse (word)
-   }
-   // static async addMnemonic (id: number, mnemo:string, hl:Array<number>){
-   //      return addMnemonicResponse (mnemo, hl)
-   // }
-   // static async addExample (id: number, mnemonicId: number, translationId: number, sentence: string) {
-   //      return addExampleResponse (mnemonicId, translationId, sentence)
-   // }
-   // static async checkExample(id: number, example: ICheckExample) {
-   //     let translationId = example.translationId ? example.translationId : 666;
-   //     let mnemonicId = example.mnemonicId ? example.mnemonicId : 666;
-   //      return checkExampleResponse (example.sentence, translationId, mnemonicId)
-   // }
-
-}
-
-const addTranslationResponse = (word: string) => {
-    let iTranslation = exampleTranslations.get(word);
-    return iTranslation ? iTranslation : {
-        id: 11,
-        translation: word
-    }
-}
-let exampleTranslations = new Map<string, ITranslation>()
-exampleTranslations.set('фото',{
-    id: 11,
-    translation: 'фото'
-})
-exampleTranslations.set('изображение',{
-    id: 22,
-    translation: 'изображение'
-})
-
-const addMnemonicResponse = (mnemo: string, hl: Array<number>) => {
-    return {
-        id: 123,
-        phrase: mnemo,
-        highlight: hl,
-        creator : {
-            id: 123,
-            author : "Ivanov"
+    static async signUp (nickName: string, email: string, password: string) {
+        let body = {
+            nickname: nickName,
+            email: email,
+            password: password
         }
-    }
+        return this.post<IAuthResponse>(`auth/sign-up`, body)
+    };
+    static async authUser ( email: string, password: string) {
+        let body = {
+            email: email,
+            password: password
+        }
+        return this.post<IAuthResponse>(`auth/login`, body)
+    };
+
+    static async myPage () {
+        return this.get<IPageElements<IStudy>>(`study/my`)
+    };
+
+    static async searchMyMnemo (word: string) {
+        return this.get<IPageElements<IStudy>>(`study/my?search=${word}`)
+    };
+
+    static async resetPassword (email: string) {
+        return this.get(`auth/reset-password?email=${email}`)
+    };
+    static async changePassword (token: string, password: string) {
+        let body = {
+            password: password,
+            token: token
+        }
+        return this.post(`auth/change-password`, body )
+    };
 }
 
-const translations = new Map<number, ITranslation>()
-translations.set(11, {
-    id: 11,
-    translation: "фото"
-})
-translations.set(22, {
-    id: 22,
-    translation: "изображение"
-})
+

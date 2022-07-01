@@ -2,11 +2,17 @@ import {Action, configureStore, ThunkAction} from "@reduxjs/toolkit";
 import engWordReducer from './engWordSlice'
 import {TypedUseSelectorHook, useDispatch, useSelector} from "react-redux";
 import alertReducer from "./alertsSlise";
+import authReducer from "./authSlice";
+import appReducer from "./appSlice";
+import userReducer from "./userSlice";
 
 export const store = configureStore( {
     reducer: {
         engWordReducer: engWordReducer,
-        alertReducer: alertReducer
+        alertReducer: alertReducer,
+        authReducer: authReducer,
+        appReducer: appReducer,
+        userReducer: userReducer
     }
 });
 

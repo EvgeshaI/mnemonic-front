@@ -4,9 +4,12 @@ import s from './mnemonic.module.css'
 import SeparatedLetter from "./SeparatedLetter";
 import {addMnemonicAsync} from "../../../store/engWordSlice";
 import {ReactComponent as CloseIcon} from "../../../import/icons/close-slim.svg"
+import {IEngWord} from "../../../shared/models/engWordTypes";
+import {TransliterationComponent} from "./TransliterationComponent";
+import MyTranslit from "./MyTranslit";
 
 
-const CreateMnemonic:FC<{engWordId: number, afterFinishClicked: () => void}> = (props) => {
+const CreateMnemonic:FC<{engWord: IEngWord, afterFinishClicked: () => void}> = (props) => {
     const dispatch = useAppDispatch();
     let [mnemo, setMnemo] = useState("");
     let [entered, setEntered] = useState(false);
@@ -19,7 +22,7 @@ const CreateMnemonic:FC<{engWordId: number, afterFinishClicked: () => void}> = (
     };
     let saveMnemo = () => {
         if(entered) {
-            dispatch(addMnemonicAsync(props.engWordId, mnemo, highlight));
+            dispatch(addMnemonicAsync(props.engWord.id, mnemo, highlight));
             setMnemo("");
             setHighlight([]);
             props.afterFinishClicked();
@@ -36,13 +39,12 @@ const CreateMnemonic:FC<{engWordId: number, afterFinishClicked: () => void}> = (
         setEntered(true);
     };
     let addNumber = (i:number) => {
-
             setHighlight([...highlight, i])
-
     };
     let deleteNumber = (i: number) => {
         setHighlight(highlight.filter(el => el !== i))
     };
+
 
     return (
         <div className={s.createMnemonic}>
@@ -50,7 +52,17 @@ const CreateMnemonic:FC<{engWordId: number, afterFinishClicked: () => void}> = (
                 <div>
                     <CloseIcon/>
                 </div>
-            </div >
+            </div>
+            {entered &&
+                <div>
+                <ul className={s.transContainer}>
+                    {props.engWord.transliterations.map((tr) =>
+                    <TransliterationComponent transliteration={tr.transliteration} accuracy={tr.accuracy}/> )}
+                    {<MyTranslit word={mnemo} highlight={highlight} trans={props.engWord.transliterations}/>}
+                </ul>
+
+                </div>
+            }
             <div>
                 <input  value={mnemo}
                     onChange={updateMnemo}
@@ -61,6 +73,7 @@ const CreateMnemonic:FC<{engWordId: number, afterFinishClicked: () => void}> = (
             </div>
 
             <div>
+
                 {entered &&
                     mnemo.split("").map((l, index) => <SeparatedLetter
                         deleteNumber ={deleteNumber}
@@ -79,6 +92,7 @@ const CreateMnemonic:FC<{engWordId: number, afterFinishClicked: () => void}> = (
             </div>
             }
             <div>
+
                 {highlight.length > 0 &&
                 <button onClick={saveMnemo}
                         className={s.buttonStyle}

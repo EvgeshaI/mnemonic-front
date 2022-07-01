@@ -21,7 +21,7 @@
 }
 
 .translationPart {
-    color: blue;
+    color: cornflowerblue;
 }
 
 .addExampleButton {
@@ -47,7 +47,17 @@
 .exampleComponent:first-child {
     padding: 0 25px 15px 25px;
 }
-
+.dateBox {
+    display: flex;
+}
+.dateFormat {
+    display: flex;
+    padding: 0 0 10px;
+    margin-left: auto;
+    color: #bdbdbd;
+    font-size: 13px;
+    align-items: center;
+}
 .example {
     font-size: 25px;
     text-align: left;
@@ -115,7 +125,7 @@
 }
 .author {
     font-size: 15px;
-    margin: 5px;
+    margin: 5px 0 5px;
     font-style: normal;
     color: #bdbdbd;
 }
@@ -130,6 +140,7 @@
     padding: 0 4px;
     width: 20px;
 }
+
 .deleteIcon svg {
     fill: #A52A2A;
 }
@@ -167,6 +178,7 @@
 }
 .mnemonicPart {
     font-weight: bold;
+    color: lightsteelblue;
 }
 
 .buttonLike{

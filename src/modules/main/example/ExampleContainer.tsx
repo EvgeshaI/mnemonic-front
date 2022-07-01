@@ -3,6 +3,7 @@ import {IEngWord, IExample, IMnemonic} from "../../../shared/models/engWordTypes
 import s from "./Example.module.css";
 import ExampleComponent from "./ExampleComponent";
 import CreateExample from "./CreateExample";
+import {useNavigate} from "react-router";
 
 type PropsType = {
     engWord: IEngWord
@@ -10,22 +11,29 @@ type PropsType = {
     examples: Array<IExample>
     updateExample: IExample | null
     checkedExample: IExample | null
+    isAuth: boolean
 }
 
 const ExampleContainer: FC<PropsType> = (props) => {
 
     let [clickCreateExample, setClickCreateExample] = useState(false);
-
+    const navigate = useNavigate()
     let clickOnAddExample = () => {
-        setClickCreateExample(!clickCreateExample)
+        if(props.isAuth) {
+            setClickCreateExample(!clickCreateExample)
+        }else {
+            navigate(`/login`)
+        }
+
     }
 
     return (
         <div className={s.exampleContainer}>
             {props.examples.map(m => <ExampleComponent engWord={props.engWord}
-                                                 mnemonics={props.mnemonics}
-                                                 example={m}
-                                                 updateExample={props.updateExample}/>)}
+                                                       mnemonics={props.mnemonics}
+                                                       example={m}
+                                                       auth={props.isAuth}
+                                                       updateExample={props.updateExample}/>)}
             {clickCreateExample ?
                 <CreateExample
                     engWord={props.engWord}
@@ -33,9 +41,13 @@ const ExampleContainer: FC<PropsType> = (props) => {
                     newExample={props.checkedExample}
                     afterSaveClick={clickOnAddExample}
                 />
-                :
-                <div className={s.addExampleButton} onClick={clickOnAddExample}>
-                    Добавить пример
+                :<div>
+                    {props.mnemonics.length > 0 &&
+                        <div className={s.addExampleButton} onClick={clickOnAddExample}>
+                        Добавить пример
+                        </div>
+                    }
+
                 </div>
             }
         </div>

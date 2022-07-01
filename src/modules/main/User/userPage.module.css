@@ -1,0 +1,197 @@
+.user {
+    width: 60%;
+    display: flex;
+    margin: 30px auto;
+    /*border-bottom: 1px solid #cccccc;*/
+}
+.text {
+    margin: 10px auto 0;
+    font-size: 25px;
+    color: lightslategrey;
+    cursor: pointer;
+}
+.text:hover {
+    color: black;
+}
+.search {
+    width: 80%;
+    display: flex;
+    margin: 0 auto;
+}
+.inputAndIconSearch {
+    position: relative;
+    width: 400px;
+    margin: 0 auto 10px;
+    background: white;
+    border-bottom: 1px solid lightgray;
+
+}
+.searchIcon,
+.searchMyMnemo  {
+    border: none;
+    outline: none;
+    background: transparent;
+}
+.searchMyMnemo{
+    width: 100%;
+    height: 42px;
+}
+.searchIcon {
+    width: 20px;
+    position: absolute;
+    top: 10px;
+    right: 0;
+    cursor: pointer;
+    margin: 5px 5px 0;
+    fill: #666666;
+}
+
+.myPage {
+    width: 45%;
+    margin: 30px auto;
+    /*border: 1px solid grey;*/
+    border-radius: 15px;
+    box-shadow: 1px 1px 8px 3px lightgray;
+}
+
+.userContainer {
+    margin: 5px;
+    padding: 10px;
+}
+
+.engWord {
+    font-size: 25px;
+    font-weight: bold;
+    padding: 0 0 5px;
+    cursor: pointer;
+}
+
+.translations {
+    display: flex;
+    font-size: 15px;
+    color: darkgrey;
+    padding: 0 0 5px;
+}
+.myMnemonicBox {
+    display: flex;
+}
+.myMnemonic {
+    padding: 5px 0 5px;
+    font-size: 20px;
+}
+.icons{
+    display: flex;
+    margin-left: auto ;
+}
+.icons svg {
+    padding: 0 5px;
+    width: 20px;
+}
+.likeCount {
+    padding: 0 0 0 10px;
+    align-items: center;
+    display: flex;
+    font-size: 16px;
+}
+
+.boldIcon {
+    cursor: pointer;
+}
+
+.trash {
+
+    cursor: pointer;
+    fill: #A52A2A;
+}
+.myExampleBox{
+    display: flex;
+}
+
+.myExample{
+    padding: 10px 0;
+    font-size: 20px;
+    margin: 10px 0 0;
+    font-style: italic;
+}
+.exampleFormat{
+}
+.inputExample textarea {
+    margin: 5px 0 10px;
+    padding: 10px;
+    width: 100%;
+    border: none;
+    outline: none;
+    box-sizing: border-box;
+    color: black;
+    border-bottom: 1px solid darkgrey;
+    font-size: 20px;
+    text-align: center;
+}
+.inputExample textarea::placeholder {
+    font-size: 14px;
+    font-style: italic;
+}
+
+
+/*Add My Example*/
+.buttonStyle{
+    font-size: 15px;
+    cursor: pointer;
+    padding: 5px;
+    width: 30%;
+    text-align: center;
+    box-shadow: 1px 1px 2px lightslategray;
+    border-radius: 10px;
+    margin: 10px auto;
+}
+.saveButtonStyleBox{
+}
+
+.closeButtonBox{
+    display: flex;
+    justify-content: flex-end;
+    height: 15px;
+    cursor: pointer;
+}
+.saveButtonStyle {
+    font-size: 15px;
+    cursor: pointer;
+    padding: 5px;
+    background-color: lightsteelblue;
+    width: 25%;
+    text-align: center;
+    box-shadow: 1px 1px 2px lightslategray;
+    border-radius: 10px;
+    margin: 15px auto 5px auto;
+
+}
+
+.addMyExample {
+    text-align: center;
+    width: 30%;
+    margin: 5px auto 5px auto;
+    font-size: 15px;
+    border-radius: 10px;
+    padding:  5px;
+    color: black;
+    background-color: #d0d6dc;
+    border: 0;
+    box-shadow: 1px 1px 2px lightslategray;
+    cursor: pointer;
+}
+.chooseTranslationHeader {
+    margin: 10px 0 5px 0;
+    font-size: 14px;
+    font-style: italic;
+    color: #bdbdbd;
+}
+.translationSelect {
+    width: 100%;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.translationSelect li {
+    display: inline-block;
+}
+

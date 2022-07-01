@@ -4,11 +4,15 @@ import s from './mnemonic.module.css'
 import SeparatedLetter from "./SeparatedLetter";
 import {updateMnemonicAsync} from "../../../store/engWordSlice";
 import {ReactComponent as CloseIcon} from "../../../import/icons/close-slim.svg";
+import {TransliterationComponent} from "./TransliterationComponent";
+import MyTranslit from "./MyTranslit";
+import {IEngWord} from "../../../shared/models/engWordTypes";
 
 type UpdateMnemonicPropsType = {
     mnemonicId: number,
     mnemonicPhrase: string
     setEdit: (flag: boolean) => void
+    engWord: IEngWord
 }
 
 
@@ -46,6 +50,15 @@ const UpdateMnemonic:FC<UpdateMnemonicPropsType> = (props) => {
 
     return (
         <div className={s.updateMnemonic}>
+            <div>
+                <ul className={s.transContainer}>
+                    {props.engWord.transliterations.map((tr) =>
+                        <TransliterationComponent transliteration={tr.transliteration} accuracy={tr.accuracy}/> )}
+                    {<MyTranslit word={props.mnemonicPhrase} highlight={highlight} trans={props.engWord.transliterations}/>}
+                </ul>
+
+            </div>
+
             <div className={s.closeButtonBox} onClick={closeForm}>
                 <div>
                     <CloseIcon/>

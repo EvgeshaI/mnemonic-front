@@ -1,0 +1,30 @@
+
+
+.closeButtonBox {
+    display: flex;
+    justify-content: flex-end;
+    padding: 7px;
+    height: 12px;
+}
+.closeButtonBox svg:hover {
+    fill: white;
+    cursor: pointer;
+}
+
+.text{
+    padding: 10px 5px;
+    text-align: center;
+    font-size: 15px;
+}
+
+.deleteButton {
+    font-size: 12px;
+    text-align: center;
+    width: 30%;
+    margin: 5px auto;
+    padding: 5px 1px;
+    box-shadow: 1px 1px 4px grey;
+    background-color: white;
+    border-radius: 10px;
+    cursor: pointer;
+}

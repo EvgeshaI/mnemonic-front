@@ -1,0 +1,140 @@
+/*.authWrapper {*/
+/*    margin: 50px auto;*/
+/*    width: 35%;*/
+/*    box-shadow: 1px 1px 2px lightslategray;*/
+/*    border-radius: 10px;*/
+/*    background-color: whitesmoke;*/
+/*}*/
+
+.text {
+    margin: 50px auto 20px;
+    text-align: center;
+    font-size: 30px;
+}
+
+.textNewPassword {
+    margin: 50px auto 20px;
+    text-align: center;
+    font-size: 20px;
+}
+.regText {
+    margin: 30px auto 15px;
+    text-align: center;
+    font-size: 13px;
+}
+
+
+.logo {
+    justify-content: space-between;
+    padding: 0 15px;
+    width: 50px;
+}
+.loginText {
+    padding: 20px;
+    margin: 20px auto 1px;
+    text-align: center;
+    font-size: 13px;
+}
+.formButtonBox {
+    display: flex;
+}
+.formButton {
+    text-align: center;
+    width: 300px;
+    padding: 12px;
+    margin: 0 auto 20px;
+    font-size: 15px;
+    border-radius: 10px;
+    color: black;
+    background-color: aliceblue;
+    border: 0;
+    box-shadow: 1px 1px 1px lightslategray;
+    cursor: pointer;
+}
+.resetForm{
+     margin: 0 auto;
+    width: 300px;
+    height: 40px;
+}
+.inputReset input {
+    width: 300px;
+    height: 40px;
+    margin: 10px auto;
+    border-radius: 10px;
+    border: 1px solid grey;
+    outline: none;
+    background: transparent;
+    text-align: center;
+}
+.inputResetError input {
+    width: 300px;
+    height: 40px;
+    margin: 10px auto;
+    border-radius: 10px;
+    border: 1px solid #A52A2A;
+    outline: none;
+    background: transparent;
+    text-align: center;
+}
+.errorMessage {
+    font-size: 12px;
+    text-align: center;
+    color: #A52A2A;
+}
+.buttonReset{
+    text-align: center;
+    width: 300px;
+    margin: 15px auto;
+    font-size: 13px;
+    border-radius: 10px;
+    padding: 10px;
+    color: black;
+    border: 0;
+    box-shadow: 1px 1px 2px lightslategray;
+    cursor: pointer;
+}
+
+.sendText {
+    width: 50%;
+    text-align: center;
+    margin: 50px auto;
+    font-size: 20px;
+    line-height: 2;
+}
+
+.emailText {
+    color: lightslategrey;
+}
+.icon {
+    margin: 0 auto;
+    width: 8%;
+    /*display: none;*/
+}
+
+.icon svg {
+    transition-delay: 0.5s;
+    transition-property: opacity;
+    transition-duration: 1s;
+    transition: visibility 1s, opacity 1s linear;
+}
+
+
+.changeForm{
+    margin: 50px auto;
+    width: 300px;
+    height: 40px;
+}
+
+.changeButton {
+    text-align: center;
+    width: 300px;
+    margin: 15px auto;
+    font-size: 15px;
+    border-radius: 10px;
+    padding: 10px;
+    color: black;
+    background-color: lightsteelblue;
+    border: 0;
+    box-shadow: 1px 1px 2px lightslategray;
+    cursor: pointer;
+}

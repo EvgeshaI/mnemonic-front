@@ -98,6 +98,10 @@
     background-color: #cccccc;
     font-weight: bold;
 }
+
+.colorHighlight{
+    color: lightsteelblue;
+}
 /* SEPARATE LETTER COMPONENT END!*/
 
 /* UPDATE MNEMONIC COMPONENT*/
@@ -127,4 +131,33 @@
 .updateButton:hover {
     background-color: #bdbdbd;
 }
+
+.errorMessage {
+    font-size: 15px;
+    text-align: center;
+    color: #A52A2A;
+    margin: 0 0 10px;
+}
 /* UPDATE MNEMONIC COMPONENT END!*/
+
+.transContainer {
+    width: 100%;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.transContainer li {
+    display: inline-block;
+}
+.transliteration{
+    margin: 5px;
+    font-size: 13px;
+    color: silver;
+}
+
+.myTransliteration{
+    margin: 5px;
+    font-size: 13px;
+    color: #666666;
+}

@@ -1,4 +1,4 @@
-import React, {FC, useEffect, useState} from "react";
+import React, {FC, useEffect} from "react";
 import {useAppDispatch, useAppSelector} from "../../store";
 import {getEngWordAsync} from "../../store/engWordSlice";
 import s from './EngWord.module.css'
@@ -14,8 +14,11 @@ const EngWordComponent:FC<any> = () => {
         mnemonics,
         examples,
         checkedExample,
-        updateExample
+        updateExample,
     } = useAppSelector((state) => state.engWordReducer);
+    const {
+        isAuth
+    } = useAppSelector((state) => state.authReducer);
 
     let params = useParams();
     let urlWord = params.word || "";
@@ -23,21 +26,10 @@ const EngWordComponent:FC<any> = () => {
     useEffect( () => {
         dispatch(getEngWordAsync(urlWord))
     }, [urlWord]);
-    let [text, setText] = useState("");
 
-    let updateText = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setText(e.target.value)
-
-    };
-    let addTranslation = () => {
-        if (engWord) {
-            setText("")
-        }
-    };
 
     let joinTranslation = (translations: Array<ITranslation>) => {
-        let joined = translations.map(t => t.translation).join(", ");
-        return joined
+        return translations.map(t => t.translation).join(", ");
     };
 
     return (
@@ -57,13 +49,20 @@ const EngWordComponent:FC<any> = () => {
             <div>
                 {engWord &&
                     <MnemonicContainer
-                        engWordId={engWord.id}
+                        engWord={engWord}
                         mnemonics={mnemonics}
+                        isAuth = {isAuth}
+
                     />
                 }
             </div>
             <br/>
+
             <div className={s.word}> примеры: </div>
+            {examples.length < 1 && mnemonics.length < 1 &&
+                <div className={s.exampleNone}> придумайте мнемонику, чтобы добавить пример
+                </div>
+            }
             {engWord &&
                 <ExampleContainer
                     engWord={engWord}
@@ -71,6 +70,7 @@ const EngWordComponent:FC<any> = () => {
                     examples={examples}
                     updateExample={updateExample}
                     checkedExample={checkedExample}
+                    isAuth = {isAuth}
                 />
             }
         </div>

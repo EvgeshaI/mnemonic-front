@@ -20,6 +20,7 @@ const SeparatedLetter: FC<{ letter: string, index: number, addNumber: (i: number
     let style = s.separatedLetter + " " + (entered ? s.separatedLetterActive : '');
     return (
         <>
+
             {props.letter === ' ' ?
                 <span className={s.whitespace}/> :
                 <div className={style} onClick={clickLetter}>
@@ -27,8 +28,6 @@ const SeparatedLetter: FC<{ letter: string, index: number, addNumber: (i: number
                 </div>
             }
         </>
-
-
     )
 };
 

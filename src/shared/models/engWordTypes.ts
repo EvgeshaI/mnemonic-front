@@ -3,11 +3,11 @@ export interface IEngWord {
     engWord: string,
     transcription: string
     translations: Array<ITranslation>
+    transliterations: Array<ITransliteration>
 }
-
-export interface IPageMnemonic {
-    mnemonics: Array<IMnemonic>,
-    totalPages: number
+export interface ITransliteration {
+    transliteration: string,
+    accuracy: number
 }
 
 export interface ITranslation {
@@ -25,13 +25,11 @@ export interface IMnemonic {
     creator: ICreator,
     exampleExists: boolean,
     isCreator: boolean,
-    added: boolean
+    added: boolean,
+    created: string,
+    accuracy: number
 }
 
-export interface IPageExample {
-    examples: Array<IExample>
-    totalPages: number
-}
 
 export interface IExample {
     exampleId: number
@@ -42,9 +40,11 @@ export interface IExample {
     mnemonicInSentence: string,
     likes: number,
     liked: boolean,
+    isCreator: boolean,
     sentence: string,
     creator: ICreator
     parts: Array<IPart>
+    created: string
 }
 export interface IPart {
     part: string,
@@ -70,3 +70,43 @@ export interface IMnemonicCreate {
     highlight: Array<number>
 }
 
+export interface IUser {
+    email: string,
+    confirmed: boolean,
+    nickname: string,
+    role: string,
+    token: string
+}
+
+export interface IAuthResponse {
+    accessToken: string
+}
+
+export interface IPageElements<T> {
+    elements: Array <T>,
+    totalPages: number
+}
+export interface IStudy {
+    studyId: number,
+    engWord: StudyEngWord
+    mnemonic: StudyMnemonic
+    examples: Array<StudyExample>
+    translations: Array <ITranslation>,
+}
+
+export interface StudyEngWord {
+    id: number,
+    word: string
+}
+export interface StudyMnemonic {
+    id: number,
+    phrase: string,
+    likes: number,
+    highlight: Array<number>
+}
+
+export interface StudyExample {
+    id: number,
+    likes: number,
+    parts: Array<IPart>
+}

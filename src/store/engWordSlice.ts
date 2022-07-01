@@ -10,6 +10,7 @@ interface EngWordState {
     checkedExample: IExample | null
     examples: Array<IExample>
     updateExample: IExample | null
+
 }
 
 const initialState: EngWordState = {
@@ -17,7 +18,7 @@ const initialState: EngWordState = {
     mnemonics: [],
     examples: [],
     checkedExample: null,
-    updateExample: null
+    updateExample: null,
 };
 
 export const engWordSlice = createSlice(
@@ -30,6 +31,14 @@ export const engWordSlice = createSlice(
             },
             getMnemonics: (state, action: PayloadAction<Array<IMnemonic>> ) => {
                 state.mnemonics = action.payload
+            },
+            updateExampleExist: (state, action: PayloadAction<{mnemonicId: number, flag: boolean}>) => {
+               state.mnemonics = state.mnemonics.map(el => {
+                    if (el.mnemonicId === action.payload.mnemonicId){
+                        el.exampleExists = action.payload.flag
+                    }
+                    return el
+                })
             },
             getExamples: (state, action: PayloadAction<Array<IExample>>) =>{
                 state.examples = action.payload
@@ -102,6 +111,7 @@ export const engWordSlice = createSlice(
             deleteExample: (state, action: PayloadAction<number>) => {
                 let deleteExampleId = action.payload;
                 state.examples = state.examples.filter(e => e.exampleId !== deleteExampleId)
+
             },
             checkExample: (state, action: PayloadAction<IExample>) => {
                 state.checkedExample = action.payload;
@@ -126,6 +136,7 @@ export const {
     getEngWord,
     checkExample,
     getMnemonics,
+    updateExampleExist,
     getExamples,
     addMnemonicLike,
     deleteMnemonicLike,
@@ -150,12 +161,12 @@ export const getEngWordAsync = (word:string): AppThunk => async (dispatch: any) 
 
 export const getMnemonicAsync = (id:number): AppThunk => async (dispatch: any) => {
     let pageResult = await MnemonicClient.getMnemonic(id);
-    dispatch(getMnemonics(pageResult.mnemonics))
+    dispatch(getMnemonics(pageResult.elements))
 };
 
 export const getExampleAsync = (id:number): AppThunk => async (dispatch: any) => {
     let result = await MnemonicClient.getExample(id);
-    dispatch(getExamples(result.examples))
+    dispatch(getExamples(result.elements))
 };
 export const addMnemonicLikeAsync = (id: number): AppThunk => async (dispatch: any) => {
     await MnemonicClient.postMnemonicLike(id);
@@ -289,6 +300,7 @@ export const saveExampleAsync = (newExample: IExample): AppThunk => async  (disp
     await MnemonicClient.saveExample(newExample);
     dispatch(getExampleAsync(newExample.engWordId));
     dispatch (clearCheckedExample())
+    dispatch(updateExampleExist({mnemonicId: newExample.mnemonicId!, flag: true}))
 };
 
 export const updateExampleAsync = (example: IExample): AppThunk => async (dispatch: any) => {

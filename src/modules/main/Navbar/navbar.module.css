@@ -1,19 +1,18 @@
 .navbar {
+    width: 99%;
     display: flex;
-    justify-content: space-between;
     background-color: lightsteelblue;
     height: 80px;
     border-radius: 15px;
-    margin: 5px 0 5px;
+    margin: 0.5%;
     box-shadow: 1px 1px 2px lightslategray;
 }
 .search {
+    width: 80%;
     display: flex;
     justify-content: space-between;
     margin: 10px 0;
 }
-
-
 
 .inputAndIcon {
     position: relative;
@@ -28,36 +27,54 @@
     border: none;
     outline: none;
     background: transparent;
-
 }
 .searchInput {
     width: 100%;
     height: 42px;
     padding-left: 15px;
-
 }
 .searchIcon {
-    width: 30px;
+    width: 25px;
     position: absolute;
     top: 0;
     right: 0;
     cursor: pointer;
     margin: 5px 5px 0;
+    fill: #666666;
 }
-
-
-
-
+.nickname {
+    font-size: 13px;
+    color: aliceblue;
+    line-height: 80px;
+}
 
 .logo {
-    margin: 30px 15px;
+    width: 10%;
+    padding: 0 20px;
     cursor: pointer;
+    color: white;
+    display: flex;
+    line-height: 80px;
 }
-
-.profile {
-
+.logout {
+    width: 10%;
+    display: flex;
+}
+.logoutLoginIcon {
     cursor: pointer;
+    display: flex;
+    margin-left: auto;
 }
+.logoutLoginIcon svg {
+    padding: 0 20px;
+    width: 25px;
+    fill: white;
+}
+/*.logo svg {*/
+
+/*    width: 50px;*/
+/*}*/
+
 
 .profile svg {
     padding: 0 15px;
