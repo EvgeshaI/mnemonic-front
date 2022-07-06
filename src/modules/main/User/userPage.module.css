@@ -7,7 +7,7 @@
 .text {
     margin: 10px auto 0;
     font-size: 25px;
-    color: lightslategrey;
+    color: #122B5A;
     cursor: pointer;
 }
 .text:hover {
@@ -110,7 +110,6 @@
 .myExample{
     padding: 10px 0;
     font-size: 20px;
-    margin: 10px 0 0;
     font-style: italic;
 }
 .exampleFormat{
@@ -138,6 +137,7 @@
     font-size: 15px;
     cursor: pointer;
     padding: 5px;
+    background-color: rgba(171, 220, 255, 0.7);
     width: 30%;
     text-align: center;
     box-shadow: 1px 1px 2px lightslategray;

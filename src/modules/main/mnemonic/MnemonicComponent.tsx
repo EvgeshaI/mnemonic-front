@@ -129,7 +129,7 @@ const MnemonicComponent: FC<PropsType> = (props) => {
                     <div className={s.buttonIcons}>
 
                         <div className={s.boldIconBox}>
-                            <div className={s.prompt}> показать мнемо-часть </div>
+                            <div className={s.prompt}> мнемо-часть </div>
                             <div onClick={pushBold}>{boldIcon}</div>
                         </div>
 
@@ -137,10 +137,18 @@ const MnemonicComponent: FC<PropsType> = (props) => {
                         <div onClick={addMeMnemonic}> {addDelete} </div>
                         }
                         {props.mnemonic.isCreator && !props.mnemonic.exampleExists && props.auth &&
-                            <div onClick={showDeleteModal} className={s2.deleteIcon}><Trash/></div>
+                            <div className={s.boldIconBox}>
+                                <div className={s.prompt}> удалить </div>
+                                <div onClick={showDeleteModal} className={s2.deleteIcon}><Trash/></div>
+                            </div>
+
                         }
                         {props.mnemonic.isCreator && !props.mnemonic.exampleExists && props.auth &&
-                            <div onClick={editMnemo}> <Pencil/> </div>
+                            <div className={s.boldIconBox}>
+                                <div className={s.prompt}> редактировать </div>
+                                <div onClick={editMnemo}> <Pencil/> </div>
+                            </div>
+
                         }
                         <div onClick={addLikeMnemonic}>{Like}</div>
                         <div className={s.likeCountContainer}>

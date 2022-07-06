@@ -28,7 +28,7 @@
     text-align: center;
     padding: 10px;
     margin: 25px auto;
-    background-color: #d0d6dc;
+    background-color: rgba(171, 220, 255, 0.7);
     box-shadow: 1px 1px 2px lightslategray;
     width: 200px;
     border-radius: 15px;
@@ -40,7 +40,7 @@
 
 .exampleComponent {
     padding: 15px 25px 15px 25px;
-    border-bottom: 1px solid #cccccc;
+    border-bottom: 1px solid rgba(171, 220, 255, 0.8);
     margin: 10px 0;
 }
 
@@ -144,6 +144,8 @@
 .deleteIcon svg {
     fill: #A52A2A;
 }
+
+
 .likeCountContainer {
     display: table;
 }
@@ -160,7 +162,7 @@
     border-radius: 10px;
     padding: 10px 5px;
     color: black;
-    background-color: #d0d6dc;
+    background-color: rgba(171, 220, 255, 0.7);
     border: 0;
     box-shadow: 1px 1px 2px lightslategray;
     cursor: pointer;
@@ -178,7 +180,8 @@
 }
 .mnemonicPart {
     font-weight: bold;
-    color: lightsteelblue;
+    color: rgba(171, 220, 255, 1);
+    text-shadow: -0.5px 0 black, 0 0.5px black, 0.5px 0 black, 0 -0.5px black;
 }
 
 .buttonLike{
@@ -189,23 +192,8 @@
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
     margin: 5px 40px ;
 }
-.buttonAddLike {
-    border: 0;
-    font-size: 15px;
-    border-radius: 25px;
-    background-color: yellow;
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
-    margin: 5px 40px ;
-}
-.buttonLike:hover {
-    background-color: lightslategray
-}
-.buttonLike:active
-{
-    background-color: #3e8e41;
-    box-shadow: 0 5px #666;
-    transform: translateY(4px);
-}
+
+
 
 /* UPDATE EXAMPLE COMPONENT*/
 .updateExample {
@@ -231,7 +219,7 @@
     border-radius: 10px;
     padding: 10px 5px;
     color: black;
-    background-color: #d0d6dc;
+    background-color: rgba(171, 220, 255, 0.7);
     border: 0;
     box-shadow: 1px 1px 2px lightslategray;
     cursor: pointer;

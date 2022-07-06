@@ -39,7 +39,7 @@
     width: 200px;
     border-radius: 15px;
     cursor: pointer;
-    background-color: #d0d6dc;
+    background-color: rgba(171, 220, 255, 0.7);
     box-shadow: 1px 1px 2px lightslategray;
 }
 
@@ -55,7 +55,7 @@
     border-radius: 10px;
     padding: 10px 5px;
     color: black;
-    background-color: #d0d6dc;
+    background-color: rgba(171, 220, 255, 0.7);
     border: 0;
     box-shadow: 1px 1px 2px lightslategray;
     cursor: pointer;
@@ -100,7 +100,8 @@
 }
 
 .colorHighlight{
-    color: lightsteelblue;
+    color: rgba(171, 220, 255, 1);
+    text-shadow: -0.5px 0 black, 0 0.5px black, 0.5px 0 black, 0 -0.5px black;
 }
 /* SEPARATE LETTER COMPONENT END!*/
 

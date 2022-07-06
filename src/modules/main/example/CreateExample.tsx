@@ -1,4 +1,4 @@
-import React, {FC, useState} from "react";
+import React, {FC, useEffect, useState} from "react";
 import {useAppDispatch} from "../../../store";
 import s from "./Example.module.css";
 import {IEngWord, IExample, IMnemonic} from "../../../shared/models/engWordTypes";
@@ -8,6 +8,7 @@ import {
     checkExampleForCreateAsync,
     checkExampleMnemonicAsync,
     checkExampleTranslationAsync,
+    clearCheckedExample,
     saveExampleAsync
 } from "../../../store/engWordSlice";
 import NewExampleComponent from "./NewExampleComponent";
@@ -23,7 +24,6 @@ type PropsType = {
 const CreateExample: FC<PropsType> = (props) => {
     const dispatch = useAppDispatch();
     let [exampleSentence, setExampleSentence] = useState("");
-    let [step, setStep] = useState(1);
     let [edit, setEdit] = useState(false);
 
     let updateExample = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -32,25 +32,25 @@ const CreateExample: FC<PropsType> = (props) => {
 
     let editExample = () => {
         setEdit(true);
-        setStep(1)
     };
+
+    useEffect( () => {
+        return () => {
+            dispatch(clearCheckedExample())
+        }
+    }, [])
 
     let saveExample = () => {
         dispatch(saveExampleAsync(props.newExample!));
         setExampleSentence("");
-        setStep(1);
         props.afterSaveClick()
     };
 
     let closeForm = () => {
         setExampleSentence("");
-        setStep(1);
         props.afterSaveClick()
     }
 
-    let nextStep = () => {
-        setStep(step + 1)
-    };
     let selectTranslation = (translationId: number) => {
         dispatch(checkExampleTranslationAsync(translationId));
     };
@@ -61,19 +61,19 @@ const CreateExample: FC<PropsType> = (props) => {
 
     let initCheck = () => {
         checkExampleRequest();
-        nextStep()
         setEdit(false)
     };
     let checkExampleRequest = () => {
+        dispatch(clearCheckedExample())
         dispatch(checkExampleForCreateAsync(props.engWord.id, exampleSentence));
     };
     let displayStepComponent = () => {
-        if (step === 1 && exampleSentence.length > 0) {
+        if ((!props.newExample || edit) && exampleSentence.length > 0) {
             return <div>
                     <div onClick={initCheck} className={s.buttonStyle}>Проверить</div>
                 </div>
 
-        } else if (props.newExample?.translationInSentence === null && step !== 1) {
+        } else if (props.newExample?.translationInSentence === null) {
             return (
                 <div>
                     <p className={s.chooseTranslationHeader}>Выберите перевод:</p>
@@ -87,7 +87,7 @@ const CreateExample: FC<PropsType> = (props) => {
                     </div>
                 </div>
             )
-        } else if (props.newExample?.mnemonicInSentence === null && step !== 1) {
+        } else if (props.newExample?.mnemonicInSentence === null) {
             return (
                 <div>
                     <p className={s.chooseTranslationHeader}>Выберите мнемонику:</p>

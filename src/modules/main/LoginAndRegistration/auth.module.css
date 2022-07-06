@@ -108,14 +108,18 @@
 .icon {
     margin: 0 auto;
     width: 8%;
-    /*display: none;*/
 }
-
+@keyframes example {
+    from {opacity: 0.1}
+    to {opacity: 1}
+}
 .icon svg {
     transition-delay: 0.5s;
     transition-property: opacity;
     transition-duration: 1s;
-    transition: visibility 1s, opacity 1s linear;
+    animation-name: example;
+    animation-duration: 3s;
+    opacity: 1;
 }
 
 

@@ -11,7 +11,7 @@ type PropsType = {
 const MyTranslit: FC<PropsType> = (props) => {
     let myTranslit = [] as Array<string>
     let myMnemo = (myWord: string, arrId: Array<number>) => {
-        arrId = arrId.sort()
+        arrId = arrId.sort((a,b) => a-b)
         for (let i =0; i< arrId.length; i++){
             myTranslit.push(myWord[arrId[i]])
         }

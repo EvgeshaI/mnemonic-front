@@ -1,5 +1,6 @@
 import React, {FC, useState} from "react";
 import s from "./navbar.module.css"
+import {ReactComponent as Logo} from "../../../import/icons/logo.svg"
 import {ReactComponent as Login} from "../../../import/icons/enter.svg"
 import {ReactComponent as Logout} from "../../../import/icons/logout.svg"
 import {ReactComponent as Search} from "../../../import/icons/search.svg"
@@ -56,7 +57,7 @@ const exit = () => {
     return (
         <div className={s.navbar}>
             <div className={s.logo} onClick={startPage}>
-                Logo
+                <Logo/>
             </div>
             <div className={s.search}>
                 <div className={s.inputAndIcon}>

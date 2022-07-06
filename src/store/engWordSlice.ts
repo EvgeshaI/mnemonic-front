@@ -234,6 +234,7 @@ export const checkExampleForCreateAsync = (engWordId: number, sentence: string):
         setTimeout(() => dispatch(removeAlert()), 5000)
     }
 };
+
 // todo delete duplicates
 export const checkExampleForUpdateAsync = (sentence: string): AppThunk =>
     async (dispatch: any, getState) => {
@@ -297,10 +298,17 @@ export const checkExampleMnemonicForUpdateAsync = (mnemonicId: number): AppThunk
 }
 
 export const saveExampleAsync = (newExample: IExample): AppThunk => async  (dispatch: any) => {
-    await MnemonicClient.saveExample(newExample);
-    dispatch(getExampleAsync(newExample.engWordId));
-    dispatch (clearCheckedExample())
-    dispatch(updateExampleExist({mnemonicId: newExample.mnemonicId!, flag: true}))
+    try{
+        await MnemonicClient.saveExample(newExample);
+        dispatch(getExampleAsync(newExample.engWordId));
+        dispatch (clearCheckedExample())
+        dispatch(updateExampleExist({mnemonicId: newExample.mnemonicId!, flag: true}))
+    }catch (error) {
+        // @ts-ignore
+        dispatch(addAlert({message: error.data?.data?.message}))
+        setTimeout(() => dispatch(removeAlert()), 5000)
+    }
+
 };
 
 export const updateExampleAsync = (example: IExample): AppThunk => async (dispatch: any) => {

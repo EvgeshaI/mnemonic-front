@@ -37,7 +37,7 @@
     font-size: 25px;
     padding: 0 0 10px 0;
     margin: 0 0 10px 0;
-    border-bottom: 1px solid #cccccc;
+    border-bottom: 1px solid rgba(171, 220, 255, 0.8);
 }
 .translateWord {
     margin: 0 0 15px 15px;
@@ -46,7 +46,7 @@
 }
 .mnemonicComponent {
     padding: 10px 25px 15px 25px;
-    border-bottom: 1px solid #cccccc;
+    border-bottom: 1px solid rgba(171, 220, 255, 0.8);
 }
 .highlightWord {
     text-align: left;
@@ -64,11 +64,6 @@
 .mnemo {
     font-size: 25px;
     text-align: left;
-
-    /*box-shadow: 5px 5px 5px lightslategray;*/
-    /*border-radius: 15px;*/
-    /*margin: 0 auto;*/
-    /*width: 60%;*/
 }
 
 .author {
@@ -105,43 +100,7 @@
     text-align: left;
 }
 
-.buttonLike{
-    border: 0;
-    font-size: 15px;
-    border-radius: 25px;
-    background-color: white;
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
-    margin: 5px 40px ;
-}
-.buttonAddLike {
-    border: 0;
-    font-size: 15px;
-    border-radius: 25px;
-    background-color: yellow;
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
-    margin: 5px 40px ;
-}
-.buttonLike:hover {
-    background-color: lightslategray
-}
-.buttonLike:active
- {
-    background-color: #3e8e41;
-    box-shadow: 0 5px #666;
-    transform: translateY(4px);
-}
-.buttonDelete {
-    background-image: linear-gradient(to bottom right, gainsboro, white);
-    border: 0;
-    font-size: 15px;
-    border-radius: 25px;
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
-}
-.buttonDelete:active {
-    box-shadow: 0 5px #666;
-    transform: translateY(4px);
 
-}
 
 .boldIconBox {
     position: relative;
@@ -153,16 +112,16 @@
 .prompt{
     display: none;
     text-align: center;
-    font-size: 10px;
-    border: 1px solid grey;
+    font-size: 8px;
+
     padding: 2px;
     position: absolute;
     /*margin-left: auto;*/
     bottom: 25px;
     background-color: white;
-    width: 90px;
+    width: 100%;
     right: 2px;
-    border-radius: 10px;
+
 }
 
 

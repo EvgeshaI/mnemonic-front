@@ -1,6 +1,7 @@
 import React, {FC, useState} from "react";
 import {IEngWord, IExample, IMnemonic, IPart, PartTypes} from "../../../shared/models/engWordTypes";
 import s from "./Example.module.css";
+import st from "../EngWord.module.css";
 import {useAppDispatch} from "../../../store";
 import {
     addExampleLikeAsync,
@@ -120,12 +121,26 @@ const ExampleComponent: FC<PropsType> = (props) => {
                         </div>
 
                         <div className={s.buttonIcons}>
-                            <div onClick={clickTextFormat}> {textFormatButton} </div>
+                            <div className={st.boldIconBox}>
+                                <div className={st.prompt}> мнемо-часть </div>
+                                <div onClick={clickTextFormat}> {textFormatButton} </div>
+                            </div>
+
                             {props.example.isCreator && props.auth &&
-                                <div onClick={showDeleteModal} className={s.deleteIcon}><Trash/></div>
+                                <div className={st.boldIconBox}>
+                                    <div className={st.prompt}> удалить </div>
+                                <div onClick={showDeleteModal}
+                                     className={s.deleteIcon}>
+                                    <Trash/>
+                                </div>
+                                </div>
                             }
                             {props.example.isCreator && props.auth &&
-                                <div onClick={editExample}><Pencil/></div>
+                                <div className={st.boldIconBox}>
+                                    <div className={st.prompt}> редактировать </div>
+                                    <div onClick={editExample}><Pencil/></div>
+                                </div>
+
                             }
                             <div onClick={addLikeExample}>{Like}</div>
                             <div className={s.likeCountContainer}>
