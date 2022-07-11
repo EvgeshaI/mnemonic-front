@@ -1,40 +1,42 @@
 import React, {useEffect, useState} from "react";
 import s from "./userPage.module.css"
 import {useAppDispatch, useAppSelector} from "../../../store";
-import {getMyPageAsync, searchMyMnemoAsync} from "../../../store/userSlice";
+import {getMyPageAsync} from "../../../store/userSlice";
 import {UserPageContainer} from "./UserPageContainer";
 import {ReactComponent as Search} from "../../../import/icons/search.svg"
+import useDebounce from "../../util/useDebounce";
 
 export const UserPage = () => {
     const {
-        studies
+        studies,
+        hasMore,
+        createExampleMap
     } = useAppSelector((state) => state.userReducer);
     const dispatch = useAppDispatch();
     const [word, setWord] = useState('')
     const searchWord = (e: React.ChangeEvent<HTMLInputElement>) => {
         setWord(e.target.value)
     };
+    const debouncedValue = useDebounce<string>(word, 400)
+
     const pressHandler = (e: React.KeyboardEvent) => {
         if (e.key === "Enter") {
-            searchMnemo()
+            loadMyMnemo()
         }
 
     };
-    const getMyMnemo = () => {
-        dispatch(getMyPageAsync())
+    const loadMyMnemo = () => {
+        dispatch(getMyPageAsync(word))
     }
-    const searchMnemo = () => {
-        dispatch(searchMyMnemoAsync(word))
-        setWord('')
-    }
+
     useEffect(() => {
-        dispatch(getMyPageAsync())
-    }, [])
+        loadMyMnemo()
+    }, [debouncedValue])
 
     return (
         <>
             <div className={s.user}>
-                <div onClick={getMyMnemo}
+                <div
                     className={s.text}>
                     Мои мнемоники
                 </div>
@@ -42,7 +44,7 @@ export const UserPage = () => {
             <div className={s.search}>
                 <div className={s.inputAndIconSearch}>
                     <div className={s.searchIcon}
-                         onClick={searchMnemo}>
+                         onClick={loadMyMnemo}>
                         <Search/>
                     </div>
                     <input type="text"
@@ -61,6 +63,7 @@ export const UserPage = () => {
                         {studies.map(el =>
                             <div className={s.myPage} key={el.studyId}>
                                 <UserPageContainer
+                                    createExampleMap={createExampleMap}
                                     mnemonic = {el.mnemonic}
                                     engWord = {el.engWord}
                                     examples={el.examples}
@@ -71,6 +74,11 @@ export const UserPage = () => {
                     </div>
                 }
             </div>
+            {hasMore &&
+                <div className={s.hasMoreBox}>
+                    <div className={s.hasMoreBtn} onClick={loadMyMnemo}>Загрузить еще</div>
+                </div>
+            }
         </>
     )
 }

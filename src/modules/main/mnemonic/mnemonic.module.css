@@ -42,10 +42,10 @@
     background-color: rgba(171, 220, 255, 0.7);
     box-shadow: 1px 1px 2px lightslategray;
 }
-
-.addMnemonicButton:hover {
-    background-color: lightgray;
+.addMnemonicButton:hover{
+    background-color: rgba(171, 220, 255, 0.3);
 }
+
 
 .buttonStyle {
     text-align: center;
@@ -61,7 +61,7 @@
     cursor: pointer;
 }
 .buttonStyle:hover {
-    background-color: #bdbdbd;
+    background-color: rgba(171, 220, 255, 0.3);
 }
 .closeButtonBox {
     display: flex;

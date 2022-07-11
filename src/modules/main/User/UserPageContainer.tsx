@@ -1,5 +1,11 @@
 import React, {FC, useState} from "react";
-import {ITranslation, StudyEngWord, StudyExample, StudyMnemonic} from "../../../shared/models/engWordTypes";
+import {
+    ITranslation,
+    NewStudyExample,
+    StudyEngWord,
+    StudyExample,
+    StudyMnemonic
+} from "../../../shared/models/engWordTypes";
 import s from "./userPage.module.css"
 import {ReactComponent as Heart} from "../../../import/icons/heart.svg"
 import {ReactComponent as HeartYes} from "../../../import/icons/heart-clicked.svg"
@@ -11,6 +17,7 @@ import {MyStudyExample} from "./MyStudyExample";
 import HighlightMnemonic from "../mnemonic/HighlightMnemonic";
 
 type UserPageContainerPropsType = {
+    createExampleMap: Array<NewStudyExample>,
     studyId: number,
     mnemonic: StudyMnemonic,
     engWord: StudyEngWord,
@@ -40,6 +47,14 @@ export const UserPageContainer: FC<UserPageContainerPropsType> = (props) => {
     if(props.mnemonic.likes>0){
         like = <HeartYes/>
     }
+
+    let findExample = () => {
+        const newStudyExample = props.createExampleMap.find(el => el.studyId === props.studyId);
+        if (newStudyExample) {
+            return newStudyExample.example
+        }
+        return null
+    }
     return (
         <div className={s.userContainer}>
             <div className={s.engWord} onClick={clickWord}>{props.engWord.word}</div>
@@ -64,6 +79,7 @@ export const UserPageContainer: FC<UserPageContainerPropsType> = (props) => {
             </div>
             {props.examples.map(ex => <div>
                     <MyStudyExample
+                        key = {ex.id}
                         parts={ex.parts}
                         exampleId={ex.id}
                         exampleLikes={ex.likes}
@@ -77,6 +93,7 @@ export const UserPageContainer: FC<UserPageContainerPropsType> = (props) => {
                     engWordId={props.engWord.id}
                     mnemonicId={props.mnemonic.id}
                     translations={props.translations}
+                    newExample={findExample()}
                     isDisplayAddMyExample={isDisplayAddMyExample}
                 />
                 :
@@ -84,7 +101,6 @@ export const UserPageContainer: FC<UserPageContainerPropsType> = (props) => {
                      onClick={() => isDisplayAddMyExample(true)}>
                     Добавить пример
                 </div>
-
             }
         </div>
     )

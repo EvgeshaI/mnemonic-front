@@ -8,10 +8,6 @@
     margin: 10px auto 0;
     font-size: 25px;
     color: #122B5A;
-    cursor: pointer;
-}
-.text:hover {
-    color: black;
 }
 .search {
     width: 80%;
@@ -125,6 +121,7 @@
     border-bottom: 1px solid darkgrey;
     font-size: 20px;
     text-align: center;
+    
 }
 .inputExample textarea::placeholder {
     font-size: 14px;
@@ -144,7 +141,8 @@
     border-radius: 10px;
     margin: 10px auto;
 }
-.saveButtonStyleBox{
+.buttonStyle:hover{
+    background-color: rgba(171, 220, 255, 0.3);
 }
 
 .closeButtonBox{
@@ -157,13 +155,15 @@
     font-size: 15px;
     cursor: pointer;
     padding: 5px;
-    background-color: lightsteelblue;
+    background-color: rgba(171, 220, 255, 0.7);
     width: 25%;
     text-align: center;
     box-shadow: 1px 1px 2px lightslategray;
     border-radius: 10px;
     margin: 15px auto 5px auto;
-
+}
+.saveButtonStyle:hover{
+    background-color: rgba(171, 220, 255, 0.3);
 }
 
 .addMyExample {
@@ -174,11 +174,15 @@
     border-radius: 10px;
     padding:  5px;
     color: black;
-    background-color: #d0d6dc;
+    background-color: rgba(171, 220, 255, 0.7);
     border: 0;
     box-shadow: 1px 1px 2px lightslategray;
     cursor: pointer;
 }
+.addMyExample:hover{
+    background-color: rgba(171, 220, 255, 0.3);
+}
+
 .chooseTranslationHeader {
     margin: 10px 0 5px 0;
     font-size: 14px;
@@ -194,4 +198,20 @@
 .translationSelect li {
     display: inline-block;
 }
+.hasMoreBox {
+    display: flex;
+    margin: 10px auto 10px;
+}
 
+.hasMoreBtn {
+    display: block;
+    margin: 20px auto;
+    cursor: pointer;
+    box-shadow: 1px 1px 1px grey;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: rgba(171, 220, 255, 0.7);
+}
+.hasMoreBtn:hover{
+    background-color: rgba(171, 220, 255, 0.3);
+}

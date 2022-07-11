@@ -110,3 +110,8 @@ export interface StudyExample {
     likes: number,
     parts: Array<IPart>
 }
+
+export interface NewStudyExample {
+    studyId: number,
+    example: IExample
+}

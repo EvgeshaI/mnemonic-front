@@ -99,12 +99,13 @@ export class MnemonicClient extends BaseClient {
         return this.post<IAuthResponse>(`auth/login`, body)
     };
 
-    static async myPage () {
-        return this.get<IPageElements<IStudy>>(`study/my`)
-    };
-
-    static async searchMyMnemo (word: string) {
-        return this.get<IPageElements<IStudy>>(`study/my?search=${word}`)
+    static async myPage (currentPage: number, search?: string) {
+        let params = {
+            page: currentPage,
+            size: 5,
+            search: search
+        }
+        return this.get<IPageElements<IStudy>>(`study/my`, {params})
     };
 
     static async resetPassword (email: string) {

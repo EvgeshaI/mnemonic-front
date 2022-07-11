@@ -22,6 +22,7 @@
 
 .translationPart {
     color: cornflowerblue;
+    text-shadow: -0.5px 0 black, 0 0.5px black, 0.5px 0 black, 0 -0.5px black;
 }
 
 .addExampleButton {
@@ -35,7 +36,7 @@
     cursor: pointer;
 }
 .addExampleButton:hover {
-    background-color: lightgray;
+    background-color: rgba(171, 220, 255, 0.3);
 }
 
 .exampleComponent {
@@ -168,7 +169,7 @@
     cursor: pointer;
 }
 .buttonStyle:hover {
-    background-color: #bdbdbd;
+    background-color: rgba(171, 220, 255, 0.3);
 }
 
 .newExample {

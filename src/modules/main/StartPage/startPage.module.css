@@ -1,4 +1,149 @@
+.startPage {
+    width: 70%;
+    margin: auto;
+}
+.initText {
+    margin: 100px auto;
+}
 .h{
     margin: 30px auto;
     width: 30%;
+}
+
+.instruction{
+    color: #122B5A;
+    line-height: 2;
+    text-align: justify;
+    margin: 20px;
+    text-indent: 40px;
+    font-size: 17px;
+}
+.text {
+    line-height: 2;
+    text-align: center;
+    text-align-last: center ;
+    color: #122B5A;
+    font-size: 18px;
+}
+
+.howBtn {
+    padding: 10px;
+    background-color: rgba(171, 220, 255, 0.7);
+    cursor: pointer;
+    width: 30%;
+    margin: 40px auto;
+    box-shadow: 1px 1px 1px grey;
+    border-radius: 10px;
+    text-align: center;
+}
+.howBtn:hover {
+    background-color: rgba(171, 220, 255, 0.3);
+}
+.carousel{
+    margin: 20px auto 30px;
+}
+
+.animatedTutorialBox{
+    display: block;
+}
+.firstSlideBox {
+    margin: 0 0 50px 0;
+}
+.slide1Text{
+    text-align: center;
+    font-size: 17px;
+    margin: 10px;
+}
+.slade1Image{
+    width: 100%;
+    display: flex;
+}
+.slade1Image img {
+    width: 50%;
+    margin: 10px auto;
+    box-shadow: 1px 1px 5px 3px lightgrey;
+}
+.secondSlideBox {
+    display: flex;
+    width: 90%;
+    margin: 70px auto;
+}
+.secondSlideImage {
+    width: 50%;
+}
+.secondSlideText {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.sladeImage{
+    width: 100%;
+    display: flex;
+}
+.sladeImage img {
+    width: 100%;
+    margin: 10px auto;
+    box-shadow: 1px 1px 5px 3px lightgrey;
+}
+.thirdSlideBox {
+    display: flex;
+    width: 100%;
+    margin: 70px auto;
+}
+.thirdSlideText {
+    width: 60%;
+    display: flex;
+    align-items: center;
+}
+.thirdSlideImage {
+    width: 50%;
+}
+.thirdSlideImage img {
+    box-shadow: 1px 1px 5px 3px lightgrey;
+}
+
+.colorHighlight{
+    color: rgba(171, 220, 255, 1);
+    text-shadow: -0.5px 0 black, 0 0.5px black, 0.5px 0 black, 0 -0.5px black;
+}
+.fourthSlideBox {
+    display: flex;
+    width: 100%;
+    margin: 70px auto;
+}
+
+.slideText{
+    text-align: center;
+    font-size: 17px;
+    padding: 20px;
+}
+.fourthSlideText {
+    width: 50%;
+    display: flex;
+    align-items: center;
+}
+.fourthSlideImage {
+    width: 50%;
+}
+.fourthSlideImage img {
+    box-shadow: 1px 1px 5px 3px lightgrey;
+}
+
+
+.fifthSlideBox {
+    display: flex;
+    width: 100%;
+    margin: 70px auto;
+}
+.fifthSlideText {
+    width: 50%;
+    display: flex;
+    align-items: center;
+}
+.fifthSlideImage {
+    width: 50%;
+}
+.fifthSlideImage img {
+    box-shadow: 1px 1px 5px 3px lightgrey;
 }

@@ -3,16 +3,18 @@ import s from "./userPage.module.css"
 import {
     checkMyExampleAsync,
     checkMyExampleTranslationAsync,
+    deleteNewExample,
     saveMyExampleAsync,
     setMyExample
 } from "../../../store/userSlice";
-import {useAppDispatch, useAppSelector} from "../../../store";
-import {ITranslation} from "../../../shared/models/engWordTypes";
+import {useAppDispatch} from "../../../store";
+import {IExample, ITranslation} from "../../../shared/models/engWordTypes";
 import NewExampleComponent from "../example/NewExampleComponent";
 import ExampleTranslation from "../example/ExampleTranslationComponent";
 import {ReactComponent as CloseIcon} from "../../../import/icons/close-slim.svg";
 
 type AddMyExamplePropsType = {
+    newExample: IExample | null,
     studyId: number,
     engWordId: number,
     mnemonicId: number,
@@ -20,9 +22,6 @@ type AddMyExamplePropsType = {
     isDisplayAddMyExample: (flag: boolean) => void
 }
 export const AddMyExample: FC<AddMyExamplePropsType> = (props) => {
-    const {
-        createMyExample
-    } = useAppSelector((state) => state.userReducer);
     const dispatch = useAppDispatch();
     const [myExampleSentence, setMyExampleSentence] = useState('')
     const updateMyExample = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -31,31 +30,32 @@ export const AddMyExample: FC<AddMyExamplePropsType> = (props) => {
     const [edit, setEdit] = useState(false)
 
     const checkMyExample = ()=> {
-        dispatch(checkMyExampleAsync(props.engWordId, myExampleSentence, props.mnemonicId))
+        dispatch(checkMyExampleAsync(props.engWordId, myExampleSentence, props.mnemonicId, props.studyId))
         setEdit(false)
     }
     let selectTranslation = (translationId: number) => {
-        dispatch(checkMyExampleTranslationAsync(translationId));
+        dispatch(checkMyExampleTranslationAsync(translationId, props.studyId));
     };
 
     const saveMyExample = () => {
-        dispatch(saveMyExampleAsync(props.studyId, createMyExample!))
+        dispatch(saveMyExampleAsync(props.studyId, props.newExample!))
         props.isDisplayAddMyExample(false)
-        dispatch(setMyExample(null))
+        dispatch(setMyExample({studyId: props.studyId, example:null}))
     }
     const editSentence = () => {
         setEdit(true)
-        dispatch(setMyExample(null))
+        dispatch(setMyExample({studyId: props.studyId, example:null}))
     }
     const closeForm = () => {
-        setMyExampleSentence("");
+        dispatch(deleteNewExample(props.studyId))
+        setMyExampleSentence('');
         setEdit(true)
         props.isDisplayAddMyExample(false)
     }
     const displayCurrentStep = () => {
-        if(!createMyExample && myExampleSentence.length > 0) {
+        if(!props.newExample && myExampleSentence.length > 0) {
             return <div className={s.addMyExample} onClick={checkMyExample}>Проверить</div>
-        } else if (createMyExample && !createMyExample.translationInSentence){
+        } else if (props.newExample && !props.newExample.translationInSentence){
             return (
                 <div>
                     <p className={s.chooseTranslationHeader}>Выберите перевод:</p>
@@ -69,7 +69,7 @@ export const AddMyExample: FC<AddMyExamplePropsType> = (props) => {
                     </div>
                 </div>
             )
-        }else if (createMyExample && createMyExample.translationInSentence) {
+        }else if (props.newExample && props.newExample.translationInSentence) {
             return (
                 <div className={s.saveButtonStyleBox}>
                     <div onClick={saveMyExample} className={s.saveButtonStyle}>Сохранить</div>
@@ -84,17 +84,17 @@ export const AddMyExample: FC<AddMyExamplePropsType> = (props) => {
                     <CloseIcon/>
                 </div>
             </div >
-            {createMyExample && !edit ?
+            {props.newExample && !edit ?
                 <div onClick={editSentence}>
-                    <NewExampleComponent example={createMyExample}/>
+                    <NewExampleComponent example={props.newExample}/>
                 </div>
                 :
                 <div className={s.inputExample}>
                     <textarea placeholder={"добавьте пример"}
                               value={myExampleSentence}
+                              autoFocus={true}
                               onChange={updateMyExample}/>
                 </div>
-
             }
 
             {displayCurrentStep()}

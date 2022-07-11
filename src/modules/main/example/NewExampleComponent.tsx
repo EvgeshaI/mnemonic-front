@@ -4,7 +4,7 @@ import s from "./Example.module.css";
 
 
 type PropsType = {
-    example: IExample
+    example: IExample | null
 }
 const NewExampleComponent: FC<PropsType> = (props) => {
 
@@ -21,7 +21,7 @@ const NewExampleComponent: FC<PropsType> = (props) => {
     return (
         <div className={s.exampleContainer}>
             <div className={s.newExampleSentence}>
-                {props.example.parts.map(p => exampleFn(p))}
+                {props.example!.parts.map(p => exampleFn(p))}
             </div>
 
         </div>

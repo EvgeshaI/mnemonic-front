@@ -7,7 +7,6 @@ import {ReactComponent as Search} from "../../../import/icons/search.svg"
 import {useNavigate} from "react-router";
 import {useAppDispatch, useAppSelector} from "../../../store";
 import {deleteUser} from "../../../store/authSlice";
-import {getMyPageAsync} from "../../../store/userSlice";
 import {ExitModal} from "../Modal/ExitModal";
 
 export const Navbar: FC = () => {
@@ -37,11 +36,10 @@ export const Navbar: FC = () => {
         navigate(`/login`)
     };
     const startPage = () => {
-        navigate(`/eng/picture`)
+        navigate(`/`)
     };
     const userPage = () => {
         navigate(`/user`)
-        dispatch(getMyPageAsync())
     };
     const pressHandler = (e: React.KeyboardEvent) => {
         if (e.key === "Enter") {
