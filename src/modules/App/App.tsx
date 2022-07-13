@@ -1,6 +1,6 @@
 import React, {useEffect} from "react";
 import {Route, Routes} from "react-router-dom"
-import EngWordComponent from "../main/EngWord";
+import EngWordComponent from "../main/EngWord/EngWord";
 import Alerts from "../main/Alert/Alerts";
 import {LoginAndRegistration} from "../main/LoginAndRegistration/LoginAndRegistration";
 import {Navbar} from "../main/Navbar/Navbar";

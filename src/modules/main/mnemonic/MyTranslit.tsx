@@ -1,4 +1,4 @@
-import React, {FC} from "react";
+import React, {FC, useEffect, useState} from "react";
 import s from './mnemonic.module.css';
 import {ITransliteration} from "../../../shared/models/engWordTypes";
 
@@ -6,21 +6,34 @@ type PropsType = {
     word: string,
     highlight: Array<number>,
     trans: Array<ITransliteration>
+    canSaveMnemonic: (accuracy: number) => void
 }
 
 const MyTranslit: FC<PropsType> = (props) => {
-    let myTranslit = [] as Array<string>
-    let myMnemo = (myWord: string, arrId: Array<number>) => {
-        arrId = arrId.sort((a,b) => a-b)
-        for (let i =0; i< arrId.length; i++){
-            myTranslit.push(myWord[arrId[i]])
+    let [myTranslit, setMyTranslit] = useState('')
+    let [accuracy, setAccuracy] = useState(0)
+
+    let myMnemo = () => {
+        let highlight = props.highlight.sort((a,b) => a-b)
+        let selected = []
+        for (let i =0; i< highlight.length; i++){
+            selected.push(props.word[highlight[i]])
         }
-        return `${myTranslit.join('')} ${Math.round(calculateAccuracy())}%`
+        setMyTranslit(selected.join(''))
     }
 
+    useEffect(() => {
+        myMnemo()
+    },[props.highlight])
+    useEffect(() => {
+        setAccuracy(calculateAccuracy())
+    },[myTranslit])
+    useEffect(() => {
+        props.canSaveMnemonic(accuracy)
+    }, [accuracy])
+
     let calculateAccuracy = () => {
-        let highlightMnemo = myTranslit.join('')
-        let maxTranslit = findMaxTrans(highlightMnemo, props.trans)
+        let maxTranslit = findMaxTrans(myTranslit, props.trans)
         if (maxTranslit.tran) {
             return maxTranslit.tran!.accuracy/maxTranslit.tran!.transliteration.length * maxTranslit.count
         }
@@ -55,7 +68,7 @@ const MyTranslit: FC<PropsType> = (props) => {
 
     return (
             <li className={s.myTransliteration}>
-                {myMnemo(props.word, props.highlight)}
+                {`${myTranslit} ${Math.round(accuracy)}%`}
             </li>
 
     )

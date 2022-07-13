@@ -3,15 +3,15 @@ import {Login} from "./Login";
 import s from "./auth.module.css";
 import {useAppSelector} from "../../../store";
 import {Registration} from "./Registration";
+import {GoogleLogin} from "./GoogleLogin";
 
 export const LoginAndRegistration: FC = () => {
+
     const {
-        user,
         isAuth,
         errorMessage
     } = useAppSelector((state) => state.authReducer);
     const [clickRegistration, setClickRegistration] = useState(false)
-
 
     return (
         <div>
@@ -21,11 +21,13 @@ export const LoginAndRegistration: FC = () => {
                 <div className={s.text}> Вход в Mnemology </div>
             }
 
-            <div className={s.authWrapper}>
+            <div>
                 {!clickRegistration &&
                     <div>
                         <Login isAuth={isAuth}
                                errorMessage={errorMessage}/>
+                        <GoogleLogin/>
+
                         <div className={s.loginText}> Нет аккаунта?</div>
                         <div className={s.formButtonBox}>
                             <button
@@ -33,7 +35,9 @@ export const LoginAndRegistration: FC = () => {
                                 className={s.formButton}>
                                 Зарегистрироваться
                             </button>
+
                         </div>
+
                     </div>
                 }
                 {clickRegistration &&

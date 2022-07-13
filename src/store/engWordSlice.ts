@@ -10,7 +10,6 @@ interface EngWordState {
     checkedExample: IExample | null
     examples: Array<IExample>
     updateExample: IExample | null
-
 }
 
 const initialState: EngWordState = {
@@ -95,7 +94,6 @@ export const engWordSlice = createSlice(
                 if(mnemonica){
                     mnemonica.added = true
                 }
-
             },
             deleteMeMnemonic: (state, action:PayloadAction<number> ) => {
                 let mnemonicId = action.payload;
@@ -103,7 +101,6 @@ export const engWordSlice = createSlice(
                 if(mnemonica){
                     mnemonica.added = false
                 }
-
             },
             clearCheckedExample: (state) => {
                 state.checkedExample = null
@@ -308,7 +305,6 @@ export const saveExampleAsync = (newExample: IExample): AppThunk => async  (disp
         dispatch(addAlert({message: error.data?.data?.message}))
         setTimeout(() => dispatch(removeAlert()), 5000)
     }
-
 };
 
 export const updateExampleAsync = (example: IExample): AppThunk => async (dispatch: any) => {

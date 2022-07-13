@@ -21,6 +21,7 @@ const UpdateMnemonic:FC<UpdateMnemonicPropsType> = (props) => {
     let [mnemoPhrase, setMnemoPhrase] = useState(props.mnemonicPhrase);
     let [chooseHighlightFlag, setChooseHighlightFlag] = useState(false);
     let [highlight, setHighlight] = useState<Array<number>>([]);
+    let [displaySaveBtn, setDisplaySaveBtn] = useState(false)
 
     let updateMnemoPhrase = (e: React.ChangeEvent<HTMLInputElement>) => {
         setMnemoPhrase(e.target.value);
@@ -46,7 +47,13 @@ const UpdateMnemonic:FC<UpdateMnemonicPropsType> = (props) => {
     let deleteNumber = (i: number) => {
         setHighlight(highlight.filter(el => el !== i))
     };
-
+    let canSaveMnemonic = (accuracy: number) => {
+        if(accuracy >= 25){
+            setDisplaySaveBtn(true)
+        } else {
+            setDisplaySaveBtn(false)
+        }
+    }
 
     return (
         <div className={s.updateMnemonic}>
@@ -54,7 +61,12 @@ const UpdateMnemonic:FC<UpdateMnemonicPropsType> = (props) => {
                 <ul className={s.transContainer}>
                     {props.engWord.transliterations.map((tr) =>
                         <TransliterationComponent transliteration={tr.transliteration} accuracy={tr.accuracy}/> )}
-                    {<MyTranslit word={props.mnemonicPhrase} highlight={highlight} trans={props.engWord.transliterations}/>}
+                    {<MyTranslit
+                        word={props.mnemonicPhrase}
+                        highlight={highlight}
+                        trans={props.engWord.transliterations}
+                        canSaveMnemonic={canSaveMnemonic}
+                    />}
                 </ul>
 
             </div>

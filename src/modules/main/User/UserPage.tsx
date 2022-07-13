@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import s from "./userPage.module.css"
 import {useAppDispatch, useAppSelector} from "../../../store";
-import {getMyPageAsync} from "../../../store/userSlice";
+import {getMyPageAsync, initUserPageState} from "../../../store/userSlice";
 import {UserPageContainer} from "./UserPageContainer";
 import {ReactComponent as Search} from "../../../import/icons/search.svg"
 import useDebounce from "../../util/useDebounce";
@@ -32,6 +32,9 @@ export const UserPage = () => {
     useEffect(() => {
         loadMyMnemo()
     }, [debouncedValue])
+    useEffect(() => {
+        return () => {dispatch(initUserPageState())}
+    }, [])
 
     return (
         <>

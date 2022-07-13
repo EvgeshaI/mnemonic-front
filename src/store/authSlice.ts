@@ -108,4 +108,17 @@ export const changePasswordAsync = (token: string, password: string): AppThunk =
     await MnemonicClient.changePassword(token, password)
 }
 
+export const googleLoginAsync = (token: string): AppThunk => async (dispatch: any) => {
+   try {
+        let response = await MnemonicClient.googleLoginSuccess(token)
+        let user = extractUser(response.accessToken)
+        dispatch(setUser(user))
+        localStorage.setItem("user", JSON.stringify(user))
+    } catch (error) {
+        // @ts-ignore
+        const message = error.data.data.message
+        dispatch(setError(message))
+    }
+}
+
 export default authSlice.reducer;

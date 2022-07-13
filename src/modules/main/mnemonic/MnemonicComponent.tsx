@@ -1,5 +1,5 @@
 import React, {FC, useState} from "react";
-import s from "../EngWord.module.css";
+import s from "../EngWord/EngWord.module.css";
 import s2 from "./mnemonic.module.css";
 import {IEngWord, IMnemonic} from "../../../shared/models/engWordTypes";
 import HighlightMnemonic from "./HighlightMnemonic";

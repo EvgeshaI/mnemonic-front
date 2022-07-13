@@ -7,7 +7,6 @@ import {addAlert, removeAlert} from "./alertsSlise";
 
 interface UserState {
     studies: Array<IStudy>
-    createMyExample: IExample | null
     createExampleMap: Array<NewStudyExample>
     currentPage: number
     hasMore: boolean,
@@ -16,7 +15,6 @@ interface UserState {
 
 const initialState: UserState = {
     studies: [],
-    createMyExample: null,
     hasMore: false,
     currentPage: 0,
     search: '',
@@ -50,7 +48,7 @@ export const userSlice = createSlice(
                 state.currentPage = action.payload.page
                 state.search = action.payload.search
             },
-            // нахуевертила
+
             setMyExample: (state, action: PayloadAction<{studyId: number, example: IExample | null}>) => {
                 let studyId = action.payload.studyId;
                 let example = action.payload.example;
@@ -98,6 +96,13 @@ export const userSlice = createSlice(
             deleteNewExample: (state, action: PayloadAction<number>) => {
                 let studyId = action.payload
                 state.createExampleMap = state.createExampleMap.filter(el => el.studyId !== studyId)
+            },
+            initUserPageState: (state) => {
+                state.studies = [];
+                state.hasMore = false;
+                state.currentPage = 0;
+                state.createExampleMap = []
+
             }
         }
     }
@@ -110,7 +115,8 @@ export const {
     setMyExample,
     updateStudyExample,
     removeMyExample,
-    deleteNewExample
+    deleteNewExample,
+    initUserPageState
 } = userSlice.actions
 
 
@@ -142,11 +148,11 @@ export const checkMyExampleAsync = (engWordId: number, sentence: string, mnemoni
 
 export const checkMyExampleTranslationAsync = (translationId: number, studyId: number): AppThunk => async (dispatch: any, getState) => {
     try {
-        let checkedExample = getState().userReducer.createMyExample;
+        let checkedExample = getState().userReducer.createExampleMap.find(el => el.studyId === studyId)!.example;
         let check = await MnemonicClient.checkExample(
             null,
-            checkedExample!.engWordId,
-            checkedExample!.sentence,
+            checkedExample.engWordId,
+            checkedExample.sentence,
             translationId,
             checkedExample!.mnemonicId
         );

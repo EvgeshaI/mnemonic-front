@@ -118,6 +118,13 @@ export class MnemonicClient extends BaseClient {
         }
         return this.post(`auth/change-password`, body )
     };
+
+    static async googleLoginSuccess (token: string){
+        let body = {
+            token: token
+        }
+        return this.post<IAuthResponse>(`auth/login/google`, body)
+    }
 }
 
 

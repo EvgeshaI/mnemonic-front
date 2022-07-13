@@ -124,13 +124,13 @@
     border-radius: 10px;
     padding: 10px 5px;
     color: black;
-    background-color: #d0d6dc;
+    background-color: rgba(171, 220, 255, 0.7);
     border: 0;
     box-shadow: 1px 1px 2px lightslategray;
     cursor: pointer;
 }
 .updateButton:hover {
-    background-color: #bdbdbd;
+    background-color: rgba(171, 220, 255, 0.3);;
 }
 
 .errorMessage {

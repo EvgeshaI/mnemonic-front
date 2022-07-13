@@ -8,12 +8,17 @@ import {IEngWord} from "../../../shared/models/engWordTypes";
 import {TransliterationComponent} from "./TransliterationComponent";
 import MyTranslit from "./MyTranslit";
 
+type CreateMnemonicPropsType = {
+    engWord: IEngWord;
+    afterFinishClicked: () => void;
+}
 
-const CreateMnemonic:FC<{engWord: IEngWord, afterFinishClicked: () => void}> = (props) => {
+const CreateMnemonic:FC<CreateMnemonicPropsType> = (props) => {
     const dispatch = useAppDispatch();
     let [mnemo, setMnemo] = useState("");
     let [entered, setEntered] = useState(false);
     let [highlight, setHighlight] = useState<Array<number>>([]);
+    let [displaySaveBtn, setDisplaySaveBtn] = useState(false)
 
     let updateMnemo = (e: React.ChangeEvent<HTMLInputElement>) => {
         setMnemo(e.target.value);
@@ -44,7 +49,13 @@ const CreateMnemonic:FC<{engWord: IEngWord, afterFinishClicked: () => void}> = (
     let deleteNumber = (i: number) => {
         setHighlight(highlight.filter(el => el !== i))
     };
-
+    let canSaveMnemonic = (accuracy: number) => {
+        if(accuracy >= 25){
+            setDisplaySaveBtn(true)
+        } else {
+            setDisplaySaveBtn(false)
+        }
+    }
 
     return (
         <div className={s.createMnemonic}>
@@ -58,7 +69,10 @@ const CreateMnemonic:FC<{engWord: IEngWord, afterFinishClicked: () => void}> = (
                 <ul className={s.transContainer}>
                     {props.engWord.transliterations.map((tr) =>
                     <TransliterationComponent transliteration={tr.transliteration} accuracy={tr.accuracy}/> )}
-                    {<MyTranslit word={mnemo} highlight={highlight} trans={props.engWord.transliterations}/>}
+                    {<MyTranslit word={mnemo}
+                                 highlight={highlight}
+                                 canSaveMnemonic = {canSaveMnemonic}
+                                 trans={props.engWord.transliterations}/>}
                 </ul>
 
                 </div>
@@ -93,7 +107,7 @@ const CreateMnemonic:FC<{engWord: IEngWord, afterFinishClicked: () => void}> = (
             }
             <div>
 
-                {highlight.length > 0 &&
+                {displaySaveBtn &&
                 <button onClick={saveMnemo}
                         className={s.buttonStyle}
                         disabled={!mnemo}>

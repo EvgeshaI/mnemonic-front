@@ -1,7 +1,7 @@
 import React, {FC, useState} from "react";
 import {IEngWord, IExample, IMnemonic, IPart, PartTypes} from "../../../shared/models/engWordTypes";
 import s from "./Example.module.css";
-import st from "../EngWord.module.css";
+import st from "../EngWord/EngWord.module.css";
 import {useAppDispatch} from "../../../store";
 import {
     addExampleLikeAsync,

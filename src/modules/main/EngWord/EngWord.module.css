@@ -16,7 +16,7 @@
 
 }
 .engWord {
-    padding: 10px;
+    padding: 10px 10px 0 10px;
     font-size: 30px;
     text-align: left;
     font-weight: bold;
@@ -24,6 +24,34 @@
 .word {
     font-style: oblique;
     font-size: 16px;
+}
+.transcriptionsBox{
+    display: flex;
+    margin: 0 10px 20px;
+    font-size: 17px;
+}
+
+.transcriptions{
+    display: inline-flex;
+    margin: 0 10px 0 0;
+    align-items: end;
+}
+.location{
+    font-size: 12px;
+    margin: 0 2px 0 0;
+    color: #bdbdbd;
+}
+.transcriptionWord {
+    color: #A0A0A0;
+}
+.iconAudio svg {
+    width: 15px;
+    fill: #A0A0A0;
+    cursor: pointer;
+    margin: 0 5px 0;
+}
+.iconAudio svg:hover {
+    fill: #666666;
 }
 .exampleNone {
     color: grey;

@@ -1,7 +1,8 @@
 export interface IEngWord {
     id: number,
     engWord: string,
-    transcription: string
+    transcription: string,
+    transcriptions: Array<ITranscriptions>
     translations: Array<ITranslation>
     transliterations: Array<ITransliteration>
 }
@@ -13,6 +14,13 @@ export interface ITransliteration {
 export interface ITranslation {
     id: number
     translation: string
+}
+
+export interface ITranscriptions {
+    id: 0,
+    transcription: string,
+    location: string,
+    audioFile: string
 }
 
 export interface IMnemonic {
