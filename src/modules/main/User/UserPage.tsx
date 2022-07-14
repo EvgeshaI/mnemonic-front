@@ -64,7 +64,7 @@ export const UserPage = () => {
                 {studies &&
                     <div>
                         {studies.map(el =>
-                            <div className={s.myPage} key={el.studyId}>
+                            <div key={el.studyId}>
                                 <UserPageContainer
                                     createExampleMap={createExampleMap}
                                     mnemonic = {el.mnemonic}

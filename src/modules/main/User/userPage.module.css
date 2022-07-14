@@ -42,23 +42,16 @@
     fill: #666666;
 }
 
-.myPage {
+.userContainer {
+    padding: 10px;
     width: 45%;
     margin: 30px auto;
-    /*border: 1px solid grey;*/
-    border-radius: 15px;
-    box-shadow: 1px 1px 8px 3px lightgray;
-}
-
-.userContainer {
-    margin: 5px;
-    padding: 10px;
+    border-bottom: 1px solid rgba(171, 220, 255, 0.8);
 }
 
 .engWord {
     font-size: 25px;
     font-weight: bold;
-    padding: 0 0 5px;
     cursor: pointer;
 }
 
@@ -73,7 +66,7 @@
 }
 .myMnemonic {
     padding: 5px 0 5px;
-    font-size: 20px;
+    font-size: 22px;
 }
 .icons{
     display: flex;
@@ -82,6 +75,7 @@
 .icons svg {
     padding: 0 5px;
     width: 20px;
+    fill: #666666;
 }
 .likeCount {
     padding: 0 0 0 10px;
@@ -89,24 +83,27 @@
     display: flex;
     font-size: 16px;
 }
-
+.likeIcon svg {
+    fill: #666666;
+}
 .boldIcon {
     cursor: pointer;
+    fill: #666666;
 }
 
 .trash {
-
     cursor: pointer;
-    fill: #A52A2A;
+    fill: #666666;
 }
 .myExampleBox{
     display: flex;
 }
 
 .myExample{
-    padding: 10px 0;
-    font-size: 20px;
-    font-style: italic;
+    padding: 5px 0;
+    font-size: 16px;
+    font-weight: 300;
+    /*font-style: italic;*/
 }
 .exampleFormat{
 }
@@ -131,20 +128,17 @@
 
 /*Add My Example*/
 .buttonStyle{
-    font-size: 15px;
+    display: flex;
+}
+.buttonStyle svg {
     cursor: pointer;
-    padding: 5px;
-    background-color: rgba(171, 220, 255, 0.7);
-    width: 30%;
-    text-align: center;
-    box-shadow: 1px 1px 2px lightslategray;
-    border-radius: 10px;
-    margin: 10px auto;
+    width: 5%;
+    margin: 5px auto;
+    fill: #666666;
 }
-.buttonStyle:hover{
-    background-color: rgba(171, 220, 255, 0.3);
+.buttonStyle svg:hover {
+    fill: black;
 }
-
 .closeButtonBox{
     display: flex;
     justify-content: flex-end;

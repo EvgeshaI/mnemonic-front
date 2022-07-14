@@ -48,7 +48,7 @@ export const MyStudyExample: FC<MyStudyExamplePropsType> = (props) => {
                     {props.parts.map(p => <ExampleFormat part={p}/>)}
                 </div>
                 :
-                <div className={s.myExample}>{props.parts.map(el => el.part)}</div>
+                <div className={s.myExample}> - {props.parts.map(el => el.part)}</div>
             }
 
             <div className={s.icons}>

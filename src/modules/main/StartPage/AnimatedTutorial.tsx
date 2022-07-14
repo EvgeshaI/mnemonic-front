@@ -28,8 +28,7 @@ export const AnimatedTutorial = () => {
                 <div  className={s.secondSlideText}>
                     <AnimationOnScroll animateIn="animate__backInRight" animateOnce={true}>
                         <div className={s.slideText}>
-
-                            Например, для слова "mark" уже есть мнемоника <span className={s.colorHighlight}>марк</span>ер с созвучной частью<br/><br/>
+                            Например, для слова 'mark' уже есть мнемоника <span className={s.colorHighlight}>марк</span>ер с созвучной частью<br/><br/>
                             Попробуйте придумать и добавить свою мнемонику
                         </div>
                     </AnimationOnScroll>
@@ -39,7 +38,7 @@ export const AnimatedTutorial = () => {
                 <div className={s.thirdSlideText}>
                     <AnimationOnScroll animateIn="animate__backInLeft" animateOnce={true}>
                         <div className={s.slideText}>
-                            Хороший пример мнемоники для слова "mark" будет слово "маркиз"<br/><br/>
+                            Хороший пример мнемоники для слова 'mark' будет слово 'маркиз'<br/><br/>
                             Выберите буквы созвучные английскому слову<br/><br/>
                             Попробуйте придумать похожую по звучанию мнемонику
                         </div>
@@ -62,7 +61,7 @@ export const AnimatedTutorial = () => {
                     <AnimationOnScroll animateIn="animate__backInRight" animateOnce={true}>
                         <div className={s.slideText}>
                             Все добавленные мнемоники будут автоматически сохраняться на вашу страницу<br/><br/>
-                            Кликните по своему имени в навигационной панели, чтобы туда перейти <br/><br/>
+                            Для перехода кликнете по своему имени в навигационной панели<br/><br/>
                         </div>
                     </AnimationOnScroll>
                 </div>

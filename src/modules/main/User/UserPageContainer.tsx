@@ -11,6 +11,7 @@ import {ReactComponent as Heart} from "../../../import/icons/heart.svg"
 import {ReactComponent as HeartYes} from "../../../import/icons/heart-clicked.svg"
 import {ReactComponent as Bold} from "../../../import/icons/bold1.svg"
 import {ReactComponent as NotBold} from "../../../import/icons/bold2.svg"
+import {ReactComponent as Add} from "../../../import/icons/add.svg"
 import {useNavigate} from "react-router";
 import {AddMyExample} from "./AddMyExample";
 import {MyStudyExample} from "./MyStudyExample";
@@ -62,7 +63,7 @@ export const UserPageContainer: FC<UserPageContainerPropsType> = (props) => {
             <div className={s.myMnemonicBox}>
                 {bold ?
                     <div className={s.myMnemonic}>
-                    <HighlightMnemonic highlight={props.mnemonic.highlight} mnemonic={props.mnemonic.phrase}/>
+                        <HighlightMnemonic highlight={props.mnemonic.highlight} mnemonic={props.mnemonic.phrase}/>
                     </div>
                     :
                     <div className={s.myMnemonic}>
@@ -71,21 +72,22 @@ export const UserPageContainer: FC<UserPageContainerPropsType> = (props) => {
                 }
                 <div className={s.icons}>
                     <div className={s.likeCount}> {props.mnemonic.likes} </div>
-                    <div className={s.icon}> {like} </div>
+                    <div className={s.likeIcon}> {like} </div>
                     <div className={s.boldIcon} onClick={pushBold}>  {boldIcon} </div>
                 </div>
-
-
             </div>
-            {props.examples.map(ex => <div>
-                    <MyStudyExample
-                        key = {ex.id}
-                        parts={ex.parts}
-                        exampleId={ex.id}
-                        exampleLikes={ex.likes}
-                    />
-                </div>
-            )}
+
+            <div>
+                {props.examples.map(ex => <div>
+                        <MyStudyExample
+                            key = {ex.id}
+                            parts={ex.parts}
+                            exampleId={ex.id}
+                            exampleLikes={ex.likes}
+                        />
+                    </div>
+                )}
+            </div>
 
             {displayAddMyExample ?
                 <AddMyExample
@@ -99,7 +101,7 @@ export const UserPageContainer: FC<UserPageContainerPropsType> = (props) => {
                 :
                 <div className={s.buttonStyle}
                      onClick={() => isDisplayAddMyExample(true)}>
-                    Добавить пример
+                    <Add/>
                 </div>
             }
         </div>
