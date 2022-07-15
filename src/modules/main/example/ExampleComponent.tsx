@@ -11,6 +11,7 @@ import {
 } from "../../../store/engWordSlice";
 import {ReactComponent as HeartNo} from "../../../import/icons/heart.svg"
 import {ReactComponent as HeartYes} from "../../../import/icons/heart-clicked.svg"
+import {ReactComponent as GreyHeart} from "../../../import/icons/heart-grey.svg"
 import {ReactComponent as Pencil} from "../../../import/icons/pencil.svg"
 import {ReactComponent as Trash} from "../../../import/icons/trash-bin.svg"
 import {ReactComponent as Bold} from "../../../import/icons/bold1.svg"
@@ -19,6 +20,7 @@ import UpdateExample from "./UpdateExample";
 import {DateAgo} from "../DateAgo";
 import {useNavigate} from "react-router";
 import {DeleteModal} from "../Modal/DeleteModal";
+import moment from "moment";
 
 
 type PropsType = {
@@ -47,13 +49,16 @@ const ExampleComponent: FC<PropsType> = (props) => {
 
     let addLikeExample = () => {
         if (props.auth) {
-            if (!props.example.liked) {
-                dispatch(addExampleLikeAsync(props.example.exampleId))
-            } else {
-                dispatch(deleteExampleLikeAsync(props.example.exampleId))
+            if (!props.example.isCreator) {
+                if (!props.example.liked) {
+                    dispatch(addExampleLikeAsync(props.example.exampleId))
+                } else {
+                    dispatch(deleteExampleLikeAsync(props.example.exampleId))
+                }
             }
+
         } else {
-            navigate ('/login')
+            navigate('/login')
         }
 
     };
@@ -76,7 +81,7 @@ const ExampleComponent: FC<PropsType> = (props) => {
     };
 
     let textFormatButton = <NotBold/>
-    if(textFormat) {
+    if (textFormat) {
         textFormatButton = <Bold/>
     }
 
@@ -91,61 +96,68 @@ const ExampleComponent: FC<PropsType> = (props) => {
             </div>
         )
     }
+    let isExpired = (created: string) => {
+        let createdDate = moment(created, "DD-MM-YYYY HH:mm:ss")
+        return createdDate.add(24, 'hours').isBefore(moment())
+    }
 
     return (
         <div className={s.exampleComponent}>
             {!edit
                 ?
                 <>
-                    <div className={s.dateBox}>
-                        <div className={s.dateFormat}>
-                            {date(props.example.created)}
+                    <div className={s.exampleBox}>
+                        <div className={s.example}>
+                            {textFormat ?
+                                <div>
+                                    {props.example.parts.map(p => exampleFn(p))}
+                                </div> :
+                                <div>
+                                    {props.example.parts.map(p => p.part)}
+                                </div>
+                            }
+                        </div>
+                        <div className={s.likeIcons}>
+                            <div className={s.likeCount}>{props.example.likes}</div>
+                            {props.example.isCreator ?
+                                <div><GreyHeart/></div>
+                                :
+                                <div onClick={addLikeExample}>{Like}</div>
+                            }
+
                         </div>
                     </div>
 
-                    <div className={s.example}>
-                        {textFormat ?
-                            <div>
-                                {props.example.parts.map(p => exampleFn(p))}
-                            </div> :
-                            <div>
-                                {props.example.parts.map(p => p.part)}
+                    <div className={s.exampleBottom}>
+                        <div className={st.creatorInfo}>
+                            <div className={st.author}>
+                                {props.example.creator.nickname}
                             </div>
-                        }
-
-                    </div>
-                    <div className={s.b}>
-
-                        <div className={s.author}> автор: <> </>
-                            {props.example.creator.nickname}
+                            <div className={st.dateFormat}>
+                                {date(props.example.created)}
+                            </div>
                         </div>
-
-                        <div className={s.buttonIcons}>
-                            <div className={st.boldIconBox}>
-                                <div className={st.prompt}> мнемо-часть </div>
-                                <div onClick={clickTextFormat}> {textFormatButton} </div>
+                        <div className={st.buttonIcons}>
+                            <div className={st.boldIconBox} onClick={clickTextFormat}>
+                                <div> {textFormatButton} </div>
+                                <div className={st.prompt}>Выделить</div>
                             </div>
 
-                            {props.example.isCreator && props.auth &&
-                                <div className={st.boldIconBox}>
-                                    <div className={st.prompt}> удалить </div>
-                                <div onClick={showDeleteModal}
-                                     className={s.deleteIcon}>
-                                    <Trash/>
-                                </div>
+                            {props.example.isCreator && props.auth && !isExpired(props.example.created) &&
+                                <div className={st.boldIconBox} onClick={showDeleteModal}>
+                                    <div className={s.deleteIcon}>
+                                        <Trash/>
+                                    </div>
+                                    <div className={st.prompt}> удалить</div>
                                 </div>
                             }
                             {props.example.isCreator && props.auth &&
-                                <div className={st.boldIconBox}>
-                                    <div className={st.prompt}> редактировать </div>
-                                    <div onClick={editExample}><Pencil/></div>
+                                <div className={st.boldIconBox} onClick={editExample}>
+                                    <div><Pencil/></div>
+                                    <div className={st.prompt}> редактировать</div>
                                 </div>
 
                             }
-                            <div onClick={addLikeExample}>{Like}</div>
-                            <div className={s.likeCountContainer}>
-                                <span className={s.likeCount}>{props.example.likes}</span>
-                            </div>
 
                         </div>
                     </div>
@@ -162,10 +174,8 @@ const ExampleComponent: FC<PropsType> = (props) => {
                 </>
             }
             <DeleteModal
-                classElement = {"пример"}
-                elementMnemonic={null}
-                elementExample={props.example}
-                elementMyExample ={null}
+                classElement={"пример"}
+                elementToDelete={props.example.sentence}
                 show={showModal}
                 close={closeDeleteModal}
                 delete={deleteExample}

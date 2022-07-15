@@ -7,7 +7,7 @@
     height: 12px;
 }
 .closeButtonBox svg:hover {
-    fill: white;
+    fill: lightgrey;
     cursor: pointer;
 }
 

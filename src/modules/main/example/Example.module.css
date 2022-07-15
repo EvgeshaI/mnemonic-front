@@ -25,15 +25,33 @@
     text-shadow: -0.5px 0 black, 0 0.5px black, 0.5px 0 black, 0 -0.5px black;
 }
 
+.addExampleBox{
+    position: relative;
+    display: flex;
+    margin: 10px 0 0 0;
+}
+.addExampleButton:hover ~ .addExample{
+    display: block;
+}
+
+.addExample{
+    display: none;
+    position: absolute;
+    font-size: 12px;
+    border: 1px solid grey;
+    border-radius: 10px;
+    padding: 5px;
+    left: 60px;
+    opacity: 0.6;
+    top: 5px;
+}
 .addExampleButton {
-    text-align: center;
-    padding: 10px;
-    margin: 25px auto;
-    background-color: rgba(171, 220, 255, 0.7);
-    box-shadow: 1px 1px 2px lightslategray;
-    width: 200px;
-    border-radius: 15px;
     cursor: pointer;
+    margin: 0 0 0 20px;
+    font-size: 20px;
+    background-color: rgba(171, 220, 255, 0.9);
+    padding: 5px 11px;
+    border-radius: 50%;
 }
 .addExampleButton:hover {
     background-color: rgba(171, 220, 255, 0.3);
@@ -47,21 +65,16 @@
 
 .exampleComponent:first-child {
     padding: 0 25px 15px 25px;
+    margin: 0;
 }
-.dateBox {
+.exampleBox {
     display: flex;
 }
-.dateFormat {
-    display: flex;
-    padding: 0 0 10px;
-    margin-left: auto;
-    color: #bdbdbd;
-    font-size: 13px;
-    align-items: center;
-}
+
 .example {
-    font-size: 25px;
+    font-size: 22px;
     text-align: left;
+    font-weight: 300;
     /*border-radius: 15px;*/
     /*box-shadow: 10px 10px 5px lightslategray;*/
     /*margin: 0 auto;*/
@@ -121,38 +134,24 @@
 .mnemonicSelect li {
     display: inline-block;
 }
-.b {
+.exampleBottom{
     display: flex;
 }
-.author {
-    font-size: 15px;
-    margin: 5px 0 5px;
-    font-style: normal;
-    color: #bdbdbd;
-}
-
-.buttonIcons {
+.likeIcons {
     display: flex;
     cursor: pointer;
     margin-left: auto;
+    justify-content: end;
+    font-size: 10px;
+    align-items: flex-start;
 }
-
-.buttonIcons svg {
-    padding: 0 4px;
+.likeIcons svg {
     width: 20px;
 }
 
-.deleteIcon svg {
-    fill: #A52A2A;
-}
-
-
-.likeCountContainer {
-    display: table;
-}
 .likeCount {
-    display: table-cell;
-    vertical-align: middle;
+    font-size: 16px;
+    padding: 0 4px;
 }
 
 .buttonStyle {
@@ -168,6 +167,7 @@
     box-shadow: 1px 1px 2px lightslategray;
     cursor: pointer;
 }
+
 .buttonStyle:hover {
     background-color: rgba(171, 220, 255, 0.3);
 }

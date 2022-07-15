@@ -72,6 +72,7 @@ export const UserPage = () => {
                                     examples={el.examples}
                                     translations={el.translations}
                                     studyId={el.studyId}
+                                    transcriptions={el.transcriptions}
                                 />
                             </div>)}
                     </div>

@@ -3,10 +3,8 @@
     width: 40%;
     position: sticky;
     bottom: 10px;
-    background: lightsteelblue;
+    background: #e6f7ff;
     border-radius: 15px;
-    opacity: .9
-
 }
 .closeButtonBox {
     display: flex;

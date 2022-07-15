@@ -10,11 +10,13 @@ import {deleteMyExampleAsync} from "../../../store/userSlice";
 import {useAppDispatch} from "../../../store";
 import {DeleteModal} from "../Modal/DeleteModal";
 import {ExampleFormat} from "../example/ExampleFormat";
+import moment from "moment";
 
 type MyStudyExamplePropsType = {
     parts: Array<IPart>
     exampleId: number
     exampleLikes: number
+    created: string
 }
 export const MyStudyExample: FC<MyStudyExamplePropsType> = (props) => {
     const dispatch = useAppDispatch();
@@ -32,6 +34,10 @@ export const MyStudyExample: FC<MyStudyExamplePropsType> = (props) => {
     const deleteExample = () => {
         dispatch(deleteMyExampleAsync(props.exampleId))
         setShowModal(false)
+    }
+    let isExpired = (created: string) => {
+        let createdDate = moment(created, "DD-MM-YYYY HH:mm:ss")
+        return createdDate.add(24, 'hours').isBefore(moment())
     }
     let like = <Heart/>
     if (props.exampleLikes > 0) {
@@ -55,17 +61,17 @@ export const MyStudyExample: FC<MyStudyExamplePropsType> = (props) => {
                 <div className={s.likeCount}> {props.exampleLikes}</div>
                 <div className={s.icon}> {like} </div>
                 <div className={s.boldIcon} onClick={pushBold}>  {boldIcon} </div>
-                <div className={s.trash}
-                     onClick={showDeleteModal}><Trash/>
-                </div>
+                {!isExpired(props.created) &&
+                    <div className={s.trash}
+                         onClick={showDeleteModal}><Trash/>
+                    </div>
+                }
             </div>
 
 
             <DeleteModal
                 classElement={"пример"}
-                elementMnemonic={null}
-                elementExample={null}
-                elementMyExample={props.parts}
+                elementToDelete={props.parts.map(p => p.part).join('')}
                 show={showModal}
                 close={closeDeleteModal}
                 delete={deleteExample}

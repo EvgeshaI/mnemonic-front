@@ -78,17 +78,22 @@ export const userSlice = createSlice(
                         el.examples.push({
                             id: example.exampleId,
                             likes: example.likes,
-                            parts: example.parts
+                            parts: example.parts,
+                            created: example.created
                         })
                     }
                     return el
                 })
             },
+
             removeMyExample: (state, action: PayloadAction<number>) => {
                 let deleteMyExampleId = action.payload;
                 state.studies.map(el => {
                     el.examples = el.examples.filter(ex => ex.id !== deleteMyExampleId)
                 })
+            },
+            removeMyMnemonic: (state, action: PayloadAction<number>) => {
+               state.studies = state.studies.filter(el => el.mnemonic.id !== action.payload)
             },
             searchMnemo: (state, action: PayloadAction<IPageElements<IStudy>>) => {
                  state.studies = action.payload.elements
@@ -115,6 +120,7 @@ export const {
     setMyExample,
     updateStudyExample,
     removeMyExample,
+    removeMyMnemonic,
     deleteNewExample,
     initUserPageState
 } = userSlice.actions
@@ -131,7 +137,6 @@ export const getMyPageAsync = (search: string): AppThunk => async (dispatch: any
         let result = await MnemonicClient.myPage(currentPage, search);
         dispatch(setUserPage(result))
     }
-
 };
 
 export const checkMyExampleAsync = (engWordId: number, sentence: string, mnemonicId: number, studyId:number): AppThunk =>
@@ -173,6 +178,13 @@ export const deleteMyExampleAsync = (myExampleId:number): AppThunk => async  (di
      await MnemonicClient.deleteExample(myExampleId)
     dispatch(removeMyExample(myExampleId))
 }
+
+export const deleteThisMnemonicAsync = (mnemonicID: number): AppThunk => async (dispatch: any) => {
+    await MnemonicClient.deleteMeMnemonic(mnemonicID)
+    dispatch(removeMyMnemonic(mnemonicID))
+}
+
+
 
 
 

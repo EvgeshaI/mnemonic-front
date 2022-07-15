@@ -12,6 +12,7 @@ type Props = {
 }
 export const DateAgo:FC<Props> = (props) => {
     let turnedIntoDate = moment(props.date, "DD-MM-YYYY HH:mm:ss").fromNow()
+
     return (
         <div>
             {turnedIntoDate}

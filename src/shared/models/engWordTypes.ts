@@ -34,6 +34,7 @@ export interface IMnemonic {
     exampleExists: boolean,
     isCreator: boolean,
     added: boolean,
+    myExampleExists: boolean,
     created: string,
     accuracy: number
 }
@@ -100,6 +101,7 @@ export interface IStudy {
     mnemonic: StudyMnemonic
     examples: Array<StudyExample>
     translations: Array <ITranslation>,
+    transcriptions: Array<ITranscriptions>
 }
 
 export interface StudyEngWord {
@@ -111,12 +113,14 @@ export interface StudyMnemonic {
     phrase: string,
     likes: number,
     highlight: Array<number>
+    created: string
 }
 
 export interface StudyExample {
     id: number,
     likes: number,
     parts: Array<IPart>
+    created: string
 }
 
 export interface NewStudyExample {

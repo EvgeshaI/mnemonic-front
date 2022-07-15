@@ -25,6 +25,15 @@
     color: #122B5A;
     font-size: 18px;
 }
+.buttonBack{
+    width: 50px;
+    fill: rgba(171, 220, 255, 0.9);
+    margin: 0 auto;
+    cursor: pointer;
+}
+.buttonBack:hover{
+    fill: rgba(171, 220, 255, 0.5);
+}
 
 .howBtn {
     padding: 10px;

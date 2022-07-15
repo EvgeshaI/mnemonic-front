@@ -10,21 +10,21 @@ textarea {
     font-weight: 300;
     src: local('MyFont'), url(./import/Merriweather-Light.ttf) format('truetype');
 }
-
-
 @font-face {
     font-family: 'MyFont';
-    font-weight: 500;
+    font-weight: 400;
     src: local('MyFont'), url(./import/Merriweather-Regular.ttf) format('truetype');
 }
-
-
 @font-face {
-    font-family: 'MyFont';
+font-family: 'MyFont';
     font-weight: 700;
     src: local('MyFont'), url(./import/Merriweather-Bold.ttf) format('truetype');
 }
-
+@font-face {
+    font-family: 'MyFont';
+    font-weight: 900;
+    src: local('MyFont'), url(./import/Merriweather-Black.ttf) format('truetype');
+}
 
 @font-face {
     font-family: 'MyFont';

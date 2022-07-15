@@ -1,7 +1,5 @@
 /* MNEMONIC COMPONENT*/
-.deleteIcon svg {
-    fill: #A52A2A;
-}
+
 /* MNEMONIC COMPONENT END!*/
 
 /* CREATE MNEMONIC COMPONENT*/
@@ -31,17 +29,34 @@
     font-size: 14px;
     font-style: italic;
 }
+.addMnemoBox{
+    position: relative;
+    display: flex;
+}
+.addMnemonicButton:hover ~ .addMnemo{
+    display: block;
+}
+.addMnemo{
+    display: none;
+    position: absolute;
+    font-size: 12px;
+    border: 1px solid grey;
+    border-radius: 10px;
+    padding: 5px;
+    left: 60px;
+    opacity: 0.6;
+    top: 15px;
+}
 
 .addMnemonicButton {
-    text-align: center;
-    padding: 10px;
-    margin: 30px auto;
-    width: 200px;
-    border-radius: 15px;
+    margin: 10px 0 0 20px;
     cursor: pointer;
-    background-color: rgba(171, 220, 255, 0.7);
-    box-shadow: 1px 1px 2px lightslategray;
+    font-size: 20px;
+    background-color: rgba(171, 220, 255, 0.9);
+    padding: 5px 11px;
+    border-radius: 50%;
 }
+
 .addMnemonicButton:hover{
     background-color: rgba(171, 220, 255, 0.3);
 }

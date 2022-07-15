@@ -79,9 +79,11 @@ export class MnemonicClient extends BaseClient {
         return this.post<IExample>(`example/check`, body)
     }
 
+
     static async deleteExample (id: number) {
         return this.delete(`example/${id}`)
     };
+
 
     static async signUp (nickName: string, email: string, password: string) {
         let body = {

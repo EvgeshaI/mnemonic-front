@@ -43,9 +43,14 @@ const ExampleContainer: FC<PropsType> = (props) => {
                 />
                 :<div>
                     {props.mnemonics.length > 0 &&
-                        <div className={s.addExampleButton} onClick={clickOnAddExample}>
-                        Добавить пример
+
+                        <div className={s.addExampleBox}>
+                            <div className={s.addExampleButton} onClick={clickOnAddExample}>
+                                +
+                            </div>
+                            <div className={s.addExample}> Добавить пример </div>
                         </div>
+
                     }
 
                 </div>

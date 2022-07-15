@@ -58,10 +58,7 @@ const EngWordComponent: FC<any> = () => {
                                 <AudioComponent audioFile={el.audioFile}/>
                             </div>
                         )}
-
-
                     </div>
-                    <div className={s.trans}> перевод:</div>
                     <div className={s.translate}>
                         {engWord && <span className={s.translateWord}>{joinTranslation(engWord.translations)}</span>}
                     </div>

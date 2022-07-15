@@ -13,7 +13,6 @@
     color: #bdbdbd;
     font-size: 13px;
     align-items: center;
-
 }
 .engWord {
     padding: 10px 10px 0 10px;
@@ -27,7 +26,7 @@
 }
 .transcriptionsBox{
     display: flex;
-    margin: 0 10px 20px;
+    margin: 0 10px 10px;
     font-size: 17px;
 }
 
@@ -62,14 +61,13 @@
     text-align: center;
 }
 .translate {
-    font-size: 25px;
     padding: 0 0 10px 0;
     margin: 0 0 10px 0;
     border-bottom: 1px solid rgba(171, 220, 255, 0.8);
 }
 .translateWord {
     margin: 0 0 15px 15px;
-    font-size: 20px;
+    font-size: 18px;
     font-style: italic;
 }
 .mnemonicComponent {
@@ -79,7 +77,6 @@
 .highlightWord {
     text-align: left;
     font-size: 17px;
-
 }
 
 .accuracy {
@@ -90,8 +87,9 @@
     font-size: 15px;
 }
 .mnemo {
-    font-size: 25px;
+    font-size: 24px;
     text-align: left;
+    font-weight: 400;
 }
 
 .author {
@@ -103,17 +101,27 @@
 .mnemonicBottom {
     display: flex;
 }
-
+.creatorInfo{
+}
 .buttonIcons {
+    display: flex;
+    cursor: pointer;
+    margin-left: auto;
+    justify-content: end;
+    font-size: 10px;
+}
+.likeIcon {
     display: flex;
     cursor: pointer;
     margin-left: auto;
 }
 
+.likeIcon svg,
 .buttonIcons svg {
     padding: 0 4px;
     width: 20px;
 }
+
 .likeCountContainer {
     display: table;
 }
@@ -121,35 +129,31 @@
     display: table-cell;
     vertical-align: middle;
 }
-
 .trans {
     font-style: italic;
     font-size: 16px;
     text-align: left;
 }
 
-
-
 .boldIconBox {
     position: relative;
     display: flex;
+    padding: 5px;
+    border: 1px solid #DCDCDC;
+    margin: 10px 0 0 5px;
+    border-radius: 10px;
+    align-items: center;
 }
-.boldIconBox:hover .prompt {
-    display: block;
+.boldIconBox svg {
+    fill: #666666;
 }
-.prompt{
-    display: none;
-    text-align: center;
-    font-size: 8px;
+.boldIconBox:hover svg {
+    fill: #282828
+}
+.iconContainer{
+    display: flex;
+    align-items: center;
+}
 
-    padding: 2px;
-    position: absolute;
-    /*margin-left: auto;*/
-    bottom: 25px;
-    background-color: white;
-    width: 100%;
-    right: 2px;
-
-}
 
 

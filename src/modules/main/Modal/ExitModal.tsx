@@ -13,12 +13,11 @@ const customStyles = {
     content: {
         top: "10%",
         left: "60%",
-        // transform: "translate(-50%, -50%)",
         padding: '0',
         width: "400px",
         height: "120px",
         borderRadius: "15px",
-        backgroundColor: "lightsteelblue",
+        backgroundColor: "#e6faff",
         opacity: ".9"
     }
 }

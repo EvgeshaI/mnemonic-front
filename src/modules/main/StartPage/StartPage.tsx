@@ -1,12 +1,16 @@
 import React, {FC, useState} from 'react'
 import s from './startPage.module.css'
 import {ReactComponent as Logo} from "../../../import/icons/logo.svg"
+import {ReactComponent as GoBack} from "../../../import/icons/go-back.svg"
 import {AnimatedTutorial} from "./AnimatedTutorial";
 
 export const StartPage: FC = () => {
     const [slide, setSlide] = useState(false)
     const clickSlide = () => {
         setSlide(true)
+    }
+    let backStartPage = () => {
+        setSlide(false)
     }
     return (
         <div className={s.startPage}>
@@ -35,8 +39,14 @@ export const StartPage: FC = () => {
                         а вот мнемоники можно использовать любые.
                     </div>
                     <AnimatedTutorial/>
+                    <div className={s.buttonBack}
+                        onClick={backStartPage}>
+                        <GoBack/>
+                    </div>
                 </div>
+
             }
+
         </div>
     )
 };

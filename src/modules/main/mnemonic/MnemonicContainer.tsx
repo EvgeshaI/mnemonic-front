@@ -31,9 +31,13 @@ const MnemonicContainer: FC<PropsType> = (props) => {
             {clickCreateMnemonic ?
                 <CreateMnemonic engWord={props.engWord} afterFinishClicked={clickOnCreateMnemonic}/>
                 :
-                <div className={s.addMnemonicButton} onClick={clickOnCreateMnemonic}>
-                    Добавить мнемонику
+                <div className={s.addMnemoBox}>
+                    <div className={s.addMnemonicButton} onClick={clickOnCreateMnemonic}>
+                        +
+                    </div>
+                    <div className={s.addMnemo}> Добавить мнемонику </div>
                 </div>
+
             }
 
 
