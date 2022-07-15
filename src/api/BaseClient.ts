@@ -1,7 +1,7 @@
 import axios, {AxiosError, AxiosRequestConfig} from "axios";
 
 export class BaseClient {
-    static baseUrl = "https://api.mnemology.ru"
+    static baseUrl = "http://api.mnemomemo.ru"
     static async get<T>(url: string, options?: AxiosRequestConfig) {
         try {
             const response = await axios.get<T>(`${this.baseUrl}/${url}`, options)
