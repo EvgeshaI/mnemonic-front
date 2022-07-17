@@ -9,12 +9,14 @@ interface LoginState {
     user: null | IUser
     isAuth: boolean
     errorMessage: string | null
+    confirmed: boolean | null
 }
 
 const initialState: LoginState = {
     user: null,
     isAuth: false,
-    errorMessage: null
+    errorMessage: null,
+    confirmed: null
 };
 
 export const authSlice = createSlice(
@@ -33,6 +35,9 @@ export const authSlice = createSlice(
             },
             setError: (state, action: PayloadAction <string | null>) => {
                 state.errorMessage = action.payload
+            },
+            setConfirmed: (state, action: PayloadAction<boolean>) => {
+                state.confirmed = action.payload
             }
         }
     }
@@ -41,7 +46,8 @@ export const authSlice = createSlice(
 export const {
     setUser,
     removeUser,
-    setError
+    setError,
+    setConfirmed
 } = authSlice.actions
 
 export const getAndSetUser = () => (dispatch: any) => {
@@ -53,7 +59,7 @@ export const getAndSetUser = () => (dispatch: any) => {
 
 export const deleteUser = () => (dispatch: any) => {
     localStorage.removeItem("user")
-        dispatch(removeUser ())
+    dispatch(removeUser ())
 }
 
 export const signUpAsync = (nickname: string, email: string, password: string): AppThunk => async  (dispatch: any) => {
@@ -118,6 +124,19 @@ export const googleLoginAsync = (token: string): AppThunk => async (dispatch: an
         // @ts-ignore
         const message = error.data.data.message
         dispatch(setError(message))
+    }
+}
+
+export const emailConfirmationAsync = (token: string): AppThunk => async (dispatch:any) => {
+    try{
+        await MnemonicClient.emailConfirmation(token)
+        let user = JSON.parse(localStorage.getItem("user") || "null")  as IUser
+        if(user) {
+            dispatch(deleteUser())
+        }
+        dispatch(setConfirmed(true))
+    } catch (error) {
+        dispatch(setConfirmed(false))
     }
 }
 

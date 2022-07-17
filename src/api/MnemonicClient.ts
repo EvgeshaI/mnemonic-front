@@ -126,6 +126,13 @@ export class MnemonicClient extends BaseClient {
             token: token
         }
         return this.post<IAuthResponse>(`auth/login/google`, body)
+    };
+
+    static async emailConfirmation (token: string) {
+        let params = {
+            token
+        }
+        return this.get(`auth/registration-confirm`, {params})
     }
 }
 

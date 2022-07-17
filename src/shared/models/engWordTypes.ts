@@ -2,7 +2,7 @@ export interface IEngWord {
     id: number,
     engWord: string,
     transcription: string,
-    transcriptions: Array<ITranscriptions>
+    transcriptions: Array<ITranscription>
     translations: Array<ITranslation>
     transliterations: Array<ITransliteration>
 }
@@ -16,7 +16,7 @@ export interface ITranslation {
     translation: string
 }
 
-export interface ITranscriptions {
+export interface ITranscription {
     id: 0,
     transcription: string,
     location: string,
@@ -101,7 +101,7 @@ export interface IStudy {
     mnemonic: StudyMnemonic
     examples: Array<StudyExample>
     translations: Array <ITranslation>,
-    transcriptions: Array<ITranscriptions>
+    transcriptions: Array<ITranscription>
 }
 
 export interface StudyEngWord {

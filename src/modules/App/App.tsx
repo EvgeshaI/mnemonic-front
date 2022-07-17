@@ -11,6 +11,7 @@ import {UserPage} from "../main/User/UserPage";
 import {Preloader} from "../main/Preloader/Preloader";
 import {ResetPassword} from "../main/LoginAndRegistration/ResetPassword";
 import {ChangePassword} from "../main/LoginAndRegistration/ChangePassword";
+import {Confirmation} from "../main/LoginAndRegistration/Confirmation";
 
 
 const App: React.FC<any> = () => {
@@ -39,6 +40,8 @@ const App: React.FC<any> = () => {
             <Route path = "/reset" element={<ResetPassword/>}>
             </Route>
             <Route path = "/changePassword" element={<ChangePassword/>}>
+            </Route>
+            <Route path = "/confirmation" element={<Confirmation/>}>
             </Route>
         </Routes>
         <Alerts/>

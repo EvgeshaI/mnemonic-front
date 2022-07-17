@@ -1,6 +1,6 @@
 import React, {FC, useState} from "react";
 import {
-    ITranscriptions,
+    ITranscription,
     ITranslation,
     NewStudyExample,
     StudyEngWord,
@@ -31,12 +31,12 @@ type UserPageContainerPropsType = {
     engWord: StudyEngWord,
     examples: Array<StudyExample>
     translations: Array<ITranslation>
-    transcriptions: Array<ITranscriptions>
+    transcriptions: Array<ITranscription>
 }
 export const UserPageContainer: FC<UserPageContainerPropsType> = (props) => {
     const dispatch = useAppDispatch()
     let joinTranslation = (translations: Array<ITranslation>) => {
-        return translations.map(t => t.translation).join(", ");
+        return translations.filter((el, i)=> i<4).map(t => t.translation).join(", ");
     };
 
     const [displayAddMyExample, isDisplayAddMyExample] = useState(false)
@@ -84,7 +84,7 @@ export const UserPageContainer: FC<UserPageContainerPropsType> = (props) => {
         if(transcript){
             return transcript
         }
-        return props.transcriptions.find(el => el.location === "BRITAIN")
+        return props.transcriptions.find(el => el.location === "BRITISH")
     }
 
     let transcription = findTranscription()

@@ -3,7 +3,7 @@ import {useAppDispatch, useAppSelector} from "../../../store";
 import {getEngWordAsync} from "../../../store/engWordSlice";
 import s from './EngWord.module.css'
 import {useParams} from "react-router-dom";
-import {ITranslation} from "../../../shared/models/engWordTypes";
+import {ITranscription, ITranslation} from "../../../shared/models/engWordTypes";
 import MnemonicContainer from "../mnemonic/MnemonicContainer";
 import ExampleContainer from "../example/ExampleContainer";
 import {AudioComponent} from "./AudioComponent";
@@ -31,7 +31,7 @@ const EngWordComponent: FC<any> = () => {
 
 
     let joinTranslation = (translations: Array<ITranslation>) => {
-        return translations.map(t => t.translation).join(", ");
+        return translations.filter((el, i) => i<4).map(t => t.translation).join(", ");
     };
 
     const defineLocation = (location: string) => {
@@ -40,6 +40,18 @@ const EngWordComponent: FC<any> = () => {
         }else {
             return "брит."
         }
+    }
+    let limitTranscriptions = (transcriptions: Array<ITranscription>) => {
+        let result = []
+        let amer = transcriptions.find(el => el.location === "AMERICAN")
+        let brit = transcriptions.find(el => el.location === "BRITISH")
+        if(amer){
+            result.push(amer)
+        }
+        if(brit){
+            result.push(brit)
+        }
+        return result
     }
 
     return (
@@ -51,7 +63,7 @@ const EngWordComponent: FC<any> = () => {
                         {engWord && engWord.engWord}
                     </div>
                     <div className={s.transcriptionsBox}>
-                        {engWord && engWord.transcriptions.map(el =>
+                        {engWord && limitTranscriptions(engWord.transcriptions).map(el =>
                             <div className={s.transcriptions}>
                                 <div className={s.location}> {defineLocation (el.location)}</div>
                                 <div className={s.transcriptionWord}>{el.transcription}</div>

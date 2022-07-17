@@ -29,7 +29,7 @@ export const Navbar: FC = () => {
     };
     const navigate = useNavigate();
     const goToWord = () => {
-        navigate(`/eng/${word}`)
+        navigate(`/eng/${word.toLowerCase()}`)
         setWord("")
     };
     const login = () => {

@@ -87,6 +87,7 @@
     color: #A52A2A;
 }
 .buttonReset{
+    background-color: rgba(171, 220, 255, 0.7);
     text-align: center;
     width: 300px;
     margin: 15px auto;
@@ -98,13 +99,17 @@
     box-shadow: 1px 1px 2px lightslategray;
     cursor: pointer;
 }
+.buttonReset:hover {
+    background-color: rgba(171, 220, 255, 0.4);
+}
 
 .sendText {
     width: 50%;
     text-align: center;
-    margin: 50px auto;
+    margin: 50px auto 10px;
     font-size: 20px;
     line-height: 2;
+    color: #122B5A;
 }
 
 .emailText {
@@ -112,7 +117,7 @@
 }
 .icon {
     margin: 0 auto;
-    width: 8%;
+    width: 5%;
 }
 @keyframes example {
     from {opacity: 0.1}
