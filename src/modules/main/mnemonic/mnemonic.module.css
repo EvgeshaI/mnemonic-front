@@ -47,7 +47,19 @@
     opacity: 0.6;
     top: 15px;
 }
-
+.loadMnemonic{
+    margin: 0 auto 10px;
+    box-shadow: 0.5px 0.5px 2px 1px lightgrey;
+    padding: 5px;
+    font-size: 13px;
+    text-align: center;
+    width: 20%;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.loadMnemonic:hover{
+    background-color: rgba(171, 220, 255, 0.3);
+}
 .addMnemonicButton {
     margin: 10px 0 0 20px;
     cursor: pointer;

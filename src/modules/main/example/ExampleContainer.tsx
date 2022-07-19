@@ -4,6 +4,8 @@ import s from "./Example.module.css";
 import ExampleComponent from "./ExampleComponent";
 import CreateExample from "./CreateExample";
 import {useNavigate} from "react-router";
+import {useAppDispatch} from "../../../store";
+import {getExampleAsync} from "../../../store/engWordSlice";
 
 type PropsType = {
     engWord: IEngWord
@@ -12,10 +14,11 @@ type PropsType = {
     updateExample: IExample | null
     checkedExample: IExample | null
     isAuth: boolean
+    hasMoreExample: boolean
 }
 
 const ExampleContainer: FC<PropsType> = (props) => {
-
+    const dispatch = useAppDispatch()
     let [clickCreateExample, setClickCreateExample] = useState(false);
     const navigate = useNavigate()
     let clickOnAddExample = () => {
@@ -24,9 +27,10 @@ const ExampleContainer: FC<PropsType> = (props) => {
         }else {
             navigate(`/login`)
         }
-
     }
-
+    const loadExample = () => {
+        dispatch(getExampleAsync(props.engWord.id))
+    }
     return (
         <div className={s.exampleContainer}>
             {props.examples.map(m => <ExampleComponent engWord={props.engWord}
@@ -54,6 +58,9 @@ const ExampleContainer: FC<PropsType> = (props) => {
                     }
 
                 </div>
+            }
+            {props.hasMoreExample &&
+                <div className={s.loadExample} onClick={loadExample}>Загрузить ещё</div>
             }
         </div>
     )

@@ -14,6 +14,7 @@ type FormValues = {
 type LoginPropsType  = {
     isAuth: boolean
     errorMessage: string | null
+    confirmed: boolean | null
 }
 
 export const Login: FC<LoginPropsType> = (props) => {

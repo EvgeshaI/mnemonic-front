@@ -100,9 +100,7 @@ const MnemonicComponent: FC<PropsType> = (props) => {
     }
 
     return (
-
         <div className={s.mnemonicComponent}>
-
             {!edit ?
                 <>
                     <div className={s.mnemonicBottom}>

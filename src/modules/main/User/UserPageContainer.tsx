@@ -115,10 +115,9 @@ export const UserPageContainer: FC<UserPageContainerPropsType> = (props) => {
                     <div className={s.likeCount}> {props.mnemonic.likes} </div>
                     <div className={s.likeIcon}> {like} </div>
                     <div className={s.boldIcon} onClick={pushBold}>  {boldIcon} </div>
-                    {!isExpired(props.mnemonic.created) &&
-                        <div className={s.trash}
-                            onClick={showDeleteModal}
-                        ><Trash/>
+                    {!isExpired(props.mnemonic.created) && props.examples.length < 1 &&
+                        <div className={s.trash} onClick={showDeleteModal}>
+                            <Trash/>
                         </div>
                     }
                 </div>

@@ -5,19 +5,28 @@ import {emailConfirmationAsync} from "../../../store/authSlice";
 import {useAppDispatch, useAppSelector} from "../../../store";
 import {ReactComponent as Checked} from "../../../import/icons/checked.svg";
 import {ReactComponent as Cancel} from "../../../import/icons/cancel.svg";
+import {useNavigate} from "react-router";
 
 export const Confirmation:FC = () => {
     const {
-        confirmed
+        confirmed,
+        user
     } = useAppSelector((state) => state.authReducer);
     const dispatch = useAppDispatch()
     const token = new URLSearchParams(useLocation().search).get('token') || '';
+    const navigate = useNavigate()
+
     useEffect(() => {
-       dispatch(emailConfirmationAsync(token))
+        if(user && user.confirmed){
+            navigate('/')
+        } else {
+            dispatch(emailConfirmationAsync(token))
+        }
     }, [])
 
+
     const componentBody = () => {
-        if(confirmed === null){
+        if(confirmed === null ){
             return <div> </div>
         }else if(confirmed){
             return (

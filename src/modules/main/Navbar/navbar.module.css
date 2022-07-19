@@ -12,8 +12,10 @@
     display: flex;
     justify-content: space-between;
     margin: 10px 0;
-
 }
+/*@media (width: 720px) {*/
+/*    .search {width: 40%;}*/
+/*}*/
 
 .inputAndIcon {
     position: relative;

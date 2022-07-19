@@ -1,6 +1,6 @@
 import React, {FC, useEffect} from "react";
 import {useAppDispatch, useAppSelector} from "../../../store";
-import {getEngWordAsync} from "../../../store/engWordSlice";
+import {getEngWordAsync, resetExample, resetMnemonic} from "../../../store/engWordSlice";
 import s from './EngWord.module.css'
 import {useParams} from "react-router-dom";
 import {ITranscription, ITranslation} from "../../../shared/models/engWordTypes";
@@ -16,6 +16,8 @@ const EngWordComponent: FC<any> = () => {
         examples,
         checkedExample,
         updateExample,
+        hasMoreMnemonics,
+        hasMoreExample
     } = useAppSelector((state) => state.engWordReducer);
     const {
         isAuth
@@ -27,6 +29,10 @@ const EngWordComponent: FC<any> = () => {
 
     useEffect(() => {
         dispatch(getEngWordAsync(urlWord))
+        return () => {
+            dispatch(resetMnemonic())
+            dispatch(resetExample())
+        }
     }, [urlWord]);
 
 
@@ -82,7 +88,7 @@ const EngWordComponent: FC<any> = () => {
                             engWord={engWord}
                             mnemonics={mnemonics}
                             isAuth={isAuth}
-
+                            hasMoreMnemonics ={hasMoreMnemonics}
                         />
                     }
                 </div>
@@ -101,6 +107,7 @@ const EngWordComponent: FC<any> = () => {
                         updateExample={updateExample}
                         checkedExample={checkedExample}
                         isAuth={isAuth}
+                        hasMoreExample ={hasMoreExample}
                     />
                 }
             </div>

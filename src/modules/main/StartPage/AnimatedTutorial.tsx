@@ -68,7 +68,7 @@ export const AnimatedTutorial = () => {
             </div>
             <div className={s.fifthSlideBox}>
                 <div className={s.fifthSlideText}>
-                    <AnimationOnScroll animateIn="animate__backInLeft" animateOnce={true}>
+                    <AnimationOnScroll animateIn="animate__backInUp" animateOnce={true}>
                         <div className={s.slideText}>
                             Для лучшего запоминания, придумайте пример, который будет содержать и мнемонику и перевод<br/><br/>
 
@@ -76,7 +76,7 @@ export const AnimatedTutorial = () => {
                     </AnimationOnScroll>
                 </div>
                 <div className={s.fifthSlideImage}>
-                    <AnimationOnScroll animateIn="animate__backInRight" animateOnce={true}>
+                    <AnimationOnScroll animateIn="animate__backInUp" animateOnce={true}>
                         <div className={s.sladeImage}> <img src={Slide5}/> </div>
                     </AnimationOnScroll>
                 </div>

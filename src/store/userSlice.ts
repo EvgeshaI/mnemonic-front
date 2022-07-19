@@ -107,7 +107,6 @@ export const userSlice = createSlice(
                 state.hasMore = false;
                 state.currentPage = 0;
                 state.createExampleMap = []
-
             }
         }
     }

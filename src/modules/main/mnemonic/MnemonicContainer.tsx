@@ -4,14 +4,17 @@ import MnemonicComponent from "./MnemonicComponent";
 import s from './mnemonic.module.css'
 import CreateMnemonic from "./CreateMnemonic";
 import {useNavigate} from "react-router";
+import {useAppDispatch} from "../../../store";
+import {getMnemonicAsync} from "../../../store/engWordSlice";
 
 type PropsType = {
     engWord: IEngWord
     mnemonics: Array<IMnemonic>
     isAuth: boolean
+    hasMoreMnemonics: boolean
 }
 const MnemonicContainer: FC<PropsType> = (props) => {
-
+    const dispatch = useAppDispatch()
     let [clickCreateMnemonic, setClickCreateMnemonic] = useState(false);
     const navigate = useNavigate()
 
@@ -22,8 +25,12 @@ const MnemonicContainer: FC<PropsType> = (props) => {
             navigate(`/login`)
         }
     }
+    const loadMnemonic = () => {
+        dispatch(getMnemonicAsync(props.engWord.id))
+    }
 
     return (
+        <>
         <div className={s.mnemonicContainer}>
             {props.mnemonics.map(m => <MnemonicComponent engWord={props.engWord}
                                                          auth = {props.isAuth}
@@ -37,11 +44,13 @@ const MnemonicContainer: FC<PropsType> = (props) => {
                     </div>
                     <div className={s.addMnemo}> Добавить мнемонику </div>
                 </div>
-
+            }
+        </div>
+            {props.hasMoreMnemonics &&
+                <div className={s.loadMnemonic} onClick={loadMnemonic}> Загрузить ещё</div>
             }
 
-
-        </div>
+        </>
     )
 }
 

@@ -9,6 +9,11 @@
     font-size: 25px;
     color: #122B5A;
 }
+.message{
+    font-size: 20px;
+    text-align: center;
+    color: #122B5A;
+}
 .search {
     width: 80%;
     display: flex;

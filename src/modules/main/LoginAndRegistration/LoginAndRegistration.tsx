@@ -9,7 +9,8 @@ export const LoginAndRegistration: FC = () => {
 
     const {
         isAuth,
-        errorMessage
+        errorMessage,
+        confirmed
     } = useAppSelector((state) => state.authReducer);
     const [clickRegistration, setClickRegistration] = useState(false)
 
@@ -25,7 +26,8 @@ export const LoginAndRegistration: FC = () => {
                 {!clickRegistration &&
                     <div>
                         <Login isAuth={isAuth}
-                               errorMessage={errorMessage}/>
+                               errorMessage={errorMessage}
+                               confirmed ={confirmed}/>
                         <GoogleLogin/>
 
                         <div className={s.loginText}> Нет аккаунта?</div>

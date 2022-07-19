@@ -56,7 +56,19 @@
 .addExampleButton:hover {
     background-color: rgba(171, 220, 255, 0.3);
 }
-
+.loadExample{
+    margin: 0 auto 10px;
+    box-shadow: 0.5px 0.5px 2px 1px lightgrey;
+    padding: 5px;
+    font-size: 13px;
+    text-align: center;
+    width: 20%;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.loadExample:hover{
+    background-color: rgba(171, 220, 255, 0.3);
+}
 .exampleComponent {
     padding: 15px 25px 15px 25px;
     border-bottom: 1px solid rgba(171, 220, 255, 0.8);

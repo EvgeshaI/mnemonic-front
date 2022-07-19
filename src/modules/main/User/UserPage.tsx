@@ -44,45 +44,54 @@ export const UserPage = () => {
                     Мои мнемоники
                 </div>
             </div>
-            <div className={s.search}>
-                <div className={s.inputAndIconSearch}>
-                    <div className={s.searchIcon}
-                         onClick={loadMyMnemo}>
-                        <Search/>
+            {studies.length<1
+                ?
+                <div className={s.message}> У вас пока не добавлено ни одной мнемоники</div>
+                :
+                <>
+                    <div className={s.search}>
+                        <div className={s.inputAndIconSearch}>
+                            <div className={s.searchIcon}
+                                 onClick={loadMyMnemo}>
+                                <Search/>
+                            </div>
+                            <input type="text"
+                                   placeholder="поиск по словарю..."
+                                   className={s.searchMyMnemo}
+                                   value={word}
+                                   onChange={searchWord}
+                                   onKeyPress={pressHandler}
+                            />
+                        </div>
                     </div>
-                    <input type="text"
-                           placeholder="поиск по словарю..."
-                           className={s.searchMyMnemo}
-                           value={word}
-                           onChange={searchWord}
-                           onKeyPress={pressHandler}
-                    />
-                </div>
-            </div>
-
-            <div>
-                {studies &&
                     <div>
-                        {studies.map(el =>
-                            <div key={el.studyId}>
-                                <UserPageContainer
-                                    createExampleMap={createExampleMap}
-                                    mnemonic = {el.mnemonic}
-                                    engWord = {el.engWord}
-                                    examples={el.examples}
-                                    translations={el.translations}
-                                    studyId={el.studyId}
-                                    transcriptions={el.transcriptions}
-                                />
-                            </div>)}
+                        {studies &&
+                            <div>
+                                {studies.map(el =>
+                                    <div key={el.studyId}>
+                                        <UserPageContainer
+                                            createExampleMap={createExampleMap}
+                                            mnemonic={el.mnemonic}
+                                            engWord={el.engWord}
+                                            examples={el.examples}
+                                            translations={el.translations}
+                                            studyId={el.studyId}
+                                            transcriptions={el.transcriptions}
+                                        />
+                                    </div>)}
+                            </div>
+                        }
                     </div>
-                }
-            </div>
-            {hasMore &&
-                <div className={s.hasMoreBox}>
-                    <div className={s.hasMoreBtn} onClick={loadMyMnemo}>Загрузить еще</div>
-                </div>
+                    {hasMore &&
+                        <div className={s.hasMoreBox}>
+                            <div className={s.hasMoreBtn} onClick={loadMyMnemo}>Загрузить еще</div>
+                        </div>
+                    }
+                </>
             }
+
+
+
         </>
     )
 }

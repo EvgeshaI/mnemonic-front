@@ -1,5 +1,5 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {IEngWord, IExample, IMnemonic} from "../shared/models/engWordTypes";
+import {IEngWord, IExample, IMnemonic, IPageElements} from "../shared/models/engWordTypes";
 import {AppThunk} from "./index";
 import {MnemonicClient} from "../api/MnemonicClient";
 import {addAlert, removeAlert} from "./alertsSlise";
@@ -10,6 +10,10 @@ interface EngWordState {
     checkedExample: IExample | null
     examples: Array<IExample>
     updateExample: IExample | null
+    currentMnemoPage: number
+    currentExPage: number
+    hasMoreMnemonics: boolean
+    hasMoreExample: boolean
 }
 
 const initialState: EngWordState = {
@@ -18,6 +22,10 @@ const initialState: EngWordState = {
     examples: [],
     checkedExample: null,
     updateExample: null,
+    currentMnemoPage: 0,
+    currentExPage:0,
+    hasMoreMnemonics: false,
+    hasMoreExample: false
 };
 
 export const engWordSlice = createSlice(
@@ -27,9 +35,17 @@ export const engWordSlice = createSlice(
         reducers: {
             getEngWord: (state, action: PayloadAction<IEngWord> ) => {
                 state.engWord = action.payload
+
             },
-            getMnemonics: (state, action: PayloadAction<Array<IMnemonic>> ) => {
-                state.mnemonics = action.payload
+            getMnemonics: (state, action: PayloadAction<IPageElements<IMnemonic>> ) => {
+                state.mnemonics = [...state.mnemonics, ...action.payload.elements]
+                state.currentMnemoPage = state.currentMnemoPage + 1
+                state.hasMoreMnemonics = state.currentMnemoPage < action.payload.totalPages
+            },
+            resetMnemonic: (state) => {
+                state.currentMnemoPage = 0
+                state.hasMoreMnemonics = false
+                state.mnemonics = []
             },
             updateExampleExist: (state, action: PayloadAction<{mnemonicId: number, flag: boolean}>) => {
                state.mnemonics = state.mnemonics.map(el => {
@@ -39,10 +55,16 @@ export const engWordSlice = createSlice(
                     return el
                 })
             },
-            getExamples: (state, action: PayloadAction<Array<IExample>>) =>{
-                state.examples = action.payload
+            getExamples: (state, action: PayloadAction<IPageElements<IExample>>) =>{
+                state.examples = [...state.examples, ...action.payload.elements]
+                state.currentExPage = state.currentExPage +1
+                state.hasMoreExample = state.currentExPage < action.payload.totalPages
             },
-
+            resetExample: (state) => {
+                state.examples = []
+                state.currentExPage = 0
+                state.hasMoreExample =false
+            },
             addMnemonicLike: (state, action: PayloadAction<number>) => {
                 let mnemonicId = action.payload;
                 let mnemonicLike = state.mnemonics.find(m => m.mnemonicId === mnemonicId);
@@ -133,8 +155,10 @@ export const {
     getEngWord,
     checkExample,
     getMnemonics,
+    resetMnemonic,
     updateExampleExist,
     getExamples,
+    resetExample,
     addMnemonicLike,
     deleteMnemonicLike,
     postExampleLike,
@@ -156,14 +180,17 @@ export const getEngWordAsync = (word:string): AppThunk => async (dispatch: any) 
     dispatch(getEngWord(result))
 };
 
-export const getMnemonicAsync = (id:number): AppThunk => async (dispatch: any) => {
-    let pageResult = await MnemonicClient.getMnemonic(id);
-    dispatch(getMnemonics(pageResult.elements))
+export const getMnemonicAsync = (id:number): AppThunk => async (dispatch: any, getState) => {
+    const engWordReducer = getState().engWordReducer
+    let currentPage = engWordReducer.currentMnemoPage
+    let pageResult = await MnemonicClient.getMnemonic(id, currentPage);
+    dispatch(getMnemonics(pageResult))
 };
-
-export const getExampleAsync = (id:number): AppThunk => async (dispatch: any) => {
-    let result = await MnemonicClient.getExample(id);
-    dispatch(getExamples(result.elements))
+export const getExampleAsync = (id:number): AppThunk => async (dispatch: any, getState) => {
+    const engWordReducer = getState().engWordReducer
+    let currentPage = engWordReducer.currentExPage
+    let result = await MnemonicClient.getExample(id, currentPage);
+    dispatch(getExamples(result))
 };
 export const addMnemonicLikeAsync = (id: number): AppThunk => async (dispatch: any) => {
     await MnemonicClient.postMnemonicLike(id);
@@ -318,3 +345,7 @@ export const deleteExampleAsync = (id: number): AppThunk => async  (dispatch: an
 };
 
 export default engWordSlice.reducer
+
+function getState() {
+    throw new Error("Function not implemented.");
+}

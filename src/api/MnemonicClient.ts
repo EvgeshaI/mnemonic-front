@@ -7,12 +7,20 @@ export class MnemonicClient extends BaseClient {
         return this.get<IEngWord>(`eng-word/${word}`)
     }
 
-    static async getMnemonic (id: number) {
-        const params = { engWordId: id };
+    static async getMnemonic (id: number, currentPage: number) {
+        const params = {
+            engWordId: id,
+            page: currentPage,
+            size: 1
+        };
         return this.get<IPageElements<IMnemonic>>(`mnemonic`, {params})
     }
-    static async getExample (id: number) {
-        const params = { engWordId: id };
+    static async getExample (id: number, currentExPage: number) {
+        const params = {
+            engWordId: id,
+            page: currentExPage,
+            size: 1
+        };
         return this.get<IPageElements<IExample>>(`example`, {params})
     }
 
