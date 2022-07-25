@@ -1,14 +1,14 @@
 import React, {FC, useState} from "react";
-import {IEngWord, IExample, IMnemonic, IPart, PartTypes} from "../../../shared/models/engWordTypes";
+import {IEngWord, IExample, IMnemonic} from "../../../shared/models/engWordTypes";
 import s from "./Example.module.css";
 import st from "../EngWord/EngWord.module.css";
 import {useAppDispatch} from "../../../store";
 import {
     addExampleLikeAsync,
+    addUpdateExample,
     deleteExampleAsync,
     deleteExampleLikeAsync,
-    setUpdateExample
-} from "../../../store/engWordSlice";
+} from "../../../store/exampleSlice";
 import {ReactComponent as HeartNo} from "../../../import/icons/heart.svg"
 import {ReactComponent as HeartYes} from "../../../import/icons/heart-clicked.svg"
 import {ReactComponent as GreyHeart} from "../../../import/icons/heart-grey.svg"
@@ -20,26 +20,27 @@ import UpdateExample from "./UpdateExample";
 import {DateAgo} from "../DateAgo";
 import {useNavigate} from "react-router";
 import {DeleteModal} from "../Modal/DeleteModal";
-import moment from "moment";
+import {ExampleFormat} from "./ExampleFormat";
+import {isExpired} from "../../util/utilFunctions";
 
 
 type PropsType = {
     example: IExample,
-    engWord: IEngWord | null,
+    engWord: IEngWord,
     mnemonics: Array<IMnemonic>
-    updateExample: IExample | null
+    updateExample: IExample | undefined
     auth: boolean
 }
 const ExampleComponent: FC<PropsType> = (props) => {
     const dispatch = useAppDispatch();
     const [edit, setEdit] = useState(false);
     const [textFormat, setTextFormat] = useState(false)
-    const [showModal, setShowModal] = useState(false)
+    const [showDeleteModal, setShowDeleteModal] = useState(false)
     const closeDeleteModal = () => {
-        setShowModal(false)
+        setShowDeleteModal(false)
     }
     let editExample = () => {
-        dispatch(setUpdateExample(props.example))
+        dispatch(addUpdateExample(props.example))
         setEdit(true)
     };
     let clickTextFormat = () => {
@@ -48,6 +49,7 @@ const ExampleComponent: FC<PropsType> = (props) => {
     const navigate = useNavigate()
 
     let addLikeExample = () => {
+        if (props.example.isCreator) return
         if (props.auth) {
             if (!props.example.isCreator) {
                 if (!props.example.liked) {
@@ -56,75 +58,49 @@ const ExampleComponent: FC<PropsType> = (props) => {
                     dispatch(deleteExampleLikeAsync(props.example.exampleId))
                 }
             }
-
         } else {
             navigate('/login')
         }
-
     };
     let deleteExample = () => {
         dispatch(deleteExampleAsync(props.example.exampleId))
-        setShowModal(false)
+        setShowDeleteModal(false)
     };
-    const showDeleteModal = () => {
-        setShowModal(true)
+
+    const getBoldIcon = () => {
+        return textFormat ? <Bold/> : <NotBold/>
     }
 
-    let exampleFn = (part: IPart) => {
-        if (part.type === PartTypes.PLAIN) {
-            return <span>{part.part}</span>
-        } else if (part.type === PartTypes.TRANSLATION) {
-            return <span className={s.translationPart}>{part.part}</span>
-        } else if (part.type === PartTypes.MNEMONIC) {
-            return <span className={s.mnemonicPart}>{part.part}</span>
+    const getLikeIcon = () => {
+        if (props.example.isCreator) {
+            return <div><GreyHeart/></div>
         }
-    };
-
-    let textFormatButton = <NotBold/>
-    if (textFormat) {
-        textFormatButton = <Bold/>
+        return props.example.liked ? <HeartYes/> : <HeartNo/>
     }
 
-    let Like = <HeartNo/>;
-    if (props.example.liked) {
-        Like = <HeartYes/>
-    }
-    let date = (date: string) => {
-        return (
-            <div>
-                <DateAgo date={date}/>
-            </div>
-        )
-    }
-    let isExpired = (created: string) => {
-        let createdDate = moment(created, "DD-MM-YYYY HH:mm:ss")
-        return createdDate.add(24, 'hours').isBefore(moment())
+    const isEditable = () => {
+        return props.example.isCreator && props.auth && !isExpired(props.example.created)
     }
 
     return (
         <div className={s.exampleComponent}>
-            {!edit
+            {!props.updateExample || !edit
                 ?
                 <>
                     <div className={s.exampleBox}>
                         <div className={s.example}>
                             {textFormat ?
                                 <div>
-                                    {props.example.parts.map(p => exampleFn(p))}
+                                    <ExampleFormat parts={props.example.parts} />
                                 </div> :
                                 <div>
-                                    {props.example.parts.map(p => p.part)}
+                                    {props.example.sentence}
                                 </div>
                             }
                         </div>
                         <div className={s.likeIcons}>
                             <div className={s.likeCount}>{props.example.likes}</div>
-                            {props.example.isCreator ?
-                                <div><GreyHeart/></div>
-                                :
-                                <div onClick={addLikeExample}>{Like}</div>
-                            }
-
+                            <div onClick={addLikeExample}>{getLikeIcon()}</div>
                         </div>
                     </div>
 
@@ -134,31 +110,29 @@ const ExampleComponent: FC<PropsType> = (props) => {
                                 {props.example.creator.nickname}
                             </div>
                             <div className={st.dateFormat}>
-                                {date(props.example.created)}
+                                <DateAgo date={props.example.created}/>
                             </div>
                         </div>
                         <div className={st.buttonIcons}>
                             <div className={st.boldIconBox} onClick={clickTextFormat}>
-                                <div> {textFormatButton} </div>
+                                <div className={st.iconContainer}>{getBoldIcon()}</div>
                                 <div className={st.prompt}>Выделить</div>
                             </div>
 
-                            {props.example.isCreator && props.auth && !isExpired(props.example.created) &&
-                                <div className={st.boldIconBox} onClick={showDeleteModal}>
+                            {isEditable() &&
+                                <div className={st.boldIconBox} onClick={() => setShowDeleteModal(true)}>
                                     <div className={s.deleteIcon}>
                                         <Trash/>
                                     </div>
-                                    <div className={st.prompt}> удалить</div>
+                                    <div>Удалить</div>
                                 </div>
                             }
-                            {props.example.isCreator && props.auth &&
+                            {isEditable() &&
                                 <div className={st.boldIconBox} onClick={editExample}>
-                                    <div><Pencil/></div>
-                                    <div className={st.prompt}> редактировать</div>
+                                    <div className={st.iconContainer}><Pencil/></div>
+                                    <div>Редактировать</div>
                                 </div>
-
                             }
-
                         </div>
                     </div>
                 </>
@@ -176,13 +150,12 @@ const ExampleComponent: FC<PropsType> = (props) => {
             <DeleteModal
                 classElement={"пример"}
                 elementToDelete={props.example.sentence}
-                show={showModal}
+                show={showDeleteModal}
                 close={closeDeleteModal}
                 delete={deleteExample}
             />
         </div>
     )
 };
-
 
 export default ExampleComponent

@@ -99,7 +99,7 @@
 }
 .createExample {
     margin: 25px auto;
-    padding: 15px 15px 5px 15px;
+    padding: 10px;
     border: 1px solid #bdbdbd;
     border-radius: 5px;
 }
@@ -212,18 +212,18 @@
 .updateExample {
     margin: 0 auto;
 }
-.closeButtonBox {
-    display: flex;
-    justify-content: flex-end;
-    height: 15px;
-}
-.closeButtonBox svg {
-    fill: #666666;
-}
-.closeButtonBox svg:hover {
-    fill: black;
-    cursor: pointer;
-}
+/*.closeButtonBox {*/
+/*    display: flex;*/
+/*    justify-content: flex-end;*/
+/*    height: 15px;*/
+/*}*/
+/*.closeButtonBox svg {*/
+/*    fill: #666666;*/
+/*}*/
+/*.closeButtonBox svg:hover {*/
+/*    fill: black;*/
+/*    cursor: pointer;*/
+/*}*/
 .updateCheckButton {
     text-align: center;
     width: 30%;

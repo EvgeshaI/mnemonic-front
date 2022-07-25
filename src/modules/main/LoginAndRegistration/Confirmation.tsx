@@ -27,26 +27,24 @@ export const Confirmation:FC = () => {
 
     const componentBody = () => {
         if(confirmed === null ){
-            return <div> </div>
-        }else if(confirmed){
+            return <></>
+        } else if (confirmed){
             return (
                 <div>Ваша почта успешно подтверждена!
                     <div className={s.checked}><Checked/></div>
                 </div>
                 )
-
         }else {
             return (
                 <div> Не удалось подтвердить почту. Возможно, вы перешли по неправильной ссылке.
                     <div className={s.cancel}><Cancel/></div>
                 </div>
-                )
+            )
         }
     }
     return (
         <div className={s.text}>
             {componentBody()}
-
         </div>
     )
 }

@@ -102,8 +102,7 @@
 .mnemonicBottom {
     display: flex;
 }
-.creatorInfo{
-}
+
 .buttonIcons {
     display: flex;
     cursor: pointer;
@@ -137,7 +136,6 @@
 }
 
 .boldIconBox {
-    position: relative;
     display: flex;
     padding: 5px;
     border: 1px solid #DCDCDC;

@@ -5,7 +5,7 @@ import ExampleComponent from "./ExampleComponent";
 import CreateExample from "./CreateExample";
 import {useNavigate} from "react-router";
 import {useAppDispatch} from "../../../store";
-import {getExampleAsync} from "../../../store/engWordSlice";
+import {getExampleAsync} from "../../../store/exampleSlice";
 
 type PropsType = {
     engWord: IEngWord
@@ -13,6 +13,7 @@ type PropsType = {
     examples: Array<IExample>
     updateExample: IExample | null
     checkedExample: IExample | null
+    updateExamples: Array<IExample>
     isAuth: boolean
     hasMoreExample: boolean
 }
@@ -31,13 +32,19 @@ const ExampleContainer: FC<PropsType> = (props) => {
     const loadExample = () => {
         dispatch(getExampleAsync(props.engWord.id))
     }
+    const findUpdateExample = (exampleId: number) => {
+       return props.updateExamples.find(ex => ex.exampleId === exampleId)
+    }
     return (
         <div className={s.exampleContainer}>
-            {props.examples.map(m => <ExampleComponent engWord={props.engWord}
-                                                       mnemonics={props.mnemonics}
-                                                       example={m}
-                                                       auth={props.isAuth}
-                                                       updateExample={props.updateExample}/>)}
+            {props.examples.map(ex =>
+                <ExampleComponent key={ex.exampleId}
+                                  engWord={props.engWord}
+                                  mnemonics={props.mnemonics}
+                                  example={ex}
+                                  auth={props.isAuth}
+                                  updateExample={findUpdateExample(ex.exampleId)}/>)
+            }
             {clickCreateExample ?
                 <CreateExample
                     engWord={props.engWord}
@@ -45,18 +52,16 @@ const ExampleContainer: FC<PropsType> = (props) => {
                     newExample={props.checkedExample}
                     afterSaveClick={clickOnAddExample}
                 />
-                :<div>
+                :
+                <div>
                     {props.mnemonics.length > 0 &&
-
                         <div className={s.addExampleBox}>
                             <div className={s.addExampleButton} onClick={clickOnAddExample}>
                                 +
                             </div>
                             <div className={s.addExample}> Добавить пример </div>
                         </div>
-
                     }
-
                 </div>
             }
             {props.hasMoreExample &&

@@ -1,0 +1,12 @@
+.closeButtonBox {
+    display: flex;
+    justify-content: flex-end;
+    height: 15px;
+}
+.closeButtonBox svg {
+    fill: #666666;
+}
+.closeButtonBox svg:hover {
+    fill: black;
+    cursor: pointer;
+}

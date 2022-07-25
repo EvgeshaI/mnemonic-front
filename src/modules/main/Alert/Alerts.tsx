@@ -2,7 +2,7 @@ import React from "react";
 import s from './Alerts.module.css';
 import {useAppDispatch, useAppSelector} from "../../../store";
 import {removeAlert} from "../../../store/alertsSlise";
-import {ReactComponent as CloseIcon} from "../../../import/icons/close-slim.svg"
+import {CloseBtn} from "../../util/CloseBtn";
 
 const Alerts = () => {
     const dispatch = useAppDispatch();
@@ -16,16 +16,12 @@ const Alerts = () => {
     return (
         <>
             {alert &&
-            <div className={s.alert}>
-                <div className={s.closeButtonBox} onClick={closeAlert}>
-                    <div>
-                        <CloseIcon/>
+                <div className={s.alert}>
+                    <CloseBtn close={closeAlert}/>
+                    <div className={s.alertMessage}>
+                        {alert.message}
                     </div>
-                </div >
-                <div className={s.alertMessage}>
-                    {alert.message}
                 </div>
-            </div>
             }
         </>
     )

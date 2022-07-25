@@ -5,6 +5,7 @@
 /* CREATE MNEMONIC COMPONENT*/
 .createMnemonic {
     margin: 20px auto;
+    padding: 10px;
     text-align: center;
     border: 1px solid #bdbdbd;
     border-radius: 5px;
@@ -90,19 +91,6 @@
 .buttonStyle:hover {
     background-color: rgba(171, 220, 255, 0.3);
 }
-.closeButtonBox {
-    display: flex;
-    justify-content: flex-end;
-    padding: 7px;
-    height: 15px;
-}
-.closeButtonBox svg {
-    fill: #666666;
-}
-.closeButtonBox svg:hover {
-    fill: black;
-    cursor: pointer;
-}
 /* CREATE MNEMONIC COMPONENT END!*/
 
 /* SEPARATE LETTER COMPONENT */
@@ -134,14 +122,11 @@
 
 /* UPDATE MNEMONIC COMPONENT*/
 .updateMnemonic {
-    margin: 0 auto;
-}
-.closeButtonBox svg {
-    fill: #666666;
-}
-.closeButtonBox svg:hover {
-    fill: black;
-    cursor: pointer;
+    margin: 20px auto;
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #bdbdbd;
+    border-radius: 5px;
 }
 .updateButton {
     text-align: center;

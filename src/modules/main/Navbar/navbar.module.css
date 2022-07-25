@@ -1,88 +1,102 @@
 .navbar {
-    width: 99%;
-    display: flex;
-    background-color: rgba(171, 220, 255, 0.4);
-    height: 80px;
-    border-radius: 15px;
-    margin: 0.5%;
-    /*box-shadow: 1px 1px 7px 0.5px lightslategray;*/
-}
-.search {
-    width: 80%;
     display: flex;
     justify-content: space-between;
-    margin: 10px 0;
-}
-/*@media (width: 720px) {*/
-/*    .search {width: 40%;}*/
-/*}*/
 
-.inputAndIcon {
-    position: relative;
-    width: 500px;
-    margin: 10px auto;
-    background: white;
-    border-radius: 10px;
-    /*box-shadow: 0.5px 0.5px 2px 0.5px #122B5A;*/
 }
-.searchInput,
-.searchIcon {
+.search {
+    display: flex;
+}
+
+.inputAndIcon{
+    position: relative;
+    width: 400px;
+    margin: 20px auto;
+    border-radius: 5px;
+    box-shadow: 0.5px 0.5px 1px 1px lightsteelblue;
+
+}
+.searchInput {
     border: none;
     outline: none;
     background: transparent;
 }
 .searchInput {
-    width: 100%;
-    height: 42px;
+    height: 40px;
     padding-left: 15px;
-
-
 }
 .searchIcon {
     width: 25px;
     position: absolute;
-    top: 0;
-    right: 0;
+    top: 6px;
+    right: 5px;
     cursor: pointer;
-    margin: 5px 5px 0;
     fill: #122B5A;
-}
-.nickname {
-    font-size: 13px;
-    color: #122B5A;
-    line-height: 80px;
 }
 
 .logo {
-    width: 10%;
-    padding: 0 20px;
     cursor: pointer;
     color: #122B5A;
-    display: flex;
-    line-height: 80px;
+    margin: 1%;
+    width: 200px;
+}
+.logo svg {
+    width: 80%;
 }
 
-.logout {
-    width: 10%;
+.nicknameAndLogout {
     display: flex;
-}
-.logoutLoginIcon {
+    justify-content: end;
+    align-items: center;
+    padding: 0 15px 0 0;
     cursor: pointer;
+    width: 185px;
+}
+.nickBox {
     display: flex;
-    margin-left: auto;
+    /*!*background-color: rgba(171, 220, 255, 0.4);*!*/
+    /*border-radius: 5px;*/
+    /*box-shadow: 0.5px 0.5px 1px 1px lightgrey;*/
+    align-items: center;
+    color: #122B5A;
+    margin: 0 10px;
+    padding: 3px 7px;
+    font-size: 13px;
 }
-.logoutLoginIcon svg {
-    padding: 0 20px;
-    width: 25px;
+.nickBox:hover{
+    /*color: rgb(144, 211, 255);*/
+    border-radius: 5px;
+    box-shadow: 0.5px 0.5px 1px 1px lightgrey;
+    /*border-bottom: 1px solid rgb(144, 211, 255);*/
+}
+.userIcon {
+    align-items: center;
+    margin: 0 0 0 5px;
+    width: 20px;
+}
+.userIcon svg {
+    width: 100%;
+    display: flex;
+    vertical-align: center;
+}
+.logText{
+    font-size: 13px;
+    color: #122B5A;
+    display: flex;
+    align-items:  center;
+    padding: 1px 5px;
+}
+.logText:hover{
+    border-radius: 5px;
+    box-shadow: 0.5px 0.5px 1px 1px lightgrey;
+    /*color: rgb(144, 211, 255);*/
+    /*border-bottom: 1px solid rgb(144, 211, 255);*/
+}
+.logIcon {
+    padding: 2px;
+    width: 20px;
+}
+.logIcon svg{
     fill: #122B5A;
-}
-/*.logo svg {*/
-
-/*    width: 50px;*/
-/*}*/
-
-
-.profile svg {
-    padding: 0 15px;
-    width: 50px;
+    display: flex;
+    vertical-align:  center;
 }

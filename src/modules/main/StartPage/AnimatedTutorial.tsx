@@ -81,9 +81,6 @@ export const AnimatedTutorial = () => {
                     </AnimationOnScroll>
                 </div>
             </div>
-
-
         </div>
         )
-
 }

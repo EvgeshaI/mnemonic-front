@@ -9,7 +9,7 @@ import {
     deleteMeMnemonicAsync,
     deleteMnemonicAsync,
     deleteMnemonicLikeAsync
-} from "../../../store/engWordSlice";
+} from "../../../store/mnemonicSlice";
 import {ReactComponent as HeartNo} from "../../../import/icons/heart.svg"
 import {ReactComponent as HeartYes} from "../../../import/icons/heart-clicked.svg"
 import {ReactComponent as GreyHeart} from "../../../import/icons/heart-grey.svg"
@@ -23,7 +23,7 @@ import UpdateMnemonic from "./UpdateMnemonic";
 import {DateAgo} from "../DateAgo";
 import {useNavigate} from "react-router";
 import {DeleteModal} from "../Modal/DeleteModal";
-import moment from "moment";
+import {isExpired} from "../../util/utilFunctions";
 
 type PropsType = {
     mnemonic: IMnemonic
@@ -36,13 +36,14 @@ const MnemonicComponent: FC<PropsType> = (props) => {
     let pushBold = () => {
         setBold(!bold)
     };
-    const [showModal, setShowModal] = useState(false)
+    const [showDeleteModal, setShowDeleteModal] = useState(false)
     const closeDeleteModal = () => {
-        setShowModal(false)
+        setShowDeleteModal(false)
     }
     const dispatch = useAppDispatch();
     const navigate = useNavigate()
     let addLikeMnemonic = () => {
+        if (props.mnemonic.isCreator) return
         if (props.auth) {
             if (!props.mnemonic.isCreator) {
                 if (!props.mnemonic.isLiked) {
@@ -55,13 +56,10 @@ const MnemonicComponent: FC<PropsType> = (props) => {
             navigate(`/login`)
         }
     };
-    const showDeleteModal = () => {
-        setShowModal(true)
-    }
 
     let deleteMnemonic = () => {
         dispatch(deleteMnemonicAsync(props.mnemonic.mnemonicId))
-        setShowModal(false)
+        setShowDeleteModal(false)
     };
     let addMeMnemonic = () => {
         if (!props.mnemonic.added) {
@@ -75,28 +73,21 @@ const MnemonicComponent: FC<PropsType> = (props) => {
         setEdit(true)
     };
 
-    let Like = <HeartNo/>;
-    if (props.mnemonic.isLiked) {
-        Like = <HeartYes/>
+    const addDelete = () => {
+        return props.mnemonic.added ? <Minus/> : <Add/>;
     }
-    let addDelete = <Add/>;
-    if (props.mnemonic.added) {
-        addDelete = <Minus/>;
+    const getBoldIcon = () => {
+        return bold ? <Bold/> : <NotBold/>
     }
-    let boldIcon = <NotBold/>;
-    if (bold) {
-        boldIcon = <Bold/>
+    const getLikeIcon = () => {
+        if (props.mnemonic.isCreator) {
+            return <div><GreyHeart/></div>
+        }
+        return props.mnemonic.isLiked ? <HeartYes/> : <HeartNo/>
     }
-    let date = (date: string) => {
-        return (
-            <div>
-                <DateAgo date={date}/>
-            </div>
-        )
-    }
-    let isExpired = (created: string) => {
-        let createdDate = moment(created, "DD-MM-YYYY HH:mm:ss")
-        return  createdDate.add(24, 'hours').isBefore(moment())
+
+    const canBeEditOrDelete = () => {
+        return props.mnemonic.isCreator && !props.mnemonic.exampleExists && !isExpired(props.mnemonic.created)
     }
 
     return (
@@ -115,14 +106,9 @@ const MnemonicComponent: FC<PropsType> = (props) => {
                             <div className={s.likeCountContainer}>
                                 <span className={s.likeCount}>{props.mnemonic.likes}</span>
                             </div>
-                            {props.mnemonic.isCreator ?
-                                <div>
-                                    <GreyHeart/>
-                                </div>
-                                :
-                                <div onClick={addLikeMnemonic} className={s.myRedHeart}>
-                                    {Like}
-                                </div> }
+                            <div onClick={addLikeMnemonic} className={s.myRedHeart}>
+                                {getLikeIcon()}
+                            </div>
                         </div>
 
                     </div>
@@ -139,31 +125,30 @@ const MnemonicComponent: FC<PropsType> = (props) => {
                                 {props.mnemonic.creator.nickname}
                             </div>
                             <div className={s.dateFormat}>
-                                {date(props.mnemonic.created)}
+                                <DateAgo date={props.mnemonic.created}/>
                             </div>
                         </div>
                         <div className={s.buttonIcons}>
                             <div className={s.boldIconBox} onClick={pushBold}>
-                                <div  className={s.iconContainer}>{boldIcon}</div>
+                                <div  className={s.iconContainer}>{getBoldIcon()}</div>
                                 <div> Выделить </div>
                             </div>
-                            {!props.mnemonic.isCreator && props.auth && !props.mnemonic.myExampleExists && // поменять флаг на !props.mnemonic.isCreator
+                            {!props.mnemonic.isCreator && props.auth && !props.mnemonic.myExampleExists &&
                                 <div className={s.boldIconBox} onClick={addMeMnemonic}>
-                                    <div  className={s.iconContainer}> {addDelete} </div>
-                                    <div> Избранное </div>
+                                    <div  className={s.iconContainer}> {addDelete()} </div>
+                                    <div>Избранное</div>
                                 </div>
                             }
-                            {props.mnemonic.isCreator && !props.mnemonic.exampleExists && props.auth
-                                && !isExpired(props.mnemonic.created) &&
-                                <div className={s.boldIconBox} onClick={showDeleteModal}>
+                            { canBeEditOrDelete() &&
+                                <div className={s.boldIconBox} onClick={() => setShowDeleteModal(true)}>
                                     <div  className={s.iconContainer}><Trash/></div>
-                                    <div> Удалить </div>
+                                    <div>Удалить</div>
                                 </div>
                             }
-                            {props.mnemonic.isCreator && !props.mnemonic.exampleExists && props.auth &&
+                            {canBeEditOrDelete() &&
                                 <div className={s.boldIconBox} onClick={editMnemo}>
                                     <div  className={s.iconContainer}><Pencil/></div>
-                                    <div> Редактировать </div>
+                                    <div>Редактировать</div>
                                 </div>
                             }
                         </div>
@@ -179,17 +164,14 @@ const MnemonicComponent: FC<PropsType> = (props) => {
                     />
                 </>
             }
-
             <DeleteModal
                 classElement={"мнемонику"}
                 elementToDelete={props.mnemonic.phrase}
-                show={showModal}
+                show={showDeleteModal}
                 close={closeDeleteModal}
                 delete={deleteMnemonic}
             />
         </div>
-
-
     )
 };
 

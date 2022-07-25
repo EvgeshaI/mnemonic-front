@@ -39,36 +39,33 @@ export const MyStudyExample: FC<MyStudyExamplePropsType> = (props) => {
         let createdDate = moment(created, "DD-MM-YYYY HH:mm:ss")
         return createdDate.add(24, 'hours').isBefore(moment())
     }
-    let like = <Heart/>
-    if (props.exampleLikes > 0) {
-        like = <HeartYes/>
+
+    const getBoldIcon = () => {
+        return bold ? <Bold/> : <NotBold/>
     }
-    let boldIcon = <NotBold/>;
-    if (bold) {
-        boldIcon = <Bold/>
+    const getLikeIcon = () => {
+        return props.exampleLikes > 0 ? <HeartYes/> : <Heart/>
     }
+
     return (
         <div className={s.myExampleBox}>
             {bold ?
                 <div className={s.myExample}>
-                    - {props.parts.map(p => <ExampleFormat part={p}/>)}
+                    ● <ExampleFormat parts={props.parts}/>
                 </div>
                 :
-                <div className={s.myExample}> - {props.parts.map(el => el.part)}</div>
+                <div className={s.myExample}> ● {props.parts.map(el => el.part)}</div>
             }
-
             <div className={s.icons}>
                 <div className={s.likeCount}> {props.exampleLikes}</div>
-                <div className={s.icon}> {like} </div>
-                <div className={s.boldIcon} onClick={pushBold}>  {boldIcon} </div>
+                <div className={s.icon}>{getLikeIcon()}</div>
+                <div className={s.boldIcon} onClick={pushBold}>{getBoldIcon()}</div>
                 {!isExpired(props.created) &&
                     <div className={s.trash}
                          onClick={showDeleteModal}><Trash/>
                     </div>
                 }
             </div>
-
-
             <DeleteModal
                 classElement={"пример"}
                 elementToDelete={props.parts.map(p => p.part).join('')}

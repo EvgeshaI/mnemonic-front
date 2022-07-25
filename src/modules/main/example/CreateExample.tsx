@@ -2,17 +2,17 @@ import React, {FC, useEffect, useState} from "react";
 import {useAppDispatch} from "../../../store";
 import s from "./Example.module.css";
 import {IEngWord, IExample, IMnemonic} from "../../../shared/models/engWordTypes";
-import ExampleTranslation from "./ExampleTranslationComponent";
-import ExampleMnemonic from "./ExampleMnemonic";
+import ExampleTranslations from "./ExampleTranslations";
+import ExampleMnemonics from "./ExampleMnemonics";
 import {
     checkExampleForCreateAsync,
     checkExampleMnemonicAsync,
     checkExampleTranslationAsync,
     clearCheckedExample,
     saveExampleAsync
-} from "../../../store/engWordSlice";
+} from "../../../store/exampleSlice";
 import NewExampleComponent from "./NewExampleComponent";
-import {ReactComponent as CloseIcon} from "../../../import/icons/close-slim.svg";
+import {CloseBtn} from "../../util/CloseBtn";
 
 type PropsType = {
     engWord: IEngWord,
@@ -77,26 +77,17 @@ const CreateExample: FC<PropsType> = (props) => {
             return (
                 <div>
                     <p className={s.chooseTranslationHeader}>Выберите перевод:</p>
-                    <div>
-                        <ul className={s.translationSelect}>
-                            {props.engWord.translations
-                                .map(t =>
-                                    <ExampleTranslation selectTranslation={selectTranslation} translation={t}/>
-                                )}
-                        </ul>
-                    </div>
+                    <ExampleTranslations
+                        translations={props.engWord.translations}
+                        selectTranslation={selectTranslation}
+                    />
                 </div>
             )
         } else if (props.newExample?.mnemonicInSentence === null) {
             return (
                 <div>
                     <p className={s.chooseTranslationHeader}>Выберите мнемонику:</p>
-                    <ul className={s.mnemonicSelect}>
-                        {props.mnemonics.map(m =>
-                            <ExampleMnemonic
-                                selectMnemonic={selectMnemonic}
-                                mnemonic={m}/>)}
-                    </ul>
+                    <ExampleMnemonics mnemonics={props.mnemonics} selectMnemonic={selectMnemonic}/>
                 </div>
             )
         } else if (props.newExample?.translationInSentence && props.newExample?.mnemonicInSentence) {
@@ -108,11 +99,7 @@ const CreateExample: FC<PropsType> = (props) => {
 
     return (
         <div className={s.createExample}>
-            <div className={s.closeButtonBox} onClick={closeForm}>
-                <div>
-                    <CloseIcon/>
-                </div>
-            </div >
+            <CloseBtn close={closeForm}/>
             <div className={s.inputNewExample}>
                 {!props.newExample || edit ?
                     <textarea value={exampleSentence}
@@ -132,6 +119,5 @@ const CreateExample: FC<PropsType> = (props) => {
         </div>
     )
 };
-
 
 export default CreateExample;

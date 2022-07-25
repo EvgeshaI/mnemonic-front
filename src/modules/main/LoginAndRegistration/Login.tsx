@@ -20,7 +20,7 @@ type LoginPropsType  = {
 export const Login: FC<LoginPropsType> = (props) => {
     const dispatch = useAppDispatch();
 
-    const { register, handleSubmit, formState: { errors}  } = useForm<FormValues>({
+    const {register, handleSubmit, formState: {errors}} = useForm<FormValues>({
         mode: "onChange"
     });
 
@@ -43,22 +43,20 @@ export const Login: FC<LoginPropsType> = (props) => {
             if(window.history.state && window.history.state.idx > 0) {
                 navigate(-1)
             }else {
-                navigate('/mnemosic', {replace: true})
+                navigate('/', {replace: true})
             }
-
         }
     }, [props.isAuth])
 
     return (
         <>
             {props.errorMessage &&
-                <div className={s.errorMessage}> {props.errorMessage} </div>
+                <div className={s.errorMessage}>{props.errorMessage}</div>
             }
             <div className={s.loginContainer}>
                 <form onSubmit={onSubmit}>
-
                     <div className = {errors.email ? s.formError : s.form}>
-                        <input  {...register( "email", { required: true} )}
+                        <input  {...register( "email", {required: true} )}
                                 aria-invalid={errors.email ? "true" : "false"}
                                 placeholder="Email" />
                         {errors.email && errors.email.type === "required" && (
@@ -76,22 +74,14 @@ export const Login: FC<LoginPropsType> = (props) => {
                         {errors.password && errors.password.type === "required" && (
                             <div className={s.errorMessage}>поле обязательно для заполнения</div>
                         )}
-
-
                     </div>
-
                     <div className = {s.formButtonBox}>
-                        <button type="submit"
-                                className = {s.formButton}>
+                        <button type="submit" className = {s.formButton}>
                             Вход
                         </button>
                     </div>
-                    <div onClick={clickResetPassword}
-                        className={s.passwordFound}> Забыли пароль?</div>
-
+                    <div onClick={clickResetPassword} className={s.passwordFound}>Забыли пароль?</div>
                 </form>
-
-
             </div>
         </>
     )

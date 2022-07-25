@@ -8,7 +8,11 @@ const HighlightMnemonic: FC<{highlight: Array<number>, mnemonic: string}> = (pro
         <>
             {props.mnemonic.split("")
                 .map((letter, index) =>
-                    props.highlight.indexOf(index) !== -1 ?  <b className={s.colorHighlight}>{letter}</b> :  <span>{letter}</span>)}
+                    props.highlight.indexOf(index) !== -1 ?
+                        <b key={index} className={s.colorHighlight}>{letter}</b>
+                        :
+                        <span key={index}>{letter}</span>
+                )}
         </>
     )
 };

@@ -3,21 +3,28 @@ import {IPart, PartTypes} from "../../../shared/models/engWordTypes";
 import s from "./Example.module.css";
 
 type ExampleFormatPropsType = {
-    part: IPart
+    parts: Array<IPart>
 }
 export const ExampleFormat:FC<ExampleFormatPropsType> = (props) => {
     let exampleFn = (part: IPart) => {
-        if (part.type === PartTypes.PLAIN) {
-            return <span>{part.part}</span>
-        } else if (part.type === PartTypes.TRANSLATION) {
-            return <span className={s.translationPart}>{part.part}</span>
-        } else if (part.type === PartTypes.MNEMONIC) {
-            return <span className={s.mnemonicPart}>{part.part}</span>
+        switch (part.type) {
+            case PartTypes.PLAIN:
+                return <span>{part.part}</span>
+            case PartTypes.MNEMONIC:
+                return <span className={s.mnemonicPart}>{part.part}</span>
+            case PartTypes.TRANSLATION:
+                return <span className={s.translationPart}>{part.part}</span>
+            default:
+                return <></>
         }
-        return <></>
     };
 
     return (
-        exampleFn(props.part)
+        <>
+            {props.parts.map(
+                (p, i) =>
+                    <span key={i}>{exampleFn(p)}</span>
+            )}
+        </>
     )
 }

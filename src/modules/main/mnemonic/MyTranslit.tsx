@@ -17,7 +17,8 @@ const MyTranslit: FC<PropsType> = (props) => {
         let highlight = props.highlight.sort((a,b) => a-b)
         let selected = []
         for (let i =0; i< highlight.length; i++){
-            selected.push(props.word[highlight[i]])
+            const number = highlight[i];
+            selected.push(props.word[number])
         }
         setMyTranslit(selected.join(''))
     }
@@ -53,6 +54,7 @@ const MyTranslit: FC<PropsType> = (props) => {
         }
         return {tran: maxTran, count: max}
     }
+
     let amountOfMatches = (trans: string, highlightMnemo: string) => {
         let count = 0
         let index
@@ -67,10 +69,9 @@ const MyTranslit: FC<PropsType> = (props) => {
     }
 
     return (
-            <li className={s.myTransliteration}>
-                {`${myTranslit} ${Math.round(accuracy)}%`}
-            </li>
-
+        <li className={s.myTransliteration}>
+            {`${myTranslit} ${Math.round(accuracy)}%`}
+        </li>
     )
 };
 

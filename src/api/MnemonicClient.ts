@@ -11,7 +11,7 @@ export class MnemonicClient extends BaseClient {
         const params = {
             engWordId: id,
             page: currentPage,
-            size: 1
+            size: 5
         };
         return this.get<IPageElements<IMnemonic>>(`mnemonic`, {params})
     }
@@ -19,7 +19,7 @@ export class MnemonicClient extends BaseClient {
         const params = {
             engWordId: id,
             page: currentExPage,
-            size: 1
+            size: 5
         };
         return this.get<IPageElements<IExample>>(`example`, {params})
     }
@@ -76,13 +76,13 @@ export class MnemonicClient extends BaseClient {
         return this.put<IExample>(`example`, example)
     }
 
-    static async checkExample (exampleId: number | null, engWordId: number, sentence: string, translationId?: number | null, mnemonicId?: number | null) {
+    static async checkExample (exampleId: number | null, sentence: string, engWordId?: number, translationId?: number | null, mnemonicId?: number | null) {
         let body = {
             exampleId: exampleId,
+            sentence: sentence,
             engWordId: engWordId,
             translationId: translationId,
-            mnemonicId: mnemonicId,
-            sentence: sentence
+            mnemonicId: mnemonicId
         };
         return this.post<IExample>(`example/check`, body)
     }

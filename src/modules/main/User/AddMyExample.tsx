@@ -10,8 +10,8 @@ import {
 import {useAppDispatch} from "../../../store";
 import {IExample, ITranslation} from "../../../shared/models/engWordTypes";
 import NewExampleComponent from "../example/NewExampleComponent";
-import ExampleTranslation from "../example/ExampleTranslationComponent";
-import {ReactComponent as CloseIcon} from "../../../import/icons/close-slim.svg";
+import ExampleTranslations from "../example/ExampleTranslations";
+import {CloseBtn} from "../../util/CloseBtn";
 
 type AddMyExamplePropsType = {
     newExample: IExample | null,
@@ -59,14 +59,10 @@ export const AddMyExample: FC<AddMyExamplePropsType> = (props) => {
             return (
                 <div>
                     <p className={s.chooseTranslationHeader}>Выберите перевод:</p>
-                    <div>
-                        <ul className={s.translationSelect}>
-                            {props.translations
-                                .map(t =>
-                                    <ExampleTranslation selectTranslation={selectTranslation} translation={t}/>
-                                )}
-                        </ul>
-                    </div>
+                    <ExampleTranslations
+                        translations={props.translations}
+                        selectTranslation={selectTranslation}
+                    />
                 </div>
             )
         }else if (props.newExample && props.newExample.translationInSentence) {
@@ -79,11 +75,7 @@ export const AddMyExample: FC<AddMyExamplePropsType> = (props) => {
     }
     return (
         <div>
-            <div className={s.closeButtonBox} onClick={closeForm}>
-                <div>
-                    <CloseIcon/>
-                </div>
-            </div >
+            <CloseBtn close={closeForm}/>
             {props.newExample && !edit ?
                 <div onClick={editSentence}>
                     <NewExampleComponent example={props.newExample}/>
@@ -96,9 +88,7 @@ export const AddMyExample: FC<AddMyExamplePropsType> = (props) => {
                               onChange={updateMyExample}/>
                 </div>
             }
-
             {displayCurrentStep()}
-
         </div>
     )
 }

@@ -1,7 +1,7 @@
 import React, {FC} from "react";
 import ReactModal from "react-modal";
 import s from "./modal.module.css"
-import {ReactComponent as CloseIcon} from "../../../import/icons/close-slim.svg";
+import {CloseBtn} from "../../util/CloseBtn";
 
 type ExitModalPropsType = {
     show: boolean,
@@ -13,12 +13,12 @@ const customStyles = {
     content: {
         top: "10%",
         left: "60%",
-        padding: '0',
+        padding: '7px',
         width: "400px",
-        height: "120px",
+        height: "100px",
         borderRadius: "15px",
         backgroundColor: "#e6faff",
-        opacity: ".9"
+        opacity: ".9",
     }
 }
 
@@ -31,20 +31,14 @@ export const ExitModal: FC<ExitModalPropsType> = (props) => {
             appElement={document.getElementById('root')!}
         >
             <div className={s.deleteModal}>
-                <div className={s.closeButtonBox} onClick={() => props.close()}>
-                    <div>
-                        <CloseIcon/>
-                    </div>
-                </div>
+                <CloseBtn close={props.close}/>
                 <div className={s.text}>
                    Вы действительно хотите выйти?
                 </div>
-                <div onClick={()=>props.exit()}
-                     className={s.deleteButton}>
+                <div onClick={()=>props.exit()} className={s.deleteButton}>
                     Выйти
                 </div>
             </div>
-
         </ReactModal>
     )
 }

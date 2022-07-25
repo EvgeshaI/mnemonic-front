@@ -2,11 +2,11 @@ import React, {FC, useState} from "react";
 import {useAppDispatch} from "../../../store";
 import s from './mnemonic.module.css'
 import SeparatedLetter from "./SeparatedLetter";
-import {updateMnemonicAsync} from "../../../store/engWordSlice";
-import {ReactComponent as CloseIcon} from "../../../import/icons/close-slim.svg";
+import {updateMnemonicAsync} from "../../../store/mnemonicSlice";
 import {TransliterationComponent} from "./TransliterationComponent";
 import MyTranslit from "./MyTranslit";
 import {IEngWord} from "../../../shared/models/engWordTypes";
+import {CloseBtn} from "../../util/CloseBtn";
 
 type UpdateMnemonicPropsType = {
     mnemonicId: number,
@@ -14,7 +14,6 @@ type UpdateMnemonicPropsType = {
     setEdit: (flag: boolean) => void
     engWord: IEngWord
 }
-
 
 const UpdateMnemonic:FC<UpdateMnemonicPropsType> = (props) => {
     const dispatch = useAppDispatch();
@@ -57,31 +56,30 @@ const UpdateMnemonic:FC<UpdateMnemonicPropsType> = (props) => {
 
     return (
         <div className={s.updateMnemonic}>
+            <CloseBtn close={closeForm} />
             <div>
                 <ul className={s.transContainer}>
-                    {props.engWord.transliterations.map((tr) =>
-                        <TransliterationComponent transliteration={tr.transliteration} accuracy={tr.accuracy}/> )}
-                    {<MyTranslit
+                    {props.engWord.transliterations.map((tr, index) =>
+                        <TransliterationComponent
+                            key ={index}
+                            transliteration={tr.transliteration}
+                            accuracy={tr.accuracy}/>
+                    )}
+                    <MyTranslit
                         word={props.mnemonicPhrase}
                         highlight={highlight}
                         trans={props.engWord.transliterations}
                         canSaveMnemonic={canSaveMnemonic}
-                    />}
+                    />
                 </ul>
-
             </div>
 
-            <div className={s.closeButtonBox} onClick={closeForm}>
-                <div>
-                    <CloseIcon/>
-                </div>
-            </div >
             <div>
                 {!chooseHighlightFlag &&
-                    <input  value={mnemoPhrase}
+                    <input value={mnemoPhrase}
                         onChange={updateMnemoPhrase}
                         className={s.mnemonicInput}
-                        placeholder={"добавить мнемонику"}
+                        placeholder={"обновить мнемонику"}
                         autoFocus={true}
                     />
                 }
@@ -98,24 +96,18 @@ const UpdateMnemonic:FC<UpdateMnemonicPropsType> = (props) => {
 
             {!chooseHighlightFlag && mnemoPhrase.length > 0 &&
             <div>
-                <div onClick={onChooseHighlightFlag}
-                        className={s.updateButton}>
+                <div onClick={onChooseHighlightFlag} className={s.updateButton}>
                     Выбрать созвучие
                 </div>
             </div>
             }
-            <div>
-                {highlight.length > 0 &&
-                <div onClick={updateMnemo}
-                        className={s.updateButton}>
+            {highlight.length > 0 &&
+                <div onClick={updateMnemo} className={s.updateButton}>
                     Обновить
                 </div>
-                }
-            </div >
+            }
         </div>
     )
 };
-
-
 
 export default UpdateMnemonic;

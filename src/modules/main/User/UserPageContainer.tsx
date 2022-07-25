@@ -1,168 +1,89 @@
-import React, {FC, useState} from "react";
-import {
-    ITranscription,
-    ITranslation,
-    NewStudyExample,
-    StudyEngWord,
-    StudyExample,
-    StudyMnemonic
-} from "../../../shared/models/engWordTypes";
+import React, {useEffect, useState} from "react";
 import s from "./userPage.module.css"
-import {ReactComponent as Heart} from "../../../import/icons/heart.svg"
-import {ReactComponent as HeartYes} from "../../../import/icons/heart-clicked.svg"
-import {ReactComponent as Bold} from "../../../import/icons/bold1.svg"
-import {ReactComponent as NotBold} from "../../../import/icons/bold2.svg"
-import {ReactComponent as Add} from "../../../import/icons/add.svg"
-import {useNavigate} from "react-router";
-import {AddMyExample} from "./AddMyExample";
-import {MyStudyExample} from "./MyStudyExample";
-import HighlightMnemonic from "../mnemonic/HighlightMnemonic";
-import {AudioComponent} from "../EngWord/AudioComponent";
-import moment from "moment";
-import {ReactComponent as Trash} from "../../../import/icons/trash-bin.svg";
-import {useAppDispatch} from "../../../store";
-import {deleteThisMnemonicAsync} from "../../../store/userSlice";
-import {DeleteModal} from "../Modal/DeleteModal";
+import {useAppDispatch, useAppSelector} from "../../../store";
+import {getMyPageAsync, initUserPageState} from "../../../store/userSlice";
+import {UserPage} from "./UserPage";
+import {ReactComponent as Search} from "../../../import/icons/search.svg"
+import useDebounce from "../../util/useDebounce";
 
-type UserPageContainerPropsType = {
-    createExampleMap: Array<NewStudyExample>,
-    studyId: number,
-    mnemonic: StudyMnemonic,
-    engWord: StudyEngWord,
-    examples: Array<StudyExample>
-    translations: Array<ITranslation>
-    transcriptions: Array<ITranscription>
-}
-export const UserPageContainer: FC<UserPageContainerPropsType> = (props) => {
-    const dispatch = useAppDispatch()
-    let joinTranslation = (translations: Array<ITranslation>) => {
-        return translations.filter((el, i)=> i<4).map(t => t.translation).join(", ");
+export const UserPageContainer = () => {
+    const {
+        studies,
+        hasMore,
+        createExampleMap
+    } = useAppSelector((state) => state.userReducer);
+    const dispatch = useAppDispatch();
+    const [word, setWord] = useState('')
+    const searchWord = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setWord(e.target.value)
     };
+    const debouncedValue = useDebounce<string>(word, 400)
 
-    const [displayAddMyExample, isDisplayAddMyExample] = useState(false)
-    const [bold, setBold] = useState<boolean>(false);
-    const [showModal, setShowModal] = useState(false);
-    const closeDeleteModal = () => {
-        setShowModal(false)
-    }
-    const showDeleteModal = () => {
-        setShowModal(true)
-    }
-    let pushBold = () => {
-        setBold(!bold)
+    const pressHandler = (e: React.KeyboardEvent) => {
+        if (e.key === "Enter") {
+            loadMyMnemo()
+        }
     };
-    const navigate = useNavigate()
-    const clickWord = () => {
-        let word = props.engWord.word
-        navigate(`/eng/${word}`)
-    }
-    let boldIcon = <NotBold/>;
-    if (bold) {
-        boldIcon = <Bold/>
-    }
-    let like = <Heart/>
-    if (props.mnemonic.likes > 0) {
-        like = <HeartYes/>
-    }
-    let isExpired = (created: string) => {
-        let createdDate = moment(created, "DD-MM-YYYY HH:mm:ss")
-        return createdDate.add(24, 'hours').isBefore(moment())
-    }
-    let findExample = () => {
-        const newStudyExample = props.createExampleMap.find(el => el.studyId === props.studyId);
-        if (newStudyExample) {
-            return newStudyExample.example
-        }
-        return null
+    const loadMyMnemo = () => {
+        dispatch(getMyPageAsync(word))
     }
 
-    let deleteThisMnemonic = () => {
-        dispatch(deleteThisMnemonicAsync(props.mnemonic.id))
-    }
-    let findTranscription = () => {
-        let transcript = props.transcriptions.find(el => el.location === "AMERICAN")
-        if(transcript){
-            return transcript
-        }
-        return props.transcriptions.find(el => el.location === "BRITISH")
-    }
-
-    let transcription = findTranscription()
+    useEffect(() => {
+        loadMyMnemo()
+    }, [debouncedValue])
+    useEffect(() => {
+        return () => {dispatch(initUserPageState())}
+    }, [])
 
     return (
-        <div className={s.userContainer}>
-            <div className={s.engWordBox}>
-                <div className={s.engWord} onClick={clickWord}>{props.engWord.word}</div>
-                {transcription &&
-                    <div className={s.transcriptionsAudio}>
-                        <AudioComponent audioFile={transcription.audioFile}/>
-                    </div>
-                }
+        <>
+            <div className={s.user}>
+                <div
+                    className={s.text}>
+                    Мои мнемоники
+                </div>
             </div>
-
-            <div className={s.translations}> {joinTranslation(props.translations)}</div>
-            <div className={s.myMnemonicBox}>
-                {bold ?
-                    <div className={s.myMnemonic}>
-                        <HighlightMnemonic highlight={props.mnemonic.highlight} mnemonic={props.mnemonic.phrase}/>
+            {studies.length === 0
+                ?
+                <div className={s.message}> У вас пока не добавлено ни одной мнемоники</div>
+                :
+                <>
+                    <div className={s.search}>
+                        <div className={s.inputAndIconSearch}>
+                            <div className={s.searchIcon} onClick={loadMyMnemo}>
+                                <Search/>
+                            </div>
+                            <input type="text"
+                                   placeholder="поиск по словарю..."
+                                   className={s.searchMyMnemo}
+                                   value={word}
+                                   onChange={searchWord}
+                                   onKeyPress={pressHandler}
+                            />
+                        </div>
                     </div>
-                    :
-                    <div className={s.myMnemonic}>
-                        {props.mnemonic.phrase}
+                    <div>
+                        {studies.map(el =>
+                            <div key={el.studyId}>
+                                <UserPage
+                                    createExampleMap={createExampleMap}
+                                    mnemonic={el.mnemonic}
+                                    engWord={el.engWord}
+                                    examples={el.examples}
+                                    translations={el.translations}
+                                    studyId={el.studyId}
+                                    transcriptions={el.transcriptions}
+                                />
+                            </div>
+                        )}
                     </div>
-                }
-                <div className={s.icons}>
-                    <div className={s.likeCount}> {props.mnemonic.likes} </div>
-                    <div className={s.likeIcon}> {like} </div>
-                    <div className={s.boldIcon} onClick={pushBold}>  {boldIcon} </div>
-                    {!isExpired(props.mnemonic.created) && props.examples.length < 1 &&
-                        <div className={s.trash} onClick={showDeleteModal}>
-                            <Trash/>
+                    {hasMore &&
+                        <div className={s.hasMoreBox}>
+                            <div className={s.hasMoreBtn} onClick={loadMyMnemo}>Загрузить еще</div>
                         </div>
                     }
-                </div>
-            </div>
-
-            <div>
-                {props.examples.map(ex => <div>
-                        <MyStudyExample
-                            key={ex.id}
-                            parts={ex.parts}
-                            exampleId={ex.id}
-                            exampleLikes={ex.likes}
-                            created = {ex.created}
-                        />
-                    </div>
-                )}
-            </div>
-
-            {displayAddMyExample ?
-                <AddMyExample
-                    studyId={props.studyId}
-                    engWordId={props.engWord.id}
-                    mnemonicId={props.mnemonic.id}
-                    translations={props.translations}
-                    newExample={findExample()}
-                    isDisplayAddMyExample={isDisplayAddMyExample}
-                />
-                :
-                <div className={s.addEx}>
-                    <div className={s.buttonStyle}
-                         onClick={() => isDisplayAddMyExample(true)}>
-                        <Add/>
-                    </div>
-                    <div className={s.prompt}> Добавить пример </div>
-                </div>
-
+                </>
             }
-            <DeleteModal
-                classElement={"мнемонику"}
-                elementToDelete={props.mnemonic.phrase}
-                show={showModal}
-                close={closeDeleteModal}
-                delete={deleteThisMnemonic}
-            />
-
-        </div>
+        </>
     )
 }

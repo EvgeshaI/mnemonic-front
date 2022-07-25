@@ -3,7 +3,6 @@ import {useForm} from 'react-hook-form';
 import s from "./login.module.css"
 import {useAppDispatch, useAppSelector} from "../../../store";
 import {setError, signUpAsync} from "../../../store/authSlice";
-import {useNavigate} from "react-router";
 
 type FormValues = {
     username: string;
@@ -12,17 +11,10 @@ type FormValues = {
     confirmPassword: string
 };
 
-
 export const Registration: FC = () => {
     const {
-        user,
-        isAuth,
         errorMessage
     } = useAppSelector((state) => state.authReducer);
-
-    const navigate = useNavigate();
-
-
 
     const dispatch = useAppDispatch();
     const { register, handleSubmit, formState: { errors}  } = useForm<FormValues>({
@@ -33,17 +25,6 @@ export const Registration: FC = () => {
             dispatch(setError(null))
         }
     }, [])
-    useEffect(() => {
-        if (isAuth) {
-            if(window.history.state && window.history.state.idx > 0) {
-                navigate(-1)
-            }else {
-                navigate('/mnemosic', {replace: true})
-            }
-
-        }
-    }, [isAuth])
-
 
     const [newPassword, setNewPassword] = useState('')
 
@@ -62,14 +43,14 @@ export const Registration: FC = () => {
         <div className={s.loginContainer}>
             <form onSubmit={onSubmit}>
                 <div className = {errors.username ? s.formError : s.form}>
-                    <input  {...register( "username", { required: true, maxLength: 15 } )}
+                    <input  {...register( "username", { required: true, maxLength: 30 } )}
                             aria-invalid={errors.username ? "true" : "false"}
                             placeholder="Имя пользователя" />
                     {errors.username && errors.username.type === "required" && (
                         <div className={s.errorMessage}>поле обязательно для заполнения</div>
                     )}
                     {errors.username && errors.username.type === "maxLength" && (
-                        <div className={s.errorMessage}>имя должно содержать не более 15 символов </div>
+                        <div className={s.errorMessage}>имя должно содержать не более 30 символов </div>
                     )}
                 </div>
 
@@ -89,8 +70,6 @@ export const Registration: FC = () => {
                     {errors.email && errors.email.type === "required" && (
                         <div className={s.errorMessage}>поле обязательно для заполнения</div>
                     )}
-
-
                 </div>
                 <div className = {errors.password ? s.formError : s.form}>
                     <input  {...register("password", { required: true, minLength: 6 })}
@@ -105,7 +84,6 @@ export const Registration: FC = () => {
                     {errors.password && errors.password.type === "minLength" && (
                         <div className={s.errorMessage}> пароль должен содержать не менее 6 символов </div>
                     )}
-
                 </div>
                 <div className = {errors.password ? s.formError : s.form}>
                     <input  {...register("confirmPassword",
@@ -125,19 +103,14 @@ export const Registration: FC = () => {
                         <div className={s.errorMessage}>Пароли не совпадают</div>
                     )}
                 </div>
-
-
                 <div className = {s.formButtonBox}>
                     <button type="submit"
                             className = {s.formButton}>
                             Регистрация
                     </button>
                 </div>
-
             </form>
-
         </div>
-
         </>
     )
 };

@@ -5,18 +5,8 @@
     bottom: 10px;
     background: #e6f7ff;
     border-radius: 15px;
-}
-.closeButtonBox {
-    display: flex;
-    justify-content: flex-end;
     padding: 7px;
-    height: 15px;
 }
-.closeButtonBox svg:hover {
-    fill: white;
-    cursor: pointer;
-}
-
 .alertMessage {
     font-weight: 500;
     padding: 0 30px 20px 30px;

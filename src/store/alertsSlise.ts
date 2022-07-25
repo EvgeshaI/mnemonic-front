@@ -28,3 +28,8 @@ export const alertSlice = createSlice( {
 
 export const {addAlert, removeAlert} = alertSlice.actions;
 export default alertSlice.reducer;
+
+export const showAndHideAlert = (dispatch: any, message:string) => {
+    dispatch(addAlert({message}));
+    setTimeout(() => dispatch(removeAlert()), 5000)
+}

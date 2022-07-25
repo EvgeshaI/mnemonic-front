@@ -141,7 +141,7 @@ export const getMyPageAsync = (search: string): AppThunk => async (dispatch: any
 export const checkMyExampleAsync = (engWordId: number, sentence: string, mnemonicId: number, studyId:number): AppThunk =>
     async (dispatch: any) => {
     try {
-        let check = await MnemonicClient.checkExample(null, engWordId, sentence, null, mnemonicId);
+        let check = await MnemonicClient.checkExample(null, sentence, engWordId, null, mnemonicId);
         dispatch(setMyExample({studyId: studyId, example: check}))
     }catch (error){
         //@ts-ignore
@@ -155,8 +155,8 @@ export const checkMyExampleTranslationAsync = (translationId: number, studyId: n
         let checkedExample = getState().userReducer.createExampleMap.find(el => el.studyId === studyId)!.example;
         let check = await MnemonicClient.checkExample(
             null,
-            checkedExample.engWordId,
             checkedExample.sentence,
+            checkedExample.engWordId,
             translationId,
             checkedExample!.mnemonicId
         );
@@ -169,8 +169,15 @@ export const checkMyExampleTranslationAsync = (translationId: number, studyId: n
 }
 
 export const saveMyExampleAsync = (studyId:number, example: IExample): AppThunk => async  (dispatch: any) => {
-    let result = await MnemonicClient.saveExample(example)
-    dispatch(updateStudyExample({studyId, example: result}))
+    try {
+        let result = await MnemonicClient.saveExample(example)
+        dispatch(updateStudyExample({studyId, example: result}))
+    } catch (error) {
+        // @ts-ignore
+        dispatch(addAlert({message: error.data?.data?.message}))
+        setTimeout(() => dispatch(removeAlert()), 5000)
+    }
+
 }
 
 export const deleteMyExampleAsync = (myExampleId:number): AppThunk => async  (dispatch: any) => {

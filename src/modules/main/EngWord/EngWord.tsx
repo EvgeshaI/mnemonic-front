@@ -1,24 +1,31 @@
 import React, {FC, useEffect} from "react";
 import {useAppDispatch, useAppSelector} from "../../../store";
-import {getEngWordAsync, resetExample, resetMnemonic} from "../../../store/engWordSlice";
+import {getEngWordAsync} from "../../../store/engWordSlice";
 import s from './EngWord.module.css'
 import {useParams} from "react-router-dom";
 import {ITranscription, ITranslation} from "../../../shared/models/engWordTypes";
 import MnemonicContainer from "../mnemonic/MnemonicContainer";
 import ExampleContainer from "../example/ExampleContainer";
 import {AudioComponent} from "./AudioComponent";
+import {resetMnemonic} from "../../../store/mnemonicSlice";
+import {resetExample} from "../../../store/exampleSlice";
 
-const EngWordComponent: FC<any> = () => {
+const EngWord: FC<any> = () => {
     const dispatch = useAppDispatch();
     const {
         engWord,
+    } = useAppSelector((state) => state.engWordReducer);
+    const {
         mnemonics,
+    } = useAppSelector((state) => state.mnemonicReducer);
+    const hasMoreMnemonics = useAppSelector((state) => state.mnemonicReducer).hasMore
+    const {
         examples,
         checkedExample,
         updateExample,
-        hasMoreMnemonics,
-        hasMoreExample
-    } = useAppSelector((state) => state.engWordReducer);
+        updateExamples
+    } = useAppSelector((state) => state.exampleReducer);
+    const hasMoreExample = useAppSelector((state) => state.exampleReducer).hasMore;
     const {
         isAuth
     } = useAppSelector((state) => state.authReducer);
@@ -37,7 +44,7 @@ const EngWordComponent: FC<any> = () => {
 
 
     let joinTranslation = (translations: Array<ITranslation>) => {
-        return translations.filter((el, i) => i<4).map(t => t.translation).join(", ");
+        return translations.filter((el, i) => i < 4).map(t => t.translation).join(", ");
     };
 
     const defineLocation = (location: string) => {
@@ -62,7 +69,6 @@ const EngWordComponent: FC<any> = () => {
 
     return (
         <>
-
             <div className={s.engWordContainer}>
                 <div className={s.engWordComponent}>
                     <div className={s.engWord}>
@@ -70,7 +76,7 @@ const EngWordComponent: FC<any> = () => {
                     </div>
                     <div className={s.transcriptionsBox}>
                         {engWord && limitTranscriptions(engWord.transcriptions).map(el =>
-                            <div className={s.transcriptions}>
+                            <div className={s.transcriptions} key={el.id}>
                                 <div className={s.location}> {defineLocation (el.location)}</div>
                                 <div className={s.transcriptionWord}>{el.transcription}</div>
                                 <AudioComponent audioFile={el.audioFile}/>
@@ -95,8 +101,9 @@ const EngWordComponent: FC<any> = () => {
                 <br/>
 
                 <div className={s.word}> примеры:</div>
-                {examples.length < 1 && mnemonics.length < 1 &&
-                    <div className={s.exampleNone}> придумайте мнемонику, чтобы добавить пример
+                {examples.length === 0 && mnemonics.length === 0 &&
+                    <div className={s.exampleNone}>
+                        придумайте мнемонику, чтобы добавить пример
                     </div>
                 }
                 {engWord &&
@@ -105,6 +112,7 @@ const EngWordComponent: FC<any> = () => {
                         mnemonics={mnemonics}
                         examples={examples}
                         updateExample={updateExample}
+                        updateExamples = {updateExamples}
                         checkedExample={checkedExample}
                         isAuth={isAuth}
                         hasMoreExample ={hasMoreExample}
@@ -115,4 +123,4 @@ const EngWordComponent: FC<any> = () => {
     )
 };
 
-export default EngWordComponent
+export default EngWord

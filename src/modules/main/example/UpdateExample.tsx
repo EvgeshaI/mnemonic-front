@@ -1,22 +1,30 @@
 import React, {FC, useState} from "react";
 import {useAppDispatch} from "../../../store";
 import s from "./Example.module.css";
+import common from "../common.module.css";
 import {IEngWord, IExample, IMnemonic} from "../../../shared/models/engWordTypes";
-import ExampleTranslation from "./ExampleTranslationComponent";
-import ExampleMnemonic from "./ExampleMnemonic";
+import ExampleTranslations from "./ExampleTranslations";
+import ExampleMnemonics from "./ExampleMnemonics";
 import {
     checkExampleForUpdateAsync,
     checkExampleMnemonicForUpdateAsync,
     checkExampleTranslationForUpdateAsync,
+    clearUpdateExample,
     updateExampleAsync
-} from "../../../store/engWordSlice";
+} from "../../../store/exampleSlice";
 import NewExampleComponent from "./NewExampleComponent";
 import {ReactComponent as CloseIcon} from "../../../import/icons/close-slim.svg";
 
-const UpdateExample: FC<{engWord: IEngWord | null, mnemonics: Array<IMnemonic>, newExample: IExample, setEdit: (b: boolean) => void}> = (props) => {
+type UpdateExamplePropsType = {
+    engWord: IEngWord,
+    mnemonics: Array<IMnemonic>,
+    newExample: IExample,
+    setEdit: (b: boolean) => void
+}
+
+const UpdateExample: FC<UpdateExamplePropsType> = (props) => {
     const dispatch = useAppDispatch();
     let [exampleSentence, setExampleSentence] = useState(props.newExample.sentence);
-    let [step, setStep] = useState(1);
     let [edit, setEdit] = useState(false);
 
     let updateExampleSentence = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -25,67 +33,54 @@ const UpdateExample: FC<{engWord: IEngWord | null, mnemonics: Array<IMnemonic>, 
 
     let editExample = () => {
         setEdit(true);
-        setStep(1)
     };
 
     let updateExample = () => {
         dispatch(updateExampleAsync(props.newExample!));
         setExampleSentence("");
-        setStep(1);
         props.setEdit(false)
     };
     let closeForm = () => {
         setExampleSentence("");
-        setStep(1);
         props.setEdit(false)
     }
-    let nextStep = () => {
-        setStep(step + 1)
-    };
     let selectTranslation = (translationId: number) => {
-        dispatch(checkExampleTranslationForUpdateAsync(translationId));
+        dispatch(checkExampleTranslationForUpdateAsync(props.newExample.exampleId,translationId));
     };
 
     let selectMnemonic = (mnemonicId: number) => {
-        dispatch(checkExampleMnemonicForUpdateAsync(mnemonicId));
+        dispatch(checkExampleMnemonicForUpdateAsync(props.newExample.exampleId, mnemonicId));
     };
 
     let initCheck = () => {
         checkExampleRequest();
-        nextStep();
         setEdit(false)
     };
     let checkExampleRequest = () => {
-        dispatch(checkExampleForUpdateAsync(exampleSentence));
+        dispatch(clearUpdateExample(props.newExample.exampleId))
+        dispatch(checkExampleForUpdateAsync(props.newExample.exampleId, exampleSentence));
     };
     let displayStepComponent = () => {
-        if (step === 1 && exampleSentence.length > 0) {
+        if ((!props.newExample || edit) && exampleSentence.length > 0) {
             return <div>
                 <div onClick={initCheck} className={s.updateCheckButton}>Проверить</div>
             </div>
 
-        } else if (props.newExample?.translationInSentence === null && step !== 1) {
+        } else if (props.newExample?.translationInSentence === null) {
             return (
                 <div>
                     <p className={s.chooseTranslationHeader}>Выберите перевод</p>
-                    <div className={s.translationSelect}>
-                        {props.engWord!.translations
-                            .map(t =>
-                                <ExampleTranslation selectTranslation={selectTranslation} translation={t}/>
-                            )}
-                    </div>
+                    <ExampleTranslations
+                        translations={props.engWord.translations}
+                        selectTranslation={selectTranslation}
+                    />
                 </div>
             )
-        } else if (props.newExample?.mnemonicInSentence === null && step !== 1) {
+        } else if (props.newExample?.mnemonicInSentence === null) {
             return (
                 <div>
                     <p className={s.chooseTranslationHeader}>Выберите мнемоники</p>
-                    <div className={s.mnemonicSelect}>
-                        {props.mnemonics.map(m =>
-                            <ExampleMnemonic
-                                selectMnemonic={selectMnemonic}
-                                mnemonic={m}/>)}
-                    </div>
+                    <ExampleMnemonics mnemonics={props.mnemonics} selectMnemonic={selectMnemonic}/>
                 </div>
             )
         } else if (props.newExample?.translationInSentence && props.newExample?.mnemonicInSentence) {
@@ -97,14 +92,14 @@ const UpdateExample: FC<{engWord: IEngWord | null, mnemonics: Array<IMnemonic>, 
 
     return (
         <div className={s.updateExample}>
-            <div className={s.closeButtonBox} onClick={closeForm}>
+            <div className={common.closeButtonBox} onClick={closeForm}>
                 <div>
                     <CloseIcon/>
                 </div>
             </div >
             <div className={s.inputNewExample}>
                     <div>
-                        {edit ?
+                        {!props.newExample || edit ?
                             <textarea value={exampleSentence}
                                       onChange={updateExampleSentence}
                                       placeholder={"добавить пример"}

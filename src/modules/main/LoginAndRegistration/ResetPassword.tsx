@@ -5,7 +5,6 @@ import {restorePasswordAsync} from "../../../store/authSlice";
 import {useForm} from "react-hook-form";
 import {ReactComponent as Checked} from "../../../import/icons/checked.svg";
 
-
 type FormValues = {
     email: string;
 };
@@ -22,13 +21,12 @@ export const ResetPassword: FC = () => {
         dispatch(restorePasswordAsync(data.email))
         setEmail(data.email)
         setSendEmail (true)
-    }
-    )
+    })
 
     return (
         <>
-                {!sendEmail ?
-                    <div>
+            {!sendEmail ?
+                <div>
                     <div className={s.text}> Восстановление пароля</div>
                     <div className={s.resetForm}>
                         <form onSubmit={onSubmit}>
@@ -49,26 +47,24 @@ export const ResetPassword: FC = () => {
                                     <div className={s.errorMessage}>поле обязательно для заполнения</div>
                                 )}
                             </div>
-                            <button type="submit"
-                                    className = {s.buttonReset}>
+                            <button type="submit" className = {s.buttonReset}>
                                 Восстановить пароль
                             </button>
                         </form>
                     </div>
-                    </div>
-                    :
-                    <div>
+                </div>
+                :
+                <div>
                     <div className={s.sendText}>
                         На адрес электронной почты
-                        <span className={s.emailText}> {email} </span> выслано письмо с инструкцией по смене пароля
+                        <span className={s.emailText}> {email} </span>
+                        выслано письмо с инструкцией по смене пароля
                     </div>
-                        <div className={s.icon}>
-                            <Checked/>
-                        </div>
+                    <div className={s.icon}>
+                        <Checked/>
                     </div>
-                }
-
+                </div>
+            }
    </>
-
     )
 }

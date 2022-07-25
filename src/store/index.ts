@@ -5,10 +5,14 @@ import alertReducer from "./alertsSlise";
 import authReducer from "./authSlice";
 import appReducer from "./appSlice";
 import userReducer from "./userSlice";
+import mnemonicReducer from "./mnemonicSlice"
+import exampleReducer from "./exampleSlice"
 
 export const store = configureStore( {
     reducer: {
         engWordReducer: engWordReducer,
+        mnemonicReducer: mnemonicReducer,
+        exampleReducer: exampleReducer,
         alertReducer: alertReducer,
         authReducer: authReducer,
         appReducer: appReducer,

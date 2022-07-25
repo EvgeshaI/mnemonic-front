@@ -5,7 +5,7 @@ import s from './mnemonic.module.css'
 import CreateMnemonic from "./CreateMnemonic";
 import {useNavigate} from "react-router";
 import {useAppDispatch} from "../../../store";
-import {getMnemonicAsync} from "../../../store/engWordSlice";
+import {getMnemonicAsync} from "../../../store/mnemonicSlice";
 
 type PropsType = {
     engWord: IEngWord
@@ -31,10 +31,15 @@ const MnemonicContainer: FC<PropsType> = (props) => {
 
     return (
         <>
-        <div className={s.mnemonicContainer}>
-            {props.mnemonics.map(m => <MnemonicComponent engWord={props.engWord}
-                                                         auth = {props.isAuth}
-                                                         mnemonic={m}/>)}
+        <div>
+            {props.mnemonics.map(m =>
+                <MnemonicComponent
+                    key={m.mnemonicId}
+                    engWord={props.engWord}
+                    auth={props.isAuth}
+                    mnemonic={m}
+                />
+            )}
             {clickCreateMnemonic ?
                 <CreateMnemonic engWord={props.engWord} afterFinishClicked={clickOnCreateMnemonic}/>
                 :
@@ -42,14 +47,13 @@ const MnemonicContainer: FC<PropsType> = (props) => {
                     <div className={s.addMnemonicButton} onClick={clickOnCreateMnemonic}>
                         +
                     </div>
-                    <div className={s.addMnemo}> Добавить мнемонику </div>
+                    <div className={s.addMnemo}>Добавить мнемонику</div>
                 </div>
             }
         </div>
             {props.hasMoreMnemonics &&
                 <div className={s.loadMnemonic} onClick={loadMnemonic}> Загрузить ещё</div>
             }
-
         </>
     )
 }

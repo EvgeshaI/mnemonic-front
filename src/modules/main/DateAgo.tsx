@@ -16,7 +16,6 @@ export const DateAgo:FC<Props> = (props) => {
     return (
         <div>
             {turnedIntoDate}
-
         </div>
     )
 }

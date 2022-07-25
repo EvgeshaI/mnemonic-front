@@ -1,7 +1,7 @@
 import React, {FC} from "react";
 import ReactModal from "react-modal";
 import s from "./modal.module.css"
-import {ReactComponent as CloseIcon} from "../../../import/icons/close-slim.svg";
+import {CloseBtn} from "../../util/CloseBtn";
 
 type DeleteModalPropsType = {
     show: boolean,
@@ -16,9 +16,9 @@ const customStyles = {
         top: "50%",
         left: "50%",
         transform: "translate(-50%, -50%)",
-        padding: '0',
+        padding: '7px',
         width: "400px",
-        height: "150px",
+        height: "120px",
         borderRadius: "15px",
         backgroundColor: "#e6f7ff",
         opacity: ".9"
@@ -34,11 +34,7 @@ export const DeleteModal: FC<DeleteModalPropsType> = (props) => {
             appElement={document.getElementById('root')!}
         >
             <div>
-                <div className={s.closeButtonBox} onClick={() => props.close()}>
-                    <div>
-                        <CloseIcon/>
-                    </div>
-                </div>
+                <CloseBtn close={props.close}/>
                 <div className={s.text}>
                     <div>
                         {`Вы действительно хотите удалить ${props.classElement} 

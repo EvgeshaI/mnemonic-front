@@ -1,8 +1,9 @@
 import React, {FC, useState} from "react";
 import s from "./navbar.module.css"
 import {ReactComponent as Logo} from "../../../import/icons/logo.svg"
-import {ReactComponent as Login} from "../../../import/icons/enter.svg"
+import {ReactComponent as Login} from "../../../import/icons/login.svg"
 import {ReactComponent as Logout} from "../../../import/icons/logout.svg"
+import {ReactComponent as User} from "../../../import/icons/user.svg"
 import {ReactComponent as Search} from "../../../import/icons/search.svg"
 import {useNavigate} from "react-router";
 import {useAppDispatch, useAppSelector} from "../../../store";
@@ -46,11 +47,11 @@ export const Navbar: FC = () => {
             goToWord()
         }
     };
-const exit = () => {
-    dispatch (deleteUser())
-    navigate("/login")
-    setShowModal(false)
-}
+    const exit = () => {
+        dispatch (deleteUser())
+        navigate("/login")
+        setShowModal(false)
+    }
 
     return (
         <div className={s.navbar}>
@@ -72,23 +73,27 @@ const exit = () => {
                     />
                 </div>
             </div>
-            <div className={s.logout}>
-                {isAuth
-                    ?
-                    <div className={s.logoutLoginIcon} >
-                        {user &&
-                            <div onClick={userPage}
-                                className={s.nickname}>
-                                {user.nickname}</div>
-                        }
-                        <div onClick={showDeleteModal}> <Logout/> </div>
-                    </div>
-                    :
-                    <div onClick={login} className={s.logoutLoginIcon}>
-                        <Login/>
-                    </div>
-                }
-            </div>
+            {isAuth ?
+                <div className={s.nicknameAndLogout}>
+                        <div onClick={userPage} className={s.nickBox}>
+                            <div className={s.nickname}>{user!.nickname}</div>
+                            <div className={s.userIcon}>
+                                <User/>
+                            </div>
+                        </div>
+                        <div onClick={showDeleteModal} className={s.logText}>
+                            <div className={s.logout}>Выйти</div>
+                            <div className={s.logIcon}><Logout/></div>
+                        </div>
+                </div>
+                :
+                <div className={s.nicknameAndLogout}>
+                <div onClick={login} className={s.logText}>
+                    <div className={s.logout}>Войти</div>
+                    <div className={s.logIcon}><Login/></div>
+                </div>
+                </div>
+            }
             <ExitModal show={showModal} close={closeDeleteModal} exit={exit}/>
         </div>
     )
