@@ -159,6 +159,10 @@
     padding: 0;
     margin: 0;
 }
+.accuracyMessage{
+    color: #cccccc;
+    font-size: 12px;
+}
 
 .transContainer li {
     display: inline-block;
@@ -166,7 +170,7 @@
 .transliteration{
     margin: 5px;
     font-size: 13px;
-    color: silver;
+    color: #A0A0A0;
 }
 
 .myTransliteration{

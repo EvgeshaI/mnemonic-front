@@ -8,6 +8,7 @@ type PropsType = {
 
 export const TransliterationComponent: FC <PropsType> = (props) => {
     return (
+
         <li className={s.transliteration}>
            <span>{props.transliteration} </span>
            <span>{props.accuracy}%</span>

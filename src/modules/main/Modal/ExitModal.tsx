@@ -17,7 +17,7 @@ const customStyles = {
         width: "400px",
         height: "100px",
         borderRadius: "15px",
-        backgroundColor: "#e6faff",
+        backgroundColor: "#e6f7ff",
         opacity: ".9",
     }
 }
@@ -30,7 +30,7 @@ export const ExitModal: FC<ExitModalPropsType> = (props) => {
             isOpen={props.show}
             appElement={document.getElementById('root')!}
         >
-            <div className={s.deleteModal}>
+            <div>
                 <CloseBtn close={props.close}/>
                 <div className={s.text}>
                    Вы действительно хотите выйти?

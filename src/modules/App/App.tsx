@@ -12,7 +12,9 @@ import {Preloader} from "../main/Preloader/Preloader";
 import {ResetPassword} from "../main/LoginAndRegistration/ResetPassword";
 import {ChangePassword} from "../main/LoginAndRegistration/ChangePassword";
 import {Confirmation} from "../main/LoginAndRegistration/Confirmation";
-
+import {Footer} from "../main/Footer/Footer";
+import s from "./app.module.css"
+import {Privacy} from "../main/privacy/Privacy";
 
 const App: React.FC<any> = () => {
     const {
@@ -26,19 +28,25 @@ const App: React.FC<any> = () => {
         </div>
     }
     return (
-    <div>
-        <Navbar/>
-        <Routes>
-            <Route path = "/eng/:word" element={<EngWord/>}/>
-            <Route path = "/login" element={<LoginAndRegistration/>}/>
-            <Route path = "/" element={<StartPage/>}/>
-            <Route path = "/user" element={<UserPageContainer/>}/>
-            <Route path = "/reset" element={<ResetPassword/>}/>
-            <Route path = "/changePassword" element={<ChangePassword/>}/>
-            <Route path = "/confirmation" element={<Confirmation/>}/>
-        </Routes>
-        <Alerts/>
-    </div>
+    <>
+        <div className={s.content}>
+            <Navbar/>
+            <Routes>
+                <Route path = "/eng/:word" element={<EngWord/>}/>
+                <Route path = "/login" element={<LoginAndRegistration/>}/>
+                <Route path = "/" element={<StartPage/>}/>
+                <Route path = "/user" element={<UserPageContainer/>}/>
+                <Route path = "/reset" element={<ResetPassword/>}/>
+                <Route path = "/changePassword" element={<ChangePassword/>}/>
+                <Route path = "/confirmation" element={<Confirmation/>}/>
+                <Route path="/privacy" element={<Privacy/>}/>
+            </Routes>
+            <Alerts/>
+        </div>
+        <div>
+            <Footer/>
+        </div>
+    </>
     )
 };
 

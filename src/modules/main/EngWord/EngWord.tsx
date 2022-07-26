@@ -99,6 +99,7 @@ const EngWord: FC<any> = () => {
                     }
                 </div>
                 <br/>
+                <br/>
 
                 <div className={s.word}> примеры:</div>
                 {examples.length === 0 && mnemonics.length === 0 &&

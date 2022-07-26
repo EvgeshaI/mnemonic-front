@@ -72,6 +72,9 @@ const CreateMnemonic:FC<CreateMnemonicPropsType> = (props) => {
                                     trans={props.engWord.transliterations}
                         />
                     </ul>
+                    {!displaySaveBtn &&
+                        <div className={s.accuracyMessage}>точность мнемоники должна быть более 24%</div>
+                    }
                 </div>
             }
             <div>
