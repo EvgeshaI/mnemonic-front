@@ -77,14 +77,15 @@ export const Navbar: FC = () => {
                     />
                 </div>
             </div>
-            {isAuth ?
-                <div className={s.nicknameAndLogout}>
-                    <div className={s.Box} onClick={searchConsonance}>
-                        <div>Созвучия</div>
-                        <div className={s.userIcon}>
-                            <Sound/>
-                        </div>
+            <div className={s.nicknameAndLogout}>
+                <div className={s.Box} onClick={searchConsonance}>
+                    <div>Созвучия</div>
+                    <div className={s.userIcon}>
+                        <Sound/>
                     </div>
+                </div>
+                {isAuth ?
+                    <>
                         <div onClick={userPage} className={s.Box}>
                             <div>{user!.nickname}</div>
                             <div className={s.userIcon}>
@@ -95,15 +96,15 @@ export const Navbar: FC = () => {
                             <div className={s.logout}>Выйти</div>
                             <div className={s.logIcon}><Logout/></div>
                         </div>
-                </div>
-                :
-                <div className={s.nicknameAndLogout}>
-                <div onClick={login} className={s.logText}>
-                    <div className={s.logout}>Войти</div>
-                    <div className={s.logIcon}><Login/></div>
-                </div>
-                </div>
-            }
+                    </>
+                    :
+                    <div onClick={login} className={s.logText}>
+                        <div className={s.logout}>Войти</div>
+                        <div className={s.logIcon}><Login/></div>
+                    </div>
+                }
+            </div>
+
             <ExitModal show={showModal} close={closeDeleteModal} exit={exit}/>
         </div>
     )
