@@ -15,6 +15,7 @@ import {Confirmation} from "../main/LoginAndRegistration/Confirmation";
 import {Footer} from "../main/Footer/Footer";
 import s from "./app.module.css"
 import {Privacy} from "../main/privacy/Privacy";
+import {Consonance} from "../main/consonance/Consonance";
 
 const App: React.FC<any> = () => {
     const {
@@ -40,6 +41,7 @@ const App: React.FC<any> = () => {
                 <Route path = "/changePassword" element={<ChangePassword/>}/>
                 <Route path = "/confirmation" element={<Confirmation/>}/>
                 <Route path="/privacy" element={<Privacy/>}/>
+                <Route path = "/consonance" element={<Consonance/>}/>
             </Routes>
             <Alerts/>
         </div>

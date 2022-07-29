@@ -38,15 +38,6 @@ export const Login: FC<LoginPropsType> = (props) => {
     }, [])
 
     const navigate = useNavigate();
-    useEffect(() => {
-        if (props.isAuth) {
-            if(window.history.state && window.history.state.idx > 0) {
-                navigate(-1)
-            }else {
-                navigate('/', {replace: true})
-            }
-        }
-    }, [props.isAuth])
 
     return (
         <>

@@ -142,6 +142,14 @@ export class MnemonicClient extends BaseClient {
         }
         return this.get(`auth/registration-confirm`, {params})
     }
+
+    static async findConsonance(regexp: string, onlyInit: boolean) {
+        let params = {
+            regexp,
+            onlyInit
+        }
+        return this.get<Array<string>>(`rus-word/regexp`, {params})
+    }
 }
 
 

@@ -127,3 +127,8 @@ export interface NewStudyExample {
     studyId: number,
     example: IExample
 }
+
+export interface LengthAndWords {
+    length: number,
+    words: Array<string>
+}

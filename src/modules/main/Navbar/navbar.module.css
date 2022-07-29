@@ -12,9 +12,14 @@
     margin: 20px auto;
     border-radius: 5px;
     box-shadow: 0.5px 0.5px 1px 1px lightsteelblue;
-
 }
+/*@media screen and (width: 720px){*/
+/*    .inputAndIcon{*/
+/*        width: 200px;*/
+/*    }*/
+/*}*/
 .searchInput {
+    max-width: 100%;
     border: none;
     outline: none;
     background: transparent;
@@ -36,7 +41,7 @@
     cursor: pointer;
     color: #122B5A;
     margin: 1%;
-    width: 200px;
+    width: 15%
 }
 .logo svg {
     width: 80%;
@@ -48,20 +53,22 @@
     align-items: center;
     padding: 0 15px 0 0;
     cursor: pointer;
-    width: 185px;
+    width: 15%;
 }
-.nickBox {
+
+
+.Box {
     display: flex;
     /*!*background-color: rgba(171, 220, 255, 0.4);*!*/
     /*border-radius: 5px;*/
     /*box-shadow: 0.5px 0.5px 1px 1px lightgrey;*/
     align-items: center;
     color: #122B5A;
-    margin: 0 10px;
+    margin: 0 5px;
     padding: 3px 7px;
     font-size: 13px;
 }
-.nickBox:hover{
+.Box:hover{
     /*color: rgb(144, 211, 255);*/
     border-radius: 5px;
     box-shadow: 0.5px 0.5px 1px 1px lightgrey;
@@ -76,6 +83,7 @@
     width: 100%;
     display: flex;
     vertical-align: center;
+    fill: #122B5A;
 }
 .logText{
     font-size: 13px;

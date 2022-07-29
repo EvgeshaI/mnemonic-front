@@ -5,6 +5,7 @@ import {ReactComponent as Login} from "../../../import/icons/login.svg"
 import {ReactComponent as Logout} from "../../../import/icons/logout.svg"
 import {ReactComponent as User} from "../../../import/icons/user.svg"
 import {ReactComponent as Search} from "../../../import/icons/search.svg"
+import {ReactComponent as Sound} from "../../../import/icons/sound.svg"
 import {useNavigate} from "react-router";
 import {useAppDispatch, useAppSelector} from "../../../store";
 import {deleteUser} from "../../../store/authSlice";
@@ -42,6 +43,9 @@ export const Navbar: FC = () => {
     const userPage = () => {
         navigate(`/user`)
     };
+    const searchConsonance = () => {
+        navigate(`/consonance`)
+    }
     const pressHandler = (e: React.KeyboardEvent) => {
         if (e.key === "Enter") {
             goToWord()
@@ -75,8 +79,14 @@ export const Navbar: FC = () => {
             </div>
             {isAuth ?
                 <div className={s.nicknameAndLogout}>
-                        <div onClick={userPage} className={s.nickBox}>
-                            <div className={s.nickname}>{user!.nickname}</div>
+                    <div className={s.Box} onClick={searchConsonance}>
+                        <div>Созвучия</div>
+                        <div className={s.userIcon}>
+                            <Sound/>
+                        </div>
+                    </div>
+                        <div onClick={userPage} className={s.Box}>
+                            <div>{user!.nickname}</div>
                             <div className={s.userIcon}>
                                 <User/>
                             </div>
