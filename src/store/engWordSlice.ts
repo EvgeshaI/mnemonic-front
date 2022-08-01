@@ -4,6 +4,7 @@ import {AppThunk} from "./index";
 import {MnemonicClient} from "../api/MnemonicClient";
 import {getMnemonicAsync} from "./mnemonicSlice";
 import {getExampleAsync} from "./exampleSlice";
+import {setFetching} from "./appSlice";
 
 interface EngWordState {
     engWord: IEngWord | null,
@@ -31,10 +32,12 @@ export const {
 } = engWordSlice.actions;
 
 export const getEngWordAsync = (word:string): AppThunk => async (dispatch: any) => {
+    dispatch(setFetching(true))
     let result = await MnemonicClient.getEngWord(word);
     dispatch(getMnemonicAsync(result.id));
     dispatch(getExampleAsync(result.id));
     dispatch(getEngWord(result))
+    dispatch(setFetching(false))
 };
 
 export default engWordSlice.reducer

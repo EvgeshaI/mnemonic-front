@@ -1,11 +1,11 @@
 import React from "react";
-import preloaderIcon from "../../../import/icons/preloader.gif"
+import {ReactComponent as PreloaderIcon} from "../../../import/icons/rings.svg"
 import s from "./preloader.module.css"
 
 export const Preloader = () => {
     return (
         <div className={s.preloader}>
-            <img src={preloaderIcon}/>
+           <PreloaderIcon/>
         </div>
     )
 }

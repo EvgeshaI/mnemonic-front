@@ -5,6 +5,7 @@ import {getMyPageAsync, initUserPageState} from "../../../store/userSlice";
 import {UserPage} from "./UserPage";
 import {ReactComponent as Search} from "../../../import/icons/search.svg"
 import useDebounce from "../../util/useDebounce";
+import {Preloader} from "../Preloader/Preloader";
 
 export const UserPageContainer = () => {
     const {
@@ -12,6 +13,9 @@ export const UserPageContainer = () => {
         hasMore,
         createExampleMap
     } = useAppSelector((state) => state.userReducer);
+    const {
+        isFetching
+    } = useAppSelector((state) => state.appReducer);
     const dispatch = useAppDispatch();
     const [word, setWord] = useState('')
     const searchWord = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -25,6 +29,9 @@ export const UserPageContainer = () => {
         }
     };
     const loadMyMnemo = () => {
+        if (/^(\s+)$/.test(word)) {
+            return
+        }
         dispatch(getMyPageAsync(word))
     }
 
@@ -43,47 +50,57 @@ export const UserPageContainer = () => {
                     Мои мнемоники
                 </div>
             </div>
-            {studies.length === 0
-                ?
+            {studies.length === 0 && debouncedValue === "" && !isFetching &&
                 <div className={s.message}> У вас пока не добавлено ни одной мнемоники</div>
-                :
+            }
+
                 <>
-                    <div className={s.search}>
-                        <div className={s.inputAndIconSearch}>
-                            <div className={s.searchIcon} onClick={loadMyMnemo}>
-                                <Search/>
-                            </div>
-                            <input type="text"
-                                   placeholder="поиск по словарю..."
-                                   className={s.searchMyMnemo}
-                                   value={word}
-                                   onChange={searchWord}
-                                   onKeyPress={pressHandler}
-                            />
-                        </div>
-                    </div>
-                    <div>
-                        {studies.map(el =>
-                            <div key={el.studyId}>
-                                <UserPage
-                                    createExampleMap={createExampleMap}
-                                    mnemonic={el.mnemonic}
-                                    engWord={el.engWord}
-                                    examples={el.examples}
-                                    translations={el.translations}
-                                    studyId={el.studyId}
-                                    transcriptions={el.transcriptions}
+                    {(studies.length > 0 || word !== "") &&
+                        <div className={s.search}>
+                            <div className={s.inputAndIconSearch}>
+                                <div className={s.searchIcon} onClick={loadMyMnemo}>
+                                    <Search/>
+                                </div>
+                                <input type="text"
+                                       placeholder="поиск по словарю..."
+                                       className={s.searchMyMnemo}
+                                       value={word}
+                                       onChange={searchWord}
+                                       onKeyPress={pressHandler}
                                 />
                             </div>
-                        )}
-                    </div>
+                        </div>
+                    }
+                    {isFetching &&
+                        <Preloader/>
+                    }
+                    {studies.length === 0 && word !== "" && !isFetching ?
+                        <div className={s.message}>По вашему запросу ничего не найдено</div>
+                        :
+                        <div>
+                            {studies.map(el =>
+                                <div key={el.studyId}>
+                                    <UserPage
+                                        createExampleMap={createExampleMap}
+                                        mnemonic={el.mnemonic}
+                                        engWord={el.engWord}
+                                        examples={el.examples}
+                                        translations={el.translations}
+                                        studyId={el.studyId}
+                                        transcriptions={el.transcriptions}
+                                    />
+                                </div>
+                            )}
+                        </div>
+                    }
+
                     {hasMore &&
                         <div className={s.hasMoreBox}>
                             <div className={s.hasMoreBtn} onClick={loadMyMnemo}>Загрузить еще</div>
                         </div>
                     }
                 </>
-            }
+
         </>
     )
 }

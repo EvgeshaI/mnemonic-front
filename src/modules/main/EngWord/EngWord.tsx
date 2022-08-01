@@ -9,6 +9,7 @@ import ExampleContainer from "../example/ExampleContainer";
 import {AudioComponent} from "./AudioComponent";
 import {resetMnemonic} from "../../../store/mnemonicSlice";
 import {resetExample} from "../../../store/exampleSlice";
+import {Preloader} from "../Preloader/Preloader";
 
 const EngWord: FC<any> = () => {
     const dispatch = useAppDispatch();
@@ -29,7 +30,9 @@ const EngWord: FC<any> = () => {
     const {
         isAuth
     } = useAppSelector((state) => state.authReducer);
-
+    const {
+        isFetching
+    } = useAppSelector((state) => state.appReducer);
 
     let params = useParams();
     let urlWord = params.word || "";
@@ -69,57 +72,63 @@ const EngWord: FC<any> = () => {
 
     return (
         <>
-            <div className={s.engWordContainer}>
-                <div className={s.engWordComponent}>
-                    <div className={s.engWord}>
-                        {engWord && engWord.engWord}
+            {isFetching
+                ?
+                <Preloader/>
+                :
+                <div className={s.engWordContainer}>
+                    <div className={s.engWordComponent}>
+                        <div className={s.engWord}>
+                            {engWord && engWord.engWord}
+                        </div>
+                        <div className={s.transcriptionsBox}>
+                            {engWord && limitTranscriptions(engWord.transcriptions).map(el =>
+                                <div className={s.transcriptions} key={el.id}>
+                                    <div className={s.location}> {defineLocation(el.location)}</div>
+                                    <div className={s.transcriptionWord}>{el.transcription}</div>
+                                    <AudioComponent audioFile={el.audioFile}/>
+                                </div>
+                            )}
+                        </div>
+                        <div className={s.translate}>
+                            {engWord &&
+                                <span className={s.translateWord}>{joinTranslation(engWord.translations)}</span>}
+                        </div>
                     </div>
-                    <div className={s.transcriptionsBox}>
-                        {engWord && limitTranscriptions(engWord.transcriptions).map(el =>
-                            <div className={s.transcriptions} key={el.id}>
-                                <div className={s.location}> {defineLocation (el.location)}</div>
-                                <div className={s.transcriptionWord}>{el.transcription}</div>
-                                <AudioComponent audioFile={el.audioFile}/>
-                            </div>
-                        )}
+                    <div className={s.word}> мнемоники:</div>
+                    <div>
+                        {engWord &&
+                            <MnemonicContainer
+                                engWord={engWord}
+                                mnemonics={mnemonics}
+                                isAuth={isAuth}
+                                hasMoreMnemonics={hasMoreMnemonics}
+                            />
+                        }
                     </div>
-                    <div className={s.translate}>
-                        {engWord && <span className={s.translateWord}>{joinTranslation(engWord.translations)}</span>}
-                    </div>
-                </div>
-                <div className={s.word}> мнемоники:</div>
-                <div>
+                    <br/>
+                    <br/>
+
+                    <div className={s.word}> примеры:</div>
+                    {examples.length === 0 && mnemonics.length === 0 &&
+                        <div className={s.exampleNone}>
+                            придумайте мнемонику, чтобы добавить пример
+                        </div>
+                    }
                     {engWord &&
-                        <MnemonicContainer
+                        <ExampleContainer
                             engWord={engWord}
                             mnemonics={mnemonics}
+                            examples={examples}
+                            updateExample={updateExample}
+                            updateExamples={updateExamples}
+                            checkedExample={checkedExample}
                             isAuth={isAuth}
-                            hasMoreMnemonics ={hasMoreMnemonics}
+                            hasMoreExample={hasMoreExample}
                         />
                     }
                 </div>
-                <br/>
-                <br/>
-
-                <div className={s.word}> примеры:</div>
-                {examples.length === 0 && mnemonics.length === 0 &&
-                    <div className={s.exampleNone}>
-                        придумайте мнемонику, чтобы добавить пример
-                    </div>
-                }
-                {engWord &&
-                    <ExampleContainer
-                        engWord={engWord}
-                        mnemonics={mnemonics}
-                        examples={examples}
-                        updateExample={updateExample}
-                        updateExamples = {updateExamples}
-                        checkedExample={checkedExample}
-                        isAuth={isAuth}
-                        hasMoreExample ={hasMoreExample}
-                    />
-                }
-            </div>
+            }
         </>
     )
 };

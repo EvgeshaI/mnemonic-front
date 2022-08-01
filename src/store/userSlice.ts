@@ -3,6 +3,7 @@ import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {MnemonicClient} from "../api/MnemonicClient";
 import {AppThunk} from "./index";
 import {addAlert, removeAlert} from "./alertsSlise";
+import {setFetching} from "./appSlice";
 
 
 interface UserState {
@@ -127,6 +128,7 @@ export const {
 
 export const getMyPageAsync = (search: string): AppThunk => async (dispatch: any, getState) => {
     const userReducer = getState().userReducer;
+    dispatch(setFetching(true))
     if (userReducer.search !== search) {
         let result = await MnemonicClient.myPage(0, search);
         dispatch(setCurrentSearch({page:0, search}))
@@ -136,6 +138,7 @@ export const getMyPageAsync = (search: string): AppThunk => async (dispatch: any
         let result = await MnemonicClient.myPage(currentPage, search);
         dispatch(setUserPage(result))
     }
+    dispatch(setFetching(false))
 };
 
 export const checkMyExampleAsync = (engWordId: number, sentence: string, mnemonicId: number, studyId:number): AppThunk =>
