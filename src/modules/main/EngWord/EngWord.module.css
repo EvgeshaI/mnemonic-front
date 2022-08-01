@@ -71,6 +71,16 @@
     font-size: 18px;
     font-style: italic;
 }
+.transIcon svg{
+    width: 15px;
+    margin: 0 10px;
+    cursor: pointer;
+    fill: #122B5A;
+}
+.transIcon svg:hover{
+    fill: rgba(171, 220, 255, 0.4);
+}
+
 .mnemonicComponent {
     padding: 10px 25px 15px 25px;
     border-bottom: 1px solid rgba(171, 220, 255, 0.8);

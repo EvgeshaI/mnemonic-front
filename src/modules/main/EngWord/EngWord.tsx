@@ -1,4 +1,4 @@
-import React, {FC, useEffect} from "react";
+import React, {FC, useEffect, useState} from "react";
 import {useAppDispatch, useAppSelector} from "../../../store";
 import {getEngWordAsync} from "../../../store/engWordSlice";
 import s from './EngWord.module.css'
@@ -10,6 +10,8 @@ import {AudioComponent} from "./AudioComponent";
 import {resetMnemonic} from "../../../store/mnemonicSlice";
 import {resetExample} from "../../../store/exampleSlice";
 import {Preloader} from "../Preloader/Preloader";
+import {ReactComponent as ArrowDown} from "../../../import/icons/arrow1.svg";
+import {ReactComponent as ArrowUp} from "../../../import/icons/arrow2.svg";
 
 const EngWord: FC<any> = () => {
     const dispatch = useAppDispatch();
@@ -46,9 +48,23 @@ const EngWord: FC<any> = () => {
     }, [urlWord]);
 
 
+    const translationsIcon = () => {
+        return !trans ? <ArrowUp/> : <ArrowDown/>
+    }
+    const [trans, setTrans] = useState(true)
+    const [amountOfTrans, setAmountOfTrans] = useState(4)
     let joinTranslation = (translations: Array<ITranslation>) => {
-        return translations.filter((el, i) => i < 4).map(t => t.translation).join(", ");
+        return translations.filter((el, i) => i < amountOfTrans).map(t => t.translation).join(", ");
     };
+    const clickTransIcon = () => {
+        const prev = trans
+        setTrans(!prev)
+        if(prev){
+            setAmountOfTrans(20)
+        }else {
+            setAmountOfTrans(4)
+        }
+    }
 
     const defineLocation = (location: string) => {
         if(location === "AMERICAN"){
@@ -92,7 +108,18 @@ const EngWord: FC<any> = () => {
                         </div>
                         <div className={s.translate}>
                             {engWord &&
-                                <span className={s.translateWord}>{joinTranslation(engWord.translations)}</span>}
+                                <>
+                                    <span className={s.translateWord}>{joinTranslation(engWord.translations)}</span>
+                                    {engWord!.translations.length > 4 &&
+                                        <span
+                                            onClick={() => clickTransIcon()}
+                                            className={s.transIcon}>
+                                            {translationsIcon()}
+                                        </span>
+                                    }
+                                </>
+                            }
+
                         </div>
                     </div>
                     <div className={s.word}> мнемоники:</div>
