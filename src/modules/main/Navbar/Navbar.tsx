@@ -2,30 +2,27 @@ import React, {FC, useState} from "react";
 import s from "./navbar.module.css"
 import {ReactComponent as Logo} from "../../../import/icons/logo.svg"
 import {ReactComponent as Login} from "../../../import/icons/login.svg"
-import {ReactComponent as Logout} from "../../../import/icons/logout.svg"
 import {ReactComponent as User} from "../../../import/icons/user.svg"
 import {ReactComponent as Search} from "../../../import/icons/search.svg"
 import {ReactComponent as Sound} from "../../../import/icons/sound.svg"
 import {useNavigate} from "react-router";
 import {useAppDispatch, useAppSelector} from "../../../store";
-import {deleteUser} from "../../../store/authSlice";
-import {ExitModal} from "../Modal/ExitModal";
+import {UserDropDown} from "./UserDropDown";
+import {ProfileModal} from "../Modal/ProfileModal";
+import {setShowProfileModal} from "../../../store/authSlice";
 
-export const Navbar: FC = () => {
+export const Navbar: FC= (props) => {
     const {
         user,
-        isAuth
+        isAuth,
+        showProfileModal
     } = useAppSelector((state) => state.authReducer);
-    const dispatch = useAppDispatch();
-    const [showModal, setShowModal] = useState(false)
-    const closeDeleteModal = () => {
-        setShowModal(false)
-    }
-    const showDeleteModal = () => {
-        setShowModal(true)
-    }
+    const dispatch = useAppDispatch()
     const [word, setWord] = useState("")
-
+    const [showUserDropDown, setShowUserDropDown] = useState(false)
+    const closeDeleteModal = () => {
+        dispatch(setShowProfileModal(false))
+    }
     const searchWord = (e: React.ChangeEvent<HTMLInputElement>) => {
         setWord(e.target.value)
     };
@@ -40,9 +37,6 @@ export const Navbar: FC = () => {
     const startPage = () => {
         navigate(`/`)
     };
-    const userPage = () => {
-        navigate(`/user`)
-    };
     const searchConsonance = () => {
         navigate(`/consonance`)
     }
@@ -51,13 +45,9 @@ export const Navbar: FC = () => {
             goToWord()
         }
     };
-    const exit = () => {
-        dispatch (deleteUser())
-        navigate("/login")
-        setShowModal(false)
-    }
 
     return (
+    <>
         <div className={s.navbar}>
             <div className={s.logo} onClick={startPage}>
                 <Logo/>
@@ -85,27 +75,33 @@ export const Navbar: FC = () => {
                     </div>
                 </div>
                 {isAuth ?
-                    <>
-                        <div onClick={userPage} className={s.Box}>
-                            <div>{user!.nickname}</div>
-                            <div className={s.userIcon}>
-                                <User/>
-                            </div>
+                    <div onClick={()=> setShowUserDropDown(!showUserDropDown)}
+                         className={s.usernameBox}>
+                        <div>{user!.nickname}</div>
+                        <div className={s.userIcon}>
+                            <User/>
                         </div>
-                        <div onClick={showDeleteModal} className={s.logText}>
-                            <div className={s.logout}>Выйти</div>
-                            <div className={s.logIcon}><Logout/></div>
-                        </div>
-                    </>
+
+                    </div>
                     :
                     <div onClick={login} className={s.logText}>
                         <div className={s.logout}>Войти</div>
                         <div className={s.logIcon}><Login/></div>
                     </div>
                 }
+                {showUserDropDown &&
+                    <UserDropDown setShowUserDropDown={setShowUserDropDown}
+                                  />
+                }
             </div>
 
-            <ExitModal show={showModal} close={closeDeleteModal} exit={exit}/>
         </div>
+        {showProfileModal && user &&
+            <ProfileModal showProfileModal={showProfileModal}
+                          close={closeDeleteModal}
+                          user={user}
+            />
+        }
+    </>
     )
 };

@@ -1,5 +1,4 @@
 
-
 .closeButtonBox {
     display: flex;
     justify-content: flex-end;
@@ -27,4 +26,68 @@
     background-color: white;
     border-radius: 10px;
     cursor: pointer;
+}
+.nickNameModalBox{
+    padding: 5px;
+    font-size: 15px;
+}
+.profileModalText{
+    font-size: 20px;
+    color: #122B5A;
+    text-align: center;
+}
+
+.emailModal{
+    text-align: center;
+    margin: 30px 0 10px 0;
+    font-size: 13px;
+}
+.email{
+    border: 1px solid lightgrey;
+    border-radius: 10px;
+    width: 70%;
+    padding: 10px;
+    margin: 5px auto;
+    font-size: 15px;
+    color: #122B5A;
+}
+.nickNameModal{
+    text-align: center;
+    margin: 10px 0 10px 0;
+    font-size: 13px;
+}
+.input{
+    border: 1px solid lightgrey;
+    border-radius: 10px;
+    width: 70%;
+    padding: 10px;
+    margin: 5px auto;
+}
+
+.inputProfileModal{
+    border: none;
+    border-radius: 10px;
+    width: 100%;
+    outline: none;
+    text-align: center;
+    font-size: 15px;
+    color: #122B5A;
+}
+.errorMessage{
+    font-size: 12px;
+    color: #A52A2A;
+    text-align: center;
+}
+
+.buttonProfileModal{
+    margin: 20px auto;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: var(--colorThree);
+    width: 50%;
+    text-align: center;
+    cursor: pointer;
+}
+.buttonProfileModal:hover{
+    background-color: var(--colorTwo);
 }

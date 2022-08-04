@@ -27,26 +27,26 @@
 }
 .buttonBack{
     width: 50px;
-    fill: rgba(171, 220, 255, 0.9);
+    fill: var(--colorThree);
     margin: 0 auto;
     cursor: pointer;
 }
 .buttonBack:hover{
-    fill: rgba(171, 220, 255, 0.5);
+    fill: var(--colorTwo);
 }
 
 .howBtn {
     padding: 10px;
-    background-color: rgba(171, 220, 255, 0.7);
+    background-color: var(--colorThree);
     cursor: pointer;
     width: 30%;
     margin: 30px auto;
-    box-shadow: 1px 1px 1px grey;
+    /*box-shadow: 1px 1px 1px grey;*/
     border-radius: 10px;
     text-align: center;
 }
 .howBtn:hover {
-    background-color: rgba(171, 220, 255, 0.3);
+    background-color: var(--colorTwo);
 }
 .carousel{
     margin: 20px auto 30px;

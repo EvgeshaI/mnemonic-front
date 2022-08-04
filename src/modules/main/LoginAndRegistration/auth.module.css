@@ -51,10 +51,13 @@
     font-size: 15px;
     border-radius: 10px;
     color: black;
-    background-color: aliceblue;
+    background-color: var(--colorThree);
     border: 0;
     box-shadow: 1px 1px 1px lightslategray;
     cursor: pointer;
+}
+.formButton:hover{
+    background-color: var(--colorTwo);
 }
 .resetForm{
      margin: 0 auto;
@@ -87,7 +90,7 @@
     color: #A52A2A;
 }
 .buttonReset{
-    background-color: rgba(171, 220, 255, 0.7);
+    background-color: var(--colorThree);
     text-align: center;
     width: 300px;
     margin: 15px auto;
@@ -100,7 +103,7 @@
     cursor: pointer;
 }
 .buttonReset:hover {
-    background-color: rgba(171, 220, 255, 0.4);
+    background-color: var(--colorTwo);
 }
 
 .sendText {
@@ -147,7 +150,7 @@
     border-radius: 10px;
     padding: 10px;
     color: black;
-    background-color: lightsteelblue;
+    background-color: var(--colorTwo);
     border: 0;
     box-shadow: 1px 1px 2px lightslategray;
     cursor: pointer;

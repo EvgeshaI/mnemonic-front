@@ -150,6 +150,12 @@ export class MnemonicClient extends BaseClient {
         }
         return this.get<Array<string>>(`rus-word/regexp`, {params})
     }
+    static async updateNickname(nickname: string){
+        let params = {
+            nickname
+        }
+        return this.put<IAuthResponse>(`user/nickname`, null,{params})
+    }
 }
 
 

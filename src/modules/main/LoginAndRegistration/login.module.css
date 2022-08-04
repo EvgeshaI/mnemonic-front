@@ -36,10 +36,13 @@
     border-radius: 10px;
     padding: 12px;
     color: black;
-    background-color: lightsteelblue;
+    background-color: var(--colorTwo);;
     border: 0;
     box-shadow: 1px 1px 2px lightslategray;
     cursor: pointer;
+}
+.formButton:hover{
+    background-color: var(--colorOne);
 }
 
 .errorMessage {

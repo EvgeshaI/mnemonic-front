@@ -64,7 +64,7 @@
 .translate {
     padding: 0 0 10px 0;
     margin: 0 0 10px 0;
-    border-bottom: 1px solid rgba(171, 220, 255, 0.8);
+    border-bottom: 1px solid var(--colorThree);
 }
 .translateWord {
     margin: 0 0 15px 15px;
@@ -78,12 +78,12 @@
     fill: #122B5A;
 }
 .transIcon svg:hover{
-    fill: rgba(171, 220, 255, 0.4);
+    fill: var(--colorTwo);
 }
 
 .mnemonicComponent {
     padding: 10px 25px 15px 25px;
-    border-bottom: 1px solid rgba(171, 220, 255, 0.8);
+    border-bottom: 1px solid var(--colorThree);
 }
 .highlightWord {
     text-align: left;

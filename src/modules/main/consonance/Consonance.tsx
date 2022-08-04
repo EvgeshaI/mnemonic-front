@@ -26,6 +26,7 @@ export const Consonance = () => {
         const match = /^([а-яА-ЯёЁ?*]+)$/.test(search);
         if (search === '') {
             setCorrect(true)
+            dispatch(clearConsonance())
         } else if(match){
             setCorrect(true)
             dispatch(findByRegexpAsync(search, onlyInit))

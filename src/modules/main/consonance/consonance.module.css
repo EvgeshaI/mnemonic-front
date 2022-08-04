@@ -74,7 +74,7 @@
 }
 .instructionIcon{
     width: 20px;
-    fill: rgb(171, 220, 255);
+    fill: var(--colorThree);
     cursor: pointer;
 }
 .instructionBox:hover .instruction{

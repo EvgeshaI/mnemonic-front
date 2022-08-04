@@ -5,6 +5,9 @@ body {
 textarea {
     font-family: 'MyFont', 'Grill Sans', serif;
 }
+input {
+    font-family: 'MyFont', 'Grill Sans', serif;
+}
 @font-face {
     font-family: 'MyFont';
     font-weight: 300;
@@ -30,4 +33,13 @@ font-family: 'MyFont';
     font-family: 'MyFont';
     font-style: italic;
     src: local('MyFont'), url(./import/Merriweather-Italic.ttf) format('truetype');
+}
+
+:root {
+    --colorOne: #e6f7ff;
+    --colorTwo: #cdefff;
+    /*--colorThree: #29b8de;*/
+    --colorThree: #b3e7ff;
+    --colorFour: #9adfff;
+    --colorFive: #122B5A;
 }

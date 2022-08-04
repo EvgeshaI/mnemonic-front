@@ -10,13 +10,17 @@ interface LoginState {
     isAuth: boolean
     errorMessage: string | null
     confirmed: boolean | null
+    nicknameError: string | null,
+    showProfileModal: boolean
 }
 
 const initialState: LoginState = {
     user: null,
     isAuth: false,
     errorMessage: null,
-    confirmed: null
+    confirmed: null,
+    nicknameError: null,
+    showProfileModal: false
 };
 
 export const authSlice = createSlice(
@@ -38,6 +42,12 @@ export const authSlice = createSlice(
             },
             setConfirmed: (state, action: PayloadAction<boolean>) => {
                 state.confirmed = action.payload
+            },
+            setNicknameError: (state, action: PayloadAction<string | null>) => {
+                state.nicknameError = action.payload
+            },
+            setShowProfileModal: (state, action: PayloadAction<boolean>) =>{
+                state.showProfileModal =action.payload
             }
         }
     }
@@ -47,7 +57,9 @@ export const {
     setUser,
     removeUser,
     setError,
-    setConfirmed
+    setConfirmed,
+    setNicknameError,
+    setShowProfileModal
 } = authSlice.actions
 
 export const getAndSetUser = () => (dispatch: any) => {
@@ -68,13 +80,29 @@ export const signUpAsync = (nickname: string, email: string, password: string): 
         let user = extractUser(response.accessToken)
         dispatch(setUser(user))
         localStorage.setItem("user", JSON.stringify(user))
+
     } catch (error){
         // @ts-ignore
         const message = error.data.data.message
         dispatch(setError(message))
     }
-
 }
+export const updateUserName = (nickname: string):AppThunk => async (dispatch: any) => {
+    try {
+        let response = await MnemonicClient.updateNickname(nickname)
+        let user = extractUser(response.accessToken)
+        dispatch(setUser(user))
+        localStorage.setItem("user", JSON.stringify(user))
+        dispatch(setShowProfileModal(false))
+    } catch (error) {
+        // @ts-ignore
+        if (error.data.status === 409){
+            // @ts-ignore
+            dispatch(setNicknameError(error.data.data.message))
+        }
+    }
+}
+
 export const authUserAsync = ( email: string, password: string): AppThunk => async  (dispatch: any) => {
     try {
         let response = await MnemonicClient.authUser ( email, password)

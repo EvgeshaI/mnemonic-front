@@ -49,12 +49,12 @@
     cursor: pointer;
     margin: 0 0 0 20px;
     font-size: 20px;
-    background-color: rgba(171, 220, 255, 0.9);
+    background-color: var(--colorThree);
     padding: 5px 11px;
     border-radius: 50%;
 }
 .addExampleButton:hover {
-    background-color: rgba(171, 220, 255, 0.3);
+    background-color: var(--colorTwo);
 }
 .loadExample{
     margin: 0 auto 10px;
@@ -67,11 +67,11 @@
     cursor: pointer;
 }
 .loadExample:hover{
-    background-color: rgba(171, 220, 255, 0.3);
+    background-color: var(--colorTwo);
 }
 .exampleComponent {
     padding: 15px 25px 15px 25px;
-    border-bottom: 1px solid rgba(171, 220, 255, 0.8);
+    border-bottom: 1px solid var(--colorThree);
     margin: 10px 0;
 }
 
@@ -174,14 +174,14 @@
     border-radius: 10px;
     padding: 10px 5px;
     color: black;
-    background-color: rgba(171, 220, 255, 0.7);
+    background-color: var(--colorThree);
     border: 0;
     box-shadow: 1px 1px 2px lightslategray;
     cursor: pointer;
 }
 
 .buttonStyle:hover {
-    background-color: rgba(171, 220, 255, 0.3);
+    background-color: var(--colorTwo);
 }
 
 .newExample {
@@ -232,7 +232,7 @@
     border-radius: 10px;
     padding: 10px 5px;
     color: black;
-    background-color: rgba(171, 220, 255, 0.7);
+    background-color: var(--colorThree);
     border: 0;
     box-shadow: 1px 1px 2px lightslategray;
     cursor: pointer;
