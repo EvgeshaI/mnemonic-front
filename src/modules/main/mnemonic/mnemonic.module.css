@@ -178,3 +178,13 @@
     font-size: 13px;
     color: #666666;
 }
+
+@media all and (max-width: 600px) {
+    .loadMnemonic{
+        width: 30%;
+        padding: 10px;
+    }
+    .buttonStyle{
+        width: 40%;
+    }
+}

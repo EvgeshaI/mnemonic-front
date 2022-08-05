@@ -63,8 +63,8 @@ const CreateMnemonic:FC<CreateMnemonicPropsType> = (props) => {
             {entered &&
                 <div>
                     <ul className={s.transContainer}>
-                        {props.engWord.transliterations.map((tr) =>
-                            <TransliterationComponent transliteration={tr.transliteration} accuracy={tr.accuracy}/>
+                        {props.engWord.transliterations.map((tr,i) =>
+                            <TransliterationComponent key={i} transliteration={tr.transliteration} accuracy={tr.accuracy}/>
                         )}
                         <MyTranslit word={mnemo}
                                     highlight={highlight}
@@ -92,7 +92,9 @@ const CreateMnemonic:FC<CreateMnemonicPropsType> = (props) => {
                     {mnemo.split("").map((l, index) => <SeparatedLetter
                         deleteNumber ={deleteNumber}
                         addNumber ={addNumber}
-                        letter={l} index={index}/>)}
+                        letter={l}
+                        index={index}
+                        key={index}/>)}
                 </div>
             }
 

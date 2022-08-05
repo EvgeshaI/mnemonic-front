@@ -24,6 +24,7 @@ import {DateAgo} from "../DateAgo";
 import {useNavigate} from "react-router";
 import {DeleteModal} from "../Modal/DeleteModal";
 import {isExpired} from "../../util/utilFunctions";
+import useWindowDimensions from "../../util/windowDimensions";
 
 type PropsType = {
     mnemonic: IMnemonic
@@ -33,10 +34,12 @@ type PropsType = {
 const MnemonicComponent: FC<PropsType> = (props) => {
     const [bold, setBold] = useState<boolean>(false);
     const [edit, setEdit] = useState<boolean>(false);
+    const [showDeleteModal, setShowDeleteModal] = useState(false)
+    const { height, width } = useWindowDimensions();
+    const isMobileScreen = width < 600
     let pushBold = () => {
         setBold(!bold)
     };
-    const [showDeleteModal, setShowDeleteModal] = useState(false)
     const closeDeleteModal = () => {
         setShowDeleteModal(false)
     }
@@ -131,24 +134,24 @@ const MnemonicComponent: FC<PropsType> = (props) => {
                         <div className={s.buttonIcons}>
                             <div className={s.boldIconBox} onClick={pushBold}>
                                 <div  className={s.iconContainer}>{getBoldIcon()}</div>
-                                <div> Выделить </div>
+                                {!isMobileScreen && <div> Выделить </div>}
                             </div>
                             {!props.mnemonic.isCreator && props.auth && !props.mnemonic.myExampleExists &&
                                 <div className={s.boldIconBox} onClick={addMeMnemonic}>
                                     <div  className={s.iconContainer}> {addDelete()} </div>
-                                    <div>Избранное</div>
+                                    {!isMobileScreen && <div>Избранное</div>}
                                 </div>
                             }
                             { canBeEditOrDelete() &&
                                 <div className={s.boldIconBox} onClick={() => setShowDeleteModal(true)}>
                                     <div  className={s.iconContainer}><Trash/></div>
-                                    <div>Удалить</div>
+                                    {!isMobileScreen && <div>Удалить</div>}
                                 </div>
                             }
                             {canBeEditOrDelete() &&
                                 <div className={s.boldIconBox} onClick={editMnemo}>
                                     <div  className={s.iconContainer}><Pencil/></div>
-                                    <div>Редактировать</div>
+                                    {!isMobileScreen && <div>Редактировать</div>}
                                 </div>
                             }
                         </div>

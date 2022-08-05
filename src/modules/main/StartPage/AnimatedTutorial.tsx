@@ -16,7 +16,7 @@ export const AnimatedTutorial = () => {
                     <div className={s.slade1Image}>
                         <img src={Slide1}/>
                     </div>
-                    <div className={s.slide1Text}>Введите в поисковой строке английское слово</div>
+                    <div className={s.slideText}>Введите в поисковой строке английское слово</div>
                 </AnimationOnScroll>
             </div>
             <div className={s.secondSlideBox}>

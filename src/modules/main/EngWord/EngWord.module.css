@@ -165,4 +165,22 @@
 }
 
 
+@media all and (max-width: 600px){
+    .engWordContainer{
+        width: 95%;
+    }
+    .engWordComponent{
+        padding: 5px 0;
+    }
+    /*.engWord{*/
+    /*    font-size: 25px;*/
+    /*}*/
+    /*.transcriptionsBox{*/
+    /*    font-size: 14px;*/
+    /*}*/
+    /*.translateWord{*/
+    /*    font-size: 15px;*/
+    /*}*/
+}
+
 

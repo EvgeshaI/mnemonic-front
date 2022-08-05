@@ -28,6 +28,7 @@ const App: React.FC<any> = () => {
             <Preloader/>
         </div>
     }
+
     return (
     <>
         <div className={s.content}>

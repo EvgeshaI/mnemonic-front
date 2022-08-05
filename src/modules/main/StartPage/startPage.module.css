@@ -156,3 +156,76 @@
 .fifthSlideImage img {
     box-shadow: 1px 1px 5px 3px lightgrey;
 }
+
+
+@media all and (max-width: 600px) {
+    .startPage{
+        width: 90%;
+    }
+    .initText{
+        margin: 30px auto;
+    }
+    .howBtn{
+        width: 50%
+    }
+    .text{
+        font-size: 17px;
+    }
+    .instruction{
+        font-size: 13px;
+    }
+    .h{
+        width: 50%;
+    }
+    .firstSlideBox{
+        margin: 0 auto 20px ;
+    }
+    .secondSlideBox{
+        display: block;
+        width: 100%;
+        margin: auto;
+    }
+    .secondSlideImage{
+        width: 80%;
+        margin: 10px auto;
+    }
+    .secondSlideText{
+        width: 100%;
+    }
+    .thirdSlideBox{
+        display: block;
+        width: 100%;
+        margin: auto;
+    }
+    .thirdSlideText{
+        width: 100%;
+    }
+    .thirdSlideImage{
+        width: 80%;
+        margin: 10px auto;
+    }
+    .fourthSlideBox{
+        display: block;
+        width: 100%;
+        margin: auto;
+    }
+    .fourthSlideImage{
+        width: 80%;
+        margin: 10px auto;
+    }
+    .fourthSlideText{
+        width: 100%;
+    }
+    .fifthSlideBox{
+        display: block;
+        width: 100%;
+        margin: auto;
+    }
+    .fifthSlideText{
+        width: 100%;
+    }
+    .fifthSlideImage{
+        width: 80%;
+        margin: 10px auto;
+    }
+}

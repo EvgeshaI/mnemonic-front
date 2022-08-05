@@ -11,3 +11,9 @@
     font-weight: 500;
     padding: 0 30px 20px 30px;
 }
+
+@media all and (max-width: 600px) {
+    .alert {
+        width: 80%;
+    }
+}

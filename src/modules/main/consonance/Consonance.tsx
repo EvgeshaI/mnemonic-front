@@ -89,9 +89,11 @@ export const Consonance = () => {
                 </div>
             </div>
             <div className={s.contentBox}>
-                {consonances.map(el =>
-                    <div className={s.content}>
-                        <ConsonanceContent consonances={el}/>
+                {consonances.map((el, i) =>
+                    <div className={s.content} key={i}>
+                        <ConsonanceContent
+                            key={i}
+                            consonances={el}/>
                     </div>
                 )}
             </div>

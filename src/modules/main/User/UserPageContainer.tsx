@@ -88,6 +88,7 @@ export const UserPageContainer = () => {
                                         translations={el.translations}
                                         studyId={el.studyId}
                                         transcriptions={el.transcriptions}
+                                        key={el.studyId}
                                     />
                                 </div>
                             )}

@@ -47,7 +47,8 @@
 }
 .errorText{
     position: absolute;
-    left: 25px;
+    left: 50px;
+    bottom: 35px;
     color: #A52A2A;
     font-size: 12px;
 }
@@ -90,9 +91,7 @@
     margin: 30px auto;
     width: 80%;
 }
-.content{
-    /*text-align: left;*/
-}
+
 .consonancesSelect{
     width: 100%;
     list-style: none;
@@ -115,3 +114,31 @@
     color: #A0A0A0;
 }
 
+@media all and (max-width: 600px) {
+    .consonances{
+        width: 90%;
+    }
+    .inputAndIconSearch,
+    .search,
+    .inputAndIconSearchError{
+        width: 300px;
+    }
+    .instruction{
+        font-size: 17px;
+    }
+    .consonance{
+        width: 50%;
+        font-size: 20px;
+        text-align: center;
+    }
+    .letterStyle{
+        padding-left: 0;
+    }
+    .consonancesSelect{
+        margin: 0;
+    }
+    .contentBox{
+        margin: 40px auto;
+        width: 90%;
+    }
+}

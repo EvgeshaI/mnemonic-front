@@ -251,3 +251,22 @@
 .hasMoreBtn:hover{
     background-color: var(--colorOne);
 }
+
+@media all and (max-width: 600px) {
+    .user{
+        width: 90%;
+    }
+    .userContainer{
+        width: 85%;
+    }
+
+    .buttonStyle{
+        width: 8%;
+    }
+    .icons svg {
+        width: 20px;
+    }
+    .inputAndIconSearch{
+        z-index: 1;
+    }
+}

@@ -1,0 +1,105 @@
+.navbar {
+    display: block;
+    justify-content: space-between;
+}
+.logoAndBurger{
+    display: flex;
+    justify-content: space-between;
+}
+.search {
+    margin: auto;
+}
+.logo {
+    cursor: pointer;
+    color: #122B5A;
+    margin: 10px;
+    width: 50%;
+    display: flex;
+    justify-content: start;
+}
+.logo svg {
+    width: 150px;
+}
+.burger{
+    fill: var(--colorFour);
+    display: flex;
+    justify-content: end;
+    width: 50%;
+    margin-left: auto;
+    padding: 10px;
+}
+.burger svg {
+    width: 40px;
+}
+.inputAndIcon{
+    position: relative;
+    width: 250px;
+    border: none;
+    margin: 20px auto;
+    box-shadow: none;
+    border-radius: 0;
+    border-bottom: 1px solid lightgrey;
+}
+
+.searchInput {
+    width: 100%;
+    border: none;
+    outline: none;
+    background: transparent;
+    height: 40px;
+    padding-left: 15px;
+}
+.searchIcon {
+    width: 25px;
+    position: absolute;
+    top: 6px;
+    right: 5px;
+    cursor: pointer;
+    fill: #122B5A;
+}
+
+
+
+
+/*.usernameBox:hover .modalList {*/
+/*    display: block;*/
+/*    opacity: 1;*/
+/*}*/
+/*.modalList:hover {*/
+/*    opacity: 1;*/
+/*    display: block;*/
+/*}*/
+
+.userIcon {
+    align-items: center;
+    margin: 0 0 0 5px;
+    width: 20px;
+}
+.userIcon svg {
+    width: 100%;
+    display: flex;
+    vertical-align: center;
+    fill: #122B5A;
+}
+.logText{
+    font-size: 13px;
+    color: #122B5A;
+    display: flex;
+    align-items:  center;
+    padding: 1px 5px;
+}
+.logText:hover{
+    border-radius: 5px;
+    box-shadow: 0.5px 0.5px 1px 1px lightgrey;
+    /*color: rgb(144, 211, 255);*/
+    /*border-bottom: 1px solid rgb(144, 211, 255);*/
+}
+.logIcon {
+    padding: 2px;
+    width: 20px;
+}
+.logIcon svg{
+    fill: #122B5A;
+    display: flex;
+    vertical-align:  center;
+}

@@ -242,3 +242,9 @@
 }
 /* UPDATE EXAMPLE COMPONENT END!*/
 
+@media all and (max-width: 600px) {
+    .loadExample{
+        width: 30%;
+        padding: 10px;
+    }
+}

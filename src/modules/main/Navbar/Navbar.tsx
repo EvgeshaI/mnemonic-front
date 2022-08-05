@@ -1,15 +1,12 @@
 import React, {FC, useState} from "react";
-import s from "./navbar.module.css"
-import {ReactComponent as Logo} from "../../../import/icons/logo.svg"
-import {ReactComponent as Login} from "../../../import/icons/login.svg"
-import {ReactComponent as User} from "../../../import/icons/user.svg"
-import {ReactComponent as Search} from "../../../import/icons/search.svg"
-import {ReactComponent as Sound} from "../../../import/icons/sound.svg"
 import {useNavigate} from "react-router";
 import {useAppDispatch, useAppSelector} from "../../../store";
 import {UserDropDown} from "./UserDropDown";
 import {ProfileModal} from "../Modal/ProfileModal";
 import {setShowProfileModal} from "../../../store/authSlice";
+import useWindowDimensions from "../../util/windowDimensions";
+import {NavBarMobile} from "./NavBarMobile";
+import {NavBarDesktop} from "./NavBarDesktop";
 
 export const Navbar: FC= (props) => {
     const {
@@ -45,57 +42,49 @@ export const Navbar: FC= (props) => {
             goToWord()
         }
     };
+    const { width } = useWindowDimensions();
+    const isMobileScreen = width < 600
 
+    const invertShowDropDown = () => {
+        setShowUserDropDown(!showUserDropDown)
+    }
     return (
     <>
-        <div className={s.navbar}>
-            <div className={s.logo} onClick={startPage}>
-                <Logo/>
-            </div>
-            <div className={s.search}>
-                <div className={s.inputAndIcon}>
-                    <div className={s.searchIcon}
-                    onClick={goToWord}>
-                        <Search/>
-                    </div>
-                    <input type="text"
-                           placeholder="поиск..."
-                           className={s.searchInput}
-                           value = {word}
-                           onChange={searchWord}
-                           onKeyPress={pressHandler}
-                    />
-                </div>
-            </div>
-            <div className={s.nicknameAndLogout}>
-                <div className={s.Box} onClick={searchConsonance}>
-                    <div>Созвучия</div>
-                    <div className={s.userIcon}>
-                        <Sound/>
-                    </div>
-                </div>
-                {isAuth ?
-                    <div onClick={()=> setShowUserDropDown(!showUserDropDown)}
-                         className={s.usernameBox}>
-                        <div>{user!.nickname}</div>
-                        <div className={s.userIcon}>
-                            <User/>
-                        </div>
-
-                    </div>
-                    :
-                    <div onClick={login} className={s.logText}>
-                        <div className={s.logout}>Войти</div>
-                        <div className={s.logIcon}><Login/></div>
-                    </div>
-                }
-                {showUserDropDown &&
-                    <UserDropDown setShowUserDropDown={setShowUserDropDown}
-                                  />
-                }
-            </div>
-
-        </div>
+        {isMobileScreen ?
+            <NavBarMobile
+                isAuth={isAuth}
+                user={user}
+                word={word}
+                startPage={startPage}
+                goToWord={goToWord}
+                searchWord={searchWord}
+                pressHandler={pressHandler}
+                login={login}
+                invertShowDropDown={invertShowDropDown}
+            />
+            :
+            <NavBarDesktop
+                isAuth={isAuth}
+                user={user}
+                word={word}
+                startPage={startPage}
+                goToWord={goToWord}
+                searchWord={searchWord}
+                pressHandler={pressHandler}
+                searchConsonance={searchConsonance}
+                invertShowDropDown={invertShowDropDown}
+                login={login}
+            />
+        }
+        {showUserDropDown &&
+            <UserDropDown
+                isAuth={isAuth}
+                isMobileScreen={isMobileScreen}
+                searchConsonance={searchConsonance}
+                setShowUserDropDown={setShowUserDropDown}
+                login={login}
+            />
+        }
         {showProfileModal && user &&
             <ProfileModal showProfileModal={showProfileModal}
                           close={closeDeleteModal}

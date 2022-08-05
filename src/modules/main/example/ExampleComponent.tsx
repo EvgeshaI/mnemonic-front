@@ -22,6 +22,7 @@ import {useNavigate} from "react-router";
 import {DeleteModal} from "../Modal/DeleteModal";
 import {ExampleFormat} from "./ExampleFormat";
 import {isExpired} from "../../util/utilFunctions";
+import useWindowDimensions from "../../util/windowDimensions";
 
 
 type PropsType = {
@@ -36,6 +37,8 @@ const ExampleComponent: FC<PropsType> = (props) => {
     const [edit, setEdit] = useState(false);
     const [textFormat, setTextFormat] = useState(false)
     const [showDeleteModal, setShowDeleteModal] = useState(false)
+    const { height, width } = useWindowDimensions();
+    const isMobileScreen = width < 600
     const closeDeleteModal = () => {
         setShowDeleteModal(false)
     }
@@ -116,7 +119,7 @@ const ExampleComponent: FC<PropsType> = (props) => {
                         <div className={st.buttonIcons}>
                             <div className={st.boldIconBox} onClick={clickTextFormat}>
                                 <div className={st.iconContainer}>{getBoldIcon()}</div>
-                                <div className={st.prompt}>Выделить</div>
+                                {!isMobileScreen && <div className={st.prompt}>Выделить</div>}
                             </div>
 
                             {isEditable() &&
@@ -124,13 +127,13 @@ const ExampleComponent: FC<PropsType> = (props) => {
                                     <div className={s.deleteIcon}>
                                         <Trash/>
                                     </div>
-                                    <div>Удалить</div>
+                                    {!isMobileScreen &&  <div>Удалить</div>}
                                 </div>
                             }
                             {isEditable() &&
                                 <div className={st.boldIconBox} onClick={editExample}>
                                     <div className={st.iconContainer}><Pencil/></div>
-                                    <div>Редактировать</div>
+                                    {!isMobileScreen &&  <div>Редактировать</div>}
                                 </div>
                             }
                         </div>
