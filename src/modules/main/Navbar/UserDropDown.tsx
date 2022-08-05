@@ -37,6 +37,10 @@ export const UserDropDown: FC <ModalListPropsType> = (props) => {
         props.setShowUserDropDown(false)
         props.searchConsonance();
     }
+    const enter = () => {
+        props.login()
+        props.setShowUserDropDown(false)
+    }
     return (
         <>
             {props.isMobileScreen ?
@@ -51,7 +55,7 @@ export const UserDropDown: FC <ModalListPropsType> = (props) => {
                         {props.isAuth ?
                             <div className={s.listStyle}><li onClick={exit}>Выйти</li></div>
                             :
-                            <div className={s.listStyle}><li onClick={props.login}>Войти</li></div>
+                            <div className={s.listStyle}><li onClick={enter}>Войти</li></div>
                         }
                     </div>
                 :
