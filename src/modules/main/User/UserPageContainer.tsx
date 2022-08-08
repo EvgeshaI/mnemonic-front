@@ -21,7 +21,7 @@ export const UserPageContainer = () => {
     const searchWord = (e: React.ChangeEvent<HTMLInputElement>) => {
         setWord(e.target.value)
     };
-    const debouncedValue = useDebounce<string>(word, 400)
+    const debouncedValue = useDebounce<string>(word, 200)
 
     const pressHandler = (e: React.KeyboardEvent) => {
         if (e.key === "Enter") {

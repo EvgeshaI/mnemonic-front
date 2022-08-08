@@ -17,7 +17,7 @@ export const Consonance = () => {
     const [search, setSearch] = useState("")
     const [correct, setCorrect] = useState(true)
     const dispatch = useAppDispatch()
-    const debouncedValue = useDebounce<string>(search, 400)
+    const debouncedValue = useDebounce<string>(search, 200)
 
     useEffect(() => {
         correctText()

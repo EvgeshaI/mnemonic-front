@@ -16,7 +16,7 @@ export const EngWordAutosuggest: FC<{transWidth: number}> = ({transWidth}) => {
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
     const [value, setValue] = useState("")
-    const debouncedValue = useDebounce<string>(value, 400)
+    const debouncedValue = useDebounce<string>(value, 200)
     const searchWord = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.value === '') {
             clearSuggestions()

@@ -79,9 +79,6 @@
 
 .Box {
     display: flex;
-    /*!*background-color: rgba(171, 220, 255, 0.4);*!*/
-    /*border-radius: 5px;*/
-    /*box-shadow: 0.5px 0.5px 1px 1px lightgrey;*/
     align-items: center;
     color: #122B5A;
     margin: 0 5px;
@@ -94,9 +91,6 @@
 }
 .usernameBox {
     display: flex;
-    /*!*background-color: rgba(171, 220, 255, 0.4);*!*/
-    /*border-radius: 5px;*/
-    /*box-shadow: 0.5px 0.5px 1px 1px lightgrey;*/
     align-items: center;
     color: #122B5A;
     margin: 0 5px;
@@ -108,14 +102,6 @@
     box-shadow: 0.5px 0.5px 1px 1px lightgrey;
 }
 
-/*.usernameBox:hover .modalList {*/
-/*    display: block;*/
-/*    opacity: 1;*/
-/*}*/
-/*.modalList:hover {*/
-/*    opacity: 1;*/
-/*    display: block;*/
-/*}*/
 
 .userIcon {
     align-items: center;
