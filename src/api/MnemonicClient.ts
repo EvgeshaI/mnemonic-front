@@ -1,10 +1,24 @@
 //обращение к серверу
-import {IAuthResponse, IEngWord, IExample, IMnemonic, IPageElements, IStudy,} from "../shared/models/engWordTypes";
+import {
+    IAuthResponse,
+    IEngWord,
+    IEngWordSuggest,
+    IExample,
+    IMnemonic,
+    IPageElements,
+    IStudy,
+} from "../shared/models/engWordTypes";
 import {BaseClient} from "./BaseClient";
 
 export class MnemonicClient extends BaseClient {
     static async getEngWord (word: string) {
         return this.get<IEngWord>(`eng-word/${word}`)
+    }
+    static async autoGetEngWord (word: string) {
+        const params = {
+            word
+        }
+        return this.get<Array<IEngWordSuggest>>(`eng-word/search`, {params})
     }
 
     static async getMnemonic (id: number, currentPage: number) {

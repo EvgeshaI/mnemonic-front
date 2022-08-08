@@ -31,45 +31,6 @@
 .burger svg {
     width: 40px;
 }
-.inputAndIcon{
-    position: relative;
-    width: 250px;
-    border: none;
-    margin: 20px auto;
-    box-shadow: none;
-    border-radius: 0;
-    border-bottom: 1px solid lightgrey;
-}
-
-.searchInput {
-    width: 100%;
-    border: none;
-    outline: none;
-    background: transparent;
-    height: 40px;
-    padding-left: 15px;
-}
-.searchIcon {
-    width: 25px;
-    position: absolute;
-    top: 6px;
-    right: 5px;
-    cursor: pointer;
-    fill: #122B5A;
-}
-
-
-
-
-/*.usernameBox:hover .modalList {*/
-/*    display: block;*/
-/*    opacity: 1;*/
-/*}*/
-/*.modalList:hover {*/
-/*    opacity: 1;*/
-/*    display: block;*/
-/*}*/
-
 .userIcon {
     align-items: center;
     margin: 0 0 0 5px;

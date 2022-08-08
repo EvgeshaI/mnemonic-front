@@ -132,3 +132,9 @@ export interface LengthAndWords {
     length: number,
     words: Array<string>
 }
+
+export interface IEngWordSuggest {
+    id: number,
+    engWord: string,
+    translations: Array<ITranslation>
+}

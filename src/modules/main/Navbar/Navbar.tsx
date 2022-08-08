@@ -15,19 +15,13 @@ export const Navbar: FC= (props) => {
         showProfileModal
     } = useAppSelector((state) => state.authReducer);
     const dispatch = useAppDispatch()
-    const [word, setWord] = useState("")
+
     const [showUserDropDown, setShowUserDropDown] = useState(false)
     const closeDeleteModal = () => {
         dispatch(setShowProfileModal(false))
     }
-    const searchWord = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setWord(e.target.value)
-    };
     const navigate = useNavigate();
-    const goToWord = () => {
-        navigate(`/eng/${word.toLowerCase()}`)
-        setWord("")
-    };
+
     const login = () => {
         navigate(`/login`)
     };
@@ -37,11 +31,6 @@ export const Navbar: FC= (props) => {
     const searchConsonance = () => {
         navigate(`/consonance`)
     }
-    const pressHandler = (e: React.KeyboardEvent) => {
-        if (e.key === "Enter") {
-            goToWord()
-        }
-    };
     const { width } = useWindowDimensions();
     const isMobileScreen = width < 600
 
@@ -54,11 +43,7 @@ export const Navbar: FC= (props) => {
             <NavBarMobile
                 isAuth={isAuth}
                 user={user}
-                word={word}
                 startPage={startPage}
-                goToWord={goToWord}
-                searchWord={searchWord}
-                pressHandler={pressHandler}
                 login={login}
                 invertShowDropDown={invertShowDropDown}
             />
@@ -66,11 +51,7 @@ export const Navbar: FC= (props) => {
             <NavBarDesktop
                 isAuth={isAuth}
                 user={user}
-                word={word}
                 startPage={startPage}
-                goToWord={goToWord}
-                searchWord={searchWord}
-                pressHandler={pressHandler}
                 searchConsonance={searchConsonance}
                 invertShowDropDown={invertShowDropDown}
                 login={login}

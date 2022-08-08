@@ -1,5 +1,5 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {IEngWord} from "../shared/models/engWordTypes";
+import {IEngWord, IEngWordSuggest} from "../shared/models/engWordTypes";
 import {AppThunk} from "./index";
 import {MnemonicClient} from "../api/MnemonicClient";
 import {getMnemonicAsync} from "./mnemonicSlice";
@@ -9,10 +9,12 @@ import {showAndHideAlert} from "./alertsSlise";
 
 interface EngWordState {
     engWord: IEngWord | null,
+    suggestions: Array<IEngWordSuggest>
 }
 
 const initialState: EngWordState = {
     engWord: null,
+    suggestions: []
 };
 
 export const engWordSlice = createSlice(
@@ -20,16 +22,20 @@ export const engWordSlice = createSlice(
         name: 'engWord',
         initialState,
         reducers: {
-            getEngWord: (state, action: PayloadAction<IEngWord> ) => {
+            setEngWord: (state, action: PayloadAction<IEngWord> ) => {
                 state.engWord = action.payload
 
+            },
+            setEngWordAuto: (state, action: PayloadAction<Array<IEngWordSuggest>> ) => {
+                state.suggestions = action.payload
             }
         }
     }
 );
 
 export const {
-    getEngWord
+    setEngWord,
+    setEngWordAuto
 } = engWordSlice.actions;
 
 export const getEngWordAsync = (word:string): AppThunk => async (dispatch: any) => {
@@ -38,7 +44,7 @@ export const getEngWordAsync = (word:string): AppThunk => async (dispatch: any) 
         let result = await MnemonicClient.getEngWord(word);
         dispatch(getMnemonicAsync(result.id));
         dispatch(getExampleAsync(result.id));
-        dispatch(getEngWord(result))
+        dispatch(setEngWord(result))
         dispatch(setFetching(false))
     }catch (error){
         // @ts-ignore
@@ -46,6 +52,12 @@ export const getEngWordAsync = (word:string): AppThunk => async (dispatch: any) 
         dispatch(setFetching(false))
     }
 };
+
+export const getEngWordSuggestAsync = (word:string): AppThunk => async (dispatch: any) => {
+    let result = await MnemonicClient.autoGetEngWord(word)
+    dispatch(setEngWordAuto(result))
+}
+
 
 export default engWordSlice.reducer
 

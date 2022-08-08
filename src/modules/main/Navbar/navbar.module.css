@@ -10,14 +10,14 @@
     position: relative;
     width: 400px;
     margin: 20px auto;
-    border-radius: 5px;
     box-shadow: 0.5px 0.5px 1px 1px lightsteelblue;
 }
-/*@media screen and (width: 720px){*/
-/*    .inputAndIcon{*/
-/*        width: 200px;*/
-/*    }*/
-/*}*/
+.inputAndIconBorder {
+    border-radius: 10px;
+}
+.inputAndIconBorderFocus{
+    border-radius: 10px 10px 0 0;
+}
 .searchInput {
     width: 100%;
     border: none;
@@ -33,6 +33,29 @@
     right: 5px;
     cursor: pointer;
     fill: #122B5A;
+}
+.suggestions{
+    z-index: 2;
+    position: absolute;
+    background-color: white;
+    cursor: pointer;
+    margin: 2px 0 0 0;
+    width: 100%;
+    box-shadow: 0.5px 0.5px 1px 1px lightsteelblue;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+.suggestion:last-child {
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+.suggestion{
+    display: flex;
+    box-sizing: border-box;
+    padding: 10px;
+}
+.suggestion:hover{
+    background-color: var(--colorTwo);
 }
 
 .logo {
@@ -151,7 +174,8 @@
 
 @media all and (max-width: 600px) {
     .inputAndIcon {
-        width: 150px;
+        width: 300px;
+        margin: 5px auto;
         border: none;
         box-shadow: none;
         border-radius: 0;
