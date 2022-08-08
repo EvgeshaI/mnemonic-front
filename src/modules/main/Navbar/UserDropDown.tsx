@@ -4,6 +4,11 @@ import {useNavigate} from "react-router";
 import {deleteUser, setShowProfileModal} from "../../../store/authSlice";
 import {useAppDispatch} from "../../../store";
 import useClickOutside from "../../util/clickOutside";
+import {ReactComponent as Book} from "../../../import/icons/book.svg";
+import {ReactComponent as Profile} from "../../../import/icons/profile.svg";
+import {ReactComponent as Logout} from "../../../import/icons/logout.svg";
+import {ReactComponent as Sound} from "../../../import/icons/sound.svg";
+import {ReactComponent as Login} from "../../../import/icons/login.svg";
 
 type ModalListPropsType = {
     isAuth: boolean
@@ -45,24 +50,48 @@ export const UserDropDown: FC <ModalListPropsType> = (props) => {
         <>
             {props.isMobileScreen ?
                     <div className={s.modalList} ref={ref}>
-                        <div className={s.listStyle}><li onClick={clickSearchConsonance}>Созвучия</li></div>
+                        <div className={s.listStyle}>
+                            <div className={s.icon}><Sound/></div>
+                            <li onClick={clickSearchConsonance}>Созвучия</li>
+                        </div>
                         {props.isAuth &&
                             <>
-                                <div className={s.listStyle}><li onClick={userPage}>Мой словарь</li></div>
-                                <div className={s.listStyle}><li onClick={showProfileModal}>Мой профиль</li></div>
+                                <div className={s.listStyle}>
+                                    <div className={s.icon}><Book/></div>
+                                    <li onClick={userPage}>Мой словарь</li>
+                                </div>
+                                <div className={s.listStyle}>
+                                    <div className={s.icon}><Profile/></div>
+                                    <li onClick={showProfileModal}>Мой профиль</li>
+                                </div>
                             </>
                         }
                         {props.isAuth ?
-                            <div className={s.listStyle}><li onClick={exit}>Выйти</li></div>
+                            <div className={s.listStyle}>
+                                <div className={s.icon}><Logout/></div>
+                                <li onClick={exit}>Выйти</li>
+                            </div>
                             :
-                            <div className={s.listStyle}><li onClick={enter}>Войти</li></div>
+                            <div className={s.listStyle}>
+                                <div className={s.icon}><Login/></div>
+                                <li onClick={enter}>Войти</li>
+                            </div>
                         }
                     </div>
                 :
                     <div className={s.modalList} ref={ref}>
-                        <div className={s.listStyle}><li onClick={userPage}>Мой словарь</li></div>
-                        <div className={s.listStyle}><li onClick={showProfileModal}>Мой профиль</li></div>
-                        <div className={s.listStyle}><li onClick={exit}>Выйти</li></div>
+                        <div className={s.listStyle}>
+                            <div className={s.icon}><Book/></div>
+                            <li onClick={userPage}>Мой словарь</li>
+                        </div>
+                        <div className={s.listStyle}>
+                            <div className={s.icon}><Profile/></div>
+                            <li onClick={showProfileModal}>Мой профиль</li>
+                        </div>
+                        <div className={s.listStyle}>
+                            <div className={s.icon}><Logout/></div>
+                            <li onClick={exit}>Выйти</li>
+                        </div>
                     </div>
             }
         </>
