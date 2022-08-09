@@ -68,7 +68,7 @@ export const ProfileModal: FC<ExitModalPropsType> = (props) => {
                 </div>
                 <div className={s.nickNameModal}>
                     nickname:
-                    <div className={s.input}>
+                    <div>
                         <input className={s.inputProfileModal}
                                value={nickName}
                                onChange={updateNickname}

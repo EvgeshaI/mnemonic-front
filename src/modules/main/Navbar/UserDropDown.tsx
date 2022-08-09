@@ -50,47 +50,47 @@ export const UserDropDown: FC <ModalListPropsType> = (props) => {
         <>
             {props.isMobileScreen ?
                     <div className={s.modalList} ref={ref}>
-                        <div className={s.listStyle}>
+                        <div className={s.listStyle} onClick={clickSearchConsonance}>
                             <div className={s.icon}><Sound/></div>
-                            <li onClick={clickSearchConsonance}>Созвучия</li>
+                            <li>Созвучия</li>
                         </div>
                         {props.isAuth &&
                             <>
-                                <div className={s.listStyle}>
+                                <div className={s.listStyle} onClick={userPage}>
                                     <div className={s.icon}><Book/></div>
-                                    <li onClick={userPage}>Мой словарь</li>
+                                    <li>Мой словарь</li>
                                 </div>
-                                <div className={s.listStyle}>
+                                <div className={s.listStyle} onClick={showProfileModal}>
                                     <div className={s.icon}><Profile/></div>
-                                    <li onClick={showProfileModal}>Мой профиль</li>
+                                    <li>Мой профиль</li>
                                 </div>
                             </>
                         }
                         {props.isAuth ?
-                            <div className={s.listStyle}>
+                            <div className={s.listStyle} onClick={exit}>
                                 <div className={s.icon}><Logout/></div>
-                                <li onClick={exit}>Выйти</li>
+                                <li>Выйти</li>
                             </div>
                             :
-                            <div className={s.listStyle}>
+                            <div className={s.listStyle} onClick={enter}>
                                 <div className={s.icon}><Login/></div>
-                                <li onClick={enter}>Войти</li>
+                                <li>Войти</li>
                             </div>
                         }
                     </div>
                 :
                     <div className={s.modalList} ref={ref}>
-                        <div className={s.listStyle}>
+                        <div className={s.listStyle} onClick={userPage}>
                             <div className={s.icon}><Book/></div>
-                            <li onClick={userPage}>Мой словарь</li>
+                            <li>Мой словарь</li>
                         </div>
-                        <div className={s.listStyle}>
+                        <div className={s.listStyle} onClick={showProfileModal}>
                             <div className={s.icon}><Profile/></div>
-                            <li onClick={showProfileModal}>Мой профиль</li>
+                            <li>Мой профиль</li>
                         </div>
-                        <div className={s.listStyle}>
+                        <div className={s.listStyle} onClick={exit}>
                             <div className={s.icon}><Logout/></div>
-                            <li onClick={exit}>Выйти</li>
+                            <li>Выйти</li>
                         </div>
                     </div>
             }

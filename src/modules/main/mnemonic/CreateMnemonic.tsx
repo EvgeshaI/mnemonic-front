@@ -108,7 +108,7 @@ const CreateMnemonic:FC<CreateMnemonicPropsType> = (props) => {
             </div>
             }
             <div>
-                {displaySaveBtn &&
+                {displaySaveBtn && entered &&
                 <button onClick={saveMnemo}
                         className={s.buttonStyle}
                         disabled={!mnemo}>

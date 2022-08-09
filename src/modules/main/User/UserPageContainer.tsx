@@ -50,10 +50,10 @@ export const UserPageContainer = () => {
                     Мои мнемоники
                 </div>
             </div>
+            {/*<Statistics/>*/}
             {studies.length === 0 && debouncedValue === "" && !isFetching &&
                 <div className={s.message}> У вас пока не добавлено ни одной мнемоники</div>
             }
-
                 <>
                     {(studies.length > 0 || word !== "") &&
                         <div className={s.search}>
@@ -71,13 +71,16 @@ export const UserPageContainer = () => {
                             </div>
                         </div>
                     }
+
                     {isFetching &&
                         <Preloader/>
                     }
+
                     {studies.length === 0 && word !== "" && !isFetching ?
                         <div className={s.message}>По вашему запросу ничего не найдено</div>
                         :
                         <div>
+
                             {studies.map(el =>
                                 <div key={el.studyId}>
                                     <UserPage

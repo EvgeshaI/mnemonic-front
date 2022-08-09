@@ -158,13 +158,14 @@
 }
 .listStyle{
     display: flex;
+    cursor: pointer;
 }
 
 .listStyle li {
     padding: 10px;
     list-style: none;
     font-size: 13px;
-    cursor: pointer;
+
 }
 
 .listStyle:hover{

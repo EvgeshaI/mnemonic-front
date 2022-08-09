@@ -34,38 +34,34 @@ const MyTranslit: FC<PropsType> = (props) => {
     }, [accuracy])
 
     let calculateAccuracy = () => {
-        let maxTranslit = findMaxTrans(myTranslit, props.trans)
-        if (maxTranslit.tran) {
-            return maxTranslit.tran!.accuracy/maxTranslit.tran!.transliteration.length * maxTranslit.count
-        }
-        return 0
+        return findMaxPoint(myTranslit, props.trans)
     }
 
-    let findMaxTrans = (highlightMnemo: string, trans: Array<ITransliteration>): {tran: ITransliteration | null, count: number} => {
+    let findMaxPoint = (highlightMnemo: string, trans: Array<ITransliteration>): number => {
         let max = 0
-        let maxTran = null
-        for (let i=0; i<trans.length; i++){
+        for (let i=0; i < trans.length; i++){
             let tran = trans[i];
-            let count = amountOfMatches(tran.transliteration, highlightMnemo)
-            if(count > max) {
-                max = count
-                maxTran = tran
+            let points = amountOfPoint(tran, highlightMnemo)
+            if(points >= max) {
+                max = points
             }
         }
-        return {tran: maxTran, count: max}
+        return max
     }
 
-    let amountOfMatches = (trans: string, highlightMnemo: string) => {
-        let count = 0
+    let amountOfPoint = (trans: ITransliteration, highlightMnemo: string) => {
+        let transliteration = trans.transliteration
+        let oneLetterPoint = trans.accuracy / transliteration.length
+        let totalPoint = 0
         let index
         for (let i=0; i< highlightMnemo.length; i++){
-            if(trans.includes(highlightMnemo[i])) {
-                index = trans.indexOf(highlightMnemo[i])
-                trans = trans.substring(index + 1)
-                count++
+            if(transliteration.includes(highlightMnemo[i])) {
+                index = transliteration.indexOf(highlightMnemo[i])
+                transliteration = transliteration.substring(index + 1)
+                totalPoint += oneLetterPoint
             }
         }
-        return count
+        return totalPoint
     }
 
     return (
