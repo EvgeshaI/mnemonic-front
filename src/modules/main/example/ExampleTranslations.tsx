@@ -1,5 +1,5 @@
 import React, {FC} from "react";
-import s from "./Example.module.css"
+import s from "./Example.module.scss"
 import {ITranslation} from "../../../shared/models/engWordTypes";
 
 const ExampleTranslations: FC<{translations: Array<ITranslation>, selectTranslation (id: number): void}> = (props) => {

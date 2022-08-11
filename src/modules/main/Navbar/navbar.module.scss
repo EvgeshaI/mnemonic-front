@@ -1,3 +1,18 @@
+@import "../common.module";
+
+@mixin box {
+    display: flex;
+    align-items: center;
+    color: $colorBlueFive;
+    margin: 0 5px;
+    padding: 3px 7px;
+    font-size: 13px;
+    &:hover{
+        border-radius: 5px;
+        box-shadow: 0.5px 0.5px 1px 1px $colorGreyOne;
+    }
+}
+
 .navbar {
     display: flex;
     justify-content: space-between;
@@ -5,7 +20,6 @@
 .search {
     display: flex;
 }
-
 .inputAndIcon{
     position: relative;
     width: 400px;
@@ -25,6 +39,7 @@
     background: transparent;
     height: 40px;
     padding-left: 15px;
+
 }
 .searchIcon {
     width: 25px;
@@ -32,7 +47,7 @@
     top: 6px;
     right: 5px;
     cursor: pointer;
-    fill: #122B5A;
+    fill: $colorBlueFive;
 }
 .suggestions{
     z-index: 2;
@@ -45,6 +60,7 @@
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
 }
+
 .suggestion:last-child {
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
@@ -53,19 +69,22 @@
     display: flex;
     box-sizing: border-box;
     padding: 10px;
+        &:hover{
+            background-color: $colorBlueTwo;
+        }
 }
-.suggestion:hover{
-    background-color: var(--colorTwo);
+.highlightSuggestion {
+    background-color: $colorBlueTwo;
 }
 
 .logo {
     cursor: pointer;
-    color: #122B5A;
+    color: $colorBlueFive;
     margin: 1%;
-    width: 15%
-}
-.logo svg {
-    width: 80%;
+    width: 15%;
+        svg {
+        width: 80%;
+    }
 }
 
 .nicknameAndLogout {
@@ -78,74 +97,41 @@
 }
 
 .Box {
-    display: flex;
-    align-items: center;
-    color: #122B5A;
-    margin: 0 5px;
-    padding: 3px 7px;
-    font-size: 13px;
-}
-.Box:hover{
-    border-radius: 5px;
-    box-shadow: 0.5px 0.5px 1px 1px lightgrey;
-}
-.usernameBox {
-    display: flex;
-    align-items: center;
-    color: #122B5A;
-    margin: 0 5px;
-    padding: 3px 7px;
-    font-size: 13px;
-}
-.usernameBox:hover{
-    border-radius: 5px;
-    box-shadow: 0.5px 0.5px 1px 1px lightgrey;
+   @include box
 }
 
-
-.userIcon {
+.navbarIcon {
     align-items: center;
     margin: 0 5px 0 0;
     width: 20px;
+    svg {
+        width: 100%;
+        display: flex;
+        vertical-align: center;
+        fill: $colorBlueFive;
+    }
 }
-.userIcon svg {
-    width: 100%;
-    display: flex;
-    vertical-align: center;
-    fill: #122B5A;
-}
-.soundIcon {
-    align-items: center;
-    margin: 0 5px 0 0;
-    width: 20px;
-}
-.soundIcon svg {
-    width: 100%;
-    display: flex;
-    vertical-align: center;
-    fill: #122B5A;
-}
+
 .logText{
     font-size: 13px;
-    color: #122B5A;
+    color: $colorBlueFive;
     display: flex;
     align-items:  center;
     padding: 1px 5px;
+    &:hover{
+        border-radius: 5px;
+        box-shadow: 0.5px 0.5px 1px 1px $colorGreyOne;
+    }
 }
-.logText:hover{
-    border-radius: 5px;
-    box-shadow: 0.5px 0.5px 1px 1px lightgrey;
-    /*color: rgb(144, 211, 255);*/
-    /*border-bottom: 1px solid rgb(144, 211, 255);*/
-}
+
 .logIcon {
     padding: 2px;
     width: 20px;
-}
-.logIcon svg{
-    fill: #122B5A;
-    display: flex;
-    vertical-align:  center;
+    svg{
+        fill: $colorBlueFive;
+        display: flex;
+        vertical-align:  center;
+    }
 }
 
 .modalList{
@@ -154,29 +140,30 @@
     top: 60px;
     width: 15%;
     border-radius: 5px;
-    box-shadow: 1px 1px 2px 1px lightgrey;
+    box-shadow: 1px 1px 2px 1px $colorGreyOne;
 }
 .listStyle{
     display: flex;
     cursor: pointer;
+     li {
+        padding: 10px;
+        list-style: none;
+        font-size: 13px;
+        &:hover{
+            background-color: $colorBlueOne
+        }
+    }
 }
 
-.listStyle li {
-    padding: 10px;
-    list-style: none;
-    font-size: 13px;
 
-}
-
-.listStyle:hover{
-    background-color: var(--colorOne)
-}
 .icon{
     display: flex;
     margin: 0 0 0 15px;
     width: 10%;
-    fill: var(--colorFive);
+    fill: $colorBlueFive;
 }
+
+
 
 @media all and (max-width: 600px) {
     .inputAndIcon {
@@ -185,7 +172,7 @@
         border: none;
         box-shadow: none;
         border-radius: 0;
-        border-bottom: 1px solid lightgrey;
+        border-bottom: 1px solid $colorGreyOne;
     }
     .logo{
         width: 25%;
@@ -199,24 +186,15 @@
         width: 80%;
         background-color: white;
         top: 65px;
-        position: absolute;
-        right: 15px;
-        border-radius: 5px;
-        box-shadow: 1px 1px 2px 1px lightgrey;
         z-index: 3;
+        li {
+            padding: 10px;
+            list-style: none;
+            margin: 20px 10px;
+            font-size: 18px;
+            color: $colorBlueFive;
+        }
     }
 
-    .modalList li {
-        padding: 10px;
-        list-style: none;
-        margin: 20px 10px;
-        font-size: 18px;
-        color: #122B5A;
-        /*border-bottom: 1px solid lightgrey;*/
-    }
-
-    .listStyle:hover{
-        background-color: var(--colorOne)
-    }
 }
 

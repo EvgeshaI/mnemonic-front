@@ -1,6 +1,6 @@
 import React, {FC, useState} from "react";
 import {useAppDispatch} from "../../../store";
-import s from './mnemonic.module.css'
+import s from './mnemonic.module.scss'
 import SeparatedLetter from "./SeparatedLetter";
 import {IEngWord} from "../../../shared/models/engWordTypes";
 import {TransliterationComponent} from "./TransliterationComponent";

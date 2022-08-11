@@ -1,6 +1,6 @@
 import React, {FC, useEffect} from "react";
 import {useLocation} from "react-router-dom";
-import s from "./confirmed.module.css"
+import s from "./confirmed.module.scss"
 import {emailConfirmationAsync} from "../../../store/authSlice";
 import {useAppDispatch, useAppSelector} from "../../../store";
 import {ReactComponent as Checked} from "../../../import/icons/checked.svg";

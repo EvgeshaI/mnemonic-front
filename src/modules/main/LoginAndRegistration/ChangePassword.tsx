@@ -2,7 +2,7 @@ import React, {ChangeEvent, useState} from "react";
 import {useAppDispatch} from "../../../store";
 import {useForm} from "react-hook-form";
 
-import s from "./auth.module.css";
+import s from "./auth.module.scss";
 import {changePasswordAsync} from "../../../store/authSlice";
 import {useLocation} from "react-router-dom";
 

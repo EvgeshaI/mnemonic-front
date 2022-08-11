@@ -1,6 +1,6 @@
 import React, {FC} from "react";
 import {IExample} from "../../../shared/models/engWordTypes";
-import s from "./Example.module.css";
+import s from "./Example.module.scss";
 import {ExampleFormat} from "./ExampleFormat";
 
 

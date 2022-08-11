@@ -1,4 +1,14 @@
+@import "../common.module";
 
+@mixin styles {
+    border: 1px solid $colorGreyOne;
+    border-radius: 10px;
+    width: 70%;
+    padding: 10px;
+    margin: 5px auto;
+    font-size: 15px;
+    color: $colorBlueFive;
+}
 .closeButtonBox {
     display: flex;
     justify-content: flex-end;
@@ -6,7 +16,7 @@
     height: 12px;
 }
 .closeButtonBox svg:hover {
-    fill: lightgrey;
+    fill: $colorGreyOne;
     cursor: pointer;
 }
 
@@ -22,7 +32,7 @@
     width: 30%;
     margin: 5px auto;
     padding: 5px 1px;
-    box-shadow: 1px 1px 4px grey;
+    box-shadow: 1px 1px 4px $colorGreyFive;
     background-color: white;
     border-radius: 10px;
     cursor: pointer;
@@ -33,7 +43,7 @@
 }
 .profileModalText{
     font-size: 20px;
-    color: #122B5A;
+    color: $colorBlueFive;
     text-align: center;
 }
 
@@ -43,13 +53,7 @@
     font-size: 13px;
 }
 .email{
-    border: 1px solid lightgrey;
-    border-radius: 10px;
-    width: 70%;
-    padding: 10px;
-    margin: 5px auto;
-    font-size: 15px;
-    color: #122B5A;
+   @include styles
 }
 .nickNameModal{
     text-align: center;
@@ -58,19 +62,13 @@
 }
 
 .inputProfileModal{
-    border-radius: 10px;
+    @include styles;
     outline: none;
     text-align: center;
-    font-size: 15px;
-    color: #122B5A;
-    border: 1px solid lightgrey;
-    width: 70%;
-    padding: 10px;
-    margin: 5px auto;
 }
 .errorMessage{
     font-size: 12px;
-    color: #A52A2A;
+    color: $colorRed;
     text-align: center;
 }
 
@@ -78,11 +76,11 @@
     margin: 20px auto;
     padding: 10px;
     border-radius: 10px;
-    background-color: var(--colorThree);
+    background-color: $colorBlueThree;
     width: 50%;
     text-align: center;
     cursor: pointer;
 }
 .buttonProfileModal:hover{
-    background-color: var(--colorTwo);
+    background-color: $colorBlueTwo;
 }

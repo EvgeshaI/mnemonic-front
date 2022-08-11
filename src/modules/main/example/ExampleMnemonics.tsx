@@ -1,6 +1,6 @@
 import React, {FC} from "react";
 import {IMnemonic} from "../../../shared/models/engWordTypes";
-import s from "./Example.module.css"
+import s from "./Example.module.scss"
 
 const ExampleMnemonics: FC<{mnemonics: Array<IMnemonic>, selectMnemonic: (id: number) => void}> = (props) => {
 

@@ -6,7 +6,7 @@ import Slide2 from '../../../import/images/slide2.png'
 import Slide3 from '../../../import/images/slide3.png'
 import Slide4 from '../../../import/images/slide4.png'
 import Slide5 from '../../../import/images/slide5.png'
-import s from './startPage.module.css'
+import s from './startPage.module.scss'
 
 export const AnimatedTutorial = () => {
     return (

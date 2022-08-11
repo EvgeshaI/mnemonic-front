@@ -1,10 +1,11 @@
 import React, {useEffect, useState} from 'react'
 import {Login} from "./Login";
-import s from "./auth.module.css";
+import s from "./auth.module.scss";
 import {useAppSelector} from "../../../store";
 import {Registration} from "./Registration";
 import {GoogleLogin} from "./GoogleLogin";
 import {useNavigate} from "react-router";
+import {VKLogin} from "./VKLogin";
 
 export const LoginAndRegistration = () => {
     const {
@@ -50,6 +51,7 @@ export const LoginAndRegistration = () => {
                                errorMessage={errorMessage}
                                confirmed ={confirmed}/>
                         <GoogleLogin/>
+                        <VKLogin/>
                         <div className={s.loginText}> Нет аккаунта?</div>
                         <div className={s.formButtonBox}>
                             <button

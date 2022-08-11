@@ -1,5 +1,5 @@
 import React, {FC} from "react";
-import s from "./mnemonic.module.css"
+import s from "./mnemonic.module.scss"
 
 
 const HighlightMnemonic: FC<{highlight: Array<number>, mnemonic: string}> = (props) => {

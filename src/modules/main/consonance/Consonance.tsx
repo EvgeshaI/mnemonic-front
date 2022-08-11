@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import s from "./consonance.module.css"
+import s from "./consonance.module.scss"
 import {ReactComponent as Search} from "../../../import/icons/search.svg";
 import {ReactComponent as Question} from "../../../import/icons/question.svg";
 import {useAppDispatch, useAppSelector} from "../../../store";

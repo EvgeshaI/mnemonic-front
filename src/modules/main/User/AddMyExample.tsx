@@ -1,5 +1,5 @@
 import React, {FC, useState} from "react";
-import s from "./userPage.module.css"
+import s from "./userPage.module.scss"
 import {
     checkMyExampleAsync,
     checkMyExampleTranslationAsync,

@@ -1,7 +1,7 @@
 import React, {useEffect} from "react";
 import {googleLoginAsync} from "../../../store/authSlice";
 import {useAppDispatch} from "../../../store";
-import s from "./auth.module.css";
+import s from "./auth.module.scss";
 
 
 export const GoogleLogin = () => {

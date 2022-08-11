@@ -1,5 +1,5 @@
 import React, {FC, useEffect, useState} from "react";
-import s from './mnemonic.module.css';
+import s from './mnemonic.module.scss';
 import {ITransliteration} from "../../../shared/models/engWordTypes";
 
 type PropsType = {

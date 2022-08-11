@@ -1,5 +1,5 @@
 import React, {FC} from "react";
-import common from "../main/common.module.css";
+import common from "../main/common.module.scss";
 import {ReactComponent as CloseIcon} from "../../import/icons/close-slim.svg";
 
 type Props = {

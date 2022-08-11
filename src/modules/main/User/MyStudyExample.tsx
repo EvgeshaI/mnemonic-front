@@ -1,5 +1,5 @@
 import React, {FC, useState} from "react";
-import s from "./userPage.module.css";
+import s from "./userPage.module.scss";
 import {ReactComponent as HeartYes} from "../../../import/icons/heart-clicked.svg";
 import {ReactComponent as Heart} from "../../../import/icons/heart.svg";
 import {ReactComponent as Trash} from "../../../import/icons/trash-bin.svg"

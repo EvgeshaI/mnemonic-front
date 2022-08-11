@@ -1,0 +1,130 @@
+@import '../common.module.scss';
+@mixin textStyle ($size, $color, $align) {
+  font-size: $size;
+  color: $color;
+  text-align: $align;
+}
+.exampleComponent {
+  @include componentStyle
+}
+.exampleContainer {
+  margin: 0 auto;
+}
+.wordTranslation {
+  @include items
+}
+.exampleMnemonic {
+  @include items
+}
+
+.addExampleBox{
+ @include addBox
+}
+
+.addTooltip{
+  @include toolTip
+}
+.addExampleButton {
+  @include addButton
+}
+
+.loadExample{
+  @include load
+}
+
+.exampleBox {
+  display: flex;
+}
+
+.example {
+  @include textItem (22px, 300);
+}
+.newExampleSentence {
+  font-size: 25px;
+  text-align: center;
+  border-bottom: 1px solid $colorGreyThree;
+}
+.dateFormat{
+  @include textStyle (13px, $colorGreyThree, center);
+  display: flex;
+  margin-left: auto;
+}
+.author {
+  @include textStyle (15px, #bdbdbd, left);
+  margin: 5px 0 0;
+  font-style: normal;
+}
+.createExample {
+  @include create
+}
+.inputNewExample {
+  width: 90%;
+  margin: 5px auto;
+}
+.newExampleTextArea {
+  @include inputStyle;
+  overflow:auto;
+  width: 100%;
+}
+.newExampleTextArea::placeholder {
+  font-size: 14px;
+  font-style: italic;
+}
+.chooseTranslationHeader {
+  margin: 10px 0 5px 0;
+  font-size: 14px;
+  font-style: italic;
+  color: $colorGreyThree;
+}
+.translationSelect {
+  @include select
+}
+.mnemonicSelect {
+ @include select
+}
+.bottom{
+  display: flex;
+}
+.buttonIcons {
+  @include buttonIcons
+}
+
+.likeIcons {
+  @include like
+}
+
+.likeCount {
+  @include count
+}
+.buttonStyle {
+  @include buttonStyle
+}
+.iconBox {
+ @include iconsBox
+}
+.iconContainer{
+  @include iconsContainer
+}
+
+.mnemonicPart {
+  font-weight: bold;
+  color: $colorBlueFour;
+  text-shadow: $textShadow
+}
+.translationPart {
+  font-weight: bold;
+  color: $cornflowerblue;
+  text-shadow: $textShadow;
+}
+
+/* UPDATE EXAMPLE COMPONENT*/
+.updateExample {
+  margin: 0 auto;
+}
+
+@media all and (max-width: 600px) {
+  .loadExample{
+    width: 30%;
+    padding: 10px;
+  }
+}

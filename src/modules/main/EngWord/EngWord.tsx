@@ -1,7 +1,7 @@
 import React, {FC, useEffect, useState} from "react";
 import {useAppDispatch, useAppSelector} from "../../../store";
 import {getEngWordAsync} from "../../../store/engWordSlice";
-import s from './EngWord.module.css'
+import s from './EngWord.module.scss'
 import {useParams} from "react-router-dom";
 import {ITranscription, ITranslation} from "../../../shared/models/engWordTypes";
 import MnemonicContainer from "../mnemonic/MnemonicContainer";

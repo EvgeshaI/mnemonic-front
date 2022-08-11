@@ -1,6 +1,6 @@
 import React, {FC, useEffect} from 'react'
 import {useForm} from 'react-hook-form';
-import s from "./login.module.css"
+import s from "./login.module.scss"
 import {useAppDispatch} from "../../../store";
 import {authUserAsync, setError} from "../../../store/authSlice";
 import {useNavigate} from "react-router";

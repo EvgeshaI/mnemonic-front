@@ -1,6 +1,6 @@
 import React, {ChangeEvent, FC, useEffect, useState} from 'react'
 import {useForm} from 'react-hook-form';
-import s from "./login.module.css"
+import s from "./login.module.scss"
 import {useAppDispatch, useAppSelector} from "../../../store";
 import {setError, signUpAsync} from "../../../store/authSlice";
 

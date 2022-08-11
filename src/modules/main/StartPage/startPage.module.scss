@@ -1,3 +1,24 @@
+@import "../common.module";
+@mixin slideText ($width) {
+    width: $width;
+    display: flex;
+    align-items: center;
+}
+@mixin slideBox ($display, $width, $marg){
+    display: $display;
+    width: $width;
+    margin: $marg;
+}
+@mixin textSlide {
+    text-align: center;
+    font-size: 17px;
+}
+@mixin slideImage ($width) {
+    width: $width;
+    img {
+        box-shadow: 1px 1px 5px 3px $colorGreyOne;
+    }
+}
 .startPage {
     width: 70%;
     margin: auto;
@@ -11,7 +32,7 @@
 }
 
 .instruction{
-    color: #122B5A;
+    color: $colorBlueFive;
     line-height: 2;
     text-align: justify;
     margin: 20px;
@@ -22,31 +43,22 @@
     line-height: 2;
     text-align: center;
     text-align-last: center ;
-    color: #122B5A;
+    color: $colorBlueFive;
     font-size: 18px;
 }
 .buttonBack{
     width: 50px;
-    fill: var(--colorThree);
+    fill: $colorBlueThree;
     margin: 0 auto;
     cursor: pointer;
-}
-.buttonBack:hover{
-    fill: var(--colorTwo);
+    &:hover{
+        fill: $colorBlueTwo;
+    }
 }
 
 .howBtn {
-    padding: 10px;
-    background-color: var(--colorThree);
-    cursor: pointer;
-    width: 30%;
+    @include buttonStyle;
     margin: 30px auto;
-    /*box-shadow: 1px 1px 1px grey;*/
-    border-radius: 10px;
-    text-align: center;
-}
-.howBtn:hover {
-    background-color: var(--colorTwo);
 }
 .carousel{
     margin: 20px auto 30px;
@@ -59,103 +71,76 @@
     margin: 0 0 50px 0;
 }
 .slide1Text{
-    text-align: center;
-    font-size: 17px;
+    @include textSlide;
     margin: 10px;
 }
 .slade1Image{
-    width: 100%;
+    @include slideImage (100%);
     display: flex;
+    img {
+        width: 50%;
+        margin: 10px auto;
+    }
 }
-.slade1Image img {
-    width: 50%;
-    margin: 10px auto;
-    box-shadow: 1px 1px 5px 3px lightgrey;
-}
+
 .secondSlideBox {
-    display: flex;
-    width: 90%;
-    margin: 70px auto;
+    @include slideBox(flex, 100%, auto)
 }
 .secondSlideImage {
     width: 50%;
 }
 .secondSlideText {
-    width: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @include slideText (50%)
 }
 .sladeImage{
-    width: 100%;
+    @include slideImage (100%);
     display: flex;
-}
-.sladeImage img {
-    width: 100%;
-    margin: 10px auto;
-    box-shadow: 1px 1px 5px 3px lightgrey;
+    img {
+        width: 100%;
+        margin: 10px auto;
+    }
 }
 .thirdSlideBox {
-    display: flex;
-    width: 100%;
-    margin: 70px auto;
+    @include slideBox(flex, 100%, 70px auto)
 }
 .thirdSlideText {
-    width: 60%;
-    display: flex;
-    align-items: center;
+    @include slideText (60%)
 }
 .thirdSlideImage {
-    width: 50%;
-}
-.thirdSlideImage img {
-    box-shadow: 1px 1px 5px 3px lightgrey;
+    @include slideImage (50%);
 }
 
 .colorHighlight{
-    color: rgba(171, 220, 255, 1);
-    text-shadow: -0.5px 0 black, 0 0.5px black, 0.5px 0 black, 0 -0.5px black;
+    color: $colorBlueFour;
+    font-weight: bold;
+    text-shadow: $textShadow;
 }
 .fourthSlideBox {
-    display: flex;
-    width: 100%;
-    margin: 70px auto;
+    @include slideBox(flex, 100%, 70px auto)
 }
 
 .slideText{
-    text-align: center;
-    font-size: 17px;
+    @include textSlide;
     padding: 20px;
 }
 .fourthSlideText {
-    width: 50%;
-    display: flex;
-    align-items: center;
+    @include slideText (50%)
 }
 .fourthSlideImage {
-    width: 50%;
+    @include slideImage (50%);
 }
-.fourthSlideImage img {
-    box-shadow: 1px 1px 5px 3px lightgrey;
-}
-
 
 .fifthSlideBox {
-    display: flex;
-    width: 100%;
-    margin: 70px auto;
+    @include slideBox(flex, 100%, 70px auto)
 }
 .fifthSlideText {
-    width: 50%;
-    display: flex;
-    align-items: center;
+    @include slideText (50%)
 }
 .fifthSlideImage {
-    width: 50%;
+    @include slideImage (50%);
 }
-.fifthSlideImage img {
-    box-shadow: 1px 1px 5px 3px lightgrey;
-}
+
+
 
 
 @media all and (max-width: 600px) {
@@ -172,7 +157,7 @@
         font-size: 17px;
     }
     .instruction{
-        font-size: 13px;
+        font-size: 15px;
     }
     .h{
         width: 50%;
@@ -181,9 +166,7 @@
         margin: 0 auto 20px ;
     }
     .secondSlideBox{
-        display: block;
-        width: 100%;
-        margin: auto;
+        @include slideBox(block, 100%, auto)
     }
     .secondSlideImage{
         width: 80%;
@@ -193,9 +176,7 @@
         width: 100%;
     }
     .thirdSlideBox{
-        display: block;
-        width: 100%;
-        margin: auto;
+        @include slideBox(block, 100%, auto)
     }
     .thirdSlideText{
         width: 100%;
@@ -205,9 +186,7 @@
         margin: 10px auto;
     }
     .fourthSlideBox{
-        display: block;
-        width: 100%;
-        margin: auto;
+        @include slideBox(block, 100%, auto)
     }
     .fourthSlideImage{
         width: 80%;
@@ -217,9 +196,7 @@
         width: 100%;
     }
     .fifthSlideBox{
-        display: block;
-        width: 100%;
-        margin: auto;
+        @include slideBox(block, 100%, auto)
     }
     .fifthSlideText{
         width: 100%;

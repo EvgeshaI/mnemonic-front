@@ -149,6 +149,12 @@ export class MnemonicClient extends BaseClient {
         }
         return this.post<IAuthResponse>(`auth/login/google`, body)
     };
+    static async vkLoginSuccess (code: string){
+        let params = {
+            code
+        }
+        return this.post<IAuthResponse>(`auth/login/vk`, null,{params})
+    };
 
     static async emailConfirmation (token: string) {
         let params = {

@@ -1,5 +1,5 @@
 import React, {FC} from "react";
-import s from "./EngWord.module.css";
+import s from "./EngWord.module.scss";
 import {ReactComponent as AudioIcon} from "../../../import/icons/audio.svg";
 
 type AudioComponentPropsType = {

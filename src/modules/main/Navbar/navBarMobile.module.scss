@@ -1,3 +1,5 @@
+@import "../common.module";
+
 .navbar {
     display: block;
     justify-content: space-between;
@@ -10,8 +12,7 @@
     margin: auto;
 }
 .logo {
-    cursor: pointer;
-    color: #122B5A;
+    color: $colorBlueFive;
     margin: 10px;
     width: 50%;
     display: flex;
@@ -21,7 +22,7 @@
     width: 150px;
 }
 .burger{
-    fill: var(--colorFour);
+    fill: $colorBlueFour;
     display: flex;
     justify-content: end;
     width: 50%;
@@ -40,27 +41,25 @@
     width: 100%;
     display: flex;
     vertical-align: center;
-    fill: #122B5A;
+    fill: $colorBlueFive;
 }
 .logText{
     font-size: 13px;
-    color: #122B5A;
+    color: $colorBlueFive;
     display: flex;
     align-items:  center;
     padding: 1px 5px;
 }
 .logText:hover{
     border-radius: 5px;
-    box-shadow: 0.5px 0.5px 1px 1px lightgrey;
-    /*color: rgb(144, 211, 255);*/
-    /*border-bottom: 1px solid rgb(144, 211, 255);*/
+    box-shadow: 0.5px 0.5px 1px 1px $colorGreyOne;
 }
 .logIcon {
     padding: 2px;
     width: 20px;
 }
 .logIcon svg{
-    fill: #122B5A;
+    fill: $colorBlueFive;
     display: flex;
     vertical-align:  center;
 }

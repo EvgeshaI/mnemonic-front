@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import s from "./userPage.module.css"
+import s from "./userPage.module.scss"
 import {useAppDispatch, useAppSelector} from "../../../store";
 import {getMyPageAsync, initUserPageState} from "../../../store/userSlice";
 import {UserPage} from "./UserPage";

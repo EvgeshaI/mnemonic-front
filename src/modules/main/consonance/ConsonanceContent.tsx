@@ -1,5 +1,5 @@
 import React, {FC} from "react";
-import s from "./consonance.module.css"
+import s from "./consonance.module.scss"
 import {LengthAndWords} from "../../../shared/models/engWordTypes";
 
 

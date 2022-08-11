@@ -1,19 +1,20 @@
+@import "../common.module";
 .user {
     width: 60%;
     display: flex;
     margin: 30px auto;
-    /*border-bottom: 1px solid #cccccc;*/
+
 }
 .text {
     margin: 10px auto 0;
     font-size: 25px;
-    color: var(--colorFive)
+    color: $colorBlueFive
 }
 .message{
     margin: 10px;
     font-size: 20px;
     text-align: center;
-    color: var(--colorFive);
+    color: $colorBlueFive;
 }
 .search {
     width: 80%;
@@ -21,13 +22,9 @@
     margin: 0 auto;
 }
 .inputAndIconSearch {
-    position: relative;
-    width: 400px;
-    margin: 0 auto 10px;
-    background: white;
-    border-bottom: 1px solid lightgray;
-
+    @include inputAndSearch($colorGreyOne)
 }
+
 .searchIcon,
 .searchMyMnemo  {
     border: none;
@@ -45,14 +42,14 @@
     right: 0;
     cursor: pointer;
     margin: 5px 5px 0;
-    fill: #666666;
+    fill: $colorGreySix;
 }
 
 .userContainer {
     padding: 10px;
     width: 45%;
     margin: 30px auto;
-    border-bottom: 1px solid var(--colorThree);
+    border-bottom: 1px solid $colorBlueThree;
 }
 .engWordBox{
     display: flex;
@@ -68,7 +65,6 @@
     display: flex;
     margin: 0 5px;
 }
-
 .translations {
     display: flex;
     font-size: 15px;
@@ -84,16 +80,17 @@
 }
 .icons{
     display: flex;
-    margin-left: auto ;
+    margin-left: auto;
+    svg {
+        padding: 0 4px;
+        width: 17px;
+        fill: $colorGreySix;
+        &:hover{
+            fill: $color-default;
+        }
+    }
 }
-.icons svg {
-    padding: 0 4px;
-    width: 17px;
-    fill: #666666;
-}
-.icons svg:hover{
-    fill: black;
-}
+
 .likeCount {
     padding: 0 0 0 10px;
     align-items: center;
@@ -101,20 +98,16 @@
     font-size: 14px;
 }
 .likeIcon svg {
-    fill: #666666;
+    fill: $colorGreySix;
 }
 .likeIcon svg g path {
-    fill: #666666;
+    fill: $colorGreySix;
 }
-.boldIcon {
+.iconStyle {
     cursor: pointer;
-    fill: #666666;
+    fill: $colorGreySix;
 }
 
-.trash {
-    cursor: pointer;
-    fill: #666666;
-}
 .myExampleBox{
     display: flex;
 }
@@ -123,10 +116,8 @@
     padding: 5px 0;
     font-size: 18px;
     font-weight: 300;
-    /*font-style: italic;*/
 }
-.exampleFormat{
-}
+
 .inputExample textarea {
     margin: 5px 0 10px;
     padding: 10px;
@@ -134,11 +125,10 @@
     border: none;
     outline: none;
     box-sizing: border-box;
-    color: black;
+    color: $color-default;
     border-bottom: 1px solid darkgrey;
     font-size: 20px;
     text-align: center;
-    
 }
 .inputExample textarea::placeholder {
     font-size: 14px;
@@ -174,13 +164,14 @@
     width: 5%;
     cursor: pointer;
     margin: 0 0 0 15px;
+    svg {
+        fill: $colorGreySix;
+        &:hover {
+            fill: black;
+        }
+    }
 }
-.buttonStyle svg {
-    fill: #666666;
-}
-.buttonStyle svg:hover {
-    fill: black;
-}
+
 .closeButtonBox{
     display: flex;
     justify-content: flex-end;
@@ -188,42 +179,20 @@
     cursor: pointer;
 }
 .saveButtonStyle {
-    font-size: 15px;
-    cursor: pointer;
-    padding: 5px;
-    background-color: var(--colorThree);
-    width: 25%;
-    text-align: center;
-    box-shadow: 1px 1px 2px lightslategray;
-    border-radius: 10px;
-    margin: 15px auto 5px auto;
-}
-.saveButtonStyle:hover{
-    background-color: var(--colorTwo);
+    @include buttonStyle
 }
 
+
 .addMyExample {
-    text-align: center;
-    width: 30%;
-    margin: 5px auto 5px auto;
-    font-size: 15px;
-    border-radius: 10px;
-    padding:  5px;
-    color: black;
-    background-color: var(--colorThree);
-    border: 0;
-    box-shadow: 1px 1px 2px lightslategray;
-    cursor: pointer;
+    @include buttonStyle
 }
-.addMyExample:hover{
-    background-color: var(--colorTwo);
-}
+
 
 .chooseTranslationHeader {
     margin: 10px 0 5px 0;
     font-size: 14px;
     font-style: italic;
-    color: #bdbdbd;
+    color: $colorGreyThree;
 }
 .translationSelect {
     width: 100%;
@@ -240,18 +209,13 @@
 }
 
 .hasMoreBtn {
-    display: block;
-    margin: 20px auto;
-    cursor: pointer;
-    box-shadow: 0.5px 0.5px 2px 0.5px lightgrey;
-    padding: 10px;
-    border-radius: 10px;
+    @include buttonStyle;
+    width: 10%;
     background-color: white;
 }
-.hasMoreBtn:hover{
-    background-color: var(--colorOne);
-}
 
+
+//MOBILE
 @media all and (max-width: 600px) {
     .user{
         width: 90%;

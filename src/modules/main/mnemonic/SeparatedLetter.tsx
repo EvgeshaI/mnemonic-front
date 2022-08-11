@@ -1,5 +1,5 @@
 import React, {FC, useState} from "react";
-import s from './mnemonic.module.css';
+import s from './mnemonic.module.scss';
 
 const SeparatedLetter: FC<{ letter: string, index: number, addNumber: (i: number) => void, deleteNumber: (i: number) => void }> = props => {
     let [entered, setEntered] = useState(false);

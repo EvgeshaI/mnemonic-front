@@ -1,5 +1,5 @@
 import React, {FC, useState} from "react";
-import s from "../EngWord/EngWord.module.css";
+import s from "./mnemonic.module.scss";
 import {IEngWord, IMnemonic} from "../../../shared/models/engWordTypes";
 import HighlightMnemonic from "./HighlightMnemonic";
 import {useAppDispatch} from "../../../store";
@@ -97,7 +97,7 @@ const MnemonicComponent: FC<PropsType> = (props) => {
         <div className={s.mnemonicComponent}>
             {!edit ?
                 <>
-                    <div className={s.mnemonicBottom}>
+                    <div className={s.box}>
                         <div className={s.highlightWord}>
                             <b>{props.mnemonic.highlightWord}</b>
                         </div>
@@ -106,12 +106,10 @@ const MnemonicComponent: FC<PropsType> = (props) => {
                         </div>
 
                         <div className={s.likeIcon}>
-                            <div className={s.likeCountContainer}>
-                                <span className={s.likeCount}>{props.mnemonic.likes}</span>
-                            </div>
-                            <div onClick={addLikeMnemonic} className={s.myRedHeart}>
-                                {getLikeIcon()}
-                            </div>
+                                <div className={s.likeCount}>{props.mnemonic.likes}</div>
+                                 <div onClick={addLikeMnemonic}>
+                                    {getLikeIcon()}
+                                </div>
                         </div>
 
                     </div>
@@ -122,7 +120,7 @@ const MnemonicComponent: FC<PropsType> = (props) => {
                             mnemonic={props.mnemonic.phrase}
                         /> : props.mnemonic.phrase}
                     </div>
-                    <div className={s.mnemonicBottom}>
+                    <div className={s.box}>
                         <div className={s.creatorInfo}>
                             <div className={s.author}>
                                 {props.mnemonic.creator.nickname}
@@ -132,24 +130,24 @@ const MnemonicComponent: FC<PropsType> = (props) => {
                             </div>
                         </div>
                         <div className={s.buttonIcons}>
-                            <div className={s.boldIconBox} onClick={pushBold}>
+                            <div className={s.iconBox} onClick={pushBold}>
                                 <div  className={s.iconContainer}>{getBoldIcon()}</div>
                                 {!isMobileScreen && <div> Выделить </div>}
                             </div>
                             {!props.mnemonic.isCreator && props.auth && !props.mnemonic.myExampleExists &&
-                                <div className={s.boldIconBox} onClick={addMeMnemonic}>
+                                <div className={s.iconBox} onClick={addMeMnemonic}>
                                     <div  className={s.iconContainer}> {addDelete()} </div>
                                     {!isMobileScreen && <div>Избранное</div>}
                                 </div>
                             }
-                            { canBeEditOrDelete() &&
-                                <div className={s.boldIconBox} onClick={() => setShowDeleteModal(true)}>
+                            {canBeEditOrDelete() &&
+                                <div className={s.iconBox} onClick={() => setShowDeleteModal(true)}>
                                     <div  className={s.iconContainer}><Trash/></div>
                                     {!isMobileScreen && <div>Удалить</div>}
                                 </div>
                             }
                             {canBeEditOrDelete() &&
-                                <div className={s.boldIconBox} onClick={editMnemo}>
+                                <div className={s.iconBox} onClick={editMnemo}>
                                     <div  className={s.iconContainer}><Pencil/></div>
                                     {!isMobileScreen && <div>Редактировать</div>}
                                 </div>

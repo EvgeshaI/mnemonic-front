@@ -1,0 +1,96 @@
+@import "../common.module";
+@mixin textStyle ($size, $color, $align) {
+  font-size: $size;
+  color: $color;
+  text-align: $align;
+}
+
+.engWordContainer {
+  padding: 10px 10px 25px 10px;
+  width: 50%;
+  margin: 0 auto;
+}
+
+.engWordComponent {
+  padding: 10px 0;
+}
+
+.engWord {
+  @include textStyle (30px, black, left);
+  padding: 10px 10px 0 10px;
+  font-weight: bold;
+}
+
+.word {
+  font-style: oblique;
+  font-size: 16px;
+}
+.transcriptionsBox{
+  display: flex;
+  margin: 0 10px 10px;
+  font-size: 17px;
+}
+
+.transcriptions{
+  display: inline-flex;
+  margin: 0 10px 0 0;
+  align-items: end;
+}
+.location{
+  font-size: 12px;
+  margin: 0 2px 0 0;
+  color: $colorGreyThree;
+}
+.transcriptionWord {
+  color: $colorGreyFour;
+}
+.iconAudio svg {
+  width: 15px;
+  fill: $colorGreyFour;
+  cursor: pointer;
+  margin: 0 5px 0;
+}
+.iconAudio svg:hover {
+  fill: $colorGreySix;
+}
+.exampleNone {
+  color: grey;
+  font-size: 16px;
+  margin: 20px 0 10px;
+}
+.nav {
+  text-align: center;
+}
+.translate {
+  padding: 0 0 10px 0;
+  margin: 0 0 10px 0;
+  border-bottom: 1px solid $colorBlueThree;
+}
+.translateWord {
+  margin: 0 0 15px 15px;
+  font-size: 18px;
+  font-style: italic;
+}
+.transIcon svg{
+  width: 15px;
+  margin: 0 10px;
+  cursor: pointer;
+  fill: $colorBlueFive;
+}
+.transIcon svg:hover{
+  fill: $colorBlueTwo;
+}
+
+
+//MOBILE
+
+@media all and (max-width: 600px){
+  .engWordContainer{
+    width: 95%;
+  }
+  .engWordComponent{
+    padding: 5px 0;
+  }
+}
+
+

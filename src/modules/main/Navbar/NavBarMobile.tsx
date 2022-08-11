@@ -1,5 +1,5 @@
 import React, {FC} from "react";
-import s from "./navBarMobile.module.css";
+import s from "./navBarMobile.module.scss";
 import {ReactComponent as Logo} from "../../../import/icons/logo.svg";
 import {ReactComponent as Burger} from "../../../import/icons/burger-bar.svg";
 import {IUser} from "../../../shared/models/engWordTypes";

@@ -1,5 +1,5 @@
 import React, {FC, useRef} from "react";
-import s from "./navbar.module.css"
+import s from "./navbar.module.scss"
 import {useNavigate} from "react-router";
 import {deleteUser, setShowProfileModal} from "../../../store/authSlice";
 import {useAppDispatch} from "../../../store";

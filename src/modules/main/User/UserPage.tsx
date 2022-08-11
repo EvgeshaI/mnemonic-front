@@ -7,7 +7,7 @@ import {
     StudyExample,
     StudyMnemonic
 } from "../../../shared/models/engWordTypes";
-import s from "./userPage.module.css"
+import s from "./userPage.module.scss"
 import {ReactComponent as Heart} from "../../../import/icons/heart.svg"
 import {ReactComponent as HeartYes} from "../../../import/icons/heart-clicked.svg"
 import {ReactComponent as Bold} from "../../../import/icons/bold1.svg"
@@ -109,9 +109,9 @@ export const UserPage: FC<UserPageContainerPropsType> = (props) => {
                 <div className={s.icons}>
                     <div className={s.likeCount}> {props.mnemonic.likes} </div>
                     <div className={s.likeIcon}> {getLikeIcon()} </div>
-                    <div className={s.boldIcon} onClick={pushBold}>{getBoldIcon()}</div>
+                    <div className={s.iconStyle} onClick={pushBold}>{getBoldIcon()}</div>
                     {!isExpired(props.mnemonic.created) && props.examples.length === 0 &&
-                        <div className={s.trash} onClick={() => setShowDeleteModal(true)}>
+                        <div className={s.iconStyle} onClick={() => setShowDeleteModal(true)}>
                             <Trash/>
                         </div>
                     }

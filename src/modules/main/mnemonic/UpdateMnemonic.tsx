@@ -1,6 +1,6 @@
 import React, {FC, useState} from "react";
 import {useAppDispatch} from "../../../store";
-import s from './mnemonic.module.css'
+import s from './mnemonic.module.scss'
 import SeparatedLetter from "./SeparatedLetter";
 import {updateMnemonicAsync} from "../../../store/mnemonicSlice";
 import {TransliterationComponent} from "./TransliterationComponent";
@@ -96,13 +96,13 @@ const UpdateMnemonic:FC<UpdateMnemonicPropsType> = (props) => {
 
             {!chooseHighlightFlag && mnemoPhrase.length > 0 &&
             <div>
-                <div onClick={onChooseHighlightFlag} className={s.updateButton}>
+                <div onClick={onChooseHighlightFlag} className={s.buttonStyle}>
                     Выбрать созвучие
                 </div>
             </div>
             }
             {highlight.length > 0 &&
-                <div onClick={updateMnemo} className={s.updateButton}>
+                <div onClick={updateMnemo} className={s.buttonStyle}>
                     Обновить
                 </div>
             }

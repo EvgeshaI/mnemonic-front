@@ -1,4 +1,4 @@
-import s from "./navbar.module.css";
+import s from "./navbar.module.scss";
 import {ReactComponent as Logo} from "../../../import/icons/logo.svg";
 import {ReactComponent as Sound} from "../../../import/icons/sound.svg";
 import {ReactComponent as User} from "../../../import/icons/user.svg";
@@ -27,15 +27,15 @@ export const NavBarDesktop:FC<NavBarDesktopPropsType> = (props) => {
             </div>
             <div className={s.nicknameAndLogout}>
                 <div className={s.Box} onClick={props.searchConsonance}>
-                    <div className={s.soundIcon}>
+                    <div className={s.navbarIcon}>
                         <Sound/>
                     </div>
                     <div>Созвучия</div>
                 </div>
                 {props.isAuth ?
                     <div onClick={() => props.invertShowDropDown()}
-                         className={s.usernameBox} id={"dropDown"}>
-                        <div className={s.userIcon}>
+                         className={s.Box} id={"dropDown"}>
+                        <div className={s.navbarIcon}>
                             <User/>
                         </div>
                         <div>{props.user!.nickname}</div>

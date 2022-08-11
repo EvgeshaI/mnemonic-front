@@ -1,0 +1,133 @@
+@import "../common.module";
+
+@mixin reset ($color) {
+    width: 300px;
+    height: 40px;
+    margin: 10px auto;
+    border-radius: 10px;
+    border: 1px solid $color;
+    outline: none;
+    background: transparent;
+    text-align: center;
+}
+@mixin textStyle ($marg, $size) {
+    margin: $marg;
+    text-align: center;
+    font-size: $size;
+}
+
+.text {
+    @include textStyle(50px auto 20px, 30px)
+}
+
+.textNewPassword {
+    @include textStyle(50px auto 20px, 20px)
+}
+.regText {
+    @include textStyle(30px auto 15px, 13px)
+}
+.googleBox{
+    display: flex;
+}
+.googleLogin {
+    margin: 15px auto;
+}
+.vkBox{
+    display: flex;
+    align-items: center;
+    border: 1px solid #dadce0;
+    width: 220px;
+    margin: auto;
+    border-radius: 4px;
+    padding: 5px;
+    cursor: pointer;
+    &:hover{
+        background-color: rgba(66,133,244,.04);
+        border: 1px solid #d2e3fc;
+    }
+}
+.vkLogo svg{
+    display: flex;
+    width: 25px;
+    margin: 0 0 0 5px;
+}
+.vkText{
+    font-size: 13px;
+    color: rgb(60, 60, 60);
+    margin: 0 0 0 7px;
+    align-items: center;
+}
+.logo {
+    justify-content: space-between;
+    padding: 0 15px;
+    width: 50px;
+}
+.loginText {
+    @include textStyle(20px auto 1px, 13px);
+    padding: 20px;
+}
+.formButtonBox {
+    display: flex;
+}
+.formButton {
+    @include form ($colorBlueThree, $lightslategray, $colorBlueTwo)
+}
+.resetForm{
+    margin: 0 auto;
+    width: 300px;
+    height: 40px;
+}
+.inputReset input {
+    @include reset ($lightslategray)
+}
+.inputResetError input {
+    @include reset ($colorRed)
+}
+.errorMessage {
+    font-size: 12px;
+    text-align: center;
+    color: $colorRed;
+}
+.buttonReset{
+    @include form ($colorBlueThree, $lightslategray, $colorBlueTwo);
+}
+
+.sendText {
+    @include textStyle(50px auto 10px, 20px);
+    width: 50%;
+    line-height: 2;
+    color: $colorBlueFive;
+}
+
+.emailText {
+    color: $lightslategray;
+}
+.icon {
+    margin: 0 auto;
+    width: 5%;
+}
+@keyframes example {
+    from {opacity: 0.1}
+    to {opacity: 1}
+}
+.icon svg {
+    @include animation;
+}
+.changeForm{
+    margin: 50px auto;
+    width: 300px;
+    height: 40px;
+}
+
+.changeButton {
+    @include form ($colorBlueTwo, $lightslategray, $colorBlueTwo);
+}
+
+@media all and (max-width: 600px) {
+    .sendText{
+        width: 90%;
+    }
+    .icon{
+        width: 15%;
+    }
+}

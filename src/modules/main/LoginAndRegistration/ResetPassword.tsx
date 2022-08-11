@@ -1,5 +1,5 @@
 import React, {FC, useState} from "react";
-import s from "./auth.module.css"
+import s from "./auth.module.scss"
 import {useAppDispatch} from "../../../store";
 import {restorePasswordAsync} from "../../../store/authSlice";
 import {useForm} from "react-hook-form";

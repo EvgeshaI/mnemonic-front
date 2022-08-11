@@ -1,5 +1,5 @@
 import React, {FC, useEffect, useRef, useState} from "react";
-import style from "./navbar.module.css";
+import style from "./navbar.module.scss";
 import {useAppDispatch, useAppSelector} from "../../../store";
 import {getEngWordSuggestAsync, setEngWordAuto} from "../../../store/engWordSlice";
 import {useNavigate} from "react-router";
@@ -16,26 +16,40 @@ export const EngWordAutosuggest: FC<{transWidth: number}> = ({transWidth}) => {
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
     const [value, setValue] = useState("")
+    const [highlightedIndex, setHighlightedIndex] = useState(-1);
     const debouncedValue = useDebounce<string>(value, 200)
     const searchWord = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.value === '') {
             clearSuggestions()
         }
         setValue(e.target.value)
+        setHighlightedIndex(-1)
     };
     const goToWord = (engWord?: string) => {
-        if (engWord) {
+        if(highlightedIndex >= 0) {
+            let word = suggestions[highlightedIndex].engWord
+            navigate(`/eng/${word}`)
+        } else if (engWord) {
             navigate(`/eng/${engWord}`)
         } else {
-            navigate(`/eng/${value.toLowerCase()}`)
+            const word = value.toLowerCase();
+            navigate(`/eng/${word}`)
         }
         setValue("")
+        setHighlightedIndex(-1)
     };
     const pressHandler = (e: React.KeyboardEvent) => {
         if (e.key === "Enter") {
             goToWord()
+        } else if (e.key === "ArrowDown") {
+            setHighlightedIndex((highlightedIndex + 1) % suggestions.length)
+        } else if (e.key === "ArrowUp") {
+            if (highlightedIndex >= 0) {
+                setHighlightedIndex((highlightedIndex - 1) % suggestions.length)
+            }
         }
     };
+
     useEffect(() => {
         onSuggestionsFetchRequested()
     }, [debouncedValue])
@@ -75,22 +89,28 @@ export const EngWordAutosuggest: FC<{transWidth: number}> = ({transWidth}) => {
     const renderSuggestion = () => {
         return (
         <>
-            {suggestions.map(suggest =>
-                    <div key={suggest.id} className={style.suggestion} onClick={() => goToWord(suggest.engWord)}>
-                        <>{boldLetters(suggest.engWord, value)}</> - <>{joinTranslations(suggest.translations)}</>
-                   </div>)
+            {suggestions.map((suggest,index) => {
+                const extraClass = highlightedIndex === index ? style.highlightSuggestion : ""
+
+                return <div
+                        key={suggest.id}
+                        className={style.suggestion + " " + extraClass}
+                        onClick={() => goToWord(suggest.engWord)}
+                    >
+                    <>{boldLetters(suggest.engWord, value)}</> - <>{joinTranslations(suggest.translations)}</>
+                </div>
+                })
             }
         </>
         )
     }
-
     const clearSuggestions = () => {
         dispatch(setEngWordAuto([]));
     }
     const inputBorderStyle = (suggestions.length > 0 && value.length > 0) ? style.inputAndIconBorderFocus : style.inputAndIconBorder;
 
     return (
-        <div className={style.inputAndIcon + ' ' + inputBorderStyle}>
+        <div className={style.inputAndIcon + ' ' + inputBorderStyle} >
             <div className={style.searchIcon}
                  onClick={() => goToWord()}>
                 <Search/>
@@ -100,7 +120,7 @@ export const EngWordAutosuggest: FC<{transWidth: number}> = ({transWidth}) => {
                    className={style.searchInput}
                    value={value}
                    onChange={searchWord}
-                   onKeyPress={pressHandler}
+                   onKeyUp={pressHandler}
             />
             {value.length > 0  && suggestions.length > 0 &&
                 <div className={style.suggestions} id={"autoSearch"} ref={ref}>

@@ -1,6 +1,6 @@
 import React, {FC, useEffect, useState} from "react";
 import {useAppDispatch} from "../../../store";
-import s from "./Example.module.css";
+import s from "./Example.module.scss";
 import {IEngWord, IExample, IMnemonic} from "../../../shared/models/engWordTypes";
 import ExampleTranslations from "./ExampleTranslations";
 import ExampleMnemonics from "./ExampleMnemonics";

@@ -1,6 +1,6 @@
 import React, {FC, useState} from "react";
 import ReactModal from "react-modal";
-import s from "./modal.module.css"
+import s from "./modal.module.scss"
 import {CloseBtn} from "../../util/CloseBtn";
 import {IUser} from "../../../shared/models/engWordTypes";
 import {useAppDispatch, useAppSelector} from "../../../store";

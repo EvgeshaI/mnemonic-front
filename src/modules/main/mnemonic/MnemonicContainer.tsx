@@ -1,7 +1,7 @@
 import React, {FC, useState} from "react";
 import {IEngWord, IMnemonic} from "../../../shared/models/engWordTypes";
 import MnemonicComponent from "./MnemonicComponent";
-import s from './mnemonic.module.css'
+import s from './mnemonic.module.scss'
 import CreateMnemonic from "./CreateMnemonic";
 import {useNavigate} from "react-router";
 import {useAppDispatch} from "../../../store";
@@ -47,7 +47,7 @@ const MnemonicContainer: FC<PropsType> = (props) => {
                     <div className={s.addMnemonicButton} onClick={clickOnCreateMnemonic}>
                         +
                     </div>
-                    <div className={s.addMnemo}>Добавить мнемонику</div>
+                    <div className={s.addTooltip}>Добавить мнемонику</div>
                 </div>
             }
         </div>

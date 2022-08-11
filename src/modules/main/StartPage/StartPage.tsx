@@ -1,5 +1,5 @@
 import React, {FC, useState} from 'react'
-import s from './startPage.module.css'
+import s from './startPage.module.scss'
 import {ReactComponent as Logo} from "../../../import/icons/logo.svg"
 import {ReactComponent as GoBack} from "../../../import/icons/go-back.svg"
 import {AnimatedTutorial} from "./AnimatedTutorial";

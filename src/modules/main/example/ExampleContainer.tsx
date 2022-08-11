@@ -1,6 +1,6 @@
 import React, {FC, useState} from "react";
 import {IEngWord, IExample, IMnemonic} from "../../../shared/models/engWordTypes";
-import s from "./Example.module.css";
+import s from "./Example.module.scss";
 import ExampleComponent from "./ExampleComponent";
 import CreateExample from "./CreateExample";
 import {useNavigate} from "react-router";
@@ -59,7 +59,7 @@ const ExampleContainer: FC<PropsType> = (props) => {
                             <div className={s.addExampleButton} onClick={clickOnAddExample}>
                                 +
                             </div>
-                            <div className={s.addExample}> Добавить пример </div>
+                            <div className={s.addTooltip}> Добавить пример </div>
                         </div>
                     }
                 </div>

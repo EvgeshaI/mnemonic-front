@@ -1,0 +1,155 @@
+@import '../common.module.scss';
+@mixin textStyle ($size, $color, $align) {
+  font-size: $size;
+  color: $color;
+  text-align: $align;
+}
+.mnemonicComponent {
+ @include componentStyle
+}
+.highlightWord {
+  text-align: left;
+  font-size: 17px;
+}
+.dateFormat {
+  @include date
+}
+.accuracy {
+  @include textStyle (15px, lightsteelblue, center);
+  padding: 0 10px 0;
+  display: flex;
+}
+.mnemo {
+  @include textItem (24px, 400);
+}
+
+.author {
+  @include textStyle (15px, $colorGreyThree, left);
+  margin: 5px 0 0;
+  font-style: normal;
+}
+.box{
+  display: flex;
+}
+
+.likeIcon {
+  @include like
+}
+
+.likeCount {
+  @include count
+}
+.iconBox {
+  @include iconsBox
+}
+
+.iconContainer{
+  @include iconsContainer
+}
+.buttonIcons {
+  @include buttonIcons
+}
+.createMnemonic {
+  @include create
+}
+.mnemonicInput {
+  @include inputStyle;
+  margin: 5px 0 10px 0;
+  width: 90%;
+  padding: 12px 5px 5px 5px;
+}
+.mnemonicInput::placeholder {
+  color: gray;
+  font-size: 14px;
+  font-style: italic;
+}
+.addMnemoBox{
+  @include addBox
+}
+
+.addTooltip{
+  @include toolTip
+}
+.loadMnemonic{
+  @include load
+}
+.addMnemonicButton {
+  @include addButton
+}
+.buttonStyle {
+  @include buttonStyle;
+}
+
+/* CREATE MNEMONIC COMPONENT END!*/
+
+/* SEPARATE LETTER COMPONENT */
+.whitespace {
+  margin: 10px;
+}
+.separatedLetter {
+  display: inline-block;
+  width: 35px;
+  height: 40px;
+  line-height: 40px;
+  margin: 5px;
+  border-radius: 5px;
+  border: 1px solid $colorGreyThree;
+  cursor: pointer;
+  text-align: center;
+}
+
+.separatedLetterActive {
+  background-color: $colorGreyTwo;
+  font-weight: bold;
+}
+
+.colorHighlight{
+  @include highlightMnemo
+}
+/* SEPARATE LETTER COMPONENT END!*/
+
+/* UPDATE MNEMONIC COMPONENT*/
+.updateMnemonic {
+  margin: 20px auto;
+  padding: 10px;
+  text-align: center;
+  border: 1px solid $colorGreyThree;
+  border-radius: 5px;
+}
+
+/* UPDATE MNEMONIC COMPONENT END!*/
+
+.transContainer {
+  width: 100%;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  li {
+    display: inline-block;
+  }
+}
+.accuracyMessage{
+  color: $colorGreyTwo;
+  font-size: 12px;
+}
+
+.transliteration{
+  @include translitText($colorGreyFour)
+}
+
+.myTransliteration{
+  @include translitText($colorGreySix);
+}
+
+
+//MOBILE
+
+@media all and (max-width: 600px) {
+  .loadMnemonic{
+    width: 30%;
+    padding: 10px;
+  }
+  .buttonStyle{
+    width: 40%;
+  }
+}

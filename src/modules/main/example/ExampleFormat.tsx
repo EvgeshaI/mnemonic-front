@@ -1,6 +1,6 @@
 import React, {FC} from "react";
 import {IPart, PartTypes} from "../../../shared/models/engWordTypes";
-import s from "./Example.module.css";
+import s from "./Example.module.scss";
 
 type ExampleFormatPropsType = {
     parts: Array<IPart>

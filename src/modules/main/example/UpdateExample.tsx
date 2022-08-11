@@ -1,7 +1,7 @@
 import React, {FC, useState} from "react";
 import {useAppDispatch} from "../../../store";
-import s from "./Example.module.css";
-import common from "../common.module.css";
+import s from "./Example.module.scss";
+import common from "../common.module.scss";
 import {IEngWord, IExample, IMnemonic} from "../../../shared/models/engWordTypes";
 import ExampleTranslations from "./ExampleTranslations";
 import ExampleMnemonics from "./ExampleMnemonics";
@@ -63,7 +63,7 @@ const UpdateExample: FC<UpdateExamplePropsType> = (props) => {
     let displayStepComponent = () => {
         if ((!props.newExample || edit) && exampleSentence.length > 0) {
             return <div>
-                <div onClick={initCheck} className={s.updateCheckButton}>Проверить</div>
+                <div onClick={initCheck} className={s.buttonStyle}>Проверить</div>
             </div>
 
         } else if (props.newExample?.translationInSentence === null) {
@@ -85,7 +85,7 @@ const UpdateExample: FC<UpdateExamplePropsType> = (props) => {
             )
         } else if (props.newExample?.translationInSentence && props.newExample?.mnemonicInSentence) {
             return <div>
-                <div  onClick={updateExample} className={s.updateCheckButton}>Сохранить</div>
+                <div  onClick={updateExample} className={s.buttonStyle}>Сохранить</div>
             </div>
         }
     };

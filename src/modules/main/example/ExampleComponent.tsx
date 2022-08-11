@@ -1,7 +1,7 @@
 import React, {FC, useState} from "react";
 import {IEngWord, IExample, IMnemonic} from "../../../shared/models/engWordTypes";
-import s from "./Example.module.css";
-import st from "../EngWord/EngWord.module.css";
+import s from "./Example.module.scss";
+import st from "../EngWord/EngWord.module.scss";
 import {useAppDispatch} from "../../../store";
 import {
     addExampleLikeAsync,
@@ -107,32 +107,32 @@ const ExampleComponent: FC<PropsType> = (props) => {
                         </div>
                     </div>
 
-                    <div className={s.exampleBottom}>
-                        <div className={st.creatorInfo}>
-                            <div className={st.author}>
+                    <div className={s.bottom}>
+                        <div>
+                            <div className={s.author}>
                                 {props.example.creator.nickname}
                             </div>
-                            <div className={st.dateFormat}>
+                            <div className={s.dateFormat}>
                                 <DateAgo date={props.example.created}/>
                             </div>
                         </div>
-                        <div className={st.buttonIcons}>
-                            <div className={st.boldIconBox} onClick={clickTextFormat}>
-                                <div className={st.iconContainer}>{getBoldIcon()}</div>
+                        <div className={s.buttonIcons}>
+                            <div className={s.iconBox} onClick={clickTextFormat}>
+                                <div className={s.iconContainer}>{getBoldIcon()}</div>
                                 {!isMobileScreen && <div className={st.prompt}>Выделить</div>}
                             </div>
 
                             {isEditable() &&
-                                <div className={st.boldIconBox} onClick={() => setShowDeleteModal(true)}>
-                                    <div className={s.deleteIcon}>
+                                <div className={s.iconBox} onClick={() => setShowDeleteModal(true)}>
+                                    <div className={s.iconContainer}>
                                         <Trash/>
                                     </div>
                                     {!isMobileScreen &&  <div>Удалить</div>}
                                 </div>
                             }
                             {isEditable() &&
-                                <div className={st.boldIconBox} onClick={editExample}>
-                                    <div className={st.iconContainer}><Pencil/></div>
+                                <div className={s.iconBox} onClick={editExample}>
+                                    <div className={s.iconContainer}><Pencil/></div>
                                     {!isMobileScreen &&  <div>Редактировать</div>}
                                 </div>
                             }

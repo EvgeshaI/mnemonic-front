@@ -154,6 +154,19 @@ export const googleLoginAsync = (token: string): AppThunk => async (dispatch: an
         dispatch(setError(message))
     }
 }
+export const vkLoginAsync = (code: string): AppThunk => async (dispatch: any) => {
+    try {
+        let response = await MnemonicClient.vkLoginSuccess(code)
+        let user = extractUser(response.accessToken)
+        dispatch(setUser(user))
+        localStorage.setItem("user", JSON.stringify(user))
+    } catch (error) {
+        // @ts-ignore
+        const message = error.data.data.message
+        dispatch(setError(message))
+    }
+}
+
 
 export const emailConfirmationAsync = (token: string): AppThunk => async (dispatch:any) => {
     try{
