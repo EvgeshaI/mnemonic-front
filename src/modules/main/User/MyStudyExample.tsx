@@ -59,9 +59,9 @@ export const MyStudyExample: FC<MyStudyExamplePropsType> = (props) => {
             <div className={s.icons}>
                 <div className={s.likeCount}> {props.exampleLikes}</div>
                 <div className={s.icon}>{getLikeIcon()}</div>
-                <div className={s.boldIcon} onClick={pushBold}>{getBoldIcon()}</div>
+                <div className={s.iconStyle} onClick={pushBold}>{getBoldIcon()}</div>
                 {!isExpired(props.created) &&
-                    <div className={s.trash}
+                    <div className={s.iconStyle}
                          onClick={showDeleteModal}><Trash/>
                     </div>
                 }

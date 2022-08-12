@@ -233,4 +233,8 @@
     .inputAndIconSearch{
         z-index: 1;
     }
+    .hasMoreBtn {
+        @include buttonStyle;
+        background-color: white;
+    }
 }
