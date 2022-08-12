@@ -19,7 +19,7 @@
 .text{
   margin: 10px auto 0;
   font-size: 25px;
-  color: #122B5A;
+  color: $colorBlueFive;
 }
 .search{
   margin: 0 auto;
@@ -33,7 +33,7 @@
   @include inputAndSearch(#A52A2A)
 }
 .searchIcon{
-  @include iconStyle(#122B5A);
+  @include iconStyle($colorGreySix);
   position: absolute;
   top: 10px;
   right: 0;
@@ -74,10 +74,10 @@
   position: absolute;
   top: 40px;
   margin: 10px auto;
-  background-color: white;
+  background-color: var(--background-color);
 }
 .instructionIcon{
-  @include iconStyle(#b3e7ff);
+  @include iconStyle($colorBlueThree);
 }
 .instructionBox:hover .instruction{
   display: block;
@@ -85,7 +85,7 @@
 .instruction{
   display: none;
   font-size: 14px;
-  color: #666666;
+  color: $colorGreySix;
   line-height: 1.5;
 }
 .contentBox{
@@ -98,7 +98,7 @@
   list-style: none;
   padding: 10px;
   margin: 5px;
-  color: #122B5A;
+  color: $colorBlueFive;
    li {
     display: inline-block;
   }

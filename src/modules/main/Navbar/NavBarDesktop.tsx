@@ -1,5 +1,6 @@
 import s from "./navbar.module.scss";
 import {ReactComponent as Logo} from "../../../import/icons/logo.svg";
+import {ReactComponent as LogoDark} from "../../../import/icons/logoForDark.svg";
 import {ReactComponent as Sound} from "../../../import/icons/sound.svg";
 import {ReactComponent as User} from "../../../import/icons/user.svg";
 import {ReactComponent as Login} from "../../../import/icons/login.svg";
@@ -14,18 +15,24 @@ type NavBarDesktopPropsType = {
     searchConsonance: () => void
     invertShowDropDown: () => void
     login: () => void
+    theme: string
+    toggleTheme: () => void
 }
 
 export const NavBarDesktop:FC<NavBarDesktopPropsType> = (props) => {
+
     return (
         <div className={s.navbar}>
             <div className={s.logo} onClick={props.startPage}>
-                <Logo/>
+                {props.theme === "theme-light" ? <Logo/> : <LogoDark/>}
             </div>
             <div className={s.search}>
                 <EngWordAutosuggest transWidth={30}/>
             </div>
             <div className={s.nicknameAndLogout}>
+                <div className={s.Box} onClick={() => {props.toggleTheme()}}>
+                    <div>тема</div>
+                </div>
                 <div className={s.Box} onClick={props.searchConsonance}>
                     <div className={s.navbarIcon}>
                         <Sound/>

@@ -6,7 +6,7 @@
     border-radius: 10px;
     border: 1px solid $color;
     outline: none;
-    background-color: white;
+    background: none;
     text-align: center;
 }
 .loginContainer {
@@ -40,4 +40,5 @@
     font-size: 11px;
     text-decoration: underline;
     cursor: pointer;
+    color: $colorBlueFive;
 }

@@ -5,7 +5,7 @@ import {ReactComponent as Question} from "../../../import/icons/question.svg";
 import {useAppDispatch, useAppSelector} from "../../../store";
 import {clearConsonance, findByRegexpAsync} from "../../../store/regexpSlice";
 import {ConsonanceContent} from "./ConsonanceContent";
-import './toggle.css'
+import './toggle.scss'
 import Toggle from "react-toggle";
 import useDebounce from "../../util/useDebounce";
 

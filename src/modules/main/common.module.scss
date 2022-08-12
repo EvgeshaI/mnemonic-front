@@ -3,7 +3,7 @@ $colorBlueOne: #e6f7ff;
 $colorBlueTwo: #cdefff;
 $colorBlueThree: #b3e7ff;
 $colorBlueFour: #9adfff;
-$colorBlueFive: #122B5A;
+$colorBlueFive: var(--font-color);
 $lightslategray: lightslategray;
 $colorGreyOne: lightgray;
 $colorGreyTwo: #cccccc;
@@ -90,7 +90,7 @@ $textShadow: -0.5px 0 black, 0 0.5px black, 0.5px 0 black, 0 -0.5px black;
   position: relative;
   width: 400px;
   margin: 0 auto 10px;
-  background: white;
+  background: none;
   border-bottom: 1px solid $color;
 }
 @mixin toolTip {

@@ -36,10 +36,18 @@ font-family: 'MyFont';
 }
 
 :root {
-    --colorOne: #e6f7ff;
-    --colorTwo: #cdefff;
-    /*--colorThree: #29b8de;*/
-    --colorThree: #b3e7ff;
-    --colorFour: #9adfff;
-    --colorFive: #122B5A;
+    --background-color-theme-light: white;
+    --font-color-theme-light: #122B5A;
+    --color-darkgray-light: #666666;
+    --shadow-theme-light: lightgray;
+
+    --background-color-theme-dark: 	#303030;
+    --font-color-theme-dark: #e6f7ff;
+    --color-darkgray-dark: #bdbdbd;
+    --shadow-theme-dark: none;
+
+    --background-color: var(--background-color-theme-light);
+    --font-color: var(--font-color-theme-light);
+    --color-darkgray: var(--color-darkgray-light);
+    --shadow: var(--shadow-theme-light);
 }

@@ -29,7 +29,7 @@
 .searchMyMnemo  {
     border: none;
     outline: none;
-    background: transparent;
+    background: none;
 }
 .searchMyMnemo{
     width: 100%;
@@ -60,6 +60,7 @@
     font-size: 25px;
     font-weight: bold;
     cursor: pointer;
+    color: $colorBlueFive;
 }
 .transcriptionsAudio{
     display: flex;
@@ -73,6 +74,7 @@
 }
 .myMnemonicBox {
     display: flex;
+    color: $colorBlueFive;
 }
 .myMnemonic {
     padding: 5px 0 5px;
@@ -110,6 +112,7 @@
 
 .myExampleBox{
     display: flex;
+    color: $colorBlueFive;
 }
 
 .myExample{
