@@ -3,6 +3,8 @@ import s from "./navBarMobile.module.scss";
 import {ReactComponent as Logo} from "../../../import/icons/logo.svg";
 import {ReactComponent as LogoDark} from "../../../import/icons/logoForDark.svg";
 import {ReactComponent as Burger} from "../../../import/icons/burger-bar.svg";
+import {ReactComponent as Moon} from "../../../import/icons/moon.svg";
+import {ReactComponent as Sun} from "../../../import/icons/sun.svg";
 import {IUser} from "../../../shared/models/engWordTypes";
 import {EngWordAutosuggest} from "./EngWordAutosuggest";
 import Toggle from "react-toggle";
@@ -34,12 +36,15 @@ export const NavBarMobile:FC<NavBarMobilePropsType> = (props) => {
                     {isDarkTheme ? <LogoDark/> : <Logo/>}
                 </div>
 
-                <div className={s.burger}  >
-                    <div className={s.theme}>
-                        <Toggle
-                            icons={false}
-                            onChange={changeTheme}/>
-                    </div>
+                <div className={s.theme}>
+                    <Toggle
+                        icons={{
+                            checked: <Sun/>,
+                            unchecked: <Moon/>,
+                        }}
+                        onChange={changeTheme}/>
+                </div>
+                <div className={s.burger}>
                    <div onClick={props.invertShowDropDown} id={"dropDown"}><Burger/></div>
                 </div>
             </div>
