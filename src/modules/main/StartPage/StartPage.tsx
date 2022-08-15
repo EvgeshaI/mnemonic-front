@@ -6,7 +6,7 @@ import {ReactComponent as GoBack} from "../../../import/icons/go-back.svg"
 import {AnimatedTutorial} from "./AnimatedTutorial";
 
 type StartPagePropsType = {
-    theme:string
+    isDarkTheme:boolean
 }
 export const StartPage: FC<StartPagePropsType> = (props) => {
     const [slide, setSlide] = useState(false)
@@ -16,12 +16,13 @@ export const StartPage: FC<StartPagePropsType> = (props) => {
     let backStartPage = () => {
         setSlide(false)
     }
+    const LogoIcon = props.isDarkTheme ? <LogoDark/> : <Logo/>
     return (
         <div className={s.startPage}>
             {!slide ?
                 <div className={s.initText}>
                     <div className={s.h}>
-                        {props.theme === "theme-light" ? <Logo/> : <LogoDark/>}
+                        {LogoIcon}
                     </div>
                     <div className={s.text}>
                         <div>Запоминать английские слова трудно, так как нашему мозгу не на что 'опереться'.</div>
@@ -34,7 +35,9 @@ export const StartPage: FC<StartPagePropsType> = (props) => {
                 </div>
                 :
                 <div className={s.carousel}>
-                    <div className={s.h}><Logo/></div>
+                    <div className={s.h}>
+                        {LogoIcon}
+                    </div>
                     <div className={s.instruction}>
                         Для эффективного запоминания мы будем использовать <b style={{textDecoration:"underline"}}>мнемотехнику</b>. Смысл ее в том, чтобы
                         придумывать русские слова, в которых есть часть, созвучная английскому слову. Такие слова или фразы

@@ -97,7 +97,8 @@ export const EngWordAutosuggest: FC<{transWidth: number}> = ({transWidth}) => {
                         className={style.suggestion + " " + extraClass}
                         onClick={() => goToWord(suggest.engWord)}
                     >
-                    <>{boldLetters(suggest.engWord, value)}</> - <>{joinTranslations(suggest.translations)}</>
+                    <div className={style.suggestEngWord}>{boldLetters(suggest.engWord, value)}</div> -
+                    <div className={style.transList}>{joinTranslations(suggest.translations)}</div>
                 </div>
                 })
             }

@@ -132,24 +132,24 @@ const MnemonicComponent: FC<PropsType> = (props) => {
                         <div className={s.buttonIcons}>
                             <div className={s.iconBox} onClick={pushBold}>
                                 <div  className={s.iconContainer}>{getBoldIcon()}</div>
-                                {!isMobileScreen && <div> Выделить </div>}
+                                {!isMobileScreen && <div className={s.buttonName}> Выделить </div>}
                             </div>
                             {!props.mnemonic.isCreator && props.auth && !props.mnemonic.myExampleExists &&
                                 <div className={s.iconBox} onClick={addMeMnemonic}>
                                     <div  className={s.iconContainer}> {addDelete()} </div>
-                                    {!isMobileScreen && <div>Избранное</div>}
+                                    {!isMobileScreen && <div className={s.buttonName}>Избранное</div>}
                                 </div>
                             }
                             {canBeEditOrDelete() &&
                                 <div className={s.iconBox} onClick={() => setShowDeleteModal(true)}>
                                     <div  className={s.iconContainer}><Trash/></div>
-                                    {!isMobileScreen && <div>Удалить</div>}
+                                    {!isMobileScreen && <div className={s.buttonName}>Удалить</div>}
                                 </div>
                             }
                             {canBeEditOrDelete() &&
                                 <div className={s.iconBox} onClick={editMnemo}>
                                     <div  className={s.iconContainer}><Pencil/></div>
-                                    {!isMobileScreen && <div>Редактировать</div>}
+                                    {!isMobileScreen && <div className={s.buttonName}>Редактировать</div>}
                                 </div>
                             }
                         </div>

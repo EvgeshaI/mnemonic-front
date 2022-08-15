@@ -4,8 +4,13 @@ body {
 }
 textarea {
     font-family: 'MyFont', 'Grill Sans', serif;
+    color: var(--font-color);
 }
 input {
+    font-family: 'MyFont', 'Grill Sans', serif;
+    color: var(--font-color);
+}
+div {
     font-family: 'MyFont', 'Grill Sans', serif;
 }
 @font-face {
@@ -38,16 +43,42 @@ font-family: 'MyFont';
 :root {
     --background-color-theme-light: white;
     --font-color-theme-light: #122B5A;
-    --color-darkgray-light: #666666;
-    --shadow-theme-light: lightgray;
+    --color-icon-theme-light: #666666;
+    --shadow-theme-light: lightsteelblue;
+    --errorColor-theme-light: #A52A2A;
+    --color-text-header-theme-light:black;
+    --border-bottom-theme-light: #b3e7ff;
+    --color-icons-hover-theme-light: #303030;
+    --nav-input-background-theme-light: none;
+    --list-background-theme-light: #e6f7ff;
+    --border-radius-theme-light: none;
+    --borderBottom-mobile-theme-light: 1px solid lightgray;
+
 
     --background-color-theme-dark: 	#303030;
     --font-color-theme-dark: #e6f7ff;
-    --color-darkgray-dark: #bdbdbd;
+    --color-icon-theme-dark: #A0A0A0;
     --shadow-theme-dark: none;
+    --errorColor-theme-dark: #d14a4a;
+    --color-text-header-theme-dark:white;
+    --border-bottom-theme-dark: gray;
+    --color-icons-hover-theme-dark: #cccccc;
+    --nav-input-background-theme-dark: #484848;
+    --list-background-theme-dark: #505050;
+    --border-radius-theme-dark: 10px;
+    --borderBottom-mobile-theme-dark: none;
+
 
     --background-color: var(--background-color-theme-light);
     --font-color: var(--font-color-theme-light);
-    --color-darkgray: var(--color-darkgray-light);
+    --color-icon: var(--color-icon-theme-light);
     --shadow: var(--shadow-theme-light);
+    --errorColor: var(--errorColor-theme-light);
+    --color-text-header: var(--color-text-header-theme-light);
+    --border-bottom: var(--border-bottom-theme-light);
+    --color-icons-hover: var(--color-icons-hover-theme-light);
+    --nav-input-background: var(--nav-input-background-theme-light);
+    --list-background: var(--list-background-theme-light);
+    --border-radius: var(--border-radius-theme-light);
+    --borderBottom-mobile: var(--borderBottom-mobile-theme-light);
 }

@@ -9,8 +9,8 @@ import {NavBarMobile} from "./NavBarMobile";
 import {NavBarDesktop} from "./NavBarDesktop";
 
 type NavbarPropsType ={
-    theme: string,
-    toggleTheme: () => void
+    // theme: string,
+    // toggleTheme: () => void
 }
 
 export const Navbar: FC<NavbarPropsType>= (props) => {
@@ -46,6 +46,8 @@ export const Navbar: FC<NavbarPropsType>= (props) => {
     <>
         {isMobileScreen ?
             <NavBarMobile
+                // toggleTheme={props.toggleTheme}
+                // theme={props.theme}
                 isAuth={isAuth}
                 user={user}
                 startPage={startPage}
@@ -54,8 +56,8 @@ export const Navbar: FC<NavbarPropsType>= (props) => {
             />
             :
             <NavBarDesktop
-                theme={props.theme}
-                toggleTheme={props.toggleTheme}
+                // theme={props.theme}
+                // toggleTheme={props.toggleTheme}
                 isAuth={isAuth}
                 user={user}
                 startPage={startPage}

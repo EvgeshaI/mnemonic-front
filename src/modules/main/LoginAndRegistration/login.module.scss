@@ -8,6 +8,9 @@
     outline: none;
     background: none;
     text-align: center;
+    &::placeholder{
+        color: $colorFont;
+    }
 }
 .loginContainer {
     display: flex;
@@ -27,7 +30,7 @@
     display: flex;
 }
 .formButton {
-    @include form ($colorBlueTwo, $lightslategray, $colorBlueOne)
+    @include form ($colorBackgroundButton1, $colorHover)
 }
 
 .errorMessage {
@@ -40,5 +43,5 @@
     font-size: 11px;
     text-decoration: underline;
     cursor: pointer;
-    color: $colorBlueFive;
+    color: $colorFont;
 }

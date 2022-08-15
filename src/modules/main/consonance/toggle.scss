@@ -1,14 +1,12 @@
 @import "../common.module";
 .react-toggle {
     touch-action: pan-x;
-
     display: inline-block;
     position: relative;
     cursor: pointer;
     background-color: transparent;
     border: 0;
     padding: 0;
-
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     -khtml-user-select: none;
@@ -32,7 +30,7 @@
 
 .react-toggle--disabled {
     cursor: not-allowed;
-    opacity: 0.5;
+    //opacity: 0.5;
     -webkit-transition: opacity 0.25s;
     transition: opacity 0.25s;
 }
@@ -43,21 +41,23 @@
     padding: 0;
     border-radius: 15px;
     background-color: #bdbdbd;
+    //opacity: 0.5;
     -webkit-transition: all 0.2s ease;
     -moz-transition: all 0.2s ease;
     transition: all 0.2s ease;
 }
 
 .react-toggle:hover:not(.react-toggle--disabled) .react-toggle-track {
-    background-color: $colorBlueTwo;
+    //background-color: $colorBackgroundButton1;
 }
 
 .react-toggle--checked .react-toggle-track {
-    background-color: $colorBlueThree;
+    background-color: lightsteelblue;
+    //opacity: 0.8;
 }
 
 .react-toggle--checked:hover:not(.react-toggle--disabled) .react-toggle-track {
-    background-color: $colorBlueTwo;
+    //background-color: $colorBackgroundButton1;
 }
 
 .react-toggle-track-check {
@@ -93,7 +93,6 @@
     margin-bottom: auto;
     line-height: 0;
     right: 10px;
-    opacity: 1;
     -webkit-transition: opacity 0.25s ease;
     -moz-transition: opacity 0.25s ease;
     transition: opacity 0.25s ease;
@@ -110,7 +109,7 @@
     left: 1px;
     width: 15px;
     height: 15px;
-    border: 1px solid $colorBlueThree;
+    border: 1px solid $colorBackgroundButton2;
     border-radius: 50%;
     background-color: #FAFAFA;
 
@@ -120,22 +119,9 @@
 
     -webkit-transition: all 0.25s ease;
     -moz-transition: all 0.25s ease;
-    transition: all 0.25s ease;
 }
 
 .react-toggle--checked .react-toggle-thumb {
     left: 20px;
-    border-color: $colorBlueThree;
+    border-color: $colorBackgroundButton2;
 }
-
-/*.react-toggle--focus .react-toggle-thumb {*/
-/*    box-shadow: 0px 0px 2px 1px #0099E0;*/
-/*    !*-moz-box-shadow: 0px 0px 2px 2px #0099E0;*!*/
-
-/*}*/
-
-/*.react-toggle:active:not(.react-toggle--disabled) .react-toggle-thumb {*/
-/*    -webkit-box-shadow: 0px 0px 5px 5px #0099E0;*/
-/*    -moz-box-shadow: 0px 0px 5px 5px #0099E0;*/
-/*    !*box-shadow: 0px 0px 5px 5px #0099E0;*!*/
-/*}*/

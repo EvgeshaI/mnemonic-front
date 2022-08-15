@@ -47,9 +47,11 @@ export const ResetPassword: FC = () => {
                                     <div className={s.errorMessage}>поле обязательно для заполнения</div>
                                 )}
                             </div>
+                            <div className={s.buttonResetBox}>
                             <button type="submit" className = {s.buttonReset}>
                                 Восстановить пароль
                             </button>
+                            </div>
                         </form>
                     </div>
                 </div>

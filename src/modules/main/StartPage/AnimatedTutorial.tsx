@@ -71,7 +71,6 @@ export const AnimatedTutorial = () => {
                     <AnimationOnScroll animateIn="animate__backInUp" animateOnce={true}>
                         <div className={s.slideText}>
                             Для лучшего запоминания, придумайте пример, который будет содержать и мнемонику и перевод<br/><br/>
-
                         </div>
                     </AnimationOnScroll>
                 </div>

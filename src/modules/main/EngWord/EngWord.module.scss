@@ -17,6 +17,7 @@
 
 .engWord {
   @include textStyle (30px, black, left);
+  color: $colorTextHeader;
   padding: 10px 10px 0 10px;
   font-weight: bold;
 }
@@ -24,6 +25,7 @@
 .word {
   font-style: oblique;
   font-size: 16px;
+  color: $colorTextHeader;
 }
 .transcriptionsBox{
   display: flex;
@@ -39,19 +41,19 @@
 .location{
   font-size: 12px;
   margin: 0 2px 0 0;
-  color: $colorGreyThree;
+  color: $colorDimText2;
 }
 .transcriptionWord {
-  color: $colorGreyFour;
+  color: $colorDimText2;
 }
 .iconAudio svg {
   width: 15px;
-  fill: $colorGreyFour;
+  fill: $colorIconDim;
   cursor: pointer;
   margin: 0 5px 0;
 }
 .iconAudio svg:hover {
-  fill: $colorGreySix;
+  fill: $colorIconHoverDim;
 }
 .exampleNone {
   color: grey;
@@ -64,21 +66,22 @@
 .translate {
   padding: 0 0 10px 0;
   margin: 0 0 10px 0;
-  border-bottom: 1px solid $colorBlueThree;
+  border-bottom: 1px solid $colorBorderBottom;
 }
 .translateWord {
   margin: 0 0 15px 15px;
   font-size: 18px;
   font-style: italic;
+  color: $colorFont;
 }
 .transIcon svg{
   width: 15px;
   margin: 0 10px;
   cursor: pointer;
-  fill: $colorBlueFive;
+  fill: $colorIconAndPlaceholder;
 }
 .transIcon svg:hover{
-  fill: $colorBlueTwo;
+  fill: $colorIconHover;
 }
 
 

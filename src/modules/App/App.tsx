@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect} from "react";
 import {Route, Routes} from "react-router-dom"
 import EngWord from "../main/EngWord/EngWord";
 import Alerts from "../main/Alert/Alerts";
@@ -16,27 +16,16 @@ import {Footer} from "../main/Footer/Footer";
 import s from "./app.module.scss"
 import {Privacy} from "../main/privacy/Privacy";
 import {Consonance} from "../main/consonance/Consonance";
+import useAppTheme from "../util/useAppTheme";
 
 const App: React.FC<any> = () => {
     const {
+        isDarkTheme,
         initialized
     } = useAppSelector((state) => state.appReducer);
     const dispatch =  useAppDispatch();
     useEffect(() => dispatch(initializedAppAsync()), [])
-    const [theme, setTheme] = useState("theme-light")
-    const toggleTheme = () => {
-        setTheme(theme === "theme-light" ? "theme-dark" : "theme-light")
-    }
-    useEffect(() => {
-        const backgroundColor = `var(--background-color-${theme})`
-        const fontColor = `var(--font-color-${theme})`
-        const darkGray = `var(--color-darkgray-${theme})`
-        const shadowColor = `var(--shadow-${theme})`
-        document.body.style.setProperty('--background-color', backgroundColor)
-        document.body.style.setProperty('--font-color', fontColor)
-        document.body.style.setProperty('--color-darkgray', darkGray)
-        document.body.style.setProperty('--shadow', shadowColor)
-    }, [theme])
+    useAppTheme(isDarkTheme)
     if (!initialized) {
         return <div>
             <Preloader/>
@@ -45,11 +34,11 @@ const App: React.FC<any> = () => {
     return (
     <div>
         <div className={s.content}>
-            <Navbar theme={theme} toggleTheme={toggleTheme}/>
+            <Navbar/>
             <Routes>
                 <Route path = "/eng/:word" element={<EngWord/>}/>
                 <Route path = "/login" element={<LoginAndRegistration/>}/>
-                <Route path = "/" element={<StartPage theme={theme}/>}/>
+                <Route path = "/" element={<StartPage isDarkTheme={isDarkTheme}/>}/>
                 <Route path = "/user" element={<UserPageContainer/>}/>
                 <Route path = "/reset" element={<ResetPassword/>}/>
                 <Route path = "/changePassword" element={<ChangePassword/>}/>

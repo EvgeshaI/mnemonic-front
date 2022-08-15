@@ -1,5 +1,5 @@
 import React from "react";
-import s from './Alerts.module.css';
+import s from './Alerts.module.scss';
 import {useAppDispatch, useAppSelector} from "../../../store";
 import {removeAlert} from "../../../store/alertsSlise";
 import {CloseBtn} from "../../util/CloseBtn";

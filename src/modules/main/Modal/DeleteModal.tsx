@@ -21,7 +21,7 @@ const customStyles = {
         width: "400px",
         height: "120px",
         borderRadius: "15px",
-        backgroundColor: "#e6f7ff",
+        backgroundColor: "#f5f5f5",
     }
 }
 const customStylesMobile = {
@@ -32,7 +32,7 @@ const customStylesMobile = {
     width: "300px",
     height: "120px",
     borderRadius: "15px",
-    backgroundColor: "#e6f7ff",
+    backgroundColor: "#f5f5f5",
 }
 
 export const DeleteModal: FC<DeleteModalPropsType> = (props) => {

@@ -9,12 +9,15 @@
     outline: none;
     background: transparent;
     text-align: center;
+        &::placeholder{
+            color: $colorFont;
+        }
 }
 @mixin textStyle ($marg, $size) {
     margin: $marg;
     text-align: center;
     font-size: $size;
-    color: $colorBlueFive;
+    color: $colorFont;
 }
 
 .text {
@@ -42,6 +45,7 @@
     border-radius: 4px;
     padding: 5px;
     cursor: pointer;
+    background:none;
     &:hover{
         background-color: rgba(66,133,244,.04);
         border: 1px solid #d2e3fc;
@@ -54,7 +58,7 @@
 }
 .vkText{
     font-size: 13px;
-    color: var(--color-darkgray);
+    color: $colorFont;
     margin: 0 0 0 7px;
     align-items: center;
 }
@@ -71,7 +75,7 @@
     display: flex;
 }
 .formButton {
-    @include form ($colorBlueThree, $lightslategray, $colorBlueTwo)
+    @include form ($colorBackgroundButton2, $colorBackgroundButton1)
 }
 .resetForm{
     margin: 0 auto;
@@ -79,7 +83,7 @@
     height: 40px;
 }
 .inputReset input {
-    @include reset ($lightslategray)
+    @include reset ($colorBorderBright)
 }
 .inputResetError input {
     @include reset ($colorRed)
@@ -89,19 +93,23 @@
     text-align: center;
     color: $colorRed;
 }
+.buttonResetBox{
+    display: flex;
+    margin:  0 auto;
+}
 .buttonReset{
-    @include form ($colorBlueThree, $lightslategray, $colorBlueTwo);
+    @include form ($colorBackgroundButton2, $colorBackgroundButton1);
 }
 
 .sendText {
     @include textStyle(50px auto 10px, 20px);
     width: 50%;
     line-height: 2;
-    color: $colorBlueFive;
+    color: $colorFont;
 }
 
 .emailText {
-    color: $lightslategray;
+    color: $colorHighlightText;
 }
 .icon {
     margin: 0 auto;
@@ -121,7 +129,7 @@
 }
 
 .changeButton {
-    @include form ($colorBlueTwo, $lightslategray, $colorBlueTwo);
+    @include form ($colorBackgroundButton1, $colorBackgroundButton1);
 }
 
 @media all and (max-width: 600px) {

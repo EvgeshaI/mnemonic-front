@@ -1,13 +1,14 @@
 @import "../common.module";
 
 @mixin styles {
-    border: 1px solid $colorGreyOne;
+    border: 1px solid $colorBorderDim;
+    background: none;
     border-radius: 10px;
     width: 70%;
     padding: 10px;
     margin: 5px auto;
     font-size: 15px;
-    color: $colorBlueFive;
+    color: $colorFont;
 }
 .closeButtonBox {
     display: flex;
@@ -16,7 +17,7 @@
     height: 12px;
 }
 .closeButtonBox svg:hover {
-    fill: $colorGreyOne;
+    fill: $colorBorderDim;
     cursor: pointer;
 }
 
@@ -32,7 +33,7 @@
     width: 30%;
     margin: 5px auto;
     padding: 5px 1px;
-    box-shadow: 1px 1px 4px $colorGreyFive;
+    border: 1px solid $colorBorderDim;
     background-color: white;
     border-radius: 10px;
     cursor: pointer;
@@ -40,10 +41,11 @@
 .nickNameModalBox{
     padding: 5px;
     font-size: 15px;
+    background-color: var(--background-color);
 }
 .profileModalText{
     font-size: 20px;
-    color: $colorBlueFive;
+    color: $colorFont;
     text-align: center;
 }
 
@@ -51,6 +53,7 @@
     text-align: center;
     margin: 30px 0 10px 0;
     font-size: 13px;
+    color: $colorFont;
 }
 .email{
    @include styles
@@ -59,6 +62,7 @@
     text-align: center;
     margin: 10px 0 10px 0;
     font-size: 13px;
+    color: $colorFont;
 }
 
 .inputProfileModal{
@@ -76,11 +80,11 @@
     margin: 20px auto;
     padding: 10px;
     border-radius: 10px;
-    background-color: $colorBlueThree;
+    background-color: $colorBackgroundButton2;
     width: 50%;
     text-align: center;
     cursor: pointer;
 }
 .buttonProfileModal:hover{
-    background-color: $colorBlueTwo;
+    background-color: $colorBackgroundButton1;
 }

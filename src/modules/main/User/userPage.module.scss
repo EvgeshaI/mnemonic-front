@@ -8,13 +8,13 @@
 .text {
     margin: 10px auto 0;
     font-size: 25px;
-    color: $colorBlueFive
+    color: $colorFont
 }
 .message{
     margin: 10px;
     font-size: 20px;
     text-align: center;
-    color: $colorBlueFive;
+    color: $colorFont;
 }
 .search {
     width: 80%;
@@ -22,7 +22,7 @@
     margin: 0 auto;
 }
 .inputAndIconSearch {
-    @include inputAndSearch($colorGreyOne)
+    @include inputAndSearch($colorBorderDim)
 }
 
 .searchIcon,
@@ -35,6 +35,9 @@
     width: 100%;
     height: 42px;
 }
+.searchMyMnemo::placeholder {
+    color: $colorIconAndPlaceholder;
+}
 .searchIcon {
     width: 20px;
     position: absolute;
@@ -42,14 +45,14 @@
     right: 0;
     cursor: pointer;
     margin: 5px 5px 0;
-    fill: $colorGreySix;
+    fill: $colorIconAndPlaceholder;
 }
 
 .userContainer {
     padding: 10px;
     width: 45%;
     margin: 30px auto;
-    border-bottom: 1px solid $colorBlueThree;
+    border-bottom: 1px solid $colorBorderBottom;
 }
 .engWordBox{
     display: flex;
@@ -60,7 +63,7 @@
     font-size: 25px;
     font-weight: bold;
     cursor: pointer;
-    color: $colorBlueFive;
+    color: $colorFont;
 }
 .transcriptionsAudio{
     display: flex;
@@ -69,12 +72,12 @@
 .translations {
     display: flex;
     font-size: 15px;
-    color: darkgrey;
+    color: $colorIconAndPlaceholder;
     padding: 0 0 5px;
 }
 .myMnemonicBox {
     display: flex;
-    color: $colorBlueFive;
+    color: $colorFont;
 }
 .myMnemonic {
     padding: 5px 0 5px;
@@ -86,9 +89,9 @@
     svg {
         padding: 0 4px;
         width: 17px;
-        fill: $colorGreySix;
+        fill: $colorIconAndPlaceholder;
         &:hover{
-            fill: $color-default;
+            fill: $colorIconHover;
         }
     }
 }
@@ -100,19 +103,19 @@
     font-size: 14px;
 }
 .likeIcon svg {
-    fill: $colorGreySix;
+    fill: $colorIconAndPlaceholder;
 }
 .likeIcon svg g path {
-    fill: $colorGreySix;
+    fill: $colorIconAndPlaceholder;
 }
 .iconStyle {
     cursor: pointer;
-    fill: $colorGreySix;
+    fill: $colorIconAndPlaceholder;
 }
 
 .myExampleBox{
     display: flex;
-    color: $colorBlueFive;
+    color: $colorFont;
 }
 
 .myExample{
@@ -128,7 +131,8 @@
     border: none;
     outline: none;
     box-sizing: border-box;
-    color: $color-default;
+    border-radius: 10px;
+    background-color: $inputBackground;
     border-bottom: 1px solid darkgrey;
     font-size: 20px;
     text-align: center;
@@ -153,6 +157,7 @@
     display: none;
     position: absolute;
     text-align: center;
+    color: $colorFont;
     top: 3px;
     margin: auto;
     font-size: 12px;
@@ -168,9 +173,9 @@
     cursor: pointer;
     margin: 0 0 0 15px;
     svg {
-        fill: $colorGreySix;
+        fill: $colorIconAndPlaceholder;
         &:hover {
-            fill: black;
+            fill: $colorIconHover;;
         }
     }
 }
@@ -195,7 +200,7 @@
     margin: 10px 0 5px 0;
     font-size: 14px;
     font-style: italic;
-    color: $colorGreyThree;
+    color: $colorDimText2;
 }
 .translationSelect {
     width: 100%;

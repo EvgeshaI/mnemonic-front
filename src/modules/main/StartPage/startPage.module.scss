@@ -10,14 +10,14 @@
     margin: $marg;
 }
 @mixin textSlide {
-    color: $colorBlueFive;
+    color: $colorFont;
     text-align: center;
     font-size: 17px;
 }
 @mixin slideImage ($width) {
     width: $width;
     img {
-        box-shadow: 1px 1px 5px 3px var(--shadow);
+        box-shadow: 0.5px 0.5px 3px 1px var(--shadow);
     }
 }
 .startPage {
@@ -33,7 +33,7 @@
 }
 
 .instruction{
-    color: $colorBlueFive;
+    color: $colorFont;
     line-height: 2;
     text-align: justify;
     margin: 20px;
@@ -44,16 +44,16 @@
     line-height: 2;
     text-align: center;
     text-align-last: center ;
-    color: $colorBlueFive;
+    color: $colorFont;
     font-size: 18px;
 }
 .buttonBack{
     width: 50px;
-    fill: $colorBlueThree;
+    fill: $colorBackgroundButton2;
     margin: 0 auto;
     cursor: pointer;
     &:hover{
-        fill: $colorBlueTwo;
+        fill: $colorBackgroundButton1;
     }
 }
 
@@ -112,7 +112,7 @@
 }
 
 .colorHighlight{
-    color: $colorBlueFour;
+    color: $colorHighlightMnemo;
     font-weight: bold;
     text-shadow: $textShadow;
 }

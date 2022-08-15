@@ -1,7 +1,6 @@
 import React, {FC, useState} from "react";
 import {IEngWord, IExample, IMnemonic} from "../../../shared/models/engWordTypes";
 import s from "./Example.module.scss";
-import st from "../EngWord/EngWord.module.scss";
 import {useAppDispatch} from "../../../store";
 import {
     addExampleLikeAsync,
@@ -119,7 +118,7 @@ const ExampleComponent: FC<PropsType> = (props) => {
                         <div className={s.buttonIcons}>
                             <div className={s.iconBox} onClick={clickTextFormat}>
                                 <div className={s.iconContainer}>{getBoldIcon()}</div>
-                                {!isMobileScreen && <div className={st.prompt}>Выделить</div>}
+                                {!isMobileScreen && <div className={s.buttonName}>Выделить</div>}
                             </div>
 
                             {isEditable() &&
@@ -127,13 +126,13 @@ const ExampleComponent: FC<PropsType> = (props) => {
                                     <div className={s.iconContainer}>
                                         <Trash/>
                                     </div>
-                                    {!isMobileScreen &&  <div>Удалить</div>}
+                                    {!isMobileScreen &&  <div className={s.buttonName}>Удалить</div>}
                                 </div>
                             }
                             {isEditable() &&
                                 <div className={s.iconBox} onClick={editExample}>
                                     <div className={s.iconContainer}><Pencil/></div>
-                                    {!isMobileScreen &&  <div>Редактировать</div>}
+                                    {!isMobileScreen &&  <div className={s.buttonName}>Редактировать</div>}
                                 </div>
                             }
                         </div>
