@@ -1,24 +1,38 @@
 $color-default: black;
-$colorBlueOne: #e6f7ff;
-$colorBlueTwo: #cdefff;
-$colorBlueThree: #b3e7ff;
-$colorBlueFour: #9adfff;
-$colorBlueFive: #122B5A;
-$lightslategray: lightslategray;
-$colorGreyOne: lightgray;
-$colorGreyTwo: #cccccc;
-$colorGreyThree: #bdbdbd;
-$colorGreyFour: #A0A0A0;
-$colorGreyFive: gray;
-$colorGreySix: #666666;
-$cornflowerblue: cornflowerblue;
-$colorRed: #A52A2A;
-$textShadow: -0.5px 0 black, 0 0.5px black, 0.5px 0 black, 0 -0.5px black;
+$colorHover: #e6f7ff;
+$colorBackgroundButton1: #cdefff;
+$colorBackgroundButton2: #b3e7ff;
+$colorBackgroundModal: #f5f5f5;
+$colorHighlightText: #606060;
+$colorHighlightTranslation: #48CAE4;
+$colorDimText: #cccccc;
+$colorDimText2: #bdbdbd;
+$colorDimText3: #A0A0A0;
+$colorDimText4: #606060;
+$colorBorderBright: lightslategray;
+$colorIconDim: #A0A0A0;
+$colorIconHoverDim: #cccccc;
+$shadow: var(--shadow);
+$shadowImg: var(--shadowImg);
+$addButton: var(--add-button);
+$colorBorderButtons: var(--border-buttons);
+$colorBorderBottom: var(--border-bottom);
+$borderRadius: var(--border-radius);
+$colorTextHeader: var(--color-text-header);
+$colorFont: var(--font-color);
+$borderMobile: var(--borderBottom-mobile);
+$colorHighlightMnemo: var(--highlight-mnemo);
+$colorIconAndPlaceholder: var(--color-icon);
+$colorIconHover: var(--color-icons-hover);
+$inputBackground: var(--nav-input-background);
+$listBackground: var(--list-background);
+$colorRed: var(--errorColor);
+$textShadow: none;
 
 
 @mixin componentStyle {
   padding: 10px 25px 15px 25px;
-  border-bottom: 1px solid $colorBlueThree;
+  border-bottom: 1px solid $colorBorderBottom;
   margin: 10px 0;
 }
 @mixin buttonStyle {
@@ -29,23 +43,23 @@ $textShadow: -0.5px 0 black, 0 0.5px black, 0.5px 0 black, 0 -0.5px black;
   border-radius: 10px;
   padding: 10px 5px;
   color: $color-default;
-  background-color: $colorBlueThree;
-  border: 0;
-  box-shadow: 1px 1px 2px $lightslategray;
+  background-color: $colorBackgroundButton2;
+  border: none;
   cursor: pointer;
     &:hover {
-      background-color: $colorBlueTwo
+      background-color: $colorBackgroundButton1
   }
 }
 @mixin addButton {
   margin: 10px 0 0 20px;
   cursor: pointer;
   font-size: 20px;
-  background-color: $colorBlueThree;
+  color: #122B5A;
+  background-color: $addButton;
   padding: 5px 11px;
   border-radius: 50%;
     &:hover{
-      background-color: $colorBlueTwo;
+      background-color: $colorBackgroundButton1;
     }
   &:hover ~ .addTooltip{
     display: block;
@@ -53,30 +67,33 @@ $textShadow: -0.5px 0 black, 0 0.5px black, 0.5px 0 black, 0 -0.5px black;
 }
 @mixin load {
   margin: 0 auto 10px;
-  box-shadow: 0.5px 0.5px 2px 1px $lightslategray;
+  //border: 1px solid $colorBorderDim;
   padding: 5px;
   font-size: 13px;
+  color: #122B5A;
   text-align: center;
   width: 20%;
   border-radius: 10px;
   cursor: pointer;
+  background-color: $colorBackgroundButton1;
     &:hover {
-      background-color: $colorBlueTwo;
+      background-color: $colorBackgroundButton2;
     }
 }
 @mixin create {
   margin: 20px auto;
   padding: 10px;
   text-align: center;
-  border: 1px solid $colorGreyThree;
+  border: 1px solid $colorDimText2;
   border-radius: 5px;
 }
 
 @mixin inputStyle {
   text-align: center;
   border: none;
-  color: black;
   outline: none;
+  background-color: $inputBackground;
+  border-radius: $borderRadius;
   box-sizing: border-box;
   font-size: 24px;
   border-bottom: 1px solid darkgrey;
@@ -90,7 +107,7 @@ $textShadow: -0.5px 0 black, 0 0.5px black, 0.5px 0 black, 0 -0.5px black;
   position: relative;
   width: 400px;
   margin: 0 auto 10px;
-  background: white;
+  background: none;
   border-bottom: 1px solid $color;
 }
 @mixin toolTip {
@@ -103,6 +120,7 @@ $textShadow: -0.5px 0 black, 0 0.5px black, 0.5px 0 black, 0 -0.5px black;
   left: 60px;
   opacity: 0.6;
   top: 15px;
+  color: $colorIconAndPlaceholder;
 }
 
 @mixin items {
@@ -111,14 +129,16 @@ $textShadow: -0.5px 0 black, 0 0.5px black, 0.5px 0 black, 0 -0.5px black;
   padding: 5px 10px;
   border: 1px solid gray;
   border-radius: 15px;
+  color: $colorFont;
     &:hover{
-      background-color: $colorBlueOne;
+      background-color: $listBackground;
     }
 }
 @mixin textItem ($size, $weight) {
   font-size: $size;
   text-align: left;
   font-weight: $weight;
+  color: $colorFont;
 }
 @mixin translitText ($color) {
   margin: 5px;
@@ -128,12 +148,12 @@ $textShadow: -0.5px 0 black, 0 0.5px black, 0.5px 0 black, 0 -0.5px black;
 
 @mixin highlightMnemo {
   font-weight: bold;
-  color: $colorBlueFour;
+  color: $colorHighlightMnemo;
   text-shadow: $textShadow
 }
 @mixin date {
     font-size: 13px;
-    color: $colorGreyThree;
+    color: $colorDimText2;
     text-align: center;
     display: flex;
     margin-left: auto;
@@ -151,15 +171,15 @@ $textShadow: -0.5px 0 black, 0 0.5px black, 0.5px 0 black, 0 -0.5px black;
 @mixin iconsBox {
   display: flex;
   padding: 5px;
-  border: 1px solid $colorGreyOne;
+  border: 1px solid $colorBorderButtons;
   margin: 10px 0 0 5px;
   border-radius: 10px;
   align-items: center;
   svg {
-    fill: $colorGreySix;
+    fill: $colorIconAndPlaceholder;
   }
     &:hover svg {
-      fill: $color-default
+      fill: $colorIconHover
     }
 }
 
@@ -178,6 +198,9 @@ $textShadow: -0.5px 0 black, 0 0.5px black, 0.5px 0 black, 0 -0.5px black;
   display: flex;
   align-items: center;
 }
+@mixin name {
+  color: $colorTextHeader;
+}
 @mixin like {
   display: flex;
   cursor: pointer;
@@ -187,27 +210,29 @@ $textShadow: -0.5px 0 black, 0 0.5px black, 0.5px 0 black, 0 -0.5px black;
   align-items: flex-start;
   svg {
     width: 20px;
+    fill: $colorIconAndPlaceholder
   }
 }
 @mixin count {
   font-size: 16px;
   padding: 0 4px;
+  color: $colorTextHeader;
 }
 
-@mixin form ($color1, $color2, $color3) {
+@mixin form ($color1, $color2) {
   text-align: center;
-  width: 300px;
+  width: 200px;
   margin: 15px auto;
   font-size: 15px;
   border-radius: 10px;
-  padding: 12px;
-  color: $color-default;
+  padding: 10px;
   background-color: $color1;
   border: 0;
-  box-shadow: 1px 1px 2px $color2;
+  color: #122B5A;
+  box-shadow: 1px 1px 2px lightslategrey;
   cursor: pointer;
     &:hover{
-      background-color: $color3;
+      background-color: $color2;
     }
 }
 
@@ -228,7 +253,7 @@ $textShadow: -0.5px 0 black, 0 0.5px black, 0.5px 0 black, 0 -0.5px black;
   height: 15px;
 }
 .closeButtonBox svg {
-  fill: $colorGreySix;
+  fill: $colorIconAndPlaceholder;
 }
 .closeButtonBox svg:hover {
   fill: $color-default;

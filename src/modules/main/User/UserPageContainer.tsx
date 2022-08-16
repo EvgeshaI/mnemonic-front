@@ -6,6 +6,7 @@ import {UserPage} from "./UserPage";
 import {ReactComponent as Search} from "../../../import/icons/search.svg"
 import useDebounce from "../../util/useDebounce";
 import {Preloader} from "../Preloader/Preloader";
+import {Statistics} from "./Statistics";
 
 export const UserPageContainer = () => {
     const {
@@ -50,7 +51,7 @@ export const UserPageContainer = () => {
                     Мои мнемоники
                 </div>
             </div>
-            {/*<Statistics/>*/}
+            <Statistics/>
             {studies.length === 0 && debouncedValue === "" && !isFetching &&
                 <div className={s.message}> У вас пока не добавлено ни одной мнемоники</div>
             }

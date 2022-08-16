@@ -1,15 +1,17 @@
+@import "../common.module";
 .alert {
     margin: 0 auto;
     width: 40%;
     position: sticky;
     bottom: 10px;
-    background: var(--colorOne);
+    background: #cdefff;
     border-radius: 15px;
     padding: 7px;
 }
 .alertMessage {
     font-weight: 500;
     padding: 0 30px 20px 30px;
+    color: #122B5A;
 }
 
 @media all and (max-width: 600px) {

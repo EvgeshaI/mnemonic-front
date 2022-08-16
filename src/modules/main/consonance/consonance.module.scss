@@ -19,7 +19,7 @@
 .text{
   margin: 10px auto 0;
   font-size: 25px;
-  color: #122B5A;
+  color: $colorFont;
 }
 .search{
   margin: 0 auto;
@@ -30,10 +30,10 @@
   @include inputAndSearch(#A0A0A0)
 }
 .inputAndIconSearchError{
-  @include inputAndSearch(#A52A2A)
+  @include inputAndSearch($colorRed)
 }
 .searchIcon{
-  @include iconStyle(#122B5A);
+  @include iconStyle($colorIconAndPlaceholder);
   position: absolute;
   top: 10px;
   right: 0;
@@ -49,11 +49,14 @@
   width: 100%;
   height: 42px;
 }
+.searchRegexp::placeholder {
+  color: $colorDimText3;
+}
 .errorText{
   position: absolute;
   left: 50px;
   bottom: 35px;
-  color: #A52A2A;
+  color: $colorRed;
   font-size: 12px;
 }
 .toggle{
@@ -66,7 +69,7 @@
 }
 .toggleText{
   font-size: 10px;
-  color: #A0A0A0;
+  color: $colorIconAndPlaceholder;
   margin: 0 5px;
   vertical-align: center;
 }
@@ -74,10 +77,10 @@
   position: absolute;
   top: 40px;
   margin: 10px auto;
-  background-color: white;
+  background-color: var(--background-color);
 }
 .instructionIcon{
-  @include iconStyle(#b3e7ff);
+  @include iconStyle($colorBackgroundButton2);
 }
 .instructionBox:hover .instruction{
   display: block;
@@ -85,7 +88,7 @@
 .instruction{
   display: none;
   font-size: 14px;
-  color: #666666;
+  color: $colorIconAndPlaceholder;
   line-height: 1.5;
 }
 .contentBox{
@@ -98,7 +101,7 @@
   list-style: none;
   padding: 10px;
   margin: 5px;
-  color: #122B5A;
+  color: $colorFont;
    li {
     display: inline-block;
   }
@@ -110,7 +113,7 @@
 .letterStyle{
   padding-left: 50px;
   font-size: 15px;
-  color: #A0A0A0;
+  color: $colorIconAndPlaceholder;
 }
 
 

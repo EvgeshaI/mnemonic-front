@@ -10,9 +10,11 @@
 .highlightWord {
   text-align: left;
   font-size: 17px;
+  color: $colorTextHeader;
 }
 .dateFormat {
-  @include date
+  @include date;
+
 }
 .accuracy {
   @include textStyle (15px, lightsteelblue, center);
@@ -24,7 +26,7 @@
 }
 
 .author {
-  @include textStyle (15px, $colorGreyThree, left);
+  @include textStyle (15px, $colorDimText2, left);
   margin: 5px 0 0;
   font-style: normal;
 }
@@ -46,6 +48,9 @@
 .iconContainer{
   @include iconsContainer
 }
+.buttonName{
+  @include name
+}
 .buttonIcons {
   @include buttonIcons
 }
@@ -59,7 +64,7 @@
   padding: 12px 5px 5px 5px;
 }
 .mnemonicInput::placeholder {
-  color: gray;
+  color: $colorIconAndPlaceholder;
   font-size: 14px;
   font-style: italic;
 }
@@ -93,13 +98,14 @@
   line-height: 40px;
   margin: 5px;
   border-radius: 5px;
-  border: 1px solid $colorGreyThree;
+  border: 1px solid $colorDimText2;
   cursor: pointer;
   text-align: center;
+  color: $colorFont;
 }
 
 .separatedLetterActive {
-  background-color: $colorGreyTwo;
+  background-color: $listBackground;
   font-weight: bold;
 }
 
@@ -113,7 +119,7 @@
   margin: 20px auto;
   padding: 10px;
   text-align: center;
-  border: 1px solid $colorGreyThree;
+  border: 1px solid $colorDimText2;
   border-radius: 5px;
 }
 
@@ -129,16 +135,16 @@
   }
 }
 .accuracyMessage{
-  color: $colorGreyTwo;
+  color: $colorDimText;
   font-size: 12px;
 }
 
 .transliteration{
-  @include translitText($colorGreyFour)
+  @include translitText($colorDimText2)
 }
 
 .myTransliteration{
-  @include translitText($colorGreySix);
+  @include translitText($colorIconAndPlaceholder);
 }
 
 

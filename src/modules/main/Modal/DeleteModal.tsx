@@ -21,18 +21,20 @@ const customStyles = {
         width: "400px",
         height: "120px",
         borderRadius: "15px",
-        backgroundColor: "#e6f7ff",
+        backgroundColor: "var(--background-color)",
     }
 }
 const customStylesMobile = {
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    padding: '7px',
-    width: "300px",
-    height: "120px",
-    borderRadius: "15px",
-    backgroundColor: "#e6f7ff",
+    content: {
+        top: "50%",
+        left: "50%",
+        transform: "translate(-50%, -50%)",
+        padding: '7px',
+        width: "300px",
+        height: "120px",
+        borderRadius: "15px",
+        backgroundColor: "var(--background-color)",
+    }
 }
 
 export const DeleteModal: FC<DeleteModalPropsType> = (props) => {
@@ -41,7 +43,7 @@ export const DeleteModal: FC<DeleteModalPropsType> = (props) => {
     const styleDeleteModal  = isMobileScreen ? customStylesMobile : customStyles
     return (
         <ReactModal
-            style={customStyles}
+            style={styleDeleteModal}
             isOpen={props.show}
             appElement={document.getElementById('root')!}
         >

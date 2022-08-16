@@ -19,7 +19,7 @@ const customStyles = {
         padding: '7px',
         width: "300px",
         borderRadius: "10px",
-        backgroundColor: "white",
+        backgroundColor: "var(--background-color)",
         right: 'auto',
         bottom: 'auto',
         marginRight: '-50%',

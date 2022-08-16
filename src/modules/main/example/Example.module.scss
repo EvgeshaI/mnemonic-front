@@ -42,15 +42,15 @@
 .newExampleSentence {
   font-size: 25px;
   text-align: center;
-  border-bottom: 1px solid $colorGreyThree;
+  border-bottom: 1px solid $colorDimText2;
 }
 .dateFormat{
-  @include textStyle (13px, $colorGreyThree, center);
+  @include textStyle (13px, $colorDimText2, center);
   display: flex;
   margin-left: auto;
 }
 .author {
-  @include textStyle (15px, #bdbdbd, left);
+  @include textStyle (15px, $colorDimText2, left);
   margin: 5px 0 0;
   font-style: normal;
 }
@@ -74,7 +74,7 @@
   margin: 10px 0 5px 0;
   font-size: 14px;
   font-style: italic;
-  color: $colorGreyThree;
+  color: $colorDimText2;
 }
 .translationSelect {
   @include select
@@ -105,15 +105,18 @@
 .iconContainer{
   @include iconsContainer
 }
+.buttonName{
+  @include name
+}
 
 .mnemonicPart {
   font-weight: bold;
-  color: $colorBlueFour;
+  color: $colorHighlightMnemo;
   text-shadow: $textShadow
 }
 .translationPart {
   font-weight: bold;
-  color: $cornflowerblue;
+  color: $colorHighlightTranslation;
   text-shadow: $textShadow;
 }
 

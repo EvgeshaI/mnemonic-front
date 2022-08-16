@@ -3,13 +3,13 @@
 @mixin box {
     display: flex;
     align-items: center;
-    color: $colorBlueFive;
+    color: $colorFont;
     margin: 0 5px;
     padding: 3px 7px;
     font-size: 13px;
     &:hover{
         border-radius: 5px;
-        box-shadow: 0.5px 0.5px 1px 1px $colorGreyOne;
+        box-shadow: 0.5px 0.5px 1px 1px $colorBorderButtons;
     }
 }
 
@@ -24,7 +24,8 @@
     position: relative;
     width: 400px;
     margin: 20px auto;
-    box-shadow: 0.5px 0.5px 1px 1px lightsteelblue;
+    box-shadow: 0.5px 0.5px 1px 1px $shadow;
+    background-color: $inputBackground;
 }
 .inputAndIconBorder {
     border-radius: 10px;
@@ -39,7 +40,9 @@
     background: transparent;
     height: 40px;
     padding-left: 15px;
-
+}
+.searchInput::placeholder{
+    color: $colorDimText3;
 }
 .searchIcon {
     width: 25px;
@@ -47,15 +50,15 @@
     top: 6px;
     right: 5px;
     cursor: pointer;
-    fill: $colorBlueFive;
+    fill: $colorIconAndPlaceholder;
 }
 .suggestions{
     z-index: 2;
     position: absolute;
-    background-color: white;
     cursor: pointer;
     margin: 2px 0 0 0;
     width: 100%;
+    background: var(--background-color);
     box-shadow: 0.5px 0.5px 1px 1px lightsteelblue;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
@@ -69,17 +72,24 @@
     display: flex;
     box-sizing: border-box;
     padding: 10px;
+    color: $colorFont;
         &:hover{
-            background-color: $colorBlueTwo;
+            background-color: $listBackground;
         }
 }
 .highlightSuggestion {
-    background-color: $colorBlueTwo;
+    background-color: $listBackground;
 }
-
+.suggestEngWord{
+    margin: 0 5px 0 0;
+}
+.transList{
+    font-style: italic;
+    margin: 0 0 0 5px;
+}
 .logo {
     cursor: pointer;
-    color: $colorBlueFive;
+    color: $colorFont;
     margin: 1%;
     width: 15%;
         svg {
@@ -95,7 +105,18 @@
     cursor: pointer;
     width: 15%;
 }
-
+.toggleTheme{
+    display: flex;
+    margin: 0 5px;
+    padding: 3px 7px;
+}
+.themeText{
+    display: flex;
+    margin: 0 5px 0 0;
+    color: $colorFont;
+    align-items: center;
+    font-size: 12px;
+}
 .Box {
    @include box
 }
@@ -108,19 +129,19 @@
         width: 100%;
         display: flex;
         vertical-align: center;
-        fill: $colorBlueFive;
+        fill: $colorFont;
     }
 }
 
 .logText{
     font-size: 13px;
-    color: $colorBlueFive;
+    color: $colorFont;
     display: flex;
     align-items:  center;
     padding: 1px 5px;
     &:hover{
         border-radius: 5px;
-        box-shadow: 0.5px 0.5px 1px 1px $colorGreyOne;
+        box-shadow: 0.5px 0.5px 1px 1px $colorBorderButtons;
     }
 }
 
@@ -128,7 +149,7 @@
     padding: 2px;
     width: 20px;
     svg{
-        fill: $colorBlueFive;
+        fill: $colorFont;
         display: flex;
         vertical-align:  center;
     }
@@ -139,14 +160,15 @@
     right: 15px;
     top: 60px;
     width: 15%;
+    color: $colorFont;
     border-radius: 5px;
-    box-shadow: 1px 1px 2px 1px $colorGreyOne;
+    box-shadow: 1px 1px 2px 1px $colorBorderButtons;
 }
 .listStyle{
     display: flex;
     cursor: pointer;
     &:hover{
-        background-color: $colorBlueOne
+        background-color: $listBackground
     }
      li {
         padding: 10px;
@@ -160,7 +182,7 @@
     display: flex;
     margin: 0 0 0 15px;
     width: 10%;
-    fill: $colorBlueFive;
+    fill: $colorFont;
 }
 
 
@@ -169,10 +191,18 @@
     .inputAndIcon {
         width: 300px;
         margin: 5px auto;
-        border: none;
+
         box-shadow: none;
         border-radius: 0;
-        border-bottom: 1px solid $colorGreyOne;
+        background-color: $inputBackground;
+        border-bottom: $borderMobile;
+    }
+    .inputAndIconBorder {
+        border-radius: $borderRadius;
+
+    }
+    .inputAndIconBorderFocus{
+        border-radius: 10px 10px 0 0;
     }
     .logo{
         width: 25%;
@@ -184,7 +214,7 @@
     }
     .modalList{
         width: 80%;
-        background-color: white;
+        background-color: var(--background-color);
         top: 65px;
         z-index: 3;
         li {
@@ -192,7 +222,7 @@
             list-style: none;
             margin: 20px 10px;
             font-size: 18px;
-            color: $colorBlueFive;
+            color: $colorFont;
         }
     }
 

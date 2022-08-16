@@ -13,30 +13,32 @@ import {ResetPassword} from "../main/LoginAndRegistration/ResetPassword";
 import {ChangePassword} from "../main/LoginAndRegistration/ChangePassword";
 import {Confirmation} from "../main/LoginAndRegistration/Confirmation";
 import {Footer} from "../main/Footer/Footer";
-import s from "./app.module.css"
+import s from "./app.module.scss"
 import {Privacy} from "../main/privacy/Privacy";
 import {Consonance} from "../main/consonance/Consonance";
+import useAppTheme from "../util/useAppTheme";
 
 const App: React.FC<any> = () => {
     const {
+        isDarkTheme,
         initialized
     } = useAppSelector((state) => state.appReducer);
     const dispatch =  useAppDispatch();
     useEffect(() => dispatch(initializedAppAsync()), [])
+    useAppTheme(isDarkTheme)
     if (!initialized) {
         return <div>
             <Preloader/>
         </div>
     }
-
     return (
-    <>
+    <div>
         <div className={s.content}>
             <Navbar/>
             <Routes>
                 <Route path = "/eng/:word" element={<EngWord/>}/>
                 <Route path = "/login" element={<LoginAndRegistration/>}/>
-                <Route path = "/" element={<StartPage/>}/>
+                <Route path = "/" element={<StartPage isDarkTheme={isDarkTheme}/>}/>
                 <Route path = "/user" element={<UserPageContainer/>}/>
                 <Route path = "/reset" element={<ResetPassword/>}/>
                 <Route path = "/changePassword" element={<ChangePassword/>}/>
@@ -49,7 +51,7 @@ const App: React.FC<any> = () => {
         <div>
             <Footer/>
         </div>
-    </>
+    </div>
     )
 };
 

@@ -8,7 +8,12 @@ import useWindowDimensions from "../../util/windowDimensions";
 import {NavBarMobile} from "./NavBarMobile";
 import {NavBarDesktop} from "./NavBarDesktop";
 
-export const Navbar: FC= (props) => {
+type NavbarPropsType ={
+    // theme: string,
+    // toggleTheme: () => void
+}
+
+export const Navbar: FC<NavbarPropsType>= (props) => {
     const {
         user,
         isAuth,
@@ -41,6 +46,8 @@ export const Navbar: FC= (props) => {
     <>
         {isMobileScreen ?
             <NavBarMobile
+                // toggleTheme={props.toggleTheme}
+                // theme={props.theme}
                 isAuth={isAuth}
                 user={user}
                 startPage={startPage}
@@ -49,6 +56,8 @@ export const Navbar: FC= (props) => {
             />
             :
             <NavBarDesktop
+                // theme={props.theme}
+                // toggleTheme={props.toggleTheme}
                 isAuth={isAuth}
                 user={user}
                 startPage={startPage}
