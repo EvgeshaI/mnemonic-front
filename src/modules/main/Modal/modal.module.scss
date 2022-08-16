@@ -1,7 +1,7 @@
 @import "../common.module";
 
 @mixin styles {
-    border: 1px solid $colorBorderDim;
+    border: 1px solid $colorBorderButtons;
     background: none;
     border-radius: 10px;
     width: 70%;
@@ -17,7 +17,7 @@
     height: 12px;
 }
 .closeButtonBox svg:hover {
-    fill: $colorBorderDim;
+    fill: $colorBorderButtons;
     cursor: pointer;
 }
 
@@ -33,10 +33,11 @@
     width: 30%;
     margin: 5px auto;
     padding: 5px 1px;
-    border: 1px solid $colorBorderDim;
+    border: 1px solid $colorBorderButtons;
     background-color: white;
     border-radius: 10px;
     cursor: pointer;
+    color: #122B5A;
 }
 .nickNameModalBox{
     padding: 5px;
@@ -84,6 +85,7 @@
     width: 50%;
     text-align: center;
     cursor: pointer;
+    color: #122B5A;
 }
 .buttonProfileModal:hover{
     background-color: $colorBackgroundButton1;

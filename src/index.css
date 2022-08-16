@@ -1,6 +1,7 @@
 body {
     font-family:  'MyFont', 'Grill Sans', serif;
     margin: 0;
+    color: var(--font-color);
 }
 textarea {
     font-family: 'MyFont', 'Grill Sans', serif;
@@ -12,7 +13,6 @@ input {
 }
 div {
     font-family: 'MyFont', 'Grill Sans', serif;
-    color: var(--font-color);
 }
 @font-face {
     font-family: 'MyFont';
@@ -46,6 +46,7 @@ font-family: 'MyFont';
     --font-color-theme-light: #122B5A;
     --color-icon-theme-light: #666666;
     --shadow-theme-light: lightsteelblue;
+    --shadowImg-theme-light: lightsteelblue;
     --errorColor-theme-light: #A52A2A;
     --color-text-header-theme-light:black;
     --border-bottom-theme-light: #b3e7ff;
@@ -54,8 +55,9 @@ font-family: 'MyFont';
     --list-background-theme-light: #e6f7ff;
     --border-radius-theme-light: none;
     --borderBottom-mobile-theme-light: 1px solid lightgray;
-    --highlight-trans-theme-light:#0077B6;
+    --highlight-mnemo-theme-light:#0077B6;
     --add-button-theme-light: #E0E0E0;
+    --border-buttons-theme-light: lightgray;
 
 
 
@@ -63,6 +65,7 @@ font-family: 'MyFont';
     --font-color-theme-dark: #e6f7ff;
     --color-icon-theme-dark: #A0A0A0;
     --shadow-theme-dark: none;
+    --shadowImg-theme-dark: #A0A0A0;
     --errorColor-theme-dark: #d14a4a;
     --color-text-header-theme-dark:white;
     --border-bottom-theme-dark: gray;
@@ -71,13 +74,15 @@ font-family: 'MyFont';
     --list-background-theme-dark: #505050;
     --border-radius-theme-dark: 10px;
     --borderBottom-mobile-theme-dark: none;
-    --highlight-trans-theme-dark: #4A9CEC;
+    --highlight-mnemo-theme-dark: #4A9CEC;
     --add-button-theme-dark: #909090;
+    --border-buttons-theme-dark: #606060;
 
     --background-color: var(--background-color-theme-light);
     --font-color: var(--font-color-theme-light);
     --color-icon: var(--color-icon-theme-light);
     --shadow: var(--shadow-theme-light);
+    --shadowImg: var(--shadowImg-theme-light);
     --errorColor: var(--errorColor-theme-light);
     --color-text-header: var(--color-text-header-theme-light);
     --border-bottom: var(--border-bottom-theme-light);
@@ -86,6 +91,7 @@ font-family: 'MyFont';
     --list-background: var(--list-background-theme-light);
     --border-radius: var(--border-radius-theme-light);
     --borderBottom-mobile: var(--borderBottom-mobile-theme-light);
-    --highlight-trans: var(--highlight-trans-theme-light);
-    --add-button: var(--add-button-theme-light)
+    --highlight-mnemo: var(--highlight-mnemo-theme-light);
+    --add-button: var(--add-button-theme-light);
+    --border-buttons: var(--border-buttons-theme-light)
 }

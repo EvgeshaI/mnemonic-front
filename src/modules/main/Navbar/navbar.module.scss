@@ -9,7 +9,7 @@
     font-size: 13px;
     &:hover{
         border-radius: 5px;
-        box-shadow: 0.5px 0.5px 1px 1px $colorBorderDim;
+        box-shadow: 0.5px 0.5px 1px 1px $colorBorderButtons;
     }
 }
 
@@ -24,7 +24,7 @@
     position: relative;
     width: 400px;
     margin: 20px auto;
-    box-shadow: 0.5px 0.5px 1px 1px var(--shadow);
+    box-shadow: 0.5px 0.5px 1px 1px $shadow;
     background-color: $inputBackground;
 }
 .inputAndIconBorder {
@@ -141,7 +141,7 @@
     padding: 1px 5px;
     &:hover{
         border-radius: 5px;
-        box-shadow: 0.5px 0.5px 1px 1px $colorBorderDim;
+        box-shadow: 0.5px 0.5px 1px 1px $colorBorderButtons;
     }
 }
 
@@ -162,7 +162,7 @@
     width: 15%;
     color: $colorFont;
     border-radius: 5px;
-    box-shadow: 1px 1px 2px 1px $colorBorderDim;
+    box-shadow: 1px 1px 2px 1px $colorBorderButtons;
 }
 .listStyle{
     display: flex;

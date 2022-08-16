@@ -13,7 +13,8 @@
   color: $colorTextHeader;
 }
 .dateFormat {
-  @include date
+  @include date;
+
 }
 .accuracy {
   @include textStyle (15px, lightsteelblue, center);

@@ -22,7 +22,7 @@
     margin: 0 auto;
 }
 .inputAndIconSearch {
-    @include inputAndSearch($colorBorderDim)
+    @include inputAndSearch($colorBorderButtons)
 }
 
 .searchIcon,
@@ -234,7 +234,6 @@
 .hasMoreBtn {
     @include buttonStyle;
     width: 10%;
-
 }
 
 
@@ -258,6 +257,6 @@
     }
     .hasMoreBtn {
         @include buttonStyle;
-        background-color: white;
+        width: 40%;
     }
 }

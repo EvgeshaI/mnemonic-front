@@ -47,7 +47,7 @@ export const StartPage: FC<StartPagePropsType> = (props) => {
                         Собственный пример лучше всего запоминается, поэтому не стоит копировать чужой,
                         а вот мнемоники можно использовать любые.
                     </div>
-                    <AnimatedTutorial/>
+                    <AnimatedTutorial isDarkTheme={props.isDarkTheme}/>
                     <div className={s.buttonBack}
                         onClick={backStartPage}>
                         <GoBack/>
