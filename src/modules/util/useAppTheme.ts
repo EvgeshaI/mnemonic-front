@@ -15,6 +15,8 @@ const useAppTheme = (isDarkTheme: boolean) => {
         const listBackground = `var(--list-background-${theme})`
         const borderRadius = `var(--border-radius-${theme})`
         const borderMobile = `var(--borderBottom-mobile-${theme})`
+        const highlightTrans = `var(--highlight-trans-${theme})`
+        const addButton = `var(--add-button-${theme})`
         document.body.style.setProperty('--background-color', backgroundColor)
         document.body.style.setProperty('--font-color', fontColor)
         document.body.style.setProperty('--color-icon', icon)
@@ -27,6 +29,8 @@ const useAppTheme = (isDarkTheme: boolean) => {
         document.body.style.setProperty('--list-background', listBackground)
         document.body.style.setProperty('--border-radius', borderRadius)
         document.body.style.setProperty('--borderBottom-mobile', borderMobile)
+        document.body.style.setProperty('--highlight-trans', highlightTrans)
+        document.body.style.setProperty('--add-button', addButton)
     }, [isDarkTheme]);
 };
 

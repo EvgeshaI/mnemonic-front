@@ -138,3 +138,8 @@ export interface IEngWordSuggest {
     engWord: string,
     translations: Array<ITranslation>
 }
+export interface IStatistic {
+    engWordAmount: number,
+    mnemonicAmount: number,
+    exampleAmount: number
+}

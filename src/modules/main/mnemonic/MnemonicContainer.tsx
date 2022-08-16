@@ -50,10 +50,11 @@ const MnemonicContainer: FC<PropsType> = (props) => {
                     <div className={s.addTooltip}>Добавить мнемонику</div>
                 </div>
             }
-        </div>
             {props.hasMoreMnemonics &&
                 <div className={s.loadMnemonic} onClick={loadMnemonic}> Загрузить ещё</div>
             }
+        </div>
+
         </>
     )
 }

@@ -6,6 +6,7 @@ import {
     IExample,
     IMnemonic,
     IPageElements,
+    IStatistic,
     IStudy,
 } from "../shared/models/engWordTypes";
 import {BaseClient} from "./BaseClient";
@@ -175,6 +176,9 @@ export class MnemonicClient extends BaseClient {
             nickname
         }
         return this.put<IAuthResponse>(`user/nickname`, null,{params})
+    }
+    static async getStatistic (){
+        return this.get<IStatistic>(`user/statistics`)
     }
 }
 

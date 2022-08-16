@@ -1,4 +1,4 @@
-import {IExample, IPageElements, IStudy, NewStudyExample} from "../shared/models/engWordTypes";
+import {IExample, IPageElements, IStatistic, IStudy, NewStudyExample} from "../shared/models/engWordTypes";
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {MnemonicClient} from "../api/MnemonicClient";
 import {AppThunk} from "./index";
@@ -11,7 +11,8 @@ interface UserState {
     createExampleMap: Array<NewStudyExample>
     currentPage: number
     hasMore: boolean,
-    search: string
+    search: string,
+    statistic: IStatistic | null
 }
 
 const initialState: UserState = {
@@ -19,7 +20,8 @@ const initialState: UserState = {
     hasMore: false,
     currentPage: 0,
     search: '',
-    createExampleMap: []
+    createExampleMap: [],
+    statistic: null
 };
 
 export const userSlice = createSlice(
@@ -30,11 +32,7 @@ export const userSlice = createSlice(
             setUserPage: (state, action: PayloadAction<IPageElements<IStudy>>) => {
                 state.studies = [...state.studies, ...action.payload.elements]
                 state.currentPage = state.currentPage + 1
-                if (state.currentPage < action.payload.totalPages){
-                    state.hasMore = true
-                }else {
-                    state.hasMore = false
-                }
+                state.hasMore = state.currentPage < action.payload.totalPages;
             },
             setNewUserPage: (state, action: PayloadAction<IPageElements<IStudy>>) => {
                 state.studies = action.payload.elements
@@ -108,7 +106,10 @@ export const userSlice = createSlice(
                 state.hasMore = false;
                 state.currentPage = 0;
                 state.createExampleMap = []
-            }
+            },
+            setMyStatistic: (state, action: PayloadAction<IStatistic>) => {
+                state.statistic = action.payload;
+            },
         }
     }
 )
@@ -122,7 +123,8 @@ export const {
     removeMyExample,
     removeMyMnemonic,
     deleteNewExample,
-    initUserPageState
+    initUserPageState,
+    setMyStatistic
 } = userSlice.actions
 
 
@@ -175,6 +177,7 @@ export const saveMyExampleAsync = (studyId:number, example: IExample): AppThunk 
     try {
         let result = await MnemonicClient.saveExample(example)
         dispatch(updateStudyExample({studyId, example: result}))
+        dispatch(getMyStatisticAsync())
     } catch (error) {
         // @ts-ignore
         dispatch(addAlert({message: error.data?.data?.message}))
@@ -186,15 +189,17 @@ export const saveMyExampleAsync = (studyId:number, example: IExample): AppThunk 
 export const deleteMyExampleAsync = (myExampleId:number): AppThunk => async  (dispatch: any) => {
      await MnemonicClient.deleteExample(myExampleId)
     dispatch(removeMyExample(myExampleId))
+    dispatch(getMyStatisticAsync())
 }
 
 export const deleteThisMnemonicAsync = (mnemonicID: number): AppThunk => async (dispatch: any) => {
     await MnemonicClient.deleteMeMnemonic(mnemonicID)
     dispatch(removeMyMnemonic(mnemonicID))
 }
-
-
-
+export const getMyStatisticAsync = (): AppThunk => async (dispatch: any) => {
+   let result =  await MnemonicClient.getStatistic()
+    dispatch(setMyStatistic(result))
+}
 
 
 export default userSlice.reducer;

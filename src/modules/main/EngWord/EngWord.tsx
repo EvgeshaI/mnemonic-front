@@ -40,7 +40,9 @@ const EngWord: FC<any> = () => {
     let urlWord = params.word || "";
 
     useEffect(() => {
-        dispatch(getEngWordAsync(urlWord))
+        if (urlWord.length > 0) {
+            dispatch(getEngWordAsync(urlWord))
+        }
         return () => {
             dispatch(resetMnemonic())
             dispatch(resetExample())
