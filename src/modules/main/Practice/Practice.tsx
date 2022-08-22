@@ -15,7 +15,7 @@ export const Practice:FC<{practices: Array<IPracticeExample>}> = (props) => {
 
     const dispatch = useAppDispatch()
 
-    const [count, setCount] = useState(8)
+    const [count, setCount] = useState(0)
     const [engWord, setEngWord] = useState("")
     const [translate, setTranslate] = useState("")
     const [engWordCorrect, setEngWordCorrect] = useState(false)
