@@ -18,8 +18,14 @@ export const PracticeContainer = () => {
     const dispatch = useAppDispatch()
     useEffect(() => {
         dispatch(getPracticeAsync())
-        dispatch(awaitingAsync())
     }, [])
+
+    useEffect(() => {
+        if (hasExamples && examplesPractice.length === 0) {
+            dispatch(awaitingAsync())
+        }
+    }, [examplesPractice])
+
     return (
         <div>
             {isFetching &&

@@ -1,7 +1,7 @@
 import React, {FC, useEffect, useState} from "react";
 import {useAppDispatch} from "../../../store";
 import {ReactComponent as Key} from "../../../import/icons/key.svg";
-import {getPracticeAsync, guessedAsync, tookHintAsync} from "../../../store/practiceSlice";
+import {guessedAsync, tookHintAsync} from "../../../store/practiceSlice";
 import s from "./practice.module.scss"
 import {ReactComponent as Question} from "../../../import/icons/question.svg";
 import {Sentence} from "./Sentence";
@@ -25,10 +25,6 @@ export const Practice:FC<{practices: Array<IPracticeExample>}> = (props) => {
     const [instruction, setInstruction] = useState(false)
     const [keyCount, setKeyCount] = useState(2)
     const [rightCount, setRightCount] = useState(0)
-
-    useEffect(() => {
-        dispatch(getPracticeAsync())
-    }, [])
 
     const changeEngWord = (e: React.ChangeEvent<HTMLInputElement>) => {
         setEngWord(e.target.value)
