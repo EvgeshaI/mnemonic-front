@@ -4,7 +4,6 @@ export interface IEngWord {
     transcription: string,
     transcriptions: Array<ITranscription>
     translations: Array<ITranslation>
-    transliterations: Array<ITransliteration>
 }
 export interface ITransliteration {
     transliteration: string,
@@ -20,7 +19,8 @@ export interface ITranscription {
     id: 0,
     transcription: string,
     location: string,
-    audioFile: string
+    audioFile: string,
+    transliterations: Array<ITransliteration>
 }
 
 export interface IMnemonic {

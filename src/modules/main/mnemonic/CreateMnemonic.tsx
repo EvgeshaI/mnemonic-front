@@ -3,7 +3,6 @@ import {useAppDispatch} from "../../../store";
 import s from './mnemonic.module.scss'
 import SeparatedLetter from "./SeparatedLetter";
 import {IEngWord} from "../../../shared/models/engWordTypes";
-import {TransliterationComponent} from "./TransliterationComponent";
 import MyTranslit from "./MyTranslit";
 import {addMnemonicAsync} from "../../../store/mnemonicSlice";
 import {CloseBtn} from "../../util/CloseBtn";
@@ -63,17 +62,14 @@ const CreateMnemonic:FC<CreateMnemonicPropsType> = (props) => {
             {entered &&
                 <div>
                     <ul className={s.transContainer}>
-                        {props.engWord.transliterations.map((tr,i) =>
-                            <TransliterationComponent key={i} transliteration={tr.transliteration} accuracy={tr.accuracy}/>
-                        )}
                         <MyTranslit word={mnemo}
                                     highlight={highlight}
                                     canSaveMnemonic = {canSaveMnemonic}
-                                    trans={props.engWord.transliterations}
+                                    trans={props.engWord.transcriptions.flatMap(t => t.transliterations)}
                         />
                     </ul>
                     {!displaySaveBtn &&
-                        <div className={s.accuracyMessage}>точность мнемоники должна быть более 24%</div>
+                        <div className={s.accuracyMessage}>точность мнемоники должна быть не менее 25%</div>
                     }
                 </div>
             }

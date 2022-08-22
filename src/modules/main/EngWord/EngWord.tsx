@@ -12,6 +12,7 @@ import {resetExample} from "../../../store/exampleSlice";
 import {Preloader} from "../Preloader/Preloader";
 import {ReactComponent as ArrowDown} from "../../../import/icons/arrow1.svg";
 import {ReactComponent as ArrowUp} from "../../../import/icons/arrow2.svg";
+import {Transliterations} from "./Transliterations";
 
 const EngWord: FC<any> = () => {
     const dispatch = useAppDispatch();
@@ -77,8 +78,12 @@ const EngWord: FC<any> = () => {
     }
     let limitTranscriptions = (transcriptions: Array<ITranscription>) => {
         let result = []
-        let amer = transcriptions.find(el => el.location === "AMERICAN")
-        let brit = transcriptions.find(el => el.location === "BRITISH")
+        let americanArr = transcriptions.filter(el => el.location === "AMERICAN")
+            .sort((a,b) => b.transliterations.length - a.transliterations.length)
+        let britishArr = transcriptions.filter(el => el.location === "BRITISH")
+            .sort((a,b) => b.transliterations.length - a.transliterations.length)
+        let amer = americanArr ? americanArr[0] : null
+        let brit = britishArr ? britishArr[0] : null
         if(amer){
             result.push(amer)
         }
@@ -87,7 +92,6 @@ const EngWord: FC<any> = () => {
         }
         return result
     }
-
     return (
         <>
             {isFetching
@@ -102,9 +106,15 @@ const EngWord: FC<any> = () => {
                         <div className={s.transcriptionsBox}>
                             {engWord && limitTranscriptions(engWord.transcriptions).map(el =>
                                 <div className={s.transcriptions} key={el.id}>
-                                    <div className={s.location}> {defineLocation(el.location)}</div>
-                                    <div className={s.transcriptionWord}>{el.transcription}</div>
-                                    <AudioComponent audioFile={el.audioFile}/>
+                                    <div className={s.transcriptionsContainer}>
+                                        <div className={s.location}> {defineLocation(el.location)}</div>
+                                        <div style={{position: 'relative'}}>
+                                            <div className={s.transcriptionWord}>{el.transcription}</div>
+                                            <Transliterations transliterations={el.transliterations}/>
+                                        </div>
+                                        <AudioComponent audioFile={el.audioFile}/>
+                                    </div>
+
                                 </div>
                             )}
                         </div>
