@@ -143,3 +143,26 @@ export interface IStatistic {
     mnemonicAmount: number,
     exampleAmount: number
 }
+
+export interface IPracticeExample {
+    exampleId: number,
+    engWord: string,
+    translationInSentence: string,
+    translationInitForm: string,
+    mnemonicInSentence: string,
+    sentence: string,
+    parts: Array<IPart>
+}
+
+export interface IPractice {
+    practices: Array<IPracticeExample>
+    hasExamples: boolean
+}
+
+export interface IAwait {
+    sentence: string,
+    waitTill: string,
+    stage: string
+}
+
+

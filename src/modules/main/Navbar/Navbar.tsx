@@ -9,8 +9,7 @@ import {NavBarMobile} from "./NavBarMobile";
 import {NavBarDesktop} from "./NavBarDesktop";
 
 type NavbarPropsType ={
-    // theme: string,
-    // toggleTheme: () => void
+
 }
 
 export const Navbar: FC<NavbarPropsType>= (props) => {

@@ -17,9 +17,7 @@
   margin: 20px auto;
 }
 .text{
-  margin: 10px auto 0;
-  font-size: 25px;
-  color: $colorFont;
+  @include header
 }
 .search{
   margin: 0 auto;

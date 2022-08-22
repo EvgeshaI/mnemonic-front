@@ -1,0 +1,78 @@
+@import "../common.module";
+@import "finish.module";
+
+.awaitContainer{
+  width: 60%;
+  margin: 30px auto;
+  text-align: center;
+  font-size: 25px;
+}
+
+.confetti{
+  width: 30px;
+  margin: 20px auto;
+  fill: $colorHighlightTranslation;
+}
+
+.text{
+  font-size: 17px;
+  margin: 20px 0;
+}
+
+.awaitPractice{
+  font-size: 15px;
+  margin: 20px 0;
+}
+.columnName{
+  display: flex;
+  width: 80%;
+  margin: 5px auto;
+  justify-content: space-between;
+}
+
+.sentenceAndDate{
+  width: 80%;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  color: $colorIconAndPlaceholder;
+}
+
+.awaitSentence{
+  margin: 10px 0;
+}
+.awaitDate{
+  margin: 10px 0;
+  font-size: 13px;
+}
+
+.buttonMyPge{
+  @include buttonSt;
+  font-size: 15px;
+  width: 17%;
+  display: flex;
+  justify-content: center;
+}
+.iconBook{
+  @include iconButton
+}
+
+
+@media all and (max-width: 600px) {
+  .awaitContainer{
+    width: 90%;
+  }
+  .sentenceAndDate {
+    width: 100%;
+    display: block;
+  }
+  .columnName{
+    justify-content: center;
+    :first-child{
+    margin: 0 5px 0 0;
+  }
+  }
+  .buttonMyPge{
+    width: 40%;
+  }
+}

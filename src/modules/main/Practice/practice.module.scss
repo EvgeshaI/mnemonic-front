@@ -1,0 +1,130 @@
+@import "../common.module";
+.practiceContainer{
+  width: 60%;
+  margin: 30px auto;
+}
+.headerBox{
+  display: flex;
+  justify-content: center;
+  margin: 0 auto 10px;
+}
+.practiceHead{
+  font-size: 25px;;
+  color: $colorIconAndPlaceholder;
+}
+.instructionIcon{
+  width: 20px;
+  fill: #48CAE4;
+  margin: 0 0 0 5px;
+  cursor: pointer;
+  align-items: center;
+}
+.instructionBox {
+  height: 30px;
+}
+.instruction {
+  text-align: center;
+  width: 80%;
+  margin: 0 auto;
+  color: $colorDimText2;
+}
+.practiceBox{
+  margin: 30px auto;
+}
+.sentence{
+  font-size: 25px;
+  text-align: center;
+  color: $colorFont;
+}
+.mnemonicPart{
+  color: $colorHighlightMnemo;
+}
+.sentenceBoxF1 {
+  display: inline-flex;
+}
+.underlineMnemo{
+  color: $colorHighlightMnemo;
+}
+.keyBox{
+  display: flex;
+  justify-content: center;
+  margin: 5px 0 0 0;
+}
+.keyIcon{
+  width: 15px;
+  margin: 0 5px 0 0;
+  fill: $colorIconAndPlaceholder;
+  cursor: pointer;
+    &:hover{
+      fill: $colorIconHover;
+    }
+}
+.count{
+  color: $colorIconAndPlaceholder;
+}
+.inputContainer{
+  width: 90%;
+  display: flex;
+  margin: 10px auto;
+  justify-content: space-between;
+}
+.inputBox{
+  margin: 30px 0;
+}
+.inputName{
+  text-align: center;
+  margin: 0 0 5px 0;
+  color: $colorDimText2;
+}
+.inputPractice{
+  @include inputStyle;
+}
+.inputPracticeError{
+  color: $colorRed;
+  border-bottom:  1px solid $colorRed;
+}
+.inputPracticeCorrect{
+  @include inputStyle;
+  color: #3DB39E;
+  border-bottom:  1px solid #3DB39E;
+}
+.practiceButton{
+  @include buttonStyle;
+}
+.practiceButton:active {
+  transform: translateY(4px);
+}
+.iconResultBox{
+  display: flex;
+  align-items: center;
+}
+.rightIcon{
+  width: 30px;
+  margin: auto;
+}
+
+.notice{
+  font-size: 20px;
+  text-align: center;
+  margin: 30px 0;
+  color: $colorFont;
+}
+
+@media all and (max-width: 600px){
+  .practiceContainer {
+    width: 95%;
+  }
+  .instruction{
+    font-size: 12px;
+    width: 100%;
+  }
+  .inputContainer{
+    display: block;
+  }
+  .inputPractice{
+    display: flex;
+    width: 90%;
+    margin: auto;
+  }
+
+}

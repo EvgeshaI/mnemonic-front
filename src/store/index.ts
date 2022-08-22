@@ -8,6 +8,7 @@ import userReducer from "./userSlice";
 import mnemonicReducer from "./mnemonicSlice"
 import exampleReducer from "./exampleSlice"
 import regexpReducer from "./regexpSlice"
+import practiceReducer from "./practiceSlice"
 
 export const store = configureStore( {
     reducer: {
@@ -18,7 +19,8 @@ export const store = configureStore( {
         authReducer: authReducer,
         appReducer: appReducer,
         userReducer: userReducer,
-        regexpReducer: regexpReducer
+        regexpReducer: regexpReducer,
+        practiceReducer: practiceReducer,
     }
 });
 
