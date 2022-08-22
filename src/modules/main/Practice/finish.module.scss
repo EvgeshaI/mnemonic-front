@@ -46,5 +46,12 @@
 @media all and (max-width: 600px){
   .buttonsBox{
     display: block;
+    width: 50%;
+  }
+  .buttonFinish{
+    justify-content: center;
+  }
+  .iconFinish {
+    margin: 0 5px 0 0;
   }
 }

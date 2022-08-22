@@ -15,7 +15,7 @@ export const Practice:FC<{practices: Array<IPracticeExample>}> = (props) => {
 
     const dispatch = useAppDispatch()
 
-    const [count, setCount] = useState(0)
+    const [count, setCount] = useState(8)
     const [engWord, setEngWord] = useState("")
     const [translate, setTranslate] = useState("")
     const [engWordCorrect, setEngWordCorrect] = useState(false)
@@ -61,10 +61,10 @@ export const Practice:FC<{practices: Array<IPracticeExample>}> = (props) => {
 
     const check = () => {
         if (engWord.length === 0 || translate.length === 0) return
-        if(engWord === currentExample.engWord || engWord.toLowerCase() === currentExample.engWord){
+        if(engWord === currentExample.engWord || engWord.trim().toLowerCase() === currentExample.engWord){
             setEngWordCorrect(true)
         }
-    const translationLower = translate.toLowerCase();
+        const translationLower = translate.trim().toLowerCase();
         if(translationLower === currentExample.translationInSentence.toLowerCase()
             ||translationLower === currentExample.translationInitForm.toLowerCase()){
             setTranslate(currentExample.translationInitForm)
