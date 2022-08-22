@@ -1,0 +1,57 @@
+@import "../common.module";
+@mixin buttonSt {
+  margin: 30px auto;
+  background: none;
+  border: 1px solid $colorBorderButtons;
+  padding: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  display: flex;
+  &:hover{
+    background-color: $listBackground;
+  }
+}
+@mixin iconButton{
+  display: flex;
+  align-items: center;
+  width: 20px;
+  margin: 0 5px 0 5px;
+  fill: $colorFont;
+}
+.finishBox{
+  text-align: center;
+  margin: 15px 0;
+}
+.headFinish{
+  font-size: 30px;
+}
+.statistic{
+  align-items: center;
+  font-size: 40px;
+  margin: 10px 0 0 0;
+  color: #4A9CEC;
+}
+.buttonsBox{
+  display: flex;
+  width: 45%;
+  margin: auto;
+}
+.buttonFinish{
+ @include buttonSt;
+}
+.iconFinish{
+  @include iconButton
+}
+
+@media all and (max-width: 600px){
+  .buttonsBox{
+    display: block;
+    width: 50%;
+  }
+  .buttonFinish{
+    justify-content: center;
+  }
+  .iconFinish {
+    margin: 0 5px 0 0;
+  }
+}

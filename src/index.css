@@ -56,7 +56,7 @@ font-family: 'MyFont';
     --border-radius-theme-light: none;
     --borderBottom-mobile-theme-light: 1px solid lightgray;
     --highlight-mnemo-theme-light:#0077B6;
-    --add-button-theme-light: #E0E0E0;
+    --add-button-theme-light: #b3e7ff;
     --border-buttons-theme-light: lightgray;
 
 
@@ -75,7 +75,7 @@ font-family: 'MyFont';
     --border-radius-theme-dark: 10px;
     --borderBottom-mobile-theme-dark: none;
     --highlight-mnemo-theme-dark: #4A9CEC;
-    --add-button-theme-dark: #909090;
+    --add-button-theme-dark: #0077B6;
     --border-buttons-theme-dark: #606060;
 
     --background-color: var(--background-color-theme-light);

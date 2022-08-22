@@ -1,11 +1,13 @@
 //обращение к серверу
 import {
     IAuthResponse,
+    IAwait,
     IEngWord,
     IEngWordSuggest,
     IExample,
     IMnemonic,
     IPageElements,
+    IPractice,
     IStatistic,
     IStudy,
 } from "../shared/models/engWordTypes";
@@ -13,7 +15,10 @@ import {BaseClient} from "./BaseClient";
 
 export class MnemonicClient extends BaseClient {
     static async getEngWord (word: string) {
-        return this.get<IEngWord>(`eng-word/${word}`)
+        const params = {
+            word
+        }
+        return this.get<IEngWord>(`eng-word`, {params})
     }
     static async autoGetEngWord (word: string) {
         const params = {
@@ -179,6 +184,26 @@ export class MnemonicClient extends BaseClient {
     }
     static async getStatistic (){
         return this.get<IStatistic>(`user/statistics`)
+    }
+    static async getPractice () {
+        return this.get<IPractice>(`practice`)
+    }
+    static async practiceGuessed (exampleId: number, guessed: boolean) {
+        let params = {
+            exampleId,
+            guessed
+        }
+        return this.put(`practice/guessed`, null,{params})
+    }
+
+    static async tookHint (exampleId: number) {
+        let params = {
+            exampleId
+        }
+        return this.put(`practice/use-hint`, null, {params})
+    }
+    static async await () {
+        return this.get<Array<IAwait>>(`practice/awaiting`)
     }
 }
 

@@ -17,6 +17,7 @@ import s from "./app.module.scss"
 import {Privacy} from "../main/privacy/Privacy";
 import {Consonance} from "../main/consonance/Consonance";
 import useAppTheme from "../util/useAppTheme";
+import {PracticeContainer} from "../main/Practice/PracticeContainer";
 
 const App: React.FC<any> = () => {
     const {
@@ -45,6 +46,7 @@ const App: React.FC<any> = () => {
                 <Route path = "/confirmation" element={<Confirmation/>}/>
                 <Route path="/privacy" element={<Privacy/>}/>
                 <Route path = "/consonance" element={<Consonance/>}/>
+                <Route path = "/practice" element={<PracticeContainer/>}/>
             </Routes>
             <Alerts/>
         </div>

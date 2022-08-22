@@ -40,8 +40,8 @@ export const NavBarDesktop:FC<NavBarDesktopPropsType> = (props) => {
             </div>
             <div className={s.nicknameAndLogout}>
                 <div className={s.toggleTheme}>
-                   {/*<div className={s.themeText}>тема</div>*/}
                     <Toggle
+                        checked={isDarkTheme}
                         icons={{
                             checked: <Sun/>,
                             unchecked: <Moon/>,

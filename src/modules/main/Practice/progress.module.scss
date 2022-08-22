@@ -1,0 +1,23 @@
+@import "../common.module";
+
+.meter{
+  width: 90%;
+  margin: 20px auto;
+  height: 4px;
+  position: relative;
+  background: none;
+  border-radius: 25px;
+  border: 1px solid $colorBorderButtons;
+  padding: 1px;
+}
+.meter > span {
+  display: block;
+  height: 100%;
+  //border-bottom-right-radius: 8px;
+  border-top-right-radius: 8px;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+  background-color: $colorBorderButtons;
+  position: relative;
+  overflow: hidden;
+}

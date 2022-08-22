@@ -4,7 +4,7 @@ $colorBackgroundButton1: #cdefff;
 $colorBackgroundButton2: #b3e7ff;
 $colorBackgroundModal: #f5f5f5;
 $colorHighlightText: #606060;
-$colorHighlightTranslation: #48CAE4;
+$colorHighlightTranslation: #1ea1c3;
 $colorDimText: #cccccc;
 $colorDimText2: #bdbdbd;
 $colorDimText3: #A0A0A0;
@@ -50,6 +50,11 @@ $textShadow: none;
       background-color: $colorBackgroundButton1
   }
 }
+@mixin header {
+  margin: 10px auto 0;
+  font-size: 25px;
+  color: $colorFont
+}
 @mixin addButton {
   margin: 10px 0 0 20px;
   cursor: pointer;
@@ -67,7 +72,6 @@ $textShadow: none;
 }
 @mixin load {
   margin: 0 auto 10px;
-  //border: 1px solid $colorBorderDim;
   padding: 5px;
   font-size: 13px;
   color: #122B5A;

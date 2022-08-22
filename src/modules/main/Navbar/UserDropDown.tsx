@@ -5,6 +5,7 @@ import {deleteUser, setShowProfileModal} from "../../../store/authSlice";
 import {useAppDispatch} from "../../../store";
 import useClickOutside from "../../util/clickOutside";
 import {ReactComponent as Book} from "../../../import/icons/book.svg";
+import {ReactComponent as Dumbbell} from "../../../import/icons/dumbbell.svg";
 import {ReactComponent as Profile} from "../../../import/icons/profile.svg";
 import {ReactComponent as Logout} from "../../../import/icons/logout.svg";
 import {ReactComponent as Sound} from "../../../import/icons/sound.svg";
@@ -27,6 +28,10 @@ export const UserDropDown: FC <ModalListPropsType> = (props) => {
 
     const userPage = () => {
         navigate(`/user`)
+        props.setShowUserDropDown(false)
+    };
+    const goWorkout = () => {
+        navigate(`/practice`)
         props.setShowUserDropDown(false)
     };
     const exit = () => {
@@ -60,6 +65,10 @@ export const UserDropDown: FC <ModalListPropsType> = (props) => {
                                     <div className={s.icon}><Book/></div>
                                     <li>Мой словарь</li>
                                 </div>
+                                <div className={s.listStyle} onClick={goWorkout}>
+                                    <div className={s.icon}><Dumbbell/></div>
+                                    <li>Тренировка</li>
+                                </div>
                                 <div className={s.listStyle} onClick={showProfileModal}>
                                     <div className={s.icon}><Profile/></div>
                                     <li>Мой профиль</li>
@@ -83,6 +92,10 @@ export const UserDropDown: FC <ModalListPropsType> = (props) => {
                         <div className={s.listStyle} onClick={userPage}>
                             <div className={s.icon}><Book/></div>
                             <li>Мой словарь</li>
+                        </div>
+                        <div className={s.listStyle} onClick={goWorkout}>
+                            <div className={s.icon}><Dumbbell/></div>
+                            <li>Тренировка</li>
                         </div>
                         <div className={s.listStyle} onClick={showProfileModal}>
                             <div className={s.icon}><Profile/></div>

@@ -3,12 +3,9 @@
     width: 60%;
     display: flex;
     margin: 30px auto;
-
 }
 .text {
-    margin: 10px auto 0;
-    font-size: 25px;
-    color: $colorFont
+    @include header
 }
 .message{
     margin: 10px;
