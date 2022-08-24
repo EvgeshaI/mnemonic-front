@@ -10,6 +10,7 @@ import {ReactComponent as Letter5} from "../../../import/icons/δ.svg"
 import {Animation} from "./Animation";
 import {useAppSelector} from "../../../store";
 import {useNavigate} from "react-router";
+import useWindowDimensions from "../../util/windowDimensions";
 
 type StartPagePropsType = {
     isDarkTheme:boolean
@@ -19,6 +20,8 @@ export const StartPageNew: FC<StartPagePropsType> = (props) => {
         isAuth
     } = useAppSelector((state) => state.authReducer);
     const [instruction, setInstruction] = useState(false)
+    const { width } = useWindowDimensions();
+    const isMobileScreen = width < 600
     const clickBrain = () => {
         setInstruction(true)
     }
@@ -33,11 +36,17 @@ export const StartPageNew: FC<StartPagePropsType> = (props) => {
         <div className={s.startPage}>
             <div className={s.header}>Запоминай английские слова эффективно и надолго!</div>
             <div className={s.text}>Создай свой собственный словарь мнемонических ассоциаций</div>
-            <div className={s.letter1}><Letter1/></div>
-            <div className={s.letter2}><Letter2/></div>
-            <div className={s.letter3}><Letter3/></div>
-            <div className={s.letter4}><Letter4/></div>
-            <div className={s.letter5}><Letter5/></div>
+            {!isMobileScreen &&
+                <>
+                    <div className={s.letter1}><Letter1/></div>
+                    <div className={s.letter2}><Letter2/></div>
+                    <div className={s.letter3}><Letter3/></div>
+                    <div className={s.letter4}><Letter4/></div>
+                    <div className={s.letter5}><Letter5/></div>
+
+                </>
+            }
+
             {instruction ?
                 <Animation/>
                 :
