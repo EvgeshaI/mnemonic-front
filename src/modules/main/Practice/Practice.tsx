@@ -54,20 +54,43 @@ export const Practice:FC<{practices: Array<IPracticeExample>}> = (props) => {
     }
     const examplesPractice = props.practices
     const currentExample = examplesPractice[count]
-
+    const prepositions = ["без", "близ", "в", "во", "вместо", "вне", "для", "до", "за", "из", "изо",
+        "из-за", "из-под", "к", "ко", "кроме", "между", "меж", "на", "над", "надо", "о", "об", "обо",
+    "от", "ото", "перед", "пред", "предо", "по", "под", "подо", "при", "про", "ради", "с", "со", "сквозь",
+    "среди", "у", "через"]
     const check = () => {
         if (engWord.length === 0 || translate.length === 0) return
         if(engWord === currentExample.engWord || engWord.trim().toLowerCase() === currentExample.engWord){
             setEngWordCorrect(true)
         }
-        const translationLower = translate.trim().toLowerCase();
-        if(translationLower === currentExample.translationInSentence.toLowerCase()
-            ||translationLower === currentExample.translationInitForm.toLowerCase()){
+        // const translationLower = translate.trim().toLowerCase();
+        let translationWithoutPrepositionArr = translate.trim().toLowerCase().split(" ")
+        let initFormWithoutPreposition = currentExample.translationInitForm.toLowerCase()
+            .split(" ").filter(el => !prepositions.includes(el)).join(" ")
+        let translationInSentenceWithoutPrepositionArr = currentExample.translationInSentence.toLowerCase()
+            .split(" ").filter(el => !prepositions.includes(el)).join(" ")
+        let translationWithoutPreposition
+        if(translationWithoutPrepositionArr.length < 2){
+            translationWithoutPreposition = translationWithoutPrepositionArr
+                .filter(el => !prepositions.includes(el)).join(" ")
+        }else{
+            translationWithoutPreposition = translationWithoutPrepositionArr.join(" ")
+        }
+        if(translationWithoutPreposition === currentExample.translationInSentence.toLowerCase()
+            || translationWithoutPreposition === currentExample.translationInitForm.toLowerCase()
+            || translationWithoutPreposition === initFormWithoutPreposition
+            || translationWithoutPreposition === translationInSentenceWithoutPrepositionArr
+        ){
             setTranslate(currentExample.translationInitForm)
             setTranslateCorrect(true)
         }
         setChecked(true)
         setCheckedCount(checkedCount + 1)
+    }
+    const keyPressCheck = (e:React.KeyboardEvent) => {
+        if (e.key === "Enter") {
+            check()
+        }
     }
     const correctAnswer = () => {
         setEngWord(currentExample.engWord)
@@ -77,7 +100,6 @@ export const Practice:FC<{practices: Array<IPracticeExample>}> = (props) => {
         setCheckedCount(checkedCount + 1)
         setRightCount(rightCount-1)
     }
-
     const wrongEngWord = () => checked && !engWordCorrect
 
     const wrongTranslation = () => checked && !translateCorrect
@@ -179,7 +201,8 @@ export const Practice:FC<{practices: Array<IPracticeExample>}> = (props) => {
                                 }}
                                 value={engWord}
                                 onChange={changeEngWord}
-                                className={engWordStyle()}/>
+                                className={engWordStyle()}
+                                onKeyPress={keyPressCheck}/>
                         </div>
                         {!isMobileScreen &&
                             <IconsResult
@@ -195,17 +218,29 @@ export const Practice:FC<{practices: Array<IPracticeExample>}> = (props) => {
                             <input
                                 value={translate}
                                 onChange={changeTranslate}
-                                className={translationStyle()}/>
+                                className={translationStyle()}
+                                onKeyPress={keyPressCheck}/>
                         </div>
                     </div>
                     {(checkedCount < 2 && (!engWordCorrect || !translateCorrect)) &&
-                        <div className={s.practiceButton} onClick={check}>Проверить</div>
+                        <div className={s.practiceButton}
+                             onClick={check}
+                             >
+                            Проверить
+                        </div>
                     }
                     {((!engWordCorrect || !translateCorrect) && checkedCount > 1) &&
-                        <div className={s.practiceButton} onClick={correctAnswer}>ответ</div>
+                        <div className={s.practiceButton}
+                             onClick={correctAnswer}
+                        >
+                            ответ
+                        </div>
                     }
                     {((engWordCorrect && translateCorrect) || checkedCount > 2) &&
-                        <div className={s.practiceButton} onClick={nextSentence}>Далее</div>
+                        <div className={s.practiceButton}
+                             onClick={nextSentence}>
+                            Далее
+                        </div>
                     }
                     {isMobileScreen &&
                         <IconsResult

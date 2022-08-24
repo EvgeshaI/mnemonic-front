@@ -1,0 +1,150 @@
+@import "../common.module";
+$border: none;
+@mixin element ($color){
+  text-align: center;
+  width: 70%;
+  padding: 5px;
+  margin: 0 auto;
+}
+
+.animationContainer{
+  margin: 40px 0;
+  font-size: 18px;
+}
+.arrowBox{
+  width: 20%;
+  position: relative;
+  animation-name: example;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+}
+.arrow{
+  margin-left: auto;
+  width: 30px;
+  fill: #4A9CEC;
+}
+@keyframes example {
+  0%   { transform: translateY(0); }
+  50%  { transform: translateY(-10px); }
+  100% { transform: translateY(0); }
+}
+
+.mnemoTechnicElement1{
+  @include element(#CAF0F8);
+  animation-delay: 0.1s;
+  transition-property: opacity;
+  transition-duration: 1s;
+  animation-name: element;
+  animation-duration: 1s;
+  opacity: 0;
+  animation-fill-mode: forwards
+}
+@keyframes element {
+  from {opacity: 0}
+  to {opacity: 1}
+}
+.mnemoTechnicElement2{
+  @include element(#90E0EF);
+  animation-delay: 1.5s;
+  transition-property: opacity;
+  transition-duration: 1s;
+  animation-name: element;
+  animation-duration: 1s;
+  opacity: 0;
+  animation-fill-mode: forwards
+}
+.mnemoTechnicElement3{
+  @include element(#48CAE4);
+  animation-delay: 3s;
+  transition-property: opacity;
+  transition-duration: 1s;
+  animation-name: element;
+  animation-duration: 1s;
+  opacity: 0;
+  animation-fill-mode: forwards
+}
+.mnemoTechnicElement4 {
+  @include element(#0096C7);
+  animation-delay: 4.5s;
+  transition-property: opacity;
+  transition-duration: 1s;
+  animation-name: element;
+  animation-duration: 1s;
+  opacity: 0;
+  animation-fill-mode: forwards
+}
+.elementsInLine{
+  display: flex;
+  margin: 0 auto 60px;
+  width: 90%;
+  align-items: center;
+}
+.words{
+  width: 40%;
+}
+.engWord{
+  text-align: center;
+  width: 50%;
+  border-radius: 10px;
+  cursor: pointer;
+  padding: 5px;
+  margin: 15px auto;
+    &:hover{color: $colorHighlightTranslation;}
+}
+.engWordBold{
+  color: $colorHighlightTranslation;
+}
+
+.iconBrain{
+  width: 20%;
+  fill: #48CAE4;
+}
+.iconBrainWithAnimation{
+  width: 20%;
+  fill: #48CAE4;
+  position: relative;
+  animation-name: brain;
+  animation-duration: 1.8s;
+  animation-direction:normal;
+  animation-iteration-count: infinite;
+}
+@keyframes brain {
+  0%   {fill: #ADE8F4; }
+  25%  {fill: #48CAE4; }
+  50%  {fill: #0077B6; }
+  75%  {fill: #48CAE4; }
+  100% {fill: #ADE8F4; }
+  0%   { transform: translateY(0); }
+  50%  { transform: translateY(-10px); }
+  100% { transform: translateY(0); }
+}
+
+.mnemoTechnic{
+  width: 40%;
+}
+
+
+@media all and (max-width: 600px){
+  .elementsInLine{
+    display: block;
+  }
+  .words{
+    width: 90%;
+    margin: 20px auto;
+    display: flex;
+    font-size: 24px;
+  }
+  .iconBrain{
+    width: 40%;
+    margin: auto;
+  }
+  .iconBrainWithAnimation{
+    width: 40%;
+    margin: auto;
+  }
+  .mnemoTechnic{
+    margin: 10px auto;
+    width: 90%;
+    height: 15vh;
+  }
+}

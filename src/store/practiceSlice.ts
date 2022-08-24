@@ -51,8 +51,10 @@ export const tookHintAsync = (exampleId: number):AppThunk => async (dispatch: an
     await MnemonicClient.tookHint(exampleId)
 }
 export const awaitingAsync = ():AppThunk => async (dispatch: any) => {
+    dispatch(setFetching(true))
     let result = await MnemonicClient.await()
     dispatch(getAwaitingPractice(result))
+    dispatch(setFetching(false))
 }
 
 export default practiceSlice.reducer;

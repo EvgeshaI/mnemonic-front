@@ -4,7 +4,6 @@ import EngWord from "../main/EngWord/EngWord";
 import Alerts from "../main/Alert/Alerts";
 import {LoginAndRegistration} from "../main/LoginAndRegistration/LoginAndRegistration";
 import {Navbar} from "../main/Navbar/Navbar";
-import {StartPage} from "../main/StartPage/StartPage";
 import {useAppDispatch, useAppSelector} from "../../store";
 import {initializedAppAsync} from "../../store/appSlice";
 import {UserPageContainer} from "../main/User/UserPageContainer";
@@ -18,6 +17,7 @@ import {Privacy} from "../main/privacy/Privacy";
 import {Consonance} from "../main/consonance/Consonance";
 import useAppTheme from "../util/useAppTheme";
 import {PracticeContainer} from "../main/Practice/PracticeContainer";
+import {StartPageNew} from "../main/StartPage/StartPageNew";
 
 const App: React.FC<any> = () => {
     const {
@@ -39,7 +39,7 @@ const App: React.FC<any> = () => {
             <Routes>
                 <Route path = "/eng/:word" element={<EngWord/>}/>
                 <Route path = "/login" element={<LoginAndRegistration/>}/>
-                <Route path = "/" element={<StartPage isDarkTheme={isDarkTheme}/>}/>
+                <Route path = "/" element={<StartPageNew isDarkTheme={isDarkTheme}/>}/>
                 <Route path = "/user" element={<UserPageContainer/>}/>
                 <Route path = "/reset" element={<ResetPassword/>}/>
                 <Route path = "/changePassword" element={<ChangePassword/>}/>

@@ -25,12 +25,12 @@ export const PracticeContainer = () => {
             dispatch(awaitingAsync())
         }
     }, [examplesPractice])
-
+    if (isFetching) {
+        return <Preloader/>
+    }
     return (
         <div>
-            {isFetching &&
-                <Preloader/>
-            }
+
             {examplesPractice.length > 0 &&
                 <Practice practices={examplesPractice}/>
             }
