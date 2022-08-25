@@ -80,7 +80,7 @@ export const Animation = () => {
                             .map((w, index) =>
                                 <div className={engWordStyle(index)}
                                      onClick={() => openMnemotechnic(w.engWord, index)}>
-                                    {w.engWord}
+                                    <div>{w.engWord}</div>
                                 </div>
                             )
                         }

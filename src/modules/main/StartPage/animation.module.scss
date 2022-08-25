@@ -74,10 +74,11 @@ $border: none;
 }
 
 .engWord{
-  text-align: center;
   cursor: pointer;
   padding: 10px;
-    &:hover{color: $colorHighlightTranslation;}
+  display: flex;
+  justify-content: center;
+    div:hover{color: $colorHighlightTranslation;}
 }
 .engWordBold{
   color: $colorHighlightTranslation;
