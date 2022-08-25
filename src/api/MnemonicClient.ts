@@ -5,6 +5,7 @@ import {
     IEngWord,
     IEngWordSuggest,
     IExample,
+    IExampleHomePage,
     IMnemonic,
     IPageElements,
     IPractice,
@@ -204,6 +205,14 @@ export class MnemonicClient extends BaseClient {
     }
     static async await () {
         return this.get<Array<IAwait>>(`practice/awaiting`)
+    }
+    static async exampleHomePage (excludeIds: Array<number>) {
+        let params = {
+            excludeIds: excludeIds.toString(),
+            likes: 2,
+            size: 4
+        }
+        return this.get<IExampleHomePage>(`example/home-page`, {params})
     }
 }
 

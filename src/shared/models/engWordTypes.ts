@@ -165,4 +165,20 @@ export interface IAwait {
     stage: string
 }
 
+export interface IExampleHomePage {
+    hasMore: boolean,
+    examples: Array<IExampleHome>
+}
+export interface IExampleHome{
+    engWordId: number,
+    engWord: string,
+    transcription: string,
+    transliteration: string,
+    translationInitForm: string,
+    mnemonicInitForm: string,
+    highlight: Array<number>,
+    sentence: string,
+    parts: Array<IPart>
+}
+
 

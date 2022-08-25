@@ -9,6 +9,7 @@ import mnemonicReducer from "./mnemonicSlice"
 import exampleReducer from "./exampleSlice"
 import regexpReducer from "./regexpSlice"
 import practiceReducer from "./practiceSlice"
+import homePageReducer from "./homePageSlice"
 
 export const store = configureStore( {
     reducer: {
@@ -21,6 +22,7 @@ export const store = configureStore( {
         userReducer: userReducer,
         regexpReducer: regexpReducer,
         practiceReducer: practiceReducer,
+        homePageReducer: homePageReducer,
     }
 });
 

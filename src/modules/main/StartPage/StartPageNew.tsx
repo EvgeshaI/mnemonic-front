@@ -43,10 +43,8 @@ export const StartPageNew: FC<StartPagePropsType> = (props) => {
                     <div className={s.letter3}><Letter3/></div>
                     <div className={s.letter4}><Letter4/></div>
                     <div className={s.letter5}><Letter5/></div>
-
                 </>
             }
-
             {instruction ?
                 <Animation/>
                 :
@@ -64,7 +62,6 @@ export const StartPageNew: FC<StartPagePropsType> = (props) => {
                 :
                 <div className={s.buttonRegistration} onClick={goToRegistration}>Регистрация</div>
             }
-
         </div>
     )
 };

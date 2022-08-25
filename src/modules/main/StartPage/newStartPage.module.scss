@@ -12,11 +12,12 @@ $border: 1px solid $colorDimText2;
   margin: 0 0 20px 0;
 }
 .animationContainer{
-  margin: 30px 0;
+  padding: 20px 0;
   font-size: 18px;
 }
 .arrowBox{
   margin: auto;
+  height: 7vh;
   text-align: center;
   position: relative;
   animation-name: example;
@@ -24,13 +25,14 @@ $border: 1px solid $colorDimText2;
   animation-iteration-count: infinite;
 }
 .arrow{
-  margin: 5px auto;
+  margin: 0 auto;
+  padding: 5px 0;
   width: 30px;
   fill: #4A9CEC;
 }
 
 .iconBrain{
-  width: 20%;
+  width: 22%;
   margin: 10px auto;
   cursor: pointer;
   fill: #48CAE4;
@@ -42,6 +44,7 @@ $border: 1px solid $colorDimText2;
 }
 .textToRegistration{
   margin: 10px;
+  padding: 30px 0 0 0;
   font-size: 15px;
   text-align: center;
   color: $colorDimText3;
@@ -69,7 +72,7 @@ $border: 1px solid $colorDimText2;
   fill: #90E0EF;
   opacity: 0.4;
   left: 80%;
-  top: 40%;
+  top: 35%;
   transform: rotate(-30deg)
 }
 .letter3{
@@ -106,8 +109,14 @@ $border: 1px solid $colorDimText2;
 }
 
 @media all and (max-width: 600px) {
+  .iconBrain{
+    width: 40%;
+  }
   .startPage{
     width: 97%;
+  }
+  .textToRegistration{
+    margin: 20px 0;
   }
   .buttonRegistration{
     width: 45%;
