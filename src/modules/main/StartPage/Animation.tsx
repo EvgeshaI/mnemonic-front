@@ -93,7 +93,7 @@ export const Animation = () => {
                                     {currentElement.engWord} - {currentElement.translationInitForm}
                                 </div>
                                 <div className={s.mnemoTechnicElement2}>
-                                    {currentElement.transcription}-{currentElement.transliteration}
+                                    [{currentElement.transcription}]-[{currentElement.transliteration}]
                                 </div>
                                 <div className={s.mnemoTechnicElement3}>
                                     <HighlightMnemonic
