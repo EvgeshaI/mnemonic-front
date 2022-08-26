@@ -78,7 +78,9 @@ export const Animation = () => {
                     <div className={s.words}>
                         {examples
                             .map((w, index) =>
-                                <div className={engWordStyle(index)}
+                                <div
+                                    key={index}
+                                    className={engWordStyle(index)}
                                      onClick={() => openMnemotechnic(w.engWord, index)}>
                                     <div>{w.engWord}</div>
                                 </div>

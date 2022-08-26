@@ -2,11 +2,11 @@ import React, {FC} from "react";
 import TimeAgo from 'javascript-time-ago'
 import s from "./awaiting.module.scss"
 import en from 'javascript-time-ago/locale/en.json'
-import ru from 'javascript-time-ago/locale/ru.json'
 import moment from "moment";
 
-TimeAgo.addDefaultLocale(en)
-TimeAgo.addLocale(ru)
+// TimeAgo.addDefaultLocale(en)
+TimeAgo.setDefaultLocale(en.locale)
+TimeAgo.addLocale(en)
 
 type AwaitingPartPropsType = {
     sentence: string,

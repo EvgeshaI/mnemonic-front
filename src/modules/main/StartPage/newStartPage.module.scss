@@ -32,9 +32,9 @@ $border: 1px solid $colorDimText2;
 }
 
 .iconBrain{
-  width: 22%;
-  margin: 10px auto;
   cursor: pointer;
+  margin: 25px auto;
+  width: 22%;
   fill: #48CAE4;
 }
 @keyframes example {
@@ -43,8 +43,6 @@ $border: 1px solid $colorDimText2;
   100% { transform: translateY(0); }
 }
 .textToRegistration{
-  margin: 10px;
-  padding: 30px 0 0 0;
   font-size: 15px;
   text-align: center;
   color: $colorDimText3;

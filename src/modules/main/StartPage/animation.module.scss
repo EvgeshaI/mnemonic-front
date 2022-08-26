@@ -63,7 +63,7 @@ $border: none;
 }
 .elementsInLine{
   display: flex;
-  margin: 10px auto 20px;
+  margin: 0 auto 20px;
   width: 100%;
   align-items: center;
 }
@@ -86,13 +86,15 @@ $border: none;
   width: 30px;
   cursor: pointer;
   fill: $colorBorderButtons;
-  margin: 5px auto;
+  margin: 0 auto;
 }
 .iconBrain{
+  margin: 22px 0;
   width: 22%;
   fill: #48CAE4;
 }
 .iconBrainWithAnimation{
+  margin: 22px 0;
   width: 22%;
   fill: #48CAE4;
   position: relative;
