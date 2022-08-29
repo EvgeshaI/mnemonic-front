@@ -54,7 +54,7 @@ const ExampleComponent: FC<PropsType> = (props) => {
         if (props.example.isCreator) return
         if (props.auth) {
             if (!props.example.isCreator) {
-                if (!props.example.liked) {
+                if (!props.example.isLiked) {
                     dispatch(addExampleLikeAsync(props.example.exampleId))
                 } else {
                     dispatch(deleteExampleLikeAsync(props.example.exampleId))
@@ -77,7 +77,7 @@ const ExampleComponent: FC<PropsType> = (props) => {
         if (props.example.isCreator) {
             return <div><GreyHeart/></div>
         }
-        return props.example.liked ? <HeartYes/> : <HeartNo/>
+        return props.example.isLiked ? <HeartYes/> : <HeartNo/>
     }
 
     const isEditable = () => {

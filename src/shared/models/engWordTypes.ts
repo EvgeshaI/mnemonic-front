@@ -48,7 +48,7 @@ export interface IExample {
     mnemonicId: number | null,
     mnemonicInSentence: string,
     likes: number,
-    liked: boolean,
+    isLiked: boolean,
     isCreator: boolean,
     sentence: string,
     creator: ICreator

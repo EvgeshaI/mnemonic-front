@@ -29,6 +29,8 @@ const App: React.FC<any> = () => {
     } = useAppSelector((state) => state.appReducer);
     const location = useLocation();
     const dispatch =  useAppDispatch();
+    console.log(location.pathname + location.search)
+    ReactGA.send({ hitType: "pageview", page: location.pathname + location.search});
     useEffect(() => {
         ReactGA.send({ hitType: "pageview", page: location.pathname + location.search});
     }, [location]);

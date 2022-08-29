@@ -43,7 +43,7 @@ export const exampleSlice = createSlice(
                 let exampleLike = state.examples.find(m => m.exampleId === exampleId);
                 if (exampleLike) {
                     exampleLike.likes = exampleLike.likes + 1;
-                    exampleLike.liked = true
+                    exampleLike.isLiked = true
                 }
             },
             deleteExampleLike: (state, action: PayloadAction<number>) => {
@@ -51,7 +51,7 @@ export const exampleSlice = createSlice(
                 let exampleLike = state.examples.find(m => m.exampleId === exampleId);
                 if (exampleLike) {
                     exampleLike.likes = exampleLike.likes - 1;
-                    exampleLike.liked = false
+                    exampleLike.isLiked = false
                 }
             },
             clearCheckedExample: (state) => {
