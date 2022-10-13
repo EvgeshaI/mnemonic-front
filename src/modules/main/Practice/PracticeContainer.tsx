@@ -30,11 +30,10 @@ export const PracticeContainer = () => {
     }
     return (
         <div>
-
             {examplesPractice.length > 0 &&
                 <Practice practices={examplesPractice}/>
             }
-            {examplesPractice.length === 0 && awaitingPractice &&
+            {examplesPractice.length === 0 && awaitingPractice.length>0 && examplesPractice.length === 0 &&
                 <AwaitPractice
                     awaitingPractice={awaitingPractice}
                 />
@@ -42,7 +41,10 @@ export const PracticeContainer = () => {
             {examplesPractice.length === 0 && awaitingPractice.length === 0 &&
                 <div className={s.notice}>
                     У вас пока нет примеров, чтобы тренироваться в запоминании английских слов!
+                    <div className={s.noticeInstr}>придумывайте больше мнемоник и примеров с ними, чтобы включить их в свои тренировки
+                    </div>
                 </div>
+
             }
         </div>
     )

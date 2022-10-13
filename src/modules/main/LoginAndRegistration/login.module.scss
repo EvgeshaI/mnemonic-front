@@ -20,7 +20,6 @@
 
 .form input {
     @include input(grey)
-
 }
 .formError input {
     @include input($colorRed)

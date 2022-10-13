@@ -70,10 +70,15 @@ export const Animation = () => {
     }
     return (
         <div className={s.animationContainer}>
-            <div className={s.iconRepeat}
-                 onClick={moreExamples}>
-                <Repeat/>
+            <div className={s.headers}>
+                <div className={s.headColumn}>слово</div>
+                <div className={s.iconRepeat}
+                     onClick={moreExamples}>
+                    <Repeat/>
+                </div>
+                <div className={s.headColumn}>как составить мнемонику</div>
             </div>
+
                 <div className={s.elementsInLine}>
                     <div className={s.words}>
                         {examples
@@ -93,17 +98,21 @@ export const Animation = () => {
                             <>
                                 <div className={s.mnemoTechnicElement1}>
                                     {currentElement.engWord} - {currentElement.translationInitForm}
+                                    <div className={s.instr}> перевод</div>
                                 </div>
                                 <div className={s.mnemoTechnicElement2}>
                                     [{currentElement.transcription}]-[{currentElement.transliteration}]
+                                    <div className={s.instr}>транскрипция-транслитерация</div>
                                 </div>
                                 <div className={s.mnemoTechnicElement3}>
                                     <HighlightMnemonic
                                         highlight={currentElement.highlight}
                                         mnemonic={currentElement.mnemonicInitForm}/>
+                                    <div className={s.instr}>мнемоника (содержит транслитерацию)</div>
                                 </div>
                                 <div className={s.mnemoTechnicElement4}>
                                     <ExampleFormat parts={currentElement.parts}/>
+                                    <div className={s.instr}> пример (содержит мнемонику и перевод)</div>
                                 </div>
                             </>
                         }

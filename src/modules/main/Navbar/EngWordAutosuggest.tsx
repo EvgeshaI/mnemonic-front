@@ -117,7 +117,7 @@ export const EngWordAutosuggest: FC<{transWidth: number}> = ({transWidth}) => {
                 <Search/>
             </div>
             <input type="text"
-                   placeholder="поиск..."
+                   placeholder="поиск английских слов..."
                    className={style.searchInput}
                    value={value}
                    onChange={searchWord}

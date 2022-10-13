@@ -106,10 +106,14 @@
 .notice{
   font-size: 20px;
   text-align: center;
-  margin: 30px 0;
+  margin: 50px 0;
   color: $colorFont;
+  padding: 10px;
 }
-
+.noticeInstr{
+  font-size: 15px;
+  margin: 10px;
+}
 @media all and (max-width: 600px){
   .practiceContainer {
     width: 95%;

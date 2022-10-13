@@ -80,13 +80,13 @@ export const signUpAsync = (nickname: string, email: string, password: string): 
         let user = extractUser(response.accessToken)
         dispatch(setUser(user))
         localStorage.setItem("user", JSON.stringify(user))
-
     } catch (error){
         // @ts-ignore
         const message = error.data.data.message
         dispatch(setError(message))
     }
 }
+
 export const updateUserName = (nickname: string):AppThunk => async (dispatch: any) => {
     try {
         let response = await MnemonicClient.updateNickname(nickname)
@@ -134,11 +134,11 @@ const extractUser = (token: string) => {
     }
 }
 
-export const restorePasswordAsync = (email: string): AppThunk => async (dispatch: any) => {
+export const restorePasswordAsync = (email: string): AppThunk => async () => {
    await MnemonicClient.resetPassword(email)
 }
 
-export const changePasswordAsync = (token: string, password: string): AppThunk => async (dispatch: any) => {
+export const changePasswordAsync = (token: string, password: string): AppThunk => async () => {
     await MnemonicClient.changePassword(token, password)
 }
 

@@ -61,10 +61,14 @@ $border: none;
   opacity: 0;
   animation-fill-mode: forwards
 }
+.instr{
+  font-size: 13px;
+  text-align: center;
+  color: $colorBorderButtons;
+}
 .elementsInLine{
   display: flex;
   margin: 0 auto 20px;
-  width: 100%;
   align-items: center;
 }
 .words{
@@ -88,6 +92,20 @@ $border: none;
   fill: $colorBorderButtons;
   margin: 0 auto;
 }
+
+.headers{
+  width: 90%;
+  display: flex;
+  font-size: 15px;
+  color: $colorDimText3;
+  margin: auto;
+  align-items: center;
+}
+.headColumn{
+  width: 30%;
+  text-align: center;
+}
+
 .iconBrain{
   margin: 22px 0;
   width: 22%;
@@ -116,9 +134,7 @@ $border: none;
 
 .mnemoTechnic{
   width: 39%;
-  div {
-    margin: 0 0 0 40px;
-  }
+
 }
 
 
@@ -154,6 +170,8 @@ $border: none;
   }
   .iconRepeat{
     width: 30px;
-
+  }
+  .headColumn{
+    display: none;
   }
 }

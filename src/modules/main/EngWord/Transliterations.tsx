@@ -7,10 +7,11 @@ type TransliterationsPropsType = {
 }
 
 export const Transliterations: FC<TransliterationsPropsType> = (props) => {
-    let sortTranslit = [...props.transliterations].sort((a, b) => b.accuracy - a.accuracy)
+   let sortTranslit = [...props.transliterations].sort((a, b) => b.accuracy - a.accuracy)
     return (
         <>
-            {sortTranslit.length > 0 &&
+            {
+                sortTranslit.length > 0 &&
                 <div className={s.transliter}>
                     <div className={s.transl}>
                         [{sortTranslit[0].transliteration}]

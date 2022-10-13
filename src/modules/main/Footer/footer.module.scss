@@ -11,9 +11,16 @@
 .mail{
   padding: 0 0 0 10px;
 }
+.vkLink{
+  margin: 0 10px 0;
+  color: $colorDimText2;
+  text-decoration: none;
+  text-align: center;
+}
+
 .confidBox{
   display: flex;
-  margin: 0 10px 0;
+  margin: 0 10px 0 0;
   cursor: pointer;
 }
 .confid{

@@ -18,7 +18,7 @@ const MyTranslit: FC<PropsType> = (props) => {
         let selected = []
         for (let i =0; i< highlight.length; i++){
             const number = highlight[i];
-            selected.push(props.word[number])
+            selected.push(props.word[number].toLowerCase())
         }
         setMyTranslit(selected.join(''))
     }

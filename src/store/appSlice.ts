@@ -38,7 +38,7 @@ export const {
     setTheme
 } = appSlice.actions
 
-export const initializedAppAsync = (): AppThunk => (dispatch: any, getState) => {
+export const initializedAppAsync = (): AppThunk => (dispatch: any) => {
     const theme = JSON.parse(localStorage.getItem("isDarkTheme") || "false") as boolean
     dispatch(setTheme(theme))
     dispatch(getAndSetUser())

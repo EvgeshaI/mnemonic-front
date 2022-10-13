@@ -10,6 +10,7 @@ export const Footer = () => {
     return (
         <div className={s.footerContainer}>
             <div className={s.mail}>info@mnemology.ru</div>
+            <a className={s.vkLink} href={"https://vk.com/mnemology"}>Mnemology в VK</a>
             <div className={s.confidBox}>
                 <div className={s.confid} onClick={goToPrivacy}>Политика</div>
                 <div className={s.agreement}>Соглашение</div>

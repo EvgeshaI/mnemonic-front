@@ -20,7 +20,7 @@ export const AwaitPractice: FC<AwaitPracticePropsType> = (props) => {
             Поздравляем! Вы успешно повторили все слова!
             <div className={s.confetti}><Confetti/></div>
             <div className={s.text}>
-                увидимя на следующей тренировке!
+                увидимcя на следующей тренировке!
             </div>
            <div className={s.awaitPractice}>
                <div className={s.columnName}>
