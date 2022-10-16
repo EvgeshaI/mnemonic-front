@@ -1,45 +1,76 @@
 body {
-    font-family:  'MyFont', 'Grill Sans', serif;
+    font-family: 'Comfortaa', 'Montserrat', 'Grill Sans', serif;
     margin: 0;
     color: var(--font-color);
 }
 textarea {
-    font-family: 'MyFont', 'Grill Sans', serif;
+    font-family: 'Comfortaa', 'Montserrat', 'Grill Sans', serif;
     color: var(--font-color);
 }
 input {
-    font-family: 'MyFont', 'Grill Sans', serif;
+    font-family: 'Comfortaa', 'Montserrat', 'Grill Sans', serif;
     color: var(--font-color);
 }
 div {
-    font-family: 'MyFont', 'Grill Sans', serif;
+    font-family: 'Comfortaa', 'Montserrat', 'Grill Sans', serif;
 }
+
+/*COMFORTAA*/
+
 @font-face {
-    font-family: 'MyFont';
+    font-family: 'Comfortaa';
     font-weight: 300;
-    /*src: local('MyFont'), url(./import/Merriweather-Light.ttf) format('truetype');*/
-    src: local('MyFont'), url(./import/fonts/MontserratAlternates-Light.ttf) format('truetype');
+    src: local('Comfortaa'), url(./import/fonts/comfortaa/Comfortaa-Light.ttf) format('truetype');
 }
 @font-face {
-    font-family: 'MyFont';
+    font-family: 'Comfortaa';
     font-weight: 400;
-    src: local('MyFont'), url(./import/fonts/MontserratAlternates-Regular.ttf) format('truetype');
+    src: local('Comfortaa'), url(./import/fonts/comfortaa/Comfortaa-Regular.ttf) format('truetype');
 }
 @font-face {
-font-family: 'MyFont';
+    font-family: 'Comfortaa';
+    font-weight: 500;
+    src: local('Comfortaa'), url(./import/fonts/comfortaa/Comfortaa-Medium.ttf) format('truetype');
+}
+@font-face {
+    font-family: 'Comfortaa';
+    font-weight: 600;
+    src: local('Comfortaa'), url(./import/fonts/comfortaa/Comfortaa-SemiBold.ttf) format('truetype');
+}
+@font-face {
+    font-family: 'Comfortaa';
     font-weight: 700;
-    src: local('MyFont'), url(./import/fonts/MontserratAlternates-Bold.ttf) format('truetype');
+    src: local('Comfortaa'), url(./import/fonts/comfortaa/Comfortaa-Bold.ttf) format('truetype');
+}
+
+/*MONTSERRAT*/
+
+@font-face {
+font-family: 'Montserrat';
+    font-weight: 300;
+    src: local('Montserrat'), url(./import/fonts/montserrat/MontserratAlternates-Light.ttf) format('truetype');
 }
 @font-face {
-    font-family: 'MyFont';
-    font-weight: 900;
-    src: local('MyFont'), url(./import/fonts/MontserratAlternates-ExtraBold.ttf) format('truetype');
+    font-family: 'Montserrat';
+    font-weight: 100;
+    font-style: italic;
+    src: local('Montserrat'), url(./import/fonts/montserrat/MontserratAlternates-Italic.ttf) format('truetype')
+}
+@font-face {
+    font-family: 'Montserrat';
+    font-weight: 400;
+    src: local('Montserrat'), url(./import/fonts/montserrat/MontserratAlternates-Regular.ttf) format('truetype')
 }
 
 @font-face {
-    font-family: 'MyFont';
-    font-style: italic;
-    src: local('MyFont'), url(./import/fonts/MontserratAlternates-Italic.ttf) format('truetype');
+    font-family: 'Montserrat';
+    font-weight: 700;
+    src: local('Montserrat'), url(./import/fonts/montserrat/MontserratAlternates-Bold.ttf) format('truetype')
+}
+@font-face {
+    font-family: 'Montserrat';
+    font-weight: 800;
+    src: local('Montserrat'), url(./import/fonts/montserrat/MontserratAlternates-ExtraBold.ttf) format('truetype')
 }
 
 :root {
