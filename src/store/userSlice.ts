@@ -68,22 +68,22 @@ export const userSlice = createSlice(
                     }
                 }
             },
-            updateStudyExample: (state, action: PayloadAction<{ studyId: number, example: IExample }>) => {
-                let studyId = action.payload.studyId;
-                let example = action.payload.example;
-                state.studies = state.studies.map(el => {
-                    if (el.studyId === studyId) {
-                        el.examples = [...el.examples,]
-                        el.examples.push({
-                            id: example.exampleId,
-                            likes: example.likes,
-                            parts: example.parts,
-                            created: example.created
-                        })
-                    }
-                    return el
-                })
-            },
+            // updateStudyExample: (state, action: PayloadAction<{ studyId: number, example: IExample }>) => {
+            //     let studyId = action.payload.studyId;
+            //     let example = action.payload.example;
+            //     state.studies = state.studies.map(el => {
+            //         if (el.studyId === studyId) {
+            //             el.examples = [...el.examples,]
+            //             el.examples.push({
+            //                 id: example.exampleId,
+            //                 likes: example.likes,
+            //                 parts: example.parts,
+            //                 created: example.created
+            //             })
+            //         }
+            //         return el
+            //     })
+            // },
 
             removeMyExample: (state, action: PayloadAction<number>) => {
                 let deleteMyExampleId = action.payload;
@@ -91,9 +91,9 @@ export const userSlice = createSlice(
                     el.examples = el.examples.filter(ex => ex.id !== deleteMyExampleId)
                 })
             },
-            removeMyMnemonic: (state, action: PayloadAction<number>) => {
-               state.studies = state.studies.filter(el => el.mnemonic.id !== action.payload)
-            },
+            // removeMyMnemonic: (state, action: PayloadAction<number>) => {
+            //    state.studies = state.studies.filter(el => el.mnemonic.id !== action.payload)
+            // },
             searchMnemo: (state, action: PayloadAction<IPageElements<IStudy>>) => {
                  state.studies = action.payload.elements
             },
@@ -119,9 +119,9 @@ export const {
     setNewUserPage,
     setCurrentSearch,
     setMyExample,
-    updateStudyExample,
+    // updateStudyExample,
     removeMyExample,
-    removeMyMnemonic,
+    // removeMyMnemonic,
     deleteNewExample,
     initUserPageState,
     setMyStatistic
@@ -176,7 +176,7 @@ export const checkMyExampleTranslationAsync = (translationId: number, studyId: n
 export const saveMyExampleAsync = (studyId:number, example: IExample): AppThunk => async  (dispatch: any) => {
     try {
         let result = await MnemonicClient.saveExample(example)
-        dispatch(updateStudyExample({studyId, example: result}))
+        // dispatch(updateStudyExample({studyId, example: result}))
         dispatch(getMyStatisticAsync())
     } catch (error) {
         // @ts-ignore
@@ -194,7 +194,7 @@ export const deleteMyExampleAsync = (myExampleId:number): AppThunk => async  (di
 
 export const deleteThisMnemonicAsync = (mnemonicID: number): AppThunk => async (dispatch: any) => {
     await MnemonicClient.deleteMeMnemonic(mnemonicID)
-    dispatch(removeMyMnemonic(mnemonicID))
+    // dispatch(removeMyMnemonic(mnemonicID))
 }
 export const getMyStatisticAsync = (): AppThunk => async (dispatch: any) => {
    let result =  await MnemonicClient.getStatistic()

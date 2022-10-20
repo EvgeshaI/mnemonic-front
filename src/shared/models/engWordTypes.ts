@@ -95,13 +95,21 @@ export interface IPageElements<T> {
     elements: Array <T>,
     totalPages: number
 }
+// export interface IStudy {
+//     studyId: number,
+//     engWord: StudyEngWord
+//     mnemonic: StudyMnemonic
+//     examples: Array<StudyExample>
+//     translations: Array <ITranslation>,
+//     transcriptions: Array<ITranscription>
+// }
+
 export interface IStudy {
-    studyId: number,
-    engWord: StudyEngWord
-    mnemonic: StudyMnemonic
-    examples: Array<StudyExample>
+    engWord: StudyEngWord,
     translations: Array <ITranslation>,
-    transcriptions: Array<ITranscription>
+    transcriptions: Array<ITranscription>,
+    mnemonics: Array<StudyMnemonic>,
+    examples: Array<StudyExample>
 }
 
 export interface StudyEngWord {
@@ -114,10 +122,12 @@ export interface StudyMnemonic {
     likes: number,
     highlight: Array<number>
     created: string
+    creator: string
 }
 
 export interface StudyExample {
     id: number,
+    mnemonicId: number,
     likes: number,
     parts: Array<IPart>
     created: string

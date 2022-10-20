@@ -151,7 +151,7 @@ $textShadow: none;
 }
 
 @mixin highlightMnemo {
-  font-weight: bold;
+  font-weight: 800;
   color: $colorHighlightMnemo;
   text-shadow: $textShadow
 }

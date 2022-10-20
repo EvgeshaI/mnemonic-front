@@ -10,7 +10,7 @@ import {deleteMyExampleAsync} from "../../../store/userSlice";
 import {useAppDispatch} from "../../../store";
 import {DeleteModal} from "../Modal/DeleteModal";
 import {ExampleFormat} from "../example/ExampleFormat";
-import moment from "moment";
+import {isExpired} from "../../util/utilFunctions";
 
 type MyStudyExamplePropsType = {
     parts: Array<IPart>
@@ -35,10 +35,6 @@ export const MyStudyExample: FC<MyStudyExamplePropsType> = (props) => {
         dispatch(deleteMyExampleAsync(props.exampleId))
         setShowModal(false)
     }
-    let isExpired = (created: string) => {
-        let createdDate = moment(created, "DD-MM-YYYY HH:mm:ss")
-        return createdDate.add(24, 'hours').isBefore(moment())
-    }
 
     const getBoldIcon = () => {
         return bold ? <Bold/> : <NotBold/>
@@ -62,7 +58,8 @@ export const MyStudyExample: FC<MyStudyExamplePropsType> = (props) => {
                 <div className={s.iconStyle} onClick={pushBold}>{getBoldIcon()}</div>
                 {!isExpired(props.created) &&
                     <div className={s.iconStyle}
-                         onClick={showDeleteModal}><Trash/>
+                         onClick={showDeleteModal}>
+                        <Trash/>
                     </div>
                 }
             </div>

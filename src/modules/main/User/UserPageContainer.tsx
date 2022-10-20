@@ -82,17 +82,17 @@ export const UserPageContainer = () => {
                         :
                         <div>
 
-                            {studies.map(el =>
-                                <div key={el.studyId}>
+                            {studies.map((el, i) =>
+                                <div key={i}>
                                     <UserPage
                                         createExampleMap={createExampleMap}
-                                        mnemonic={el.mnemonic}
+                                        mnemonics={el.mnemonics}
                                         engWord={el.engWord}
                                         examples={el.examples}
                                         translations={el.translations}
-                                        studyId={el.studyId}
+                                        // studyId={el.studyId}
                                         transcriptions={el.transcriptions}
-                                        key={el.studyId}
+                                        // key={el.studyId}
                                     />
                                 </div>
                             )}

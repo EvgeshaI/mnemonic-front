@@ -1,15 +1,20 @@
-import React, {useEffect, useState} from "react";
+import React, {FC, useEffect, useState} from "react";
 import s from "./consonance.module.scss"
 import {ReactComponent as Search} from "../../../import/icons/search.svg";
 import {ReactComponent as Question} from "../../../import/icons/question.svg";
 import {useAppDispatch, useAppSelector} from "../../../store";
-import {clearConsonance, findByRegexpAsync} from "../../../store/regexpSlice";
+import {findByRegexpAsync} from "../../../store/regexpSlice";
 import {ConsonanceContent} from "./ConsonanceContent";
 import './toggle.scss'
 import Toggle from "react-toggle";
 import useDebounce from "../../util/useDebounce";
 
-export const Consonance = () => {
+
+type ConsonancePropsType = {
+    locationContent: string | null
+}
+
+export const Consonance: FC<ConsonancePropsType> = (props) => {
     const {
         consonances
     } = useAppSelector((state) => state.regexpReducer);
@@ -26,7 +31,7 @@ export const Consonance = () => {
         const match = /^([а-яА-ЯёЁ?*]+)$/.test(search);
         if (search === '') {
             setCorrect(true)
-            dispatch(clearConsonance())
+            // dispatch(clearConsonance())
         } else if(match){
             setCorrect(true)
             dispatch(findByRegexpAsync(search, onlyInit))
@@ -37,24 +42,33 @@ export const Consonance = () => {
     const searchWord = (e: React.ChangeEvent<HTMLInputElement>) => {
         setSearch(e.target.value)
     }
-    useEffect(() => {
-        return () => {
-            dispatch(clearConsonance())
-        }
-    }, []);
+    // useEffect(() => {
+    //     return () => {
+    //         dispatch(clearConsonance())
+    //     }
+    // }, []);
 
 
     return (
         <>
             <div className={s.consonances}>
-                <div className={s.text}>
-                    Поиск созвучий
-                </div>
-                <div className={s.instructionText}>
-                    Данный раздел поможет вам подобрать русские слова, созвучные английским или содержащие созвучную часть. <br/>
-                    Для этого введите в поиске на русском языке транслитерацию или ее часть. <br/>
-                    Чтобы расширить поиск, добавляйте дополнительные буквы с помощью специальных символов "?" и "*".
-                </div>
+                {props.locationContent === "navbar" &&
+                    <div className={s.text}>
+                        Поиск созвучий
+                    </div>
+                }
+                {props.locationContent === "navbar" ?
+                    <div className={s.instructionText}>
+                        Данный раздел поможет вам подобрать русские слова, созвучные английским или содержащие созвучную часть. <br/>
+                        Для этого введите в поиске на русском языке транслитерацию или ее часть. <br/>
+                        Чтобы расширить поиск, добавляйте дополнительные буквы с помощью специальных символов "?" и "*".
+                    </div>
+                    :
+                    <div className={s.instructionText}>
+                        введите в поиске на русском языке транслитерацию или ее часть
+                    </div>
+                }
+
             </div>
             <div>
                 <div className={s.search}>
@@ -98,7 +112,9 @@ export const Consonance = () => {
                     <div className={s.content} key={i}>
                         <ConsonanceContent
                             key={i}
-                            consonances={el}/>
+                            consonances={el}
+                            locationContent={props.locationContent}
+                        />
                     </div>
                 )}
             </div>

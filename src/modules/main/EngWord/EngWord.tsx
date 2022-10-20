@@ -13,6 +13,7 @@ import {Preloader} from "../Preloader/Preloader";
 import {ReactComponent as ArrowDown} from "../../../import/icons/arrow1.svg";
 import {ReactComponent as ArrowUp} from "../../../import/icons/arrow2.svg";
 import {Transliterations} from "./Transliterations";
+import {Consonance} from "../consonance/Consonance";
 
 const EngWord: FC<any> = () => {
     const dispatch = useAppDispatch();
@@ -56,6 +57,7 @@ const EngWord: FC<any> = () => {
     }
     const [trans, setTrans] = useState(true)
     const [amountOfTrans, setAmountOfTrans] = useState(4)
+    const [showContent, setShowContent] = useState(true)
     let joinTranslation = (translations: Array<ITranslation>) => {
         return translations.filter((el, i) => i < amountOfTrans).map(t => t.translation).join(", ");
     };
@@ -68,7 +70,6 @@ const EngWord: FC<any> = () => {
             setAmountOfTrans(4)
         }
     }
-
     const defineLocation = (location: string) => {
         if(location === "AMERICAN"){
             return "амер."
@@ -76,6 +77,7 @@ const EngWord: FC<any> = () => {
             return "брит."
         }
     }
+
     let limitTranscriptions = (transcriptions: Array<ITranscription>) => {
         let result = []
         let americanArr = transcriptions.filter(el => el.location === "AMERICAN")
@@ -131,43 +133,57 @@ const EngWord: FC<any> = () => {
                                     }
                                 </>
                             }
-
                         </div>
                     </div>
-                    <div className={s.word}> мнемоники:</div>
-                    <div>
-                        {engWord &&
-                            <MnemonicContainer
-                                engWord={engWord}
-                                mnemonics={mnemonics}
-                                isAuth={isAuth}
-                                hasMoreMnemonics={hasMoreMnemonics}
-                            />
-                        }
-                    </div>
-                    <br/>
-                    <br/>
-
-                    <div className={s.word}> примеры:</div>
-                    {examples.length === 0 && mnemonics.length === 0 &&
-                        <div className={s.exampleNone}>
-                            придумайте мнемонику, чтобы добавить пример
+                    <div className={s.tabsBlock}>
+                        <div className={showContent ? s.tabStyleActive : s.tabStyle}
+                             onClick={() => setShowContent(true)}>
+                            мнемоники и примеры
                         </div>
-                    }
-                    {engWord &&
-                        <ExampleContainer
-                            engWord={engWord}
-                            mnemonics={mnemonics}
-                            examples={examples}
-                            updateExample={updateExample}
-                            updateExamples={updateExamples}
-                            checkedExample={checkedExample}
-                            isAuth={isAuth}
-                            hasMoreExample={hasMoreExample}
-                        />
+                        <div className={showContent ? s.tabStyle : s.tabStyleActive}
+                             onClick={() => setShowContent(false)}>
+                            поиск созвучий
+                        </div>
+                    </div>
+                    {showContent &&
+                        <div>
+                            <div className={s.word}> мнемоники:</div>
+                            <div>
+                                {engWord &&
+                                    <MnemonicContainer
+                                        engWord={engWord}
+                                        mnemonics={mnemonics}
+                                        isAuth={isAuth}
+                                        hasMoreMnemonics={hasMoreMnemonics}
+                                    />
+                                }
+                            </div>
+                            <br/>
+                            <br/>
+                            <div className={s.word}> примеры:</div>
+                            {examples.length === 0 && mnemonics.length === 0 &&
+                                <div className={s.exampleNone}>
+                                    придумайте мнемонику, чтобы добавить пример
+                                </div>
+                            }
+                            {engWord &&
+                                <ExampleContainer
+                                    engWord={engWord}
+                                    mnemonics={mnemonics}
+                                    examples={examples}
+                                    updateExample={updateExample}
+                                    updateExamples={updateExamples}
+                                    checkedExample={checkedExample}
+                                    isAuth={isAuth}
+                                    hasMoreExample={hasMoreExample}
+                                />
+
+                            }
+                        </div>
                     }
                 </div>
             }
+            {!showContent &&  <Consonance locationContent={null}/>}
         </>
     )
 };

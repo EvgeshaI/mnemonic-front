@@ -100,6 +100,31 @@
   fill: $colorIconHover;
 }
 
+.tabsBlock{
+  display: flex;
+  justify-content: space-around;
+  margin: 10px 0;
+  border-bottom: 1px solid $colorBorderBottom;
+  :first-child{
+    border-right: none;
+  }
+}
+.tabStyle{
+  width: 50%;
+  text-align: center;
+  padding: 10px;
+  border-bottom: none;
+  cursor: pointer;
+  border-radius: 10px 10px 0 0;
+  font-weight: 700;
+  &:hover {
+    background-color: $listBackground;
+  }
+}
+.tabStyleActive {
+  @extend .tabStyle;
+  background-color: $listBackground;
+}
 
 //MOBILE
 

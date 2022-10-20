@@ -54,7 +54,7 @@ const App: React.FC<any> = () => {
                 <Route path = "/changePassword" element={<ChangePassword/>}/>
                 <Route path = "/confirmation" element={<Confirmation/>}/>
                 <Route path="/privacy" element={<Privacy/>}/>
-                <Route path = "/consonance" element={<Consonance/>}/>
+                <Route path = "/consonance" element={<Consonance locationContent={"navbar"}/>}/>
                 <Route path = "/practice" element={<PracticeContainer/>}/>
             </Routes>
             <Alerts/>
