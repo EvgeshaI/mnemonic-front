@@ -94,6 +94,7 @@ const EngWord: FC<any> = () => {
         }
         return result
     }
+    const transliterations = engWord?.transcriptions.flatMap(el => el.transliterations)
     return (
         <>
             {isFetching
@@ -183,7 +184,9 @@ const EngWord: FC<any> = () => {
                     }
                 </div>
             }
-            {!showContent &&  <Consonance locationContent={null}/>}
+            {!showContent &&
+                <Consonance locationContent={null} transliterations={transliterations}/>
+            }
         </>
     )
 };

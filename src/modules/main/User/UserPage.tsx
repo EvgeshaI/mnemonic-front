@@ -11,10 +11,10 @@ import s from "./userPage.module.scss"
 import {useNavigate} from "react-router";
 import {MyStudyExample} from "./MyStudyExample";
 import {AudioComponent} from "../EngWord/AudioComponent";
-
+import {ReactComponent as Add} from "../../../import/icons/add.svg";
 import {useAppDispatch} from "../../../store";
-
 import {MyStudyMnemonic} from "./MyStudyMnemonic";
+import {AddMyExample} from "./AddMyExample";
 
 type UserPageContainerPropsType = {
     createExampleMap: Array<NewStudyExample>,
@@ -27,30 +27,23 @@ type UserPageContainerPropsType = {
 }
 export const UserPage: FC<UserPageContainerPropsType> = (props) => {
     const dispatch = useAppDispatch()
-
     const [displayAddMyExample, isDisplayAddMyExample] = useState(false)
-
     const [showDeleteModal, setShowDeleteModal] = useState(false);
     const closeDeleteModal = () => {
         setShowDeleteModal(false)
     }
-
     const navigate = useNavigate()
     const clickWord = () => {
         let word = props.engWord.word
         navigate(`/eng/${word}`)
     }
-
-    // let findExample = () => {
-    //     const newStudyExample = props.createExampleMap.find(el => el.studyId === props.studyId);
-    //     if (newStudyExample) {
-    //         return newStudyExample.example
-    //     }
-    //     return null
-    // }
-
-
-
+    let findExample = (engWordId: number) => {
+        const newStudyExample = props.createExampleMap.find(el => el.engWordId === engWordId);
+        if (newStudyExample) {
+            return newStudyExample.example
+        }
+        return null
+    }
     let joinTranslation = (translations: Array<ITranslation>) => {
         return translations.filter((el, i)=> i < 4).map(t => t.translation).join(", ");
     };
@@ -79,49 +72,38 @@ export const UserPage: FC<UserPageContainerPropsType> = (props) => {
             <div className={s.translations}> {joinTranslation(props.translations)}</div>
             <div>
                 {props.mnemonics.map(mnemo =>
-                    <>
-                        <MyStudyMnemonic mnemonic={mnemo} examples={props.examples}/>
-                        <div>
-                            {props.examples.map(ex => {
-                                    if (ex.mnemonicId === mnemo.id) {
-                                        return <div key={ex.id}>
-                                            <MyStudyExample
-                                                parts={ex.parts}
-                                                exampleId={ex.id}
-                                                exampleLikes={ex.likes}
-                                                created={ex.created}
-                                            />
-                                        </div>
-                                    }
-                                    return <></>
-                                }
-                            )}
-                        </div>
-                    </>
-                )
+                        <>
+                            <MyStudyMnemonic mnemonic={mnemo} examples={props.examples}/>
+                            <div>
+                                {props.examples.filter(ex => ex.mnemonicId === mnemo.id).map(ex =>
+                                    <MyStudyExample
+                                        parts={ex.parts}
+                                        exampleId={ex.id}
+                                        exampleLikes={ex.likes}
+                                        created={ex.created}
+                                    />
+                                )}
+                            </div>
+                        </>
+                    )
                 }
             </div>
-
-
-
-            {/*{displayAddMyExample ?*/}
-            {/*    <AddMyExample*/}
-            {/*        // studyId={props.studyId}*/}
-            {/*        engWordId={props.engWord.id}*/}
-            {/*        // mnemonicId={props.mnemonic.id}*/}
-            {/*        translations={props.translations}*/}
-            {/*        // newExample={findExample()}*/}
-            {/*        isDisplayAddMyExample={isDisplayAddMyExample}*/}
-            {/*    />*/}
-            {/*    :*/}
-            {/*    <div className={s.addEx}>*/}
-            {/*        <div className={s.buttonStyle}*/}
-            {/*             onClick={() => isDisplayAddMyExample(true)}>*/}
-            {/*            <Add/>*/}
-            {/*        </div>*/}
-            {/*        <div className={s.prompt}> Добавить пример </div>*/}
-            {/*    </div>*/}
-            {/*}*/}
+            {displayAddMyExample ?
+                <AddMyExample
+                    engWordId={props.engWord.id}
+                    translations={props.translations}
+                    newExample={findExample(props.engWord.id)}
+                    isDisplayAddMyExample={isDisplayAddMyExample}
+                />
+                :
+                <div className={s.addEx}>
+                    <div className={s.buttonStyle}
+                         onClick={() => isDisplayAddMyExample(true)}>
+                        <Add/>
+                    </div>
+                    <div className={s.prompt}> Добавить пример </div>
+                </div>
+            }
 
         </div>
     )

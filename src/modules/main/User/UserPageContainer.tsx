@@ -90,9 +90,7 @@ export const UserPageContainer = () => {
                                         engWord={el.engWord}
                                         examples={el.examples}
                                         translations={el.translations}
-                                        // studyId={el.studyId}
                                         transcriptions={el.transcriptions}
-                                        // key={el.studyId}
                                     />
                                 </div>
                             )}

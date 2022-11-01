@@ -3,50 +3,48 @@ import s from "./consonance.module.scss"
 import {ReactComponent as Search} from "../../../import/icons/search.svg";
 import {ReactComponent as Question} from "../../../import/icons/question.svg";
 import {useAppDispatch, useAppSelector} from "../../../store";
-import {findByRegexpAsync} from "../../../store/regexpSlice";
+import {clearConsonance, findByRegexpAsync, setSearchConsonance} from "../../../store/regexpSlice";
 import {ConsonanceContent} from "./ConsonanceContent";
 import './toggle.scss'
 import Toggle from "react-toggle";
 import useDebounce from "../../util/useDebounce";
+import {ITransliteration} from "../../../shared/models/engWordTypes";
 
 
 type ConsonancePropsType = {
     locationContent: string | null
+    transliterations?: Array<ITransliteration>
 }
 
 export const Consonance: FC<ConsonancePropsType> = (props) => {
     const {
-        consonances
+        consonances,
+        searchConsonances
     } = useAppSelector((state) => state.regexpReducer);
     const [onlyInit, setOnlyInit] = useState(true)
-    const [search, setSearch] = useState("")
     const [correct, setCorrect] = useState(true)
     const dispatch = useAppDispatch()
-    const debouncedValue = useDebounce<string>(search, 200)
+    const debouncedValue = useDebounce<string>(searchConsonances, 200)
 
     useEffect(() => {
         correctText()
     }, [debouncedValue, onlyInit])
     const correctText = () => {
-        const match = /^([а-яА-ЯёЁ?*]+)$/.test(search);
-        if (search === '') {
+        const match = /^([а-яА-ЯёЁ?*]+)$/.test(searchConsonances);
+        if (searchConsonances === '') {
             setCorrect(true)
-            // dispatch(clearConsonance())
+            dispatch(clearConsonance())
         } else if(match){
             setCorrect(true)
-            dispatch(findByRegexpAsync(search, onlyInit))
+            dispatch(findByRegexpAsync(searchConsonances, onlyInit))
         }else{
             setCorrect(false)
         }
     }
     const searchWord = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setSearch(e.target.value)
+        dispatch(setSearchConsonance(e.target.value))
     }
-    // useEffect(() => {
-    //     return () => {
-    //         dispatch(clearConsonance())
-    //     }
-    // }, []);
+
 
 
     return (
@@ -66,6 +64,8 @@ export const Consonance: FC<ConsonancePropsType> = (props) => {
                     :
                     <div className={s.instructionText}>
                         введите в поиске на русском языке транслитерацию или ее часть
+                        [{props.transliterations && props.transliterations[0].transliteration}]<br/>
+                        Чтобы расширить поиск, используйте специальные символы "?" и "*".
                     </div>
                 }
 
@@ -80,7 +80,7 @@ export const Consonance: FC<ConsonancePropsType> = (props) => {
                                placeholder="поиск..."
                                className={s.searchRegexp}
                                autoFocus={true}
-                               value={search}
+                               value={searchConsonances}
                                onChange={searchWord}
                         />
                     </div>

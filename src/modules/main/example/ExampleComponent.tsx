@@ -4,9 +4,11 @@ import s from "./Example.module.scss";
 import {useAppDispatch} from "../../../store";
 import {
     addExampleLikeAsync,
+    addMeExampleAsync,
     addUpdateExample,
     deleteExampleAsync,
     deleteExampleLikeAsync,
+    deleteMeExampleAsync,
 } from "../../../store/exampleSlice";
 import {ReactComponent as HeartNo} from "../../../import/icons/heart.svg"
 import {ReactComponent as HeartYes} from "../../../import/icons/heart-clicked.svg"
@@ -15,6 +17,8 @@ import {ReactComponent as Pencil} from "../../../import/icons/pencil.svg"
 import {ReactComponent as Trash} from "../../../import/icons/trash-bin.svg"
 import {ReactComponent as Bold} from "../../../import/icons/bold1.svg"
 import {ReactComponent as NotBold} from "../../../import/icons/bold2.svg"
+import {ReactComponent as Add} from "../../../import/icons/add.svg"
+import {ReactComponent as Minus} from "../../../import/icons/minus.svg"
 import UpdateExample from "./UpdateExample";
 import {DateAgo} from "../DateAgo";
 import {useNavigate} from "react-router";
@@ -79,6 +83,17 @@ const ExampleComponent: FC<PropsType> = (props) => {
         }
         return props.example.isLiked ? <HeartYes/> : <HeartNo/>
     }
+    let addExample = () => {
+        if (!props.example.added) {
+            dispatch(addMeExampleAsync(props.example.exampleId))
+        } else {
+            dispatch(deleteMeExampleAsync(props.example.exampleId))
+        }
+    };
+
+    const addDelete = () => {
+        return props.example.added ? <Minus/> : <Add/>;
+    }
 
     const isEditable = () => {
         return props.example.isCreator && props.auth && !isExpired(props.example.created)
@@ -127,6 +142,12 @@ const ExampleComponent: FC<PropsType> = (props) => {
                                         <Trash/>
                                     </div>
                                     {!isMobileScreen &&  <div className={s.buttonName}>Удалить</div>}
+                                </div>
+                            }
+                            {!props.example.isCreator && props.auth &&
+                                <div className={s.iconBox} onClick={addExample}>
+                                    <div  className={s.iconContainer}> {addDelete()} </div>
+                                    {!isMobileScreen && <div className={s.buttonName}>Избранное</div>}
                                 </div>
                             }
                             {isEditable() &&

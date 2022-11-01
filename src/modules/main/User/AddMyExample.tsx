@@ -15,9 +15,7 @@ import {CloseBtn} from "../../util/CloseBtn";
 
 type AddMyExamplePropsType = {
     newExample: IExample | null,
-    studyId: number,
     engWordId: number,
-    mnemonicId: number,
     translations: Array<ITranslation>
     isDisplayAddMyExample: (flag: boolean) => void
 }
@@ -30,24 +28,24 @@ export const AddMyExample: FC<AddMyExamplePropsType> = (props) => {
     const [edit, setEdit] = useState(false)
 
     const checkMyExample = ()=> {
-        dispatch(checkMyExampleAsync(props.engWordId, myExampleSentence, props.mnemonicId, props.studyId))
+        dispatch(checkMyExampleAsync(props.engWordId, myExampleSentence))
         setEdit(false)
     }
     let selectTranslation = (translationId: number) => {
-        dispatch(checkMyExampleTranslationAsync(translationId, props.studyId));
+        dispatch(checkMyExampleTranslationAsync(translationId, props.engWordId));
     };
 
     const saveMyExample = () => {
-        dispatch(saveMyExampleAsync(props.studyId, props.newExample!))
+        dispatch(saveMyExampleAsync(props.engWordId, props.newExample!))
         props.isDisplayAddMyExample(false)
-        dispatch(setMyExample({studyId: props.studyId, example:null}))
+        dispatch(setMyExample({engWordId: props.engWordId, example:null}))
     }
     const editSentence = () => {
         setEdit(true)
-        dispatch(setMyExample({studyId: props.studyId, example:null}))
+        dispatch(setMyExample({engWordId: props.engWordId, example:null}))
     }
     const closeForm = () => {
-        dispatch(deleteNewExample(props.studyId))
+        dispatch(deleteNewExample(props.engWordId))
         setMyExampleSentence('');
         setEdit(true)
         props.isDisplayAddMyExample(false)

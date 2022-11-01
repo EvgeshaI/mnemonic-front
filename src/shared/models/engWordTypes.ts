@@ -45,11 +45,12 @@ export interface IExample {
     engWordId: number,
     translationId: number | null,
     translationInSentence: string,
-    mnemonicId: number | null,
+    mnemonicId: number,
     mnemonicInSentence: string,
     likes: number,
     isLiked: boolean,
     isCreator: boolean,
+    added: boolean,
     sentence: string,
     creator: ICreator
     parts: Array<IPart>
@@ -134,7 +135,7 @@ export interface StudyExample {
 }
 
 export interface NewStudyExample {
-    studyId: number,
+    engWordId: number,
     example: IExample
 }
 

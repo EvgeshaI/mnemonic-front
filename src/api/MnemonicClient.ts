@@ -75,6 +75,9 @@ export class MnemonicClient extends BaseClient {
     };
     static async addMeMnemonic (id: number) {
         return this.post(`mnemonic/my/add/${id}`, null)
+    };
+    static async addMeExample (id: number) {
+        return this.post(`example/my/${id}`, null)
     }
     static async updateMnemonic(mnemonicId: number, mnemonicPhrase: string, highlight: Array<number>) {
         let body = {
@@ -87,6 +90,9 @@ export class MnemonicClient extends BaseClient {
 
     static async deleteMeMnemonic (id: number) {
         return this.delete(`mnemonic/my/delete/${id}`)
+    };
+    static async deleteMeExample (id: number) {
+        return this.delete(`example/my/${id}`)
     };
 
     static async saveExample (newExample: IExample) {

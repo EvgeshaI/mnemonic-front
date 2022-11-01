@@ -5,11 +5,12 @@ import {LengthAndWords} from "../shared/models/engWordTypes";
 
 interface ConsonanceState {
     consonances: Array<LengthAndWords>
+    searchConsonances: string
 }
 
 const initialState: ConsonanceState = {
-    consonances: []
-
+    consonances: [],
+    searchConsonances: ""
 };
 
 export const regexpSlice = createSlice(
@@ -22,6 +23,9 @@ export const regexpSlice = createSlice(
             },
             clearConsonance: (state) => {
                 state.consonances = []
+            },
+            setSearchConsonance : (state,  action: PayloadAction<string>) => {
+                state.searchConsonances = action.payload
             }
         }
     }
@@ -29,7 +33,8 @@ export const regexpSlice = createSlice(
 
 export const {
     setConsonance,
-    clearConsonance
+    clearConsonance,
+    setSearchConsonance
 } = regexpSlice.actions
 
 export const findByRegexpAsync = (regexp: string, onlyInit: boolean):AppThunk => async (dispatch: any) => {

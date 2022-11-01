@@ -11,11 +11,13 @@ type Props = {
     date: string
 }
 export const DateAgo:FC<Props> = (props) => {
-    let turnedIntoDate = moment(props.date, "DD-MM-YYYY HH:mm:ss").fromNow()
 
+    let result = moment(props.date, "DD-MM-YYYY HH:mm:ss").subtract(3, "hours")
+    const offset = new Date().getTimezoneOffset();
+    result = result.add(-1 * offset, 'minutes')
     return (
         <div>
-            {turnedIntoDate}
+            {result.fromNow()}
         </div>
     )
 }

@@ -65,6 +65,20 @@ export const exampleSlice = createSlice(
                 state.examples = state.examples.filter(e => e.exampleId !== deleteExampleId)
 
             },
+            addMeExample: (state, action: PayloadAction<number>) => {
+                let exampleId = action.payload;
+                let example = state.examples.find(e => e.exampleId === exampleId);
+                if(example){
+                    example.added = true
+                }
+            },
+            deleteMeExample: (state, action:PayloadAction<number> ) => {
+                let exampleId = action.payload;
+                let example = state.examples.find(e => e.exampleId === exampleId);
+                if(example){
+                    example.added = false
+                }
+            },
             checkExample: (state, action: PayloadAction<IExample>) => {
                 state.checkedExample = action.payload;
             },
@@ -95,6 +109,8 @@ export const {
     deleteExampleLike,
     clearCheckedExample,
     clearUpdateExample,
+    addMeExample,
+    deleteMeExample,
     deleteExample,
     updateExample,
     addUpdateExample,
@@ -195,6 +211,14 @@ export const updateExampleAsync = (example: IExample): AppThunk => async (dispat
 export const deleteExampleAsync = (id: number): AppThunk => async  (dispatch: any) => {
     await MnemonicClient.deleteExample(id);
     dispatch(deleteExample(id))
+};
+export const addMeExampleAsync = (id: number): AppThunk => async (dispatch: any) => {
+    await MnemonicClient.addMeExample(id);
+    dispatch(addMeExample(id))
+};
+export const deleteMeExampleAsync = (id: number): AppThunk => async  (dispatch: any) => {
+    await MnemonicClient.deleteMeExample(id);
+    dispatch(deleteMeExample(id))
 };
 
 export default exampleSlice.reducer

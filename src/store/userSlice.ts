@@ -48,42 +48,43 @@ export const userSlice = createSlice(
                 state.search = action.payload.search
             },
 
-            setMyExample: (state, action: PayloadAction<{studyId: number, example: IExample | null}>) => {
-                let studyId = action.payload.studyId;
+            setMyExample: (state, action: PayloadAction<{engWordId: number, example: IExample | null}>) => {
+                let engWordId = action.payload.engWordId;
                 let example = action.payload.example;
-                let foundExample = state.createExampleMap.find(el => el.studyId === studyId)
+                let foundExample = state.createExampleMap.find(el => el.engWordId === engWordId)
                 if (foundExample) {
                     state.createExampleMap = state.createExampleMap.map(el => {
-                        if(el.studyId === studyId){
+                        if(el.engWordId === engWordId){
                             el.example = action.payload.example!;
                         }
                         return el
                     })
                 } else {
                     if(example) {
-                        const newExample:NewStudyExample = {studyId, example}
+                        const newExample:NewStudyExample = {engWordId, example}
                         state.createExampleMap = [...state.createExampleMap, newExample]
                     } else {
-                        state.createExampleMap = state.createExampleMap.filter(el => el.studyId !== studyId)
+                        state.createExampleMap = state.createExampleMap.filter(el => el.engWordId !== engWordId)
                     }
                 }
             },
-            // updateStudyExample: (state, action: PayloadAction<{ studyId: number, example: IExample }>) => {
-            //     let studyId = action.payload.studyId;
-            //     let example = action.payload.example;
-            //     state.studies = state.studies.map(el => {
-            //         if (el.studyId === studyId) {
-            //             el.examples = [...el.examples,]
-            //             el.examples.push({
-            //                 id: example.exampleId,
-            //                 likes: example.likes,
-            //                 parts: example.parts,
-            //                 created: example.created
-            //             })
-            //         }
-            //         return el
-            //     })
-            // },
+            updateStudyExample: (state, action: PayloadAction<{ engWordId: number, example: IExample }>) => {
+                let engWordId = action.payload.engWordId;
+                let example = action.payload.example;
+                state.studies = state.studies.map(el => {
+                    if (el.engWord.id === engWordId) {
+                        el.examples = [...el.examples]
+                        el.examples.push({
+                            id: example.exampleId,
+                            mnemonicId: example.mnemonicId,
+                            likes: example.likes,
+                            parts: example.parts,
+                            created: example.created
+                        })
+                    }
+                    return el
+                })
+            },
 
             removeMyExample: (state, action: PayloadAction<number>) => {
                 let deleteMyExampleId = action.payload;
@@ -98,8 +99,8 @@ export const userSlice = createSlice(
                  state.studies = action.payload.elements
             },
             deleteNewExample: (state, action: PayloadAction<number>) => {
-                let studyId = action.payload
-                state.createExampleMap = state.createExampleMap.filter(el => el.studyId !== studyId)
+                let engWordId = action.payload
+                state.createExampleMap = state.createExampleMap.filter(el => el.engWordId !== engWordId)
             },
             initUserPageState: (state) => {
                 state.studies = [];
@@ -119,7 +120,7 @@ export const {
     setNewUserPage,
     setCurrentSearch,
     setMyExample,
-    // updateStudyExample,
+    updateStudyExample,
     removeMyExample,
     // removeMyMnemonic,
     deleteNewExample,
@@ -143,11 +144,11 @@ export const getMyPageAsync = (search: string): AppThunk => async (dispatch: any
     dispatch(setFetching(false))
 };
 
-export const checkMyExampleAsync = (engWordId: number, sentence: string, mnemonicId: number, studyId:number): AppThunk =>
+export const checkMyExampleAsync = (engWordId: number, sentence: string): AppThunk =>
     async (dispatch: any) => {
     try {
-        let check = await MnemonicClient.checkExample(null, sentence, engWordId, null, mnemonicId);
-        dispatch(setMyExample({studyId: studyId, example: check}))
+        let check = await MnemonicClient.checkExample(null, sentence, engWordId, null, null);
+        dispatch(setMyExample({engWordId: engWordId, example: check}))
     }catch (error){
         //@ts-ignore
         dispatch(addAlert({message: error.data?.data?.message}))
@@ -155,9 +156,9 @@ export const checkMyExampleAsync = (engWordId: number, sentence: string, mnemoni
     }
     };
 
-export const checkMyExampleTranslationAsync = (translationId: number, studyId: number): AppThunk => async (dispatch: any, getState) => {
+export const checkMyExampleTranslationAsync = (translationId: number, engWordId: number): AppThunk => async (dispatch: any, getState) => {
     try {
-        let checkedExample = getState().userReducer.createExampleMap.find(el => el.studyId === studyId)!.example;
+        let checkedExample = getState().userReducer.createExampleMap.find(el => el.engWordId === engWordId)!.example;
         let check = await MnemonicClient.checkExample(
             null,
             checkedExample.sentence,
@@ -165,7 +166,7 @@ export const checkMyExampleTranslationAsync = (translationId: number, studyId: n
             translationId,
             checkedExample!.mnemonicId
         );
-        dispatch(setMyExample({studyId: studyId, example: check})) //нахуевертила здесь (добавила studyId)
+        dispatch(setMyExample({engWordId: engWordId, example: check})) //нахуевертила здесь (добавила studyId)
     } catch (error) {
         // @ts-ignore
         dispatch(addAlert({message: error.data?.data?.message}))
@@ -173,10 +174,10 @@ export const checkMyExampleTranslationAsync = (translationId: number, studyId: n
     }
 }
 
-export const saveMyExampleAsync = (studyId:number, example: IExample): AppThunk => async  (dispatch: any) => {
+export const saveMyExampleAsync = (engWordId:number, example: IExample): AppThunk => async  (dispatch: any) => {
     try {
         let result = await MnemonicClient.saveExample(example)
-        // dispatch(updateStudyExample({studyId, example: result}))
+        dispatch(updateStudyExample({engWordId, example: result}))
         dispatch(getMyStatisticAsync())
     } catch (error) {
         // @ts-ignore
