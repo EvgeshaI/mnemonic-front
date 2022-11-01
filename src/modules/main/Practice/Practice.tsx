@@ -63,7 +63,6 @@ export const Practice:FC<{practices: Array<IPracticeExample>}> = (props) => {
         if(engWord === currentExample.engWord || engWord.trim().toLowerCase() === currentExample.engWord){
             setEngWordCorrect(true)
         }
-        // const translationLower = translate.trim().toLowerCase();
         let translationWithoutPrepositionArr = translate.trim().toLowerCase().split(" ")
         let initFormWithoutPreposition = currentExample.translationInitForm.toLowerCase()
             .split(" ").filter(el => !prepositions.includes(el)).join(" ")
@@ -106,10 +105,10 @@ export const Practice:FC<{practices: Array<IPracticeExample>}> = (props) => {
 
     useEffect(() => {
         if(wrongEngWord() || wrongTranslation()){
-            dispatch(guessedAsync(currentExample.exampleId, false))
+            dispatch(guessedAsync(currentExample.exampleStudyId, false))
         }
         if(engWordCorrect && translateCorrect){
-            dispatch(guessedAsync(currentExample.exampleId, true))
+            dispatch(guessedAsync(currentExample.exampleStudyId, true))
         }
     }, [checked])
 
@@ -123,7 +122,7 @@ export const Practice:FC<{practices: Array<IPracticeExample>}> = (props) => {
             setKeyCount(0)
         }else{
             setKeyCount(keyCount-1)
-            dispatch(tookHintAsync(currentExample.exampleId))
+            dispatch(tookHintAsync(currentExample.exampleStudyId))
         }
     }
     const { width } = useWindowDimensions();

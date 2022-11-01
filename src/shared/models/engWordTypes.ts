@@ -96,14 +96,7 @@ export interface IPageElements<T> {
     elements: Array <T>,
     totalPages: number
 }
-// export interface IStudy {
-//     studyId: number,
-//     engWord: StudyEngWord
-//     mnemonic: StudyMnemonic
-//     examples: Array<StudyExample>
-//     translations: Array <ITranslation>,
-//     transcriptions: Array<ITranscription>
-// }
+
 
 export interface IStudy {
     engWord: StudyEngWord,
@@ -156,7 +149,7 @@ export interface IStatistic {
 }
 
 export interface IPracticeExample {
-    exampleId: number,
+    exampleStudyId: number,
     engWord: string,
     translationInSentence: string,
     translationInitForm: string,

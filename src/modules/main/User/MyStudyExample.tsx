@@ -46,16 +46,21 @@ export const MyStudyExample: FC<MyStudyExamplePropsType> = (props) => {
     return (
         <div className={s.myExampleBox}>
             {bold ?
-                <div className={s.myExample}>
+                <div className={s.myExample} onClick={pushBold}>
                     ● <ExampleFormat parts={props.parts}/>
                 </div>
                 :
-                <div className={s.myExample}> ● {props.parts.map(el => el.part)}</div>
+                <div className={s.myExample} onClick={pushBold}> ● {props.parts.map(el => el.part)}</div>
             }
             <div className={s.icons}>
-                <div className={s.likeCount}> {props.exampleLikes}</div>
-                <div className={s.icon}>{getLikeIcon()}</div>
-                <div className={s.iconStyle} onClick={pushBold}>{getBoldIcon()}</div>
+                {props.exampleLikes > 0 &&
+                    <>
+                        <div className={s.likeCount}> {props.exampleLikes}</div>
+                        <div className={s.icon}>{getLikeIcon()}</div>
+                    </>
+                }
+
+                {/*<div className={s.iconStyle} onClick={pushBold}>{getBoldIcon()}</div>*/}
                 {!isExpired(props.created) &&
                     <div className={s.iconStyle}
                          onClick={showDeleteModal}>

@@ -195,17 +195,17 @@ export class MnemonicClient extends BaseClient {
     static async getPractice () {
         return this.get<IPractice>(`practice`)
     }
-    static async practiceGuessed (exampleId: number, guessed: boolean) {
+    static async practiceGuessed (exampleStudyId: number, guessed: boolean) {
         let params = {
-            exampleId,
+            exampleStudyId,
             guessed
         }
         return this.put(`practice/guessed`, null,{params})
     }
 
-    static async tookHint (exampleId: number) {
+    static async tookHint (exampleStudyId: number) {
         let params = {
-            exampleId
+            exampleStudyId
         }
         return this.put(`practice/use-hint`, null, {params})
     }

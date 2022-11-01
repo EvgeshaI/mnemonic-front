@@ -7,7 +7,6 @@ import {ReactComponent as Heart} from "../../../import/icons/heart.svg"
 import {ReactComponent as HeartYes} from "../../../import/icons/heart-clicked.svg"
 import {ReactComponent as Trash} from "../../../import/icons/trash-bin.svg";
 import {StudyExample, StudyMnemonic} from "../../../shared/models/engWordTypes";
-import {isExpired} from "../../util/utilFunctions";
 import {DeleteModal} from "../Modal/DeleteModal";
 import {useAppDispatch} from "../../../store";
 import {deleteThisMnemonicAsync} from "../../../store/userSlice";
@@ -41,23 +40,28 @@ export const MyStudyMnemonic: FC<MyStudyMnemonicPropsType> = (props) => {
     return (
         <div className={s.myMnemonicBox}>
             {bold ?
-                <div className={s.myMnemonic}>
+                <div className={s.myMnemonic} onClick={pushBold}>
                      <HighlightMnemonic highlight={props.mnemonic.highlight} mnemonic={props.mnemonic.phrase}/>
                 </div>
                 :
-                <div className={s.myMnemonic}>
+                <div className={s.myMnemonic} onClick={pushBold}>
                      <div>{props.mnemonic.phrase}</div>
                 </div>
             }
             <div className={s.icons}>
-                <div className={s.likeCount}> {props.mnemonic.likes} </div>
-                <div className={s.likeIcon}> {getLikeIcon()} </div>
-                <div className={s.iconStyle} onClick={pushBold}>{getBoldIcon()}</div>
-                {!isExpired(props.mnemonic.created)  &&
+                {props.mnemonic.likes > 0 &&
+                <>
+                    <div className={s.likeCount}> {props.mnemonic.likes} </div>
+                    <div className={s.likeIcon}> {getLikeIcon()} </div>
+                </>
+                }
+
+                {/*<div className={s.iconStyle} onClick={pushBold}>{getBoldIcon()}</div>*/}
+                {/*{!isExpired(props.mnemonic.created)  &&*/}
                     <div className={s.iconStyle} onClick={() => setShowDeleteModal(true)}>
                         <Trash/>
                     </div>
-                }
+                {/*}*/}
             </div>
             <DeleteModal
                 classElement={"мнемонику"}

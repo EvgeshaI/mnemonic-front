@@ -44,12 +44,12 @@ export const getPracticeAsync = ():AppThunk => async (dispatch: any) => {
     dispatch(getMyPractice(result))
     dispatch(setFetching(false))
 }
-export const guessedAsync = (exampleId: number, guessed: boolean):AppThunk => async (dispatch: any) => {
-    await MnemonicClient.practiceGuessed(exampleId, guessed)
+export const guessedAsync = (exampleStudyId: number, guessed: boolean):AppThunk => async (dispatch: any) => {
+    await MnemonicClient.practiceGuessed(exampleStudyId, guessed)
 }
 
-export const tookHintAsync = (exampleId: number):AppThunk => async (dispatch: any) => {
-    await MnemonicClient.tookHint(exampleId)
+export const tookHintAsync = (exampleStudyId: number):AppThunk => async (dispatch: any) => {
+    await MnemonicClient.tookHint(exampleStudyId)
 }
 export const awaitingAsync = ():AppThunk => async (dispatch: any) => {
     dispatch(setFetching(true))

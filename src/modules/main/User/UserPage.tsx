@@ -72,7 +72,7 @@ export const UserPage: FC<UserPageContainerPropsType> = (props) => {
             <div className={s.translations}> {joinTranslation(props.translations)}</div>
             <div>
                 {props.mnemonics.map(mnemo =>
-                        <>
+                        <div className={s.mnemonicAndExampleBox}>
                             <MyStudyMnemonic mnemonic={mnemo} examples={props.examples}/>
                             <div>
                                 {props.examples.filter(ex => ex.mnemonicId === mnemo.id).map(ex =>
@@ -84,7 +84,7 @@ export const UserPage: FC<UserPageContainerPropsType> = (props) => {
                                     />
                                 )}
                             </div>
-                        </>
+                        </div>
                     )
                 }
             </div>
