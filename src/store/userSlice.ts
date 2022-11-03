@@ -92,9 +92,12 @@ export const userSlice = createSlice(
                     el.examples = el.examples.filter(ex => ex.id !== deleteMyExampleId)
                 })
             },
-            // removeMyMnemonic: (state, action: PayloadAction<number>) => {
-            //    state.studies = state.studies.filter(el => el.mnemonic.id !== action.payload)
-            // },
+            removeMyMnemonic: (state, action: PayloadAction<number>) => {
+                state.studies = state.studies.map(s => {
+                   s.mnemonics = s.mnemonics.filter(el => el.id !== action.payload)
+                    return s
+               })
+            },
             searchMnemo: (state, action: PayloadAction<IPageElements<IStudy>>) => {
                  state.studies = action.payload.elements
             },
@@ -122,7 +125,7 @@ export const {
     setMyExample,
     updateStudyExample,
     removeMyExample,
-    // removeMyMnemonic,
+    removeMyMnemonic,
     deleteNewExample,
     initUserPageState,
     setMyStatistic
@@ -195,7 +198,7 @@ export const deleteMyExampleAsync = (myExampleId:number): AppThunk => async  (di
 
 export const deleteThisMnemonicAsync = (mnemonicID: number): AppThunk => async (dispatch: any) => {
     await MnemonicClient.deleteMeMnemonic(mnemonicID)
-    // dispatch(removeMyMnemonic(mnemonicID))
+    dispatch(removeMyMnemonic(mnemonicID))
 }
 export const getMyStatisticAsync = (): AppThunk => async (dispatch: any) => {
    let result =  await MnemonicClient.getStatistic()

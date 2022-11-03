@@ -100,6 +100,7 @@
     cursor: pointer;
 }
 .icons{
+    position: relative;
     display: flex;
     margin-left: auto;
     svg {
@@ -116,7 +117,7 @@
     padding: 0 0 0 10px;
     align-items: center;
     display: flex;
-    font-size: 14px;
+    font-size: 12px;
 }
 .likeIcon svg {
     fill: $colorIconAndPlaceholder;

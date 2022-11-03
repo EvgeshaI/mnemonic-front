@@ -1,15 +1,14 @@
 import React, {FC, useState} from "react";
 import s from "./userPage.module.scss";
 import HighlightMnemonic from "../mnemonic/HighlightMnemonic";
-import {ReactComponent as Bold} from "../../../import/icons/bold1.svg";
-import {ReactComponent as NotBold} from "../../../import/icons/bold2.svg";
 import {ReactComponent as Heart} from "../../../import/icons/heart.svg"
-import {ReactComponent as HeartYes} from "../../../import/icons/heart-clicked.svg"
+import {ReactComponent as HeartYes} from "../../../import/icons/heart-grey.svg"
 import {ReactComponent as Trash} from "../../../import/icons/trash-bin.svg";
 import {StudyExample, StudyMnemonic} from "../../../shared/models/engWordTypes";
 import {DeleteModal} from "../Modal/DeleteModal";
 import {useAppDispatch} from "../../../store";
 import {deleteThisMnemonicAsync} from "../../../store/userSlice";
+import {isExpired} from "../../util/utilFunctions";
 
 type MyStudyMnemonicPropsType = {
     mnemonic: StudyMnemonic,
@@ -23,9 +22,6 @@ export const MyStudyMnemonic: FC<MyStudyMnemonicPropsType> = (props) => {
     let pushBold = () => {
         setBold(!bold)
     };
-    const getBoldIcon = () => {
-        return bold ? <Bold/> : <NotBold/>
-    }
     const getLikeIcon = () => {
         return props.mnemonic.likes > 0 ? <HeartYes/> : <Heart/>
     }
@@ -56,12 +52,11 @@ export const MyStudyMnemonic: FC<MyStudyMnemonicPropsType> = (props) => {
                 </>
                 }
 
-                {/*<div className={s.iconStyle} onClick={pushBold}>{getBoldIcon()}</div>*/}
-                {/*{!isExpired(props.mnemonic.created)  &&*/}
+                {!isExpired(props.mnemonic.created)  &&
                     <div className={s.iconStyle} onClick={() => setShowDeleteModal(true)}>
                         <Trash/>
                     </div>
-                {/*}*/}
+                }
             </div>
             <DeleteModal
                 classElement={"мнемонику"}

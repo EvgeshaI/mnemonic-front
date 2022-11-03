@@ -1,16 +1,13 @@
 import React, {FC, useState} from "react";
 import s from "./userPage.module.scss";
-import {ReactComponent as HeartYes} from "../../../import/icons/heart-clicked.svg";
+import {ReactComponent as HeartYes} from "../../../import/icons/heart-grey.svg";
 import {ReactComponent as Heart} from "../../../import/icons/heart.svg";
 import {ReactComponent as Trash} from "../../../import/icons/trash-bin.svg"
-import {ReactComponent as Bold} from "../../../import/icons/bold1.svg"
-import {ReactComponent as NotBold} from "../../../import/icons/bold2.svg"
 import {IPart} from "../../../shared/models/engWordTypes";
 import {deleteMyExampleAsync} from "../../../store/userSlice";
 import {useAppDispatch} from "../../../store";
 import {DeleteModal} from "../Modal/DeleteModal";
 import {ExampleFormat} from "../example/ExampleFormat";
-import {isExpired} from "../../util/utilFunctions";
 
 type MyStudyExamplePropsType = {
     parts: Array<IPart>
@@ -35,10 +32,6 @@ export const MyStudyExample: FC<MyStudyExamplePropsType> = (props) => {
         dispatch(deleteMyExampleAsync(props.exampleId))
         setShowModal(false)
     }
-
-    const getBoldIcon = () => {
-        return bold ? <Bold/> : <NotBold/>
-    }
     const getLikeIcon = () => {
         return props.exampleLikes > 0 ? <HeartYes/> : <Heart/>
     }
@@ -56,17 +49,15 @@ export const MyStudyExample: FC<MyStudyExamplePropsType> = (props) => {
                 {props.exampleLikes > 0 &&
                     <>
                         <div className={s.likeCount}> {props.exampleLikes}</div>
-                        <div className={s.icon}>{getLikeIcon()}</div>
+                        <div>{getLikeIcon()}</div>
                     </>
                 }
 
-                {/*<div className={s.iconStyle} onClick={pushBold}>{getBoldIcon()}</div>*/}
-                {!isExpired(props.created) &&
                     <div className={s.iconStyle}
                          onClick={showDeleteModal}>
                         <Trash/>
                     </div>
-                }
+
             </div>
             <DeleteModal
                 classElement={"пример"}
