@@ -1,0 +1,173 @@
+@import "../common.module";
+.myPageBox{
+  width: 40%;
+  margin: 30px auto 0;
+  //display: flex;
+  //flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  //border: 1px solid gray;
+}
+.myInfoContainer{
+  width: 80%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin: auto;
+  border: 1px solid rgba(215, 215, 215, 0.4);
+  padding: 10px 0 10px 10px;
+  border-radius: 10px;
+}
+.avatar{
+  margin: 0 10px 0 10px;
+  svg{
+    width: 100px;
+  }
+}
+.myInfo{
+  width: 50%;
+  font-size: 22px;
+  line-height: 30px;
+  color: $colorFont;
+  padding-left: 40px;
+}
+
+.inputNicknameBox{
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: left;
+}
+.myInfoField{
+  display: flex;
+  padding: 3px 0;
+  color: var(--border-buttons);
+  font-size: 18px;
+  width: 100%;
+  div:first-child {
+    width: 45%;
+  }
+  div:last-child {
+    color: var(--font-color);
+    font-size: 20px;
+  }
+}
+.userEmail{
+  padding-left: 15px;
+}
+.updateNickname{
+  width: 90%;
+  background: transparent;
+  font-size: 20px;
+  border: 1px solid $colorBorderBottom;
+  border-radius: 5px;
+  padding: 3px;
+  margin-left: 15px;
+  outline: none;
+}
+.instruction{
+  margin: 30px 0 20px;
+  line-height: 1.5;
+  font-size: 12px;
+  color: $colorDimText3
+}
+.headerTable{
+  margin: 20px auto;
+  font-size: 25px;
+  text-align: center;
+}
+
+.typesPractice{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  font-size: 16px;
+  font-weight: bold;
+  margin: 20px 0 15px;
+}
+.radioBtnBox{
+  display: flex;
+  flex-wrap: wrap;
+  padding-right: 20px;
+}
+
+.tableBox{
+  width: 100%;
+}
+.radio{
+  border-radius: 50%;
+  width: 17px;
+  height: 17px;
+  border: 1px solid #999;
+  transition: 0.2s all linear;
+  margin-right: 10px;
+  cursor: pointer;
+  &:hover{
+    background-color: var(--highlight-mnemo);
+  }
+}
+.radio_active {
+  @extend .radio;
+  background-color: var(--highlight-mnemo);
+  border: 1px solid var(--highlight-mnemo);
+}
+
+.table{
+  border-collapse: collapse;
+  margin-top: 10px;
+  width: 100%;
+  text-align: center;
+  font-size: 21px;
+  tr {
+    border-bottom: 1px solid rgba(215, 215, 215, 0.4);
+    th {
+      padding: 10px;
+      color: var(--border-buttons);
+      font-weight: normal;
+    }
+    td {
+      padding: 10px;
+    }
+  }
+  tr:last-child {
+    border-bottom: none;
+  }
+}
+.saveTypeRepetition{
+  @include buttonStyle;
+  margin-top: 30px;
+}
+
+
+@media all and (max-width: 600px) {
+  .myPageBox{
+    width: 90%;
+  }
+  .myInfoContainer {
+    width: 100%;
+    padding: 5px 0 5px 5px;
+  }
+  .avatar {
+    margin: 0 5px;
+
+    svg {
+      width: 70px;
+    }
+  }
+  .myInfo{
+    width: 60%;
+    font-size: 18px;
+    padding-left: 20px;
+  }
+  .radioBtnBox{
+    padding-right: 10px;
+  }
+  .radio{
+    width: 12px;
+    height: 12px;
+  }
+  .typesPractice{
+    font-size: 14px;
+    flex-wrap: nowrap;
+  }
+}

@@ -1,16 +1,18 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {AppThunk} from "./index";
 import {MnemonicClient} from "../api/MnemonicClient";
-import {LengthAndWords} from "../shared/models/engWordTypes";
+import {LengthAndWords, SelectedWord} from "../shared/models/engWordTypes";
 
 interface ConsonanceState {
     consonances: Array<LengthAndWords>
     searchConsonances: string
+    consonanceWords: Array<SelectedWord>
 }
 
 const initialState: ConsonanceState = {
     consonances: [],
-    searchConsonances: ""
+    searchConsonances: "",
+    consonanceWords: []
 };
 
 export const regexpSlice = createSlice(
@@ -26,6 +28,15 @@ export const regexpSlice = createSlice(
             },
             setSearchConsonance : (state,  action: PayloadAction<string>) => {
                 state.searchConsonances = action.payload
+            },
+            addSelectedWords: (state,  action: PayloadAction<SelectedWord>) => {
+                if(!state.consonanceWords.map(el => el.word).includes(action.payload.word)){
+                    state.consonanceWords = [...state.consonanceWords, action.payload]
+                }
+            },
+            deleteConsonanceWords: (state,  action: PayloadAction<string>) => {
+                let word = action.payload
+                state.consonanceWords = state.consonanceWords.filter(el => el.word !== word)
             }
         }
     }
@@ -34,7 +45,9 @@ export const regexpSlice = createSlice(
 export const {
     setConsonance,
     clearConsonance,
-    setSearchConsonance
+    setSearchConsonance,
+    addSelectedWords,
+    deleteConsonanceWords
 } = regexpSlice.actions
 
 export const findByRegexpAsync = (regexp: string, onlyInit: boolean):AppThunk => async (dispatch: any) => {

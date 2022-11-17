@@ -23,6 +23,7 @@
 }
 .mnemo {
   @include textItem (24px, 400);
+  cursor: pointer;
 }
 
 .author {

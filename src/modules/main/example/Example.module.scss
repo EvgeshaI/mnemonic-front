@@ -38,6 +38,7 @@
 
 .example {
   @include textItem (22px, 300);
+  cursor: pointer;
 }
 .newExampleSentence {
   font-size: 25px;

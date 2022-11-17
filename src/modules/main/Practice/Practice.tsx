@@ -88,7 +88,14 @@ export const Practice:FC<{practices: Array<IPracticeExample>}> = (props) => {
     }
     const keyPressCheck = (e:React.KeyboardEvent) => {
         if (e.key === "Enter") {
-            check()
+            // check()
+            if((checkedCount < 2 && (!engWordCorrect || !translateCorrect))){
+                check()
+            }else if(((!engWordCorrect || !translateCorrect) && checkedCount > 1)){
+                correctAnswer()
+            }else if(((engWordCorrect && translateCorrect) || checkedCount > 2)){
+                nextSentence()
+            }
         }
     }
     const correctAnswer = () => {
@@ -201,7 +208,8 @@ export const Practice:FC<{practices: Array<IPracticeExample>}> = (props) => {
                                 value={engWord}
                                 onChange={changeEngWord}
                                 className={engWordStyle()}
-                                onKeyPress={keyPressCheck}/>
+                                onKeyPress={keyPressCheck}
+                            />
                         </div>
                         {!isMobileScreen &&
                             <IconsResult

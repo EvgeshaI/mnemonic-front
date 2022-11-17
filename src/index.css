@@ -1,18 +1,18 @@
 body {
-    font-family: 'Comfortaa', 'Montserrat', 'Grill Sans', serif;
+    font-family: 'Raleway', 'Montserrat', 'Grill Sans', serif;
     margin: 0;
     color: var(--font-color);
 }
 textarea {
-    font-family: 'Comfortaa', 'Montserrat', 'Grill Sans', serif;
+    font-family: 'Raleway', 'Montserrat', 'Grill Sans', serif;
     color: var(--font-color);
 }
 input {
-    font-family: 'Comfortaa', 'Montserrat', 'Grill Sans', serif;
+    font-family: 'Raleway', 'Montserrat', 'Grill Sans', serif;
     color: var(--font-color);
 }
 div {
-    font-family: 'Comfortaa', 'Montserrat', 'Grill Sans', serif;
+    font-family: 'Raleway', 'Montserrat', 'Grill Sans', serif;
 }
 
 /*COMFORTAA*/
@@ -71,6 +71,38 @@ font-family: 'Montserrat';
     font-family: 'Montserrat';
     font-weight: 800;
     src: local('Montserrat'), url(./import/fonts/montserrat/MontserratAlternates-ExtraBold.ttf) format('truetype')
+}
+
+/*Raleway*/
+@font-face {
+    font-family: 'Raleway';
+    font-style: italic;
+    src: local('Raleway'), url(./import/fonts/raleway/Raleway-Italic.ttf) format('truetype');
+}
+@font-face {
+    font-family: 'Raleway';
+    font-weight: 300;
+    src: local('Raleway'), url(./import/fonts/raleway/Raleway-Light.ttf) format('truetype');
+}
+@font-face {
+    font-family: 'Raleway';
+    font-weight: 400;
+    src: local('Raleway'), url(./import/fonts/raleway/Raleway-Regular.ttf) format('truetype');
+}
+@font-face {
+    font-family: 'Raleway';
+    font-weight: 500;
+    src: local('Raleway'), url(./import/fonts/raleway/Raleway-Medium.ttf) format('truetype');
+}
+@font-face {
+    font-family: 'Raleway';
+    font-weight: 600;
+    src: local('Raleway'), url(./import/fonts/raleway/Raleway-SemiBold.ttf) format('truetype');
+}
+@font-face {
+    font-family: 'Raleway';
+    font-weight: 700;
+    src: local('Raleway'), url(./import/fonts/raleway/Raleway-Bold.ttf) format('truetype');
 }
 
 :root {

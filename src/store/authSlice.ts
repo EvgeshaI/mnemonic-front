@@ -3,12 +3,14 @@ import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {AppThunk} from "./index";
 import {MnemonicClient} from "../api/MnemonicClient";
 import jwt_decode from "jwt-decode"
+import {showAndHideAlert} from "./alertsSlise";
 
 
 interface LoginState {
     user: null | IUser
     isAuth: boolean
-    errorMessage: string | null
+    errorMessage: string | null,
+    isUpdateNickname: boolean
     confirmed: boolean | null
     nicknameError: string | null,
     showProfileModal: boolean
@@ -18,6 +20,7 @@ const initialState: LoginState = {
     user: null,
     isAuth: false,
     errorMessage: null,
+    isUpdateNickname: false,
     confirmed: null,
     nicknameError: null,
     showProfileModal: false
@@ -48,6 +51,9 @@ export const authSlice = createSlice(
             },
             setShowProfileModal: (state, action: PayloadAction<boolean>) =>{
                 state.showProfileModal =action.payload
+            },
+            setIsUpdateNickname: (state, action: PayloadAction<boolean>) => {
+                state.isUpdateNickname = action.payload
             }
         }
     }
@@ -59,7 +65,8 @@ export const {
     setError,
     setConfirmed,
     setNicknameError,
-    setShowProfileModal
+    setShowProfileModal,
+    setIsUpdateNickname
 } = authSlice.actions
 
 export const getAndSetUser = () => (dispatch: any) => {
@@ -94,11 +101,13 @@ export const updateUserName = (nickname: string):AppThunk => async (dispatch: an
         dispatch(setUser(user))
         localStorage.setItem("user", JSON.stringify(user))
         dispatch(setShowProfileModal(false))
+        dispatch(setIsUpdateNickname(false))
     } catch (error) {
         // @ts-ignore
         if (error.data.status === 409){
+            dispatch(setIsUpdateNickname(true))
             // @ts-ignore
-            dispatch(setNicknameError(error.data.data.message))
+            showAndHideAlert(dispatch, error.data.data.message)
         }
     }
 }

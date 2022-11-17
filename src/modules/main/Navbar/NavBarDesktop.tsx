@@ -25,6 +25,7 @@ type NavBarDesktopPropsType = {
 export const NavBarDesktop:FC<NavBarDesktopPropsType> = (props) => {
     const {
         isDarkTheme,
+        readyToPractice
     } = useAppSelector((state) => state.appReducer);
     const dispatch = useAppDispatch()
     const changeTheme = () => {
@@ -61,7 +62,9 @@ export const NavBarDesktop:FC<NavBarDesktopPropsType> = (props) => {
                             <User/>
                         </div>
                         <div>{props.user!.nickname}</div>
-
+                        {readyToPractice > 0 &&
+                            <div className={s.readeToPractice}>{readyToPractice}</div>
+                        }
                     </div>
                     :
                     <div onClick={props.login} className={s.logText}>

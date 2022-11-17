@@ -105,7 +105,7 @@ const ExampleComponent: FC<PropsType> = (props) => {
                 ?
                 <>
                     <div className={s.exampleBox}>
-                        <div className={s.example}>
+                        <div className={s.example} onClick={clickTextFormat}>
                             {textFormat ?
                                 <div>
                                     <ExampleFormat parts={props.example.parts} />
@@ -144,7 +144,7 @@ const ExampleComponent: FC<PropsType> = (props) => {
                                     {!isMobileScreen &&  <div className={s.buttonName}>Удалить</div>}
                                 </div>
                             }
-                            {!props.example.isCreator && props.auth &&
+                            {props.auth &&
                                 <div className={s.iconBox} onClick={addExample}>
                                     <div  className={s.iconContainer}> {addDelete()} </div>
                                     {!isMobileScreen && <div className={s.buttonName}>Избранное</div>}

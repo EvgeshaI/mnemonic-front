@@ -137,6 +137,12 @@ export interface LengthAndWords {
     words: Array<string>
 }
 
+export interface SelectedWord {
+    word: string,
+    regexp: string,
+    highlight: Array<number>
+}
+
 export interface IEngWordSuggest {
     id: number,
     engWord: string,
@@ -185,4 +191,29 @@ export interface IExampleHome{
     parts: Array<IPart>
 }
 
+export interface IUserInfo{
+    nickname: string,
+    email: string,
+    readyToPractice: number
+}
 
+export interface ITypeOfRepetition{
+    userRepetition: RepetitionType,
+    practices: Array<IPractices>
+}
+
+export interface IPractices {
+    repetitionType: RepetitionType,
+    stages: Array<IStages>
+}
+export interface IStages{
+    stage: string,
+    amount: 0,
+    timeUnit: string
+}
+export enum repetitionType {
+    EXPONENTIAL="EXPONENTIAL",
+    EBBINGHAUS = "EBBINGHAUS",
+    DOUBLE = "DOUBLE"
+}
+export type RepetitionType = repetitionType.EXPONENTIAL | repetitionType.EBBINGHAUS | repetitionType.DOUBLE

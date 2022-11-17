@@ -1,8 +1,8 @@
 import React, {FC, useRef} from "react";
 import s from "./navbar.module.scss"
 import {useNavigate} from "react-router";
-import {deleteUser, setShowProfileModal} from "../../../store/authSlice";
-import {useAppDispatch} from "../../../store";
+import {deleteUser} from "../../../store/authSlice";
+import {useAppDispatch, useAppSelector} from "../../../store";
 import useClickOutside from "../../util/clickOutside";
 import {ReactComponent as Book} from "../../../import/icons/book.svg";
 import {ReactComponent as Dumbbell} from "../../../import/icons/dumbbell.svg";
@@ -20,6 +20,9 @@ type ModalListPropsType = {
 }
 
 export const UserDropDown: FC <ModalListPropsType> = (props) => {
+    const {
+        readyToPractice
+    } = useAppSelector((state) => state.appReducer);
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
     const ref = useRef<HTMLDivElement>(null);
@@ -40,7 +43,8 @@ export const UserDropDown: FC <ModalListPropsType> = (props) => {
         props.setShowUserDropDown(false)
     }
     const showProfileModal = () => {
-        dispatch(setShowProfileModal(true))
+        // dispatch(setShowProfileModal(true))
+        navigate('/profile')
         props.setShowUserDropDown(false)
     }
     const clickSearchConsonance = () => {
@@ -65,9 +69,12 @@ export const UserDropDown: FC <ModalListPropsType> = (props) => {
                                     <div className={s.icon}><Book/></div>
                                     <li>Мой словарь</li>
                                 </div>
-                                <div className={s.listStyle} onClick={goWorkout}>
+                                <div className={s.listStyle} onClick={goWorkout} style={{position: "relative"}}>
                                     <div className={s.icon}><Dumbbell/></div>
                                     <li>Тренировка</li>
+                                    {readyToPractice >0 &&
+                                        <div className={s.readeToPractice} style={{top: "25%", left: "65%" }}>{readyToPractice}</div>
+                                    }
                                 </div>
                                 <div className={s.listStyle} onClick={showProfileModal}>
                                     <div className={s.icon}><Profile/></div>
@@ -93,9 +100,12 @@ export const UserDropDown: FC <ModalListPropsType> = (props) => {
                             <div className={s.icon}><Book/></div>
                             <li>Мой словарь</li>
                         </div>
-                        <div className={s.listStyle} onClick={goWorkout}>
+                        <div className={s.listStyle} onClick={goWorkout} style={{position: "relative"}}>
                             <div className={s.icon}><Dumbbell/></div>
                             <li>Тренировка</li>
+                            {readyToPractice > 0 &&
+                                <div className={s.readeToPractice} style={{top: "25%", left: "65%" }}>{readyToPractice}</div>
+                            }
                         </div>
                         <div className={s.listStyle} onClick={showProfileModal}>
                             <div className={s.icon}><Profile/></div>

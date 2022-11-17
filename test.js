@@ -1,27 +1,39 @@
-function abbreviate(string) {
-    let items = ["!", ",", "?", "."]
-    let str = string.split(" ")
-    let result = []
-    for(let i=0; i<str.length; i++){
-        let letter = str[i]
-        if(items.includes(letter[letter.length-1])) letter = letter.substring(0, letter.length-1)
-        if(letter.includes("-")){
-            let st = letter.split("-")
-            let a = st.map(el => {
-                if(el.length>3){
-                    return `${el[0]}${el.length-2}${el[el.length-1]}`
-                }else{
-                    return el
-                }
-            }).join("-")
-            result.push(a)
-        }else{
-            if(letter.length>3){
-                result.push(`${letter[0]}${letter.length-2}${letter[letter.length-1]}`)
-            }else{
-                result.push(letter)
+// функция сравнитель
+const comparator = (a, b) => {
+    return a-b
+}
+
+// функция перестановки
+const swap = (arr, i, j) => {
+    let temp = arr[i]
+    arr[i] = arr[j]
+    arr[j] = temp
+}
+
+//пузырьковая сортировка
+
+let bubbleSort = (arr) => {
+    for(let i=0; i<arr.length; i++){
+        for(let j=0; j<arr.length-1-i; j++){
+            if(comparator(arr[j], arr[j+1]) > 0){
+                swap(arr, j, j+1)
             }
         }
     }
-    return result.join(" ")
+}
+
+//сортировка выбором
+
+let selectionSort = (arr) => {
+    for(let i=0; i<arr.length-1; i++){
+        let min = i
+        for(let j= i+1; j<arr.length; j++){
+            if(comparator(arr[min], arr[j]) > 0){
+                min = j
+            }
+        }
+        if(min !== i) {
+            swap(arr, i, min)
+        }
+    }
 }

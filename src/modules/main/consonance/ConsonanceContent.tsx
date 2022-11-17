@@ -3,19 +3,29 @@ import s from "./consonance.module.scss"
 import {LengthAndWords} from "../../../shared/models/engWordTypes";
 import useWindowDimensions from "../../util/windowDimensions";
 
-
 type ConsonanceContentPropsType = {
     consonances: LengthAndWords,
-    locationContent: string | null
+    locationContent: string | null,
+    skipSymbols: (word: string) => void
 }
 
 export const ConsonanceContent:FC<ConsonanceContentPropsType> = (props) => {
     const { width } = useWindowDimensions();
     const isMobileScreen = width < 600
     let widthConsonance = isMobileScreen ? 80 : 25;
+    const pushConsonanceWords = (word: string) => {
+        props.skipSymbols(word)
+    }
     let sortWords = (consonances: Array<string>) => {
         let arr = [...consonances]
-        return arr.sort().map((el, i) => <li key={i} className={s.consonance} style={{width: `${widthConsonance}%`}}> {el}</li>)
+        return arr.sort().map((el, i) =>
+            <li key={i}
+                className={s.consonance}
+                style={{width: `${widthConsonance}%`}}
+                onClick={() => pushConsonanceWords(el)}
+            >
+                {el}
+            </li>)
     }
     let numberOfLetters = (length: number) => {
         return <>Букв: {length}</>
