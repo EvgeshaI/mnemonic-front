@@ -137,7 +137,13 @@
   @include buttonStyle;
   margin-top: 30px;
 }
-
+.saveTypeRepetitionDisable{
+  @extend .saveTypeRepetition;
+  background-color: var(--border-buttons);
+  &:hover{
+    background-color: var(--border-buttons);
+  };
+}
 
 @media all and (max-width: 600px) {
   .myPageBox{

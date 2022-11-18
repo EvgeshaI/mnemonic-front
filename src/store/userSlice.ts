@@ -4,7 +4,8 @@ import {
     IStatistic,
     IStudy,
     ITypeOfRepetition,
-    NewStudyExample
+    NewStudyExample,
+    RepetitionType
 } from "../shared/models/engWordTypes";
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {MnemonicClient} from "../api/MnemonicClient";
@@ -126,9 +127,9 @@ export const userSlice = createSlice(
             setRepetitions: (state, action: PayloadAction<ITypeOfRepetition>) => {
                 state.userTypeRepetition = action.payload
             },
-            // updateTypeOfRepetition: (state, action: PayloadAction<ITypeOfRepetition>) => {
-            //
-            // },
+            updateTypeOfRepetition: (state, action: PayloadAction<RepetitionType>) => {
+                state.userTypeRepetition = {...state.userTypeRepetition!, userRepetition: action.payload}
+            },
 
         }
     }
@@ -145,7 +146,8 @@ export const {
     deleteNewExample,
     initUserPageState,
     setMyStatistic,
-    setRepetitions
+    setRepetitions,
+    updateTypeOfRepetition
 } = userSlice.actions
 
 
@@ -226,9 +228,10 @@ export const getUserRepetition = (): AppThunk => async (dispatch: any) => {
     let result =  await MnemonicClient.repetitions()
     dispatch(setRepetitions(result))
 }
-export const updateRepetitionType = (repetitions: string): AppThunk => async (dispatch: any) => {
-    await MnemonicClient.updateRepetitions(repetitions)
+export const updateRepetitionType = (repetition: RepetitionType): AppThunk => async (dispatch: any) => {
+    await MnemonicClient.updateRepetitions(repetition)
     dispatch(getReadyToPractice())
+    dispatch(updateTypeOfRepetition(repetition))
 }
 
 export default userSlice.reducer;

@@ -14,7 +14,6 @@ export const TypeOfPractice = () => {
     const [typePractice, setTypePractice] = useState<IPractices | null>(null)
     useEffect(() => {
         dispatch(getUserRepetition())
-
     }, [])
     useEffect(() => {
         if (userTypeRepetition) {
@@ -22,13 +21,17 @@ export const TypeOfPractice = () => {
         }
     }, [userTypeRepetition])
     const updateTypeRepetition = () => {
-        dispatch(updateRepetitionType(typePractice!.repetitionType))
+        if(userTypeRepetition?.userRepetition !== typePractice?.repetitionType){
+            dispatch(updateRepetitionType(typePractice!.repetitionType))
+        }
     }
     const changeRepetitionType = (type: string) => {
         setTypePractice(
             userTypeRepetition!.practices.find(el => el.repetitionType === type)!
         )
     }
+    let saveButtonStyle = userTypeRepetition?.userRepetition === typePractice?.repetitionType ?
+        s.saveTypeRepetitionDisable : s.saveTypeRepetition
     return(
         <div className={s.tableBox}>
             <div className={s.typesPractice}>
@@ -51,10 +54,7 @@ export const TypeOfPractice = () => {
                         <td>{el.timeUnit.toLowerCase()}</td>
                     </tr>)}
                 </table>
-            {userTypeRepetition?.userRepetition !== typePractice?.repetitionType &&
-                <div className={s.saveTypeRepetition} onClick={updateTypeRepetition}>Сохранить</div>
-            }
-
+                <div className={saveButtonStyle} onClick={updateTypeRepetition}>Сохранить</div>
         </div>
     )
 }
