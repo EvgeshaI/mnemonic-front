@@ -57,7 +57,7 @@ export const Consonance: FC<ConsonancePropsType> = (props) => {
         dispatch(deleteConsonanceWords(word))
     }
 
-    const skipSymbols = (word: string) => {
+    const addSelectedWord = (word: string) => {
         const syllables = searchConsonances.split('*')
         let highlight = Array<number>()
         let wordPart = word
@@ -201,7 +201,7 @@ export const Consonance: FC<ConsonancePropsType> = (props) => {
                             key={i}
                             consonances={el}
                             locationContent={props.locationContent}
-                            skipSymbols={skipSymbols}
+                            addSelectedWord={addSelectedWord}
                         />
                     </div>
                 )}

@@ -212,8 +212,8 @@ export interface IStages{
     timeUnit: string
 }
 export enum repetitionType {
-    EXPONENTIAL="EXPONENTIAL",
     EBBINGHAUS = "EBBINGHAUS",
-    DOUBLE = "DOUBLE"
+    DOUBLE = "DOUBLE",
+    EXPONENTIAL="EXPONENTIAL"
 }
 export type RepetitionType = repetitionType.EXPONENTIAL | repetitionType.EBBINGHAUS | repetitionType.DOUBLE

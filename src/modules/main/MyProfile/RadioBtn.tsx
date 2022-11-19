@@ -1,10 +1,11 @@
 import React, {FC} from "react";
 import s from "./myProfile.module.scss";
+import {RepetitionType} from "../../../shared/models/engWordTypes";
 
 type RadioBtnPropsType = {
-    valueBtn: string,
+    valueBtn: RepetitionType,
     active: boolean,
-    changeRepetitionType: (type: string) => void
+    changeRepetitionType: (type: RepetitionType) => void
 }
 
 export const RadioBtn:FC<RadioBtnPropsType> = (props) => {

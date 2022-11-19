@@ -1,9 +1,10 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import s from "./myProfile.module.scss"
 import {useAppDispatch, useAppSelector} from "../../../store";
 import {ReactComponent as User} from "../../../import/icons/user.svg";
 import {setIsUpdateNickname, updateUserName} from "../../../store/authSlice";
 import {TypeOfPractice} from "./TypeOfPractice";
+import {getUserRepetition} from "../../../store/userSlice";
 
 export const MyProfile = () => {
     const dispatch = useAppDispatch()
@@ -11,6 +12,13 @@ export const MyProfile = () => {
         user,
         isUpdateNickname
     } = useAppSelector((state) => state.authReducer);
+    const {
+        userTypeRepetition
+    } = useAppSelector((state) => state.userReducer);
+
+    useEffect(() => {
+        dispatch(getUserRepetition())
+    }, [])
 
     const [nickname, setNickname] = useState(user?.nickname)
 
@@ -38,7 +46,6 @@ export const MyProfile = () => {
                 </div>
                 <div className={s.myInfo}>
                     {isUpdateNickname ?
-                        <div className={s.inputNicknameBox}>
                             <div className={s.myInfoField}>
                                <div>nickname:</div>
                                 <input className={s.updateNickname}
@@ -49,7 +56,6 @@ export const MyProfile = () => {
                                        onBlur={saveNewNickname}
                                 />
                             </div>
-                        </div>
                         :
                         <div className={s.myInfoField}>
                             <div>nickname:</div>
@@ -69,7 +75,9 @@ export const MyProfile = () => {
                 Выберите тип интервального повторения для запоминания слов.
                 В таблице указаны интервалы времени, через которое ваши примеры будут вновь доступны для тренировки.
             </div>
-            <TypeOfPractice/>
+            {userTypeRepetition &&
+                <TypeOfPractice userTypeRepetition={userTypeRepetition}/>
+            }
         </div>
     )
 }

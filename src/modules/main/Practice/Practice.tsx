@@ -10,6 +10,7 @@ import {ProgressBar} from "./ProgressBar";
 import useWindowDimensions from "../../util/windowDimensions";
 import {IconsResult} from "./IconsResult";
 import {IPracticeExample} from "../../../shared/models/engWordTypes";
+import {getReadyToPractice} from "../../../store/appSlice";
 
 export const Practice:FC<{practices: Array<IPracticeExample>}> = (props) => {
 
@@ -122,6 +123,9 @@ export const Practice:FC<{practices: Array<IPracticeExample>}> = (props) => {
     useEffect(() => {
         setKeyCount(2)
         setCheckedCount(0)
+        if (count === examplesPractice.length) {
+            dispatch(getReadyToPractice())
+        }
     }, [count])
 
     const getKey = () => {

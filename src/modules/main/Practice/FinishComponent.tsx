@@ -1,11 +1,10 @@
-import React, {FC, useEffect} from "react";
+import React, {FC} from "react";
 import s from "./finish.module.scss"
 import {getPracticeAsync} from "../../../store/practiceSlice";
 import {useAppDispatch} from "../../../store";
 import {useNavigate} from "react-router";
 import {ReactComponent as Book} from "../../../import/icons/book.svg";
 import {ReactComponent as Repeat} from "../../../import/icons/repeat.svg";
-import {getReadyToPractice} from "../../../store/appSlice";
 
 type FinishComponent = {
     allPractice: number,
@@ -26,9 +25,7 @@ export const FinishComponent: FC<FinishComponent> = (props) => {
         props.setCount(0)
         props.setRightCount(0)
     }
-    useEffect(() => {
-        dispatch(getReadyToPractice())
-    }, [])
+
     return (
         <div className={s.finishBox}>
            <div className={s.headFinish}>Результат:</div>
