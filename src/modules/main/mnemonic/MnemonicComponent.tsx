@@ -114,7 +114,7 @@ const MnemonicComponent: FC<PropsType> = (props) => {
 
                     </div>
 
-                    <div className={s.mnemo}>
+                    <div className={s.mnemo} onClick={pushBold}>
                         {bold ? <HighlightMnemonic
                             highlight={props.mnemonic.highlight}
                             mnemonic={props.mnemonic.phrase}
@@ -134,7 +134,7 @@ const MnemonicComponent: FC<PropsType> = (props) => {
                                 <div  className={s.iconContainer}>{getBoldIcon()}</div>
                                 {!isMobileScreen && <div className={s.buttonName}> Выделить </div>}
                             </div>
-                            {!props.mnemonic.isCreator && props.auth && !props.mnemonic.myExampleExists &&
+                            {props.auth && !props.mnemonic.myExampleExists &&
                                 <div className={s.iconBox} onClick={addMeMnemonic}>
                                     <div  className={s.iconContainer}> {addDelete()} </div>
                                     {!isMobileScreen && <div className={s.buttonName}>Избранное</div>}

@@ -25,6 +25,7 @@ export const FinishComponent: FC<FinishComponent> = (props) => {
         props.setCount(0)
         props.setRightCount(0)
     }
+
     return (
         <div className={s.finishBox}>
            <div className={s.headFinish}>Результат:</div>

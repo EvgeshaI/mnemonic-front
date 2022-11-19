@@ -10,6 +10,7 @@ import {ProgressBar} from "./ProgressBar";
 import useWindowDimensions from "../../util/windowDimensions";
 import {IconsResult} from "./IconsResult";
 import {IPracticeExample} from "../../../shared/models/engWordTypes";
+import {getReadyToPractice} from "../../../store/appSlice";
 
 export const Practice:FC<{practices: Array<IPracticeExample>}> = (props) => {
 
@@ -88,7 +89,14 @@ export const Practice:FC<{practices: Array<IPracticeExample>}> = (props) => {
     }
     const keyPressCheck = (e:React.KeyboardEvent) => {
         if (e.key === "Enter") {
-            check()
+            // check()
+            if((checkedCount < 2 && (!engWordCorrect || !translateCorrect))){
+                check()
+            }else if(((!engWordCorrect || !translateCorrect) && checkedCount > 1)){
+                correctAnswer()
+            }else if(((engWordCorrect && translateCorrect) || checkedCount > 2)){
+                nextSentence()
+            }
         }
     }
     const correctAnswer = () => {
@@ -115,6 +123,9 @@ export const Practice:FC<{practices: Array<IPracticeExample>}> = (props) => {
     useEffect(() => {
         setKeyCount(2)
         setCheckedCount(0)
+        if (count === examplesPractice.length) {
+            dispatch(getReadyToPractice())
+        }
     }, [count])
 
     const getKey = () => {
@@ -201,7 +212,8 @@ export const Practice:FC<{practices: Array<IPracticeExample>}> = (props) => {
                                 value={engWord}
                                 onChange={changeEngWord}
                                 className={engWordStyle()}
-                                onKeyPress={keyPressCheck}/>
+                                onKeyPress={keyPressCheck}
+                            />
                         </div>
                         {!isMobileScreen &&
                             <IconsResult

@@ -11,6 +11,8 @@ import {
     IPractice,
     IStatistic,
     IStudy,
+    ITypeOfRepetition,
+    IUserInfo,
 } from "../shared/models/engWordTypes";
 import {BaseClient} from "./BaseClient";
 
@@ -219,6 +221,16 @@ export class MnemonicClient extends BaseClient {
             size: 4
         }
         return this.get<IExampleHomePage>(`example/home-page`, {params})
+    }
+
+    static async readyToPractice () {
+        return this.get<IUserInfo>(`user/info`)
+    }
+    static async repetitions () {
+        return this.get<ITypeOfRepetition>(`practice/repetitions`)
+    }
+    static async updateRepetitions (repetition: string) {
+        return this.post(`practice/repetition/${repetition}`,  null)
     }
 }
 

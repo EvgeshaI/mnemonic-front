@@ -23,6 +23,7 @@ export const Sentence: FC<SentencePropsType> = (props) => {
                 <SentenceFormat0
                     parts={props?.currentExample.parts}/>
             }
+
         </div>
     )
 }

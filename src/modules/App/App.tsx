@@ -19,6 +19,7 @@ import useAppTheme from "../util/useAppTheme";
 import {PracticeContainer} from "../main/Practice/PracticeContainer";
 import {StartPageNew} from "../main/StartPage/StartPageNew";
 import ReactGA from "react-ga4";
+import {MyProfile} from "../main/MyProfile/MyProfile";
 
 ReactGA.initialize(process.env.REACT_APP_GOOGLE_ANALYTIC_ID!);
 
@@ -29,7 +30,6 @@ const App: React.FC<any> = () => {
     } = useAppSelector((state) => state.appReducer);
     const location = useLocation();
     const dispatch =  useAppDispatch();
-    console.log(location.pathname + location.search)
     ReactGA.send({ hitType: "pageview", page: location.pathname + location.search});
     useEffect(() => {
         ReactGA.send({ hitType: "pageview", page: location.pathname + location.search});
@@ -56,6 +56,7 @@ const App: React.FC<any> = () => {
                 <Route path="/privacy" element={<Privacy/>}/>
                 <Route path = "/consonance" element={<Consonance locationContent={"navbar"}/>}/>
                 <Route path = "/practice" element={<PracticeContainer/>}/>
+                <Route path = "/profile" element={<MyProfile/>}/>
             </Routes>
             <Alerts/>
         </div>

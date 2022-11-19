@@ -1,9 +1,17 @@
-import {IExample, IPageElements, IStatistic, IStudy, NewStudyExample} from "../shared/models/engWordTypes";
+import {
+    IExample,
+    IPageElements,
+    IStatistic,
+    IStudy,
+    ITypeOfRepetition,
+    NewStudyExample,
+    RepetitionType
+} from "../shared/models/engWordTypes";
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {MnemonicClient} from "../api/MnemonicClient";
 import {AppThunk} from "./index";
 import {addAlert, removeAlert} from "./alertsSlise";
-import {setFetching} from "./appSlice";
+import {getReadyToPractice, setFetching} from "./appSlice";
 
 
 interface UserState {
@@ -13,6 +21,7 @@ interface UserState {
     hasMore: boolean,
     search: string,
     statistic: IStatistic | null
+    userTypeRepetition: ITypeOfRepetition | null
 }
 
 const initialState: UserState = {
@@ -21,7 +30,8 @@ const initialState: UserState = {
     currentPage: 0,
     search: '',
     createExampleMap: [],
-    statistic: null
+    statistic: null,
+    userTypeRepetition: null
 };
 
 export const userSlice = createSlice(
@@ -114,6 +124,13 @@ export const userSlice = createSlice(
             setMyStatistic: (state, action: PayloadAction<IStatistic>) => {
                 state.statistic = action.payload;
             },
+            setRepetitions: (state, action: PayloadAction<ITypeOfRepetition>) => {
+                state.userTypeRepetition = action.payload
+            },
+            updateTypeOfRepetition: (state, action: PayloadAction<RepetitionType>) => {
+                state.userTypeRepetition = {...state.userTypeRepetition!, userRepetition: action.payload}
+            },
+
         }
     }
 )
@@ -128,7 +145,9 @@ export const {
     removeMyMnemonic,
     deleteNewExample,
     initUserPageState,
-    setMyStatistic
+    setMyStatistic,
+    setRepetitions,
+    updateTypeOfRepetition
 } = userSlice.actions
 
 
@@ -191,7 +210,7 @@ export const saveMyExampleAsync = (engWordId:number, example: IExample): AppThun
 }
 
 export const deleteMyExampleAsync = (myExampleId:number): AppThunk => async  (dispatch: any) => {
-     await MnemonicClient.deleteExample(myExampleId)
+     await MnemonicClient.deleteMeExample(myExampleId)
     dispatch(removeMyExample(myExampleId))
     dispatch(getMyStatisticAsync())
 }
@@ -205,5 +224,14 @@ export const getMyStatisticAsync = (): AppThunk => async (dispatch: any) => {
     dispatch(setMyStatistic(result))
 }
 
+export const getUserRepetition = (): AppThunk => async (dispatch: any) => {
+    let result =  await MnemonicClient.repetitions()
+    dispatch(setRepetitions(result))
+}
+export const updateRepetitionType = (repetition: RepetitionType): AppThunk => async (dispatch: any) => {
+    await MnemonicClient.updateRepetitions(repetition)
+    dispatch(getReadyToPractice())
+    dispatch(updateTypeOfRepetition(repetition))
+}
 
 export default userSlice.reducer;

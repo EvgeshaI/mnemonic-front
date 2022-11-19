@@ -15,6 +15,7 @@
 
 .navbar {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
 }
 .search {
@@ -70,6 +71,7 @@
 }
 .suggestion{
     display: flex;
+    flex-wrap: wrap;
     box-sizing: border-box;
     padding: 10px;
     color: $colorFont;
@@ -99,6 +101,7 @@
 
 .nicknameAndLogout {
     display: flex;
+    //flex-wrap: wrap;
     justify-content: end;
     align-items: center;
     padding: 0 15px 0 0;
@@ -118,7 +121,8 @@
     font-size: 12px;
 }
 .Box {
-   @include box
+   @include box;
+    position: relative;
 }
 
 .navbarIcon {
@@ -186,7 +190,19 @@
     fill: $colorFont;
 }
 
-
+.readeToPractice{
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    text-align: center;
+    top: -6px;
+    left: -5px;
+    border-radius: 100%;
+    padding: 4px;
+    font-size: 9px;
+    color: whitesmoke;
+    background-color: var(--errorColor);
+}
 
 @media all and (max-width: 600px) {
     .inputAndIcon {
