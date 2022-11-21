@@ -2,6 +2,7 @@ import s from "./navbar.module.scss";
 import {ReactComponent as Logo} from "../../../import/icons/logo.svg";
 import {ReactComponent as LogoDark} from "../../../import/icons/logoForDark.svg";
 import {ReactComponent as Sound} from "../../../import/icons/sound.svg";
+import {ReactComponent as Dictionary} from "../../../import/icons/dictionary.svg";
 import {ReactComponent as User} from "../../../import/icons/user.svg";
 import {ReactComponent as Login} from "../../../import/icons/login.svg";
 import {ReactComponent as Moon} from "../../../import/icons/moon.svg";
@@ -12,6 +13,7 @@ import {EngWordAutosuggest} from "./EngWordAutosuggest";
 import Toggle from "react-toggle";
 import {useAppDispatch, useAppSelector} from "../../../store";
 import {updateTheme} from "../../../store/appSlice";
+import {useNavigate} from "react-router";
 
 type NavBarDesktopPropsType = {
     isAuth: boolean
@@ -28,8 +30,12 @@ export const NavBarDesktop:FC<NavBarDesktopPropsType> = (props) => {
         readyToPractice
     } = useAppSelector((state) => state.appReducer);
     const dispatch = useAppDispatch()
+    const navigate = useNavigate()
     const changeTheme = () => {
         dispatch(updateTheme(!isDarkTheme))
+    }
+    const goToVocabulary = () => {
+        navigate("/vocabulary")
     }
     return (
         <div className={s.navbar}>
@@ -54,6 +60,12 @@ export const NavBarDesktop:FC<NavBarDesktopPropsType> = (props) => {
                         <Sound/>
                     </div>
                     <div>Созвучия</div>
+                </div>
+                <div className={s.Box} onClick={goToVocabulary}>
+                    <div className={s.navbarIcon}>
+                        <Dictionary/>
+                    </div>
+                    <div>Словарь</div>
                 </div>
                 {props.isAuth ?
                     <div onClick={() => props.invertShowDropDown()}
