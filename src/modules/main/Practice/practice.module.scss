@@ -31,10 +31,16 @@
 .practiceBox{
   margin: 30px auto;
 }
+.sentenceBox{
+  position: relative;
+}
 .sentence{
   font-size: 25px;
   text-align: center;
   color: $colorFont;
+}
+.wordTranslate{
+  cursor: pointer;
 }
 .mnemonicPart{
   color: $colorHighlightMnemo;
@@ -62,6 +68,23 @@
 .count{
   color: $colorIconAndPlaceholder;
 }
+.promptBox{
+  display: flex;
+  margin: 10px auto 0;
+  justify-content: center;
+  text-align: center;
+
+}
+.prompt{
+  text-align: center;
+  padding: 10px;
+  font-size: 18px;
+  color: $colorHighlightMnemo;
+  font-weight: bold;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 0);
+}
 .inputContainer{
   width: 90%;
   display: flex;
@@ -70,11 +93,18 @@
 }
 .inputBox{
   margin: 30px 0;
+  position: relative;
 }
 .inputName{
   text-align: center;
   margin: 0 0 5px 0;
   color: $colorDimText2;
+  position: relative;
+}
+.sound{
+  position: absolute;
+  left: 60%;
+  bottom: -3px
 }
 .inputPractice{
   @include inputStyle;
@@ -87,6 +117,13 @@
   @include inputStyle;
   color: #3DB39E;
   border-bottom:  1px solid #3DB39E;
+}
+.transcription{
+  color: $colorDimText2;
+  position: absolute;
+  bottom: -25px;
+  left: 50%;
+  transform: translate(-50%, 0);
 }
 .practiceButton{
   @include buttonStyle;
