@@ -28,24 +28,27 @@ export const TypeOfPractice:FC<TypeOfPracticePropsType> = (props) => {
     return(
         <div className={s.tableBox}>
             <div className={s.typesPractice}>
-                {Object.keys(repetitionType).map(el =>
+                {Object.keys(repetitionType).map((el, i) =>
                     <RadioBtn valueBtn={el as RepetitionType}
                               active={el == type}
+                              key={i}
                               changeRepetitionType={changeRepetitionType}
                     />)}
             </div>
                 <table className={s.table}>
+                    <tbody>
                     <tr>
                         <th>этап</th>
                         <th>количество</th>
                         <th>единицы</th>
                     </tr>
                     {getPractice()?.stages.filter((el, i) => i>0).map((el, i) =>
-                    <tr>
+                    <tr key={i}>
                         <td>{i+1}</td>
                         <td>{el.amount}</td>
                         <td>{el.timeUnit.toLowerCase()}</td>
                     </tr>)}
+                    </tbody>
                 </table>
                 <div className={saveButtonStyle} onClick={updateTypeRepetition}>Сохранить</div>
         </div>

@@ -95,7 +95,7 @@
   height: 17px;
   border: 1px solid #999;
   transition: 0.2s all linear;
-  margin-right: 10px;
+  margin-right: 5px;
   cursor: pointer;
   &:hover{
     background-color: var(--highlight-mnemo);
@@ -147,6 +147,7 @@
   .myInfoContainer {
     width: 100%;
     padding: 5px 0 5px 5px;
+
   }
   .avatar {
     margin: 0 5px;
@@ -160,15 +161,23 @@
     font-size: 18px;
     padding-left: 20px;
   }
+  .myInfoField{
+    font-size: 14px;
+    div:last-child{
+      font-size: 14px;
+    }
+  }
   .radioBtnBox{
-    padding-right: 10px;
+    padding-right: 2px;
   }
   .radio{
     width: 12px;
     height: 12px;
+    margin-right: 5px;
   }
   .typesPractice{
     font-size: 14px;
     flex-wrap: nowrap;
+    margin: 5px;
   }
 }
