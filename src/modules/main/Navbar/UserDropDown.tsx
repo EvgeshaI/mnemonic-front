@@ -10,12 +10,14 @@ import {ReactComponent as Profile} from "../../../import/icons/profile.svg";
 import {ReactComponent as Logout} from "../../../import/icons/logout.svg";
 import {ReactComponent as Sound} from "../../../import/icons/sound.svg";
 import {ReactComponent as Login} from "../../../import/icons/login.svg";
+import {ReactComponent as Dictionary} from "../../../import/icons/dictionary.svg";
 
 type ModalListPropsType = {
     isAuth: boolean
     isMobileScreen: boolean
     searchConsonance: () => void
     setShowUserDropDown: (show: boolean) => void
+    goToVocabulary: () => void
     login: () => void
 }
 
@@ -43,7 +45,6 @@ export const UserDropDown: FC <ModalListPropsType> = (props) => {
         props.setShowUserDropDown(false)
     }
     const showProfileModal = () => {
-        // dispatch(setShowProfileModal(true))
         navigate('/profile')
         props.setShowUserDropDown(false)
     }
@@ -62,6 +63,10 @@ export const UserDropDown: FC <ModalListPropsType> = (props) => {
                         <div className={s.listStyle} onClick={clickSearchConsonance}>
                             <div className={s.icon}><Sound/></div>
                             <li>Созвучия</li>
+                        </div>
+                        <div className={s.listStyle} onClick={props.goToVocabulary}>
+                            <div className={s.icon}><Dictionary/></div>
+                            <li>Индекс</li>
                         </div>
                         {props.isAuth &&
                             <>

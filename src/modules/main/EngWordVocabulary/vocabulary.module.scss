@@ -21,7 +21,6 @@
   cursor: pointer;
   display: flex;
   flex-wrap: wrap;
-  //justify-content: center;
   &:hover{
     color: $colorHighlightMnemo;
   }
@@ -30,5 +29,6 @@
 @media all  and (max-width: 600px){
   .vocabularyWords{
     width: 60%;
+    padding: 10px;
   }
 }

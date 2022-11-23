@@ -1,5 +1,5 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {IEngWord, IEngWordSuggest, IVocabulary, LetterAndVocabulary} from "../shared/models/engWordTypes";
+import {IEngWord, IEngWordSuggest, IEngWordVocabulary} from "../shared/models/engWordTypes";
 import {AppThunk} from "./index";
 import {MnemonicClient} from "../api/MnemonicClient";
 import {getMnemonicAsync} from "./mnemonicSlice";
@@ -10,15 +10,13 @@ import {showAndHideAlert} from "./alertsSlise";
 interface EngWordState {
     engWord: IEngWord | null,
     suggestions: Array<IEngWordSuggest>,
-    // engWordVocabulary: IEngWordVocabulary | null
-    engWordVocabulary: Array<LetterAndVocabulary>
+    engWordVocabulary: IEngWordVocabulary | null
 }
 
 const initialState: EngWordState = {
     engWord: null,
     suggestions: [],
-    // engWordVocabulary: null
-    engWordVocabulary: []
+    engWordVocabulary: null,
 };
 
 export const engWordSlice = createSlice(
@@ -33,7 +31,7 @@ export const engWordSlice = createSlice(
             setEngWordAuto: (state, action: PayloadAction<Array<IEngWordSuggest>> ) => {
                 state.suggestions = action.payload
             },
-            setVocabulary: (state, action: PayloadAction<Array<LetterAndVocabulary>>) => {
+            setVocabulary: (state, action: PayloadAction<IEngWordVocabulary>) => {
                 state.engWordVocabulary = action.payload
             }
         }
@@ -68,20 +66,7 @@ export const getEngWordSuggestAsync = (word:string): AppThunk => async (dispatch
 
 export const getEngWordVocabulary = ():AppThunk => async  (dispatch: any) => {
     let result = await MnemonicClient.vocabulary()
-    let map = new Map<string, Array<IVocabulary>>()
-    for (let vocabulary of result.vocabulary){
-        let key = vocabulary.engWord[0]
-        if(map.has(key)){
-            map.get(key)!.push(vocabulary)
-        }else{
-            map.set(key, [vocabulary])
-        }
-    }
-    let letterAndVocabulary = [] as Array<LetterAndVocabulary>
-    map.forEach((value: Array<IVocabulary>, key: string) => {
-        letterAndVocabulary.push({letter: key, vocabularies: value})
-    });
-    dispatch(setVocabulary(letterAndVocabulary))
+    dispatch(setVocabulary(result))
 }
 
 

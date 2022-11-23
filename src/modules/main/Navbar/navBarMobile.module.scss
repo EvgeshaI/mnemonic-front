@@ -32,6 +32,22 @@
     align-items: center;
     font-size: 13px;
 }
+.vocabularyBox{
+    display: flex;
+    margin: auto;
+    align-items: center;
+}
+.navbarIcon{
+    align-items: center;
+    //margin: 0 5px 0 0;
+    width: 20px;
+    svg {
+        width: 100%;
+        //display: flex;
+        //vertical-align: center;
+        fill: $colorFont;
+    }
+}
 .burger{
     fill: $colorHighlightMnemo;
     display: flex;

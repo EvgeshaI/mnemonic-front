@@ -1,7 +1,7 @@
 import React, {FC} from "react";
-import {IVocabulary} from "../../../shared/models/engWordTypes";
 import s from "./vocabulary.module.scss"
 import {useNavigate} from "react-router";
+import {IVocabulary} from "../../../shared/models/engWordTypes";
 
 type VocabularyPropsType = {
     letter: string,

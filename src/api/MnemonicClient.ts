@@ -33,7 +33,7 @@ export class MnemonicClient extends BaseClient {
     static async vocabulary () {
         const params = {
             // page: currentPage,
-            size: 100
+            size: 500
         };
         return this.get<IEngWordVocabulary>(`eng-word/vocabulary`, {params})
     }

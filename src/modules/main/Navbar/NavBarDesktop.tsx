@@ -13,11 +13,11 @@ import {EngWordAutosuggest} from "./EngWordAutosuggest";
 import Toggle from "react-toggle";
 import {useAppDispatch, useAppSelector} from "../../../store";
 import {updateTheme} from "../../../store/appSlice";
-import {useNavigate} from "react-router";
 
 type NavBarDesktopPropsType = {
     isAuth: boolean
     user: IUser | null
+    goToVocabulary: () => void
     startPage: () => void
     searchConsonance: () => void
     invertShowDropDown: () => void
@@ -30,13 +30,10 @@ export const NavBarDesktop:FC<NavBarDesktopPropsType> = (props) => {
         readyToPractice
     } = useAppSelector((state) => state.appReducer);
     const dispatch = useAppDispatch()
-    const navigate = useNavigate()
     const changeTheme = () => {
         dispatch(updateTheme(!isDarkTheme))
     }
-    const goToVocabulary = () => {
-        navigate("/vocabulary")
-    }
+
     return (
         <div className={s.navbar}>
             <div className={s.logo} onClick={props.startPage}>
@@ -61,7 +58,7 @@ export const NavBarDesktop:FC<NavBarDesktopPropsType> = (props) => {
                     </div>
                     <div>Созвучия</div>
                 </div>
-                <div className={s.Box} onClick={goToVocabulary}>
+                <div className={s.Box} onClick={props.goToVocabulary}>
                     <div className={s.navbarIcon}>
                         <Dictionary/>
                     </div>
