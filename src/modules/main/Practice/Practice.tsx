@@ -1,4 +1,4 @@
-import React, {FC, useEffect, useState} from "react";
+import React, {FC, useEffect, useRef, useState} from "react";
 import {useAppDispatch} from "../../../store";
 import {ReactComponent as Key} from "../../../import/icons/key.svg";
 import {guessedAsync, tookHintAsync} from "../../../store/practiceSlice";
@@ -9,8 +9,9 @@ import {FinishComponent} from "./FinishComponent";
 import {ProgressBar} from "./ProgressBar";
 import useWindowDimensions from "../../util/windowDimensions";
 import {IconsResult} from "./IconsResult";
-import {IPracticeExample} from "../../../shared/models/engWordTypes";
+import {IPracticeExample, PartTypes} from "../../../shared/models/engWordTypes";
 import {getReadyToPractice} from "../../../store/appSlice";
+import {AudioComponent} from "../EngWord/AudioComponent";
 
 export const Practice:FC<{practices: Array<IPracticeExample>}> = (props) => {
 
@@ -34,6 +35,15 @@ export const Practice:FC<{practices: Array<IPracticeExample>}> = (props) => {
     const changeTranslate = (e: React.ChangeEvent<HTMLInputElement>) => {
         setTranslate(e.target.value)
         resetAllFlags()
+    }
+    const addWordToTranslate = (word: string) => {
+        let words = translate.split(" ")
+        if (words.includes(word)) {
+            words = words.filter(w => w !== word)
+        } else {
+            words.push(word)
+        }
+        setTranslate(words.join(" "))
     }
     const nextSentence = () => {
         setCount(count+1)
@@ -87,18 +97,7 @@ export const Practice:FC<{practices: Array<IPracticeExample>}> = (props) => {
         setChecked(true)
         setCheckedCount(checkedCount + 1)
     }
-    const keyPressCheck = (e:React.KeyboardEvent) => {
-        if (e.key === "Enter") {
-            // check()
-            if((checkedCount < 2 && (!engWordCorrect || !translateCorrect))){
-                check()
-            }else if(((!engWordCorrect || !translateCorrect) && checkedCount > 1)){
-                correctAnswer()
-            }else if(((engWordCorrect && translateCorrect) || checkedCount > 2)){
-                nextSentence()
-            }
-        }
-    }
+
     const correctAnswer = () => {
         setEngWord(currentExample.engWord)
         setTranslate(currentExample.translationInSentence)
@@ -127,6 +126,30 @@ export const Practice:FC<{practices: Array<IPracticeExample>}> = (props) => {
             dispatch(getReadyToPractice())
         }
     }, [count])
+    const handleUserKeyPress = (event: KeyboardEvent) => {
+        if (event.key === "Enter") {
+            if((checkedCount < 2 && (!engWordCorrect || !translateCorrect))){
+                check()
+            }else if(((!engWordCorrect || !translateCorrect) && checkedCount > 1)){
+                correctAnswer()
+            }else if(((engWordCorrect && translateCorrect) || checkedCount > 2)){
+                nextSentence()
+            }
+        }
+    }
+    const cbRef = useRef(handleUserKeyPress)
+
+    useEffect(() => {
+        cbRef.current = handleUserKeyPress;
+    });
+
+    useEffect(() => {
+        const cb = (e: KeyboardEvent) => cbRef.current(e);
+        document.addEventListener("keypress", cb);
+        return () => {
+            document.removeEventListener("keypress", cb);
+        };
+    }, []);
 
     const getKey = () => {
         if(keyCount<1){
@@ -163,6 +186,7 @@ export const Practice:FC<{practices: Array<IPracticeExample>}> = (props) => {
         }
         return 0
     }
+    let mnemo = currentExample?.parts.filter(el => el.type === PartTypes.MNEMONIC).map(el => el.part).join("")
 
     return (
         <div className={s.practiceContainer}>
@@ -189,6 +213,7 @@ export const Practice:FC<{practices: Array<IPracticeExample>}> = (props) => {
                     <div className={s.sentenceBox}>
                         <div className={s.sentence}>
                             <Sentence
+                                addWordToTranslate={addWordToTranslate}
                                 currentExample={currentExample}
                                 count={keyCount}
                             />
@@ -201,19 +226,38 @@ export const Practice:FC<{practices: Array<IPracticeExample>}> = (props) => {
                             </div>
                             <div className={s.count}>{keyCount}</div>
                         </div>
+                        {keyCount === 1 &&
+                            <div className={s.prompt}>
+                                {currentExample.mnemonicInSentence}
+                            </div>
+                        }
+                        {keyCount<1 &&
+                            <div className={s.prompt}>
+                                {mnemo}
+                            </div>
+                        }
                     </div>
 
                     <div className={s.inputContainer}>
                         <div className={s.inputBox}>
-                            <div className={s.inputName}>слово</div>
+                            <div className={s.inputName}>
+                                слово
+                                {((engWordCorrect && translateCorrect) || checkedCount > 2)
+                                    &&
+                                    <div className={s.sound}><AudioComponent audioFile={currentExample.audioFile}/></div>
+                                }
+                            </div>
                             <input
                                 onBlur={() => {
                                 }}
                                 value={engWord}
                                 onChange={changeEngWord}
                                 className={engWordStyle()}
-                                onKeyPress={keyPressCheck}
+                                // onKeyPress={keyPressCheck}
                             />
+                            {((engWordCorrect && translateCorrect) || checkedCount > 2) &&
+                                < div className={s.transcription}>[{currentExample.transcription}]</div>
+                            }
                         </div>
                         {!isMobileScreen &&
                             <IconsResult
@@ -230,7 +274,7 @@ export const Practice:FC<{practices: Array<IPracticeExample>}> = (props) => {
                                 value={translate}
                                 onChange={changeTranslate}
                                 className={translationStyle()}
-                                onKeyPress={keyPressCheck}/>
+                                />
                         </div>
                     </div>
                     {(checkedCount < 2 && (!engWordCorrect || !translateCorrect)) &&

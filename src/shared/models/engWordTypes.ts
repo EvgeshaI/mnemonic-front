@@ -157,6 +157,8 @@ export interface IStatistic {
 export interface IPracticeExample {
     exampleStudyId: number,
     engWord: string,
+    transcription: string,
+    audioFile: string,
     translationInSentence: string,
     translationInitForm: string,
     mnemonicInSentence: string,
