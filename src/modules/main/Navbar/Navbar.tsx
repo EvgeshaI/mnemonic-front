@@ -32,6 +32,10 @@ export const Navbar: FC<NavbarPropsType>= (props) => {
     const startPage = () => {
         navigate(`/`)
     };
+    const goToVocabulary= () => {
+        navigate("/vocabulary")
+        setShowUserDropDown(false)
+    }
     const searchConsonance = () => {
         navigate(`/consonance`)
     }
@@ -56,6 +60,7 @@ export const Navbar: FC<NavbarPropsType>= (props) => {
                 isAuth={isAuth}
                 user={user}
                 startPage={startPage}
+                goToVocabulary={goToVocabulary}
                 searchConsonance={searchConsonance}
                 invertShowDropDown={invertShowDropDown}
                 login={login}
@@ -66,6 +71,7 @@ export const Navbar: FC<NavbarPropsType>= (props) => {
                 isAuth={isAuth}
                 isMobileScreen={isMobileScreen}
                 searchConsonance={searchConsonance}
+                goToVocabulary={goToVocabulary}
                 setShowUserDropDown={setShowUserDropDown}
                 login={login}
             />

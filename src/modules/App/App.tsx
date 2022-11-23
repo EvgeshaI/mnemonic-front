@@ -20,6 +20,7 @@ import {PracticeContainer} from "../main/Practice/PracticeContainer";
 import {StartPageNew} from "../main/StartPage/StartPageNew";
 import ReactGA from "react-ga4";
 import {MyProfile} from "../main/MyProfile/MyProfile";
+import {EngWordVocabulary} from "../main/EngWordVocabulary/EngWordVocabulary";
 
 ReactGA.initialize(process.env.REACT_APP_GOOGLE_ANALYTIC_ID!);
 
@@ -57,6 +58,7 @@ const App: React.FC<any> = () => {
                 <Route path = "/consonance" element={<Consonance locationContent={"navbar"}/>}/>
                 <Route path = "/practice" element={<PracticeContainer/>}/>
                 <Route path = "/profile" element={<MyProfile/>}/>
+                <Route path = "/vocabulary" element={<EngWordVocabulary/>}/>
             </Routes>
             <Alerts/>
         </div>

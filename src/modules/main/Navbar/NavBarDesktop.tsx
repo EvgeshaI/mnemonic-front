@@ -2,6 +2,7 @@ import s from "./navbar.module.scss";
 import {ReactComponent as Logo} from "../../../import/icons/logo.svg";
 import {ReactComponent as LogoDark} from "../../../import/icons/logoForDark.svg";
 import {ReactComponent as Sound} from "../../../import/icons/sound.svg";
+import {ReactComponent as Dictionary} from "../../../import/icons/dictionary.svg";
 import {ReactComponent as User} from "../../../import/icons/user.svg";
 import {ReactComponent as Login} from "../../../import/icons/login.svg";
 import {ReactComponent as Moon} from "../../../import/icons/moon.svg";
@@ -16,6 +17,7 @@ import {updateTheme} from "../../../store/appSlice";
 type NavBarDesktopPropsType = {
     isAuth: boolean
     user: IUser | null
+    goToVocabulary: () => void
     startPage: () => void
     searchConsonance: () => void
     invertShowDropDown: () => void
@@ -31,6 +33,7 @@ export const NavBarDesktop:FC<NavBarDesktopPropsType> = (props) => {
     const changeTheme = () => {
         dispatch(updateTheme(!isDarkTheme))
     }
+
     return (
         <div className={s.navbar}>
             <div className={s.logo} onClick={props.startPage}>
@@ -54,6 +57,12 @@ export const NavBarDesktop:FC<NavBarDesktopPropsType> = (props) => {
                         <Sound/>
                     </div>
                     <div>Созвучия</div>
+                </div>
+                <div className={s.Box} onClick={props.goToVocabulary}>
+                    <div className={s.navbarIcon}>
+                        <Dictionary/>
+                    </div>
+                    <div>Индекс</div>
                 </div>
                 {props.isAuth ?
                     <div onClick={() => props.invertShowDropDown()}

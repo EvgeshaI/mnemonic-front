@@ -216,4 +216,13 @@ export enum repetitionType {
     DOUBLE = "DOUBLE",
     EXPONENTIAL="EXPONENTIAL"
 }
+
+export interface IEngWordVocabulary {
+    vocabulary: Array<IVocabulary>
+}
+export interface IVocabulary {
+    engWord: string,
+    mnemonics: number,
+    examples: number
+}
 export type RepetitionType = repetitionType.EXPONENTIAL | repetitionType.EBBINGHAUS | repetitionType.DOUBLE

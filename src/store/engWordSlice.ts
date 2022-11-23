@@ -1,5 +1,5 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {IEngWord, IEngWordSuggest} from "../shared/models/engWordTypes";
+import {IEngWord, IEngWordSuggest, IEngWordVocabulary} from "../shared/models/engWordTypes";
 import {AppThunk} from "./index";
 import {MnemonicClient} from "../api/MnemonicClient";
 import {getMnemonicAsync} from "./mnemonicSlice";
@@ -9,12 +9,14 @@ import {showAndHideAlert} from "./alertsSlise";
 
 interface EngWordState {
     engWord: IEngWord | null,
-    suggestions: Array<IEngWordSuggest>
+    suggestions: Array<IEngWordSuggest>,
+    engWordVocabulary: IEngWordVocabulary | null
 }
 
 const initialState: EngWordState = {
     engWord: null,
-    suggestions: []
+    suggestions: [],
+    engWordVocabulary: null,
 };
 
 export const engWordSlice = createSlice(
@@ -28,6 +30,9 @@ export const engWordSlice = createSlice(
             },
             setEngWordAuto: (state, action: PayloadAction<Array<IEngWordSuggest>> ) => {
                 state.suggestions = action.payload
+            },
+            setVocabulary: (state, action: PayloadAction<IEngWordVocabulary>) => {
+                state.engWordVocabulary = action.payload
             }
         }
     }
@@ -35,7 +40,8 @@ export const engWordSlice = createSlice(
 
 export const {
     setEngWord,
-    setEngWordAuto
+    setEngWordAuto,
+    setVocabulary
 } = engWordSlice.actions;
 
 export const getEngWordAsync = (word:string): AppThunk => async (dispatch: any) => {
@@ -56,6 +62,11 @@ export const getEngWordAsync = (word:string): AppThunk => async (dispatch: any) 
 export const getEngWordSuggestAsync = (word:string): AppThunk => async (dispatch: any) => {
     let result = await MnemonicClient.autoGetEngWord(word)
     dispatch(setEngWordAuto(result))
+}
+
+export const getEngWordVocabulary = ():AppThunk => async  (dispatch: any) => {
+    let result = await MnemonicClient.vocabulary()
+    dispatch(setVocabulary(result))
 }
 
 

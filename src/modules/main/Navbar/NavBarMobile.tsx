@@ -17,8 +17,6 @@ type NavBarMobilePropsType = {
     startPage: () => void
     login: () => void
     invertShowDropDown: () => void
-    // theme: string
-    // toggleTheme: () => void
 }
 
 export const NavBarMobile:FC<NavBarMobilePropsType> = (props) => {

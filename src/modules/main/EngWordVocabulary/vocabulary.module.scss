@@ -1,0 +1,35 @@
+@import "../common.module";
+.engWordVocabulary{
+  width: 50%;
+  margin: auto;
+
+}
+.vocabularyLetter{
+  font-weight: bold;
+  font-size: 23px;
+  margin: 10px 0;
+  color: var(--border-buttons);
+}
+.vocabularyWordsContainer{
+  display: flex;
+  flex-wrap: wrap;
+
+}
+.vocabularyWords{
+  width: 25%;
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  &:hover{
+    color: $colorHighlightMnemo;
+  }
+}
+
+@media all  and (max-width: 600px){
+  .vocabularyWords{
+    width: 60%;
+    padding: 10px;
+  }
+}

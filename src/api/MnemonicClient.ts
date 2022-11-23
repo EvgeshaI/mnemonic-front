@@ -4,6 +4,7 @@ import {
     IAwait,
     IEngWord,
     IEngWordSuggest,
+    IEngWordVocabulary,
     IExample,
     IExampleHomePage,
     IMnemonic,
@@ -28,6 +29,13 @@ export class MnemonicClient extends BaseClient {
             word
         }
         return this.get<Array<IEngWordSuggest>>(`eng-word/search`, {params})
+    }
+    static async vocabulary () {
+        const params = {
+            // page: currentPage,
+            size: 500
+        };
+        return this.get<IEngWordVocabulary>(`eng-word/vocabulary`, {params})
     }
 
     static async getMnemonic (id: number, currentPage: number) {
