@@ -82,7 +82,8 @@
   color: $colorHighlightMnemo;
   font-weight: bold;
   position: absolute;
-  left: 45%;
+  left: 50%;
+  transform: translate(-50%, 0);
 }
 .inputContainer{
   width: 90%;
@@ -121,7 +122,8 @@
   color: $colorDimText2;
   position: absolute;
   bottom: -25px;
-  left: 42%;
+  left: 50%;
+  transform: translate(-50%, 0);
 }
 .practiceButton{
   @include buttonStyle;

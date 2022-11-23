@@ -253,10 +253,9 @@ export const Practice:FC<{practices: Array<IPracticeExample>}> = (props) => {
                                 value={engWord}
                                 onChange={changeEngWord}
                                 className={engWordStyle()}
-                                // onKeyPress={keyPressCheck}
                             />
                             {((engWordCorrect && translateCorrect) || checkedCount > 2) &&
-                                < div className={s.transcription}>[{currentExample.transcription}]</div>
+                                <div className={s.transcription}>[{currentExample.transcription}]</div>
                             }
                         </div>
                         {!isMobileScreen &&
