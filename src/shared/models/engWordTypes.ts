@@ -216,10 +216,6 @@ export enum repetitionType {
     DOUBLE = "DOUBLE",
     EXPONENTIAL="EXPONENTIAL"
 }
-export interface LetterAndVocabulary {
-    letter: string,
-    vocabularies: Array<IVocabulary>
-}
 
 export interface IEngWordVocabulary {
     vocabulary: Array<IVocabulary>

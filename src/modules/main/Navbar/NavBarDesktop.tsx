@@ -62,7 +62,7 @@ export const NavBarDesktop:FC<NavBarDesktopPropsType> = (props) => {
                     <div className={s.navbarIcon}>
                         <Dictionary/>
                     </div>
-                    <div>Словарь</div>
+                    <div>Индекс</div>
                 </div>
                 {props.isAuth ?
                     <div onClick={() => props.invertShowDropDown()}

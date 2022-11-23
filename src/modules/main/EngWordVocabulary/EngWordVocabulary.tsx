@@ -3,7 +3,7 @@ import {useAppDispatch, useAppSelector} from "../../../store";
 import s from "./vocabulary.module.scss"
 import {Vocabulary} from "./Vocabulary";
 import {getEngWordVocabulary} from "../../../store/engWordSlice";
-import {IVocabulary, LetterAndVocabulary} from "../../../shared/models/engWordTypes";
+import {IVocabulary} from "../../../shared/models/engWordTypes";
 
 export const EngWordVocabulary = () => {
     const dispatch = useAppDispatch()
@@ -25,16 +25,14 @@ export const EngWordVocabulary = () => {
                 }
             }
         }
-        let letterAndVocabulary = [] as Array<LetterAndVocabulary>
-        map.forEach((value: Array<IVocabulary>, key: string) => {
-            letterAndVocabulary.push({letter: key, vocabularies: value})
-        });
-        return letterAndVocabulary
+        return map
     }
+    let letterAndVocabulary = vocabularies()
 
     return (
         <div className={s.engWordVocabulary}>
-            {vocabularies().map((el, i) => <Vocabulary key={i} letter={el.letter} vocabularies={el.vocabularies}/>)}
+            {Array.from(letterAndVocabulary.keys()).map(letter =>
+                <Vocabulary key={letter} letter={letter} vocabularies={letterAndVocabulary.get(letter)!}/>)}
         </div>
     )
 }

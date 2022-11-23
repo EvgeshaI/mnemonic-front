@@ -13,7 +13,6 @@ export const Vocabulary: FC<VocabularyPropsType> = (props) => {
     const goToWord = (word: string) => {
         navigate(`/eng/${word}`)
     }
-    // let vocabulariesSort = [...props.vocabularies].sort((a, b) => a.engWord.length - b.engWord.length)
     return (
         <>
             <div className={s.vocabularyLetter}>{props.letter.toUpperCase()}</div>
