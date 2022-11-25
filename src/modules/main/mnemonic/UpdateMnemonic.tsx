@@ -37,10 +37,9 @@ const UpdateMnemonic:FC<UpdateMnemonicPropsType> = (props) => {
     }
     let onChooseHighlightFlag = () => {
         setChooseHighlightFlag(true);
-
     };
-    let addNumber = (i:number) => {
-            setHighlight([...highlight, i])
+    let addNumber = (i: number) => {
+        setHighlight([...highlight, i])
     };
     let deleteNumber = (i: number) => {
         setHighlight(highlight.filter(el => el !== i))
@@ -59,7 +58,7 @@ const UpdateMnemonic:FC<UpdateMnemonicPropsType> = (props) => {
             <div>
                 <ul className={s.transContainer}>
                     <MyTranslit
-                        word={props.mnemonicPhrase}
+                        word={mnemoPhrase}
                         highlight={highlight}
                         trans={props.engWord.transcriptions.flatMap(t => t.transliterations)}
                         canSaveMnemonic={canSaveMnemonic}
@@ -84,6 +83,7 @@ const UpdateMnemonic:FC<UpdateMnemonicPropsType> = (props) => {
             <div>
                 {chooseHighlightFlag &&
                     mnemoPhrase.split("").map((l, index) => <SeparatedLetter
+                        key={index}
                         deleteNumber ={deleteNumber}
                         addNumber ={addNumber}
                         letter={l} index={index}/>)
