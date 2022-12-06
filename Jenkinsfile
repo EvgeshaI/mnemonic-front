@@ -4,7 +4,9 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'npm install && npm run build'
+                nodejs('node-17.3.0') {
+                    sh 'npm install && npm run build'
+                }
             }
         }
         stage('Deploy') {
