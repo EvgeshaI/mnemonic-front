@@ -34,7 +34,7 @@ export const StartPageNew: FC<StartPagePropsType> = (props) => {
     }
     return (
         <div className={s.startPage}>
-            <div className={s.header}>Запоминай английские слова эффективно и надолго!</div>
+            <div className={s.header}>Запоминай английские слова эффективно и надолго!!!</div>
             <div className={s.text}>Создай свой собственный словарь мнемонических ассоциаций</div>
             {!isMobileScreen &&
                 <>
