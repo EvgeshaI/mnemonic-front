@@ -4,6 +4,7 @@ import {AppThunk} from "./index";
 import {MnemonicClient} from "../api/MnemonicClient";
 import {showAndHideAlert} from "./alertsSlise";
 import {updateExampleExist} from "./mnemonicSlice";
+import {getReadyToPractice} from "./appSlice";
 
 interface ExampleState {
     checkedExample: IExample | null
@@ -197,6 +198,7 @@ export const saveExampleAsync = (newExample: IExample): AppThunk => async  (disp
         dispatch(getExampleAsync(newExample.engWordId));
         dispatch (clearCheckedExample())
         dispatch(updateExampleExist({mnemonicId: newExample.mnemonicId!, flag: true}))
+        dispatch(getReadyToPractice())
     }catch (error) {
         // @ts-ignore
         showAndHideAlert(dispatch, error?.data?.data?.message)
@@ -211,6 +213,7 @@ export const updateExampleAsync = (example: IExample): AppThunk => async (dispat
 export const deleteExampleAsync = (id: number): AppThunk => async  (dispatch: any) => {
     await MnemonicClient.deleteExample(id);
     dispatch(deleteExample(id))
+    dispatch(getReadyToPractice())
 };
 export const addMeExampleAsync = (id: number): AppThunk => async (dispatch: any) => {
     await MnemonicClient.addMeExample(id);

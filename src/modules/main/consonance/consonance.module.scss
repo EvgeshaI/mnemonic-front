@@ -133,6 +133,9 @@
 .consonance{
   @include consonanceStyle (20%, center, 15px);
   cursor: pointer;
+  &:hover{
+    color: $colorHighlightMnemo;
+  }
 }
 .letterStyle{
   padding-left: 50px;

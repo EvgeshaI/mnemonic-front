@@ -23,6 +23,7 @@ export const NavBarMobile:FC<NavBarMobilePropsType> = (props) => {
     const dispatch = useAppDispatch()
     const {
         isDarkTheme,
+        readyToPractice
     } = useAppSelector((state) => state.appReducer);
     const changeTheme = () => {
             dispatch(updateTheme(!isDarkTheme))
@@ -44,6 +45,9 @@ export const NavBarMobile:FC<NavBarMobilePropsType> = (props) => {
                 </div>
                 <div className={s.burger}>
                    <div onClick={props.invertShowDropDown} id={"dropDown"}><Burger/></div>
+                    {readyToPractice > 0 &&
+                        <div className={s.readeToPractice} style={{top: "20%", left: "-20%"}}>{readyToPractice}</div>
+                    }
                 </div>
             </div>
             <EngWordAutosuggest transWidth={20}/>

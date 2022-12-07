@@ -4,6 +4,7 @@ import {AppThunk} from "./index";
 import {MnemonicClient} from "../api/MnemonicClient";
 import jwt_decode from "jwt-decode"
 import {showAndHideAlert} from "./alertsSlise";
+import {getReadyToPractice} from "./appSlice";
 
 
 interface LoginState {
@@ -118,6 +119,7 @@ export const authUserAsync = ( email: string, password: string): AppThunk => asy
         let user = extractUser(response.accessToken)
         dispatch(setUser(user))
         localStorage.setItem("user", JSON.stringify(user))
+        dispatch(getReadyToPractice())
     } catch (error) {
         // @ts-ignore
         const message = error.data.data.message

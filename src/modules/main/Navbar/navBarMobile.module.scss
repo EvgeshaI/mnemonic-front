@@ -1,4 +1,5 @@
 @import "../common.module";
+@import "./navbar.module";
 
 .navbar {
     display: block;
@@ -49,6 +50,7 @@
     }
 }
 .burger{
+    position: relative;
     fill: $colorHighlightMnemo;
     display: flex;
     justify-content: end;
@@ -89,4 +91,7 @@
     fill: $colorFont;
     display: flex;
     vertical-align:  center;
+}
+.readeToPractice{
+    @extend .readeToPractice,
 }

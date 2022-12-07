@@ -12,13 +12,11 @@ import {useNavigate} from "react-router";
 import {MyStudyExample} from "./MyStudyExample";
 import {AudioComponent} from "../EngWord/AudioComponent";
 import {ReactComponent as Add} from "../../../import/icons/add.svg";
-import {useAppDispatch} from "../../../store";
 import {MyStudyMnemonic} from "./MyStudyMnemonic";
 import {AddMyExample} from "./AddMyExample";
 
 type UserPageContainerPropsType = {
     createExampleMap: Array<NewStudyExample>,
-    // studyId: number,
     mnemonics: Array<StudyMnemonic>,
     engWord: StudyEngWord,
     examples: Array<StudyExample>
@@ -26,12 +24,7 @@ type UserPageContainerPropsType = {
     transcriptions: Array<ITranscription>
 }
 export const UserPage: FC<UserPageContainerPropsType> = (props) => {
-    const dispatch = useAppDispatch()
     const [displayAddMyExample, isDisplayAddMyExample] = useState(false)
-    const [showDeleteModal, setShowDeleteModal] = useState(false);
-    const closeDeleteModal = () => {
-        setShowDeleteModal(false)
-    }
     const navigate = useNavigate()
     const clickWord = () => {
         let word = props.engWord.word
@@ -72,7 +65,7 @@ export const UserPage: FC<UserPageContainerPropsType> = (props) => {
             <div className={s.translations}> {joinTranslation(props.translations)}</div>
             <div>
                 {props.mnemonics.map(mnemo =>
-                        <div className={s.mnemonicAndExampleBox}>
+                        <div className={s.mnemonicAndExampleBox} key={mnemo.id}>
                             <MyStudyMnemonic mnemonic={mnemo} examples={props.examples}/>
                             <div>
                                 {props.examples.filter(ex => ex.mnemonicId === mnemo.id).map(ex =>
@@ -81,6 +74,7 @@ export const UserPage: FC<UserPageContainerPropsType> = (props) => {
                                         exampleId={ex.id}
                                         exampleLikes={ex.likes}
                                         created={ex.created}
+                                        key={ex.id}
                                     />
                                 )}
                             </div>
@@ -104,7 +98,6 @@ export const UserPage: FC<UserPageContainerPropsType> = (props) => {
                     <div className={s.prompt}> Добавить пример </div>
                 </div>
             }
-
         </div>
     )
 }
