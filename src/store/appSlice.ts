@@ -2,7 +2,6 @@ import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {AppThunk} from "./index";
 import {getAndSetUser} from "./authSlice";
 import {MnemonicClient} from "../api/MnemonicClient";
-import {IUser} from "../shared/models/engWordTypes";
 
 interface appState {
     initialized: boolean,
@@ -48,13 +47,9 @@ export const {
 
 export const initializedAppAsync = (): AppThunk => (dispatch: any) => {
     const theme = JSON.parse(localStorage.getItem("isDarkTheme") || "false") as boolean
-    let user = JSON.parse(localStorage.getItem("user") || "null") as IUser
     dispatch(setTheme(theme))
     dispatch(getAndSetUser())
     dispatch(successInit())
-    if (user) {
-        dispatch(getReadyToPractice())
-    }
 }
 export const updateTheme = (theme:boolean):AppThunk => (dispatch:any) => {
     dispatch(setTheme(theme))

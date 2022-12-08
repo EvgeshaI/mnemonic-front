@@ -74,6 +74,7 @@ export const getAndSetUser = () => (dispatch: any) => {
     let user = JSON.parse(localStorage.getItem("user") || "null") as IUser
     if (user) {
         dispatch(setUser(user))
+        dispatch(getReadyToPractice())
     }
 }
 

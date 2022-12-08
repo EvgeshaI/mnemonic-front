@@ -46,7 +46,7 @@ export const NavBarMobile:FC<NavBarMobilePropsType> = (props) => {
                 <div className={s.burger}>
                    <div onClick={props.invertShowDropDown} id={"dropDown"}><Burger/></div>
                     {readyToPractice > 0 &&
-                        <div className={s.readeToPractice} style={{top: "20%", left: "-20%"}}>{readyToPractice}</div>
+                        <div className={s.readeToPractice}>{readyToPractice}</div>
                     }
                 </div>
             </div>

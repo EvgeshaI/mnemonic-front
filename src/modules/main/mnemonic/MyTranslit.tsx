@@ -54,7 +54,7 @@ const MyTranslit: FC<PropsType> = (props) => {
         let oneLetterPoint = trans.accuracy / transliteration.length
         let totalPoint = 0
         let index
-        for (let i=0; i< highlightMnemo.length; i++){
+        for (let i=0; i<highlightMnemo.length; i++){
             if(transliteration.includes(highlightMnemo[i])) {
                 index = transliteration.indexOf(highlightMnemo[i])
                 transliteration = transliteration.substring(index + 1)

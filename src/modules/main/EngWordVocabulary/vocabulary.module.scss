@@ -18,12 +18,12 @@
 .vocabularyWords{
   width: 25%;
   font-size: 20px;
-  cursor: pointer;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
 }
 .vocabularyWord{
+  cursor: pointer;
   &:hover{
     color: $colorHighlightMnemo;
   }

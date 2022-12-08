@@ -9,10 +9,13 @@ type SentencePropsType = {
 }
 
 export const Sentence: FC<SentencePropsType> = (props) => {
+    const addWord = (el: string) => {
+        props.addWordToTranslate(el.replace(/[^а-яА-ЯЁё]/, ""))
+    }
     return (
         <div>
             {props?.currentExample?.sentence.split(" ").map((el, i) =>
-                <span key={i} className={s.wordTranslate} onClick={() => props.addWordToTranslate(el.replace(/[^а-яА-ЯЁё]/, ""))}>{el} </span>)}
+                <span key={i} className={s.wordTranslate} onClick={() => addWord(el)}>{el} </span>)}
         </div>
     )
 }

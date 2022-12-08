@@ -93,5 +93,7 @@
     vertical-align:  center;
 }
 .readeToPractice{
-    @extend .readeToPractice,
+    @extend .readeToPractice;
+    top: 20%;
+    left: -20%
 }
