@@ -39,6 +39,11 @@ export interface IMnemonic {
     accuracy: number
 }
 
+export interface ICalcAccuracyMnemo {
+    mnemonicPhrase: string,
+    accuracy: number,
+    highlight: Array<number>
+}
 
 export interface IExample {
     exampleId: number

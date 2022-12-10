@@ -85,7 +85,14 @@
 .buttonStyle {
   @include buttonStyle;
 }
-
+.buttonStyleConsonance{
+  //@include buttonStyle;
+  //background: none;
+  color: var(--border-buttons);
+  width: 30%;
+  margin: auto;
+  cursor: pointer;
+}
 /* CREATE MNEMONIC COMPONENT END!*/
 
 /* SEPARATE LETTER COMPONENT */

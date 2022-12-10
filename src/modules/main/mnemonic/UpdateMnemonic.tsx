@@ -1,11 +1,12 @@
 import React, {FC, useState} from "react";
-import {useAppDispatch} from "../../../store";
+import {useAppDispatch, useAppSelector} from "../../../store";
 import s from './mnemonic.module.scss'
 import SeparatedLetter from "./SeparatedLetter";
-import {updateMnemonicAsync} from "../../../store/mnemonicSlice";
+import {calcAccuracyAsync, updateMnemonicAsync} from "../../../store/mnemonicSlice";
 import MyTranslit from "./MyTranslit";
 import {IEngWord} from "../../../shared/models/engWordTypes";
 import {CloseBtn} from "../../util/CloseBtn";
+import HighlightMnemonic from "./HighlightMnemonic";
 
 type UpdateMnemonicPropsType = {
     mnemonicId: number,
@@ -15,8 +16,12 @@ type UpdateMnemonicPropsType = {
 }
 
 const UpdateMnemonic:FC<UpdateMnemonicPropsType> = (props) => {
+    const {
+        calcAccuracyMnemo
+    } = useAppSelector((state) => state.mnemonicReducer);
     const dispatch = useAppDispatch();
     let [mnemoPhrase, setMnemoPhrase] = useState(props.mnemonicPhrase);
+    let [checkNewMnemo, setCheckNewMnemo] = useState(false);
     let [chooseHighlightFlag, setChooseHighlightFlag] = useState(false);
     let [highlight, setHighlight] = useState<Array<number>>([]);
     let [displaySaveBtn, setDisplaySaveBtn] = useState(false)
@@ -25,8 +30,8 @@ const UpdateMnemonic:FC<UpdateMnemonicPropsType> = (props) => {
         setMnemoPhrase(e.target.value);
     };
     let updateMnemo = () => {
-        if(chooseHighlightFlag) {
-            dispatch(updateMnemonicAsync(props.mnemonicId, mnemoPhrase, highlight));
+        if(calcAccuracyMnemo) {
+            dispatch(updateMnemonicAsync(props.mnemonicId, calcAccuracyMnemo.mnemonicPhrase, calcAccuracyMnemo.highlight, calcAccuracyMnemo.accuracy));
             props.setEdit(false);
             setHighlight([]);
         }
@@ -34,6 +39,10 @@ const UpdateMnemonic:FC<UpdateMnemonicPropsType> = (props) => {
     let closeForm = () => {
         props.setEdit(false);
         setHighlight([]);
+    }
+    let calcAccuracy = () => {
+        dispatch(calcAccuracyAsync(props.engWord.id, mnemoPhrase))
+        setCheckNewMnemo(true)
     }
     let onChooseHighlightFlag = () => {
         setChooseHighlightFlag(true);
@@ -56,21 +65,23 @@ const UpdateMnemonic:FC<UpdateMnemonicPropsType> = (props) => {
         <div className={s.updateMnemonic}>
             <CloseBtn close={closeForm} />
             <div>
-                <ul className={s.transContainer}>
-                    <MyTranslit
-                        word={mnemoPhrase}
-                        highlight={highlight}
-                        trans={props.engWord.transcriptions.flatMap(t => t.transliterations)}
-                        canSaveMnemonic={canSaveMnemonic}
-                    />
-                </ul>
+                {chooseHighlightFlag ?
+                    <ul className={s.transContainer}>
+                        <MyTranslit
+                            word={mnemoPhrase}
+                            highlight={highlight}
+                            trans={props.engWord.transcriptions.flatMap(t => t.transliterations)}
+                            canSaveMnemonic={canSaveMnemonic}
+                        />
+                    </ul> :
+                    <div className={s.myTransliteration}>{Math.round(calcAccuracyMnemo!.accuracy)}%</div>
+                }
                 {!displaySaveBtn &&
                     <div className={s.accuracyMessage}>точность мнемоники должна быть не менее 25%</div>
                 }
             </div>
-
             <div>
-                {!chooseHighlightFlag &&
+                {(chooseHighlightFlag || !checkNewMnemo) &&
                     <input value={mnemoPhrase}
                         onChange={updateMnemoPhrase}
                         className={s.mnemonicInput}
@@ -79,7 +90,11 @@ const UpdateMnemonic:FC<UpdateMnemonicPropsType> = (props) => {
                     />
                 }
             </div>
-
+            <div style={{fontSize: 22, margin: 10}}>
+                {checkNewMnemo && calcAccuracyMnemo && !chooseHighlightFlag &&
+                    <HighlightMnemonic highlight={calcAccuracyMnemo.highlight} mnemonic={calcAccuracyMnemo.mnemonicPhrase}/>
+                }
+            </div>
             <div>
                 {chooseHighlightFlag &&
                     mnemoPhrase.split("").map((l, index) => <SeparatedLetter
@@ -89,18 +104,25 @@ const UpdateMnemonic:FC<UpdateMnemonicPropsType> = (props) => {
                         letter={l} index={index}/>)
                 }
             </div>
-
-            {!chooseHighlightFlag && mnemoPhrase.length > 0 &&
+            {!chooseHighlightFlag && mnemoPhrase.length > 0 && !checkNewMnemo &&
             <div>
-                <div onClick={onChooseHighlightFlag} className={s.buttonStyle}>
-                    Выбрать созвучие
+                <div className={s.buttonStyle} onClick={calcAccuracy}>
+                    Проверить
                 </div>
             </div>
             }
-            {highlight.length > 0 &&
-                <div onClick={updateMnemo} className={s.buttonStyle}>
-                    Обновить
+            {checkNewMnemo && !chooseHighlightFlag &&
+                <div>
+                    <div onClick={updateMnemo} className={s.buttonStyle}>
+                        Обновить
+                    </div>
+                    <div className={s.buttonStyleConsonance} onClick={onChooseHighlightFlag}>
+                        выбрать созвучие
+                    </div>
                 </div>
+            }
+            {chooseHighlightFlag && highlight.length >0 &&
+            <div onClick={updateMnemo} className={s.buttonStyle}>Обновить</div>
             }
         </div>
     )

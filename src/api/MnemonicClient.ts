@@ -2,6 +2,7 @@
 import {
     IAuthResponse,
     IAwait,
+    ICalcAccuracyMnemo,
     IEngWord,
     IEngWordSuggest,
     IEngWordVocabulary,
@@ -30,10 +31,10 @@ export class MnemonicClient extends BaseClient {
         }
         return this.get<Array<IEngWordSuggest>>(`eng-word/search`, {params})
     }
-    static async vocabulary () {
+    static async vocabulary (currentPage: number) {
         const params = {
-            // page: currentPage,
-            size: 500
+            page: currentPage,
+            size: 20
         };
         return this.get<IEngWordVocabulary>(`eng-word/vocabulary`, {params})
     }
@@ -72,11 +73,12 @@ export class MnemonicClient extends BaseClient {
         return this.delete(`example/like/`, {params})
     }
 
-    static async addMnemonic (engWordId: number, phrase: string, hl:Array<number>) {
+    static async addMnemonic (engWordId: number, phrase: string, hl:Array<number>, accuracy:number) {
         let body = {
             engWordId: engWordId,
             phrase: phrase,
-            highlight: hl
+            highlight: hl,
+            accuracy
         };
         return this.post(`mnemonic/`, body)
     }
@@ -89,13 +91,21 @@ export class MnemonicClient extends BaseClient {
     static async addMeExample (id: number) {
         return this.post(`example/my/${id}`, null)
     }
-    static async updateMnemonic(mnemonicId: number, mnemonicPhrase: string, highlight: Array<number>) {
+    static async updateMnemonic(mnemonicId: number, mnemonicPhrase: string, highlight: Array<number>, accuracy: number) {
         let body = {
             mnemonicId: mnemonicId,
             phrase: mnemonicPhrase,
-            highlight: highlight
+            highlight: highlight,
+            accuracy
         };
         return this.put<IMnemonic>(`mnemonic/`, body)
+    }
+    static async calcAccuracy (engWordId: number, mnemonicPhrase: string) {
+        let body = {
+            engWordId,
+            mnemonicPhrase
+        }
+        return this.post<ICalcAccuracyMnemo>(`mnemonic/calc-accuracy`, body)
     }
 
     static async deleteMeMnemonic (id: number) {

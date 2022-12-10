@@ -1,4 +1,4 @@
-import {IMnemonic, IPageElements} from "../shared/models/engWordTypes";
+import {ICalcAccuracyMnemo, IMnemonic, IPageElements} from "../shared/models/engWordTypes";
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {AppThunk} from "./index";
 import {MnemonicClient} from "../api/MnemonicClient";
@@ -7,12 +7,14 @@ import {showAndHideAlert} from "./alertsSlise";
 interface MnemonicState {
     mnemonics: Array<IMnemonic>
     currentPage: number
+    calcAccuracyMnemo: ICalcAccuracyMnemo | null
     hasMore: boolean
 }
 
 const initialState: MnemonicState = {
     mnemonics: [],
     currentPage: 0,
+    calcAccuracyMnemo: null,
     hasMore: false
 };
 
@@ -82,6 +84,9 @@ export const mnemonicSlice = createSlice(
                     return el
                 })
             },
+            setCalcAccuracyMnemo: (state, action: PayloadAction<ICalcAccuracyMnemo>) => {
+                state.calcAccuracyMnemo = action.payload
+            }
         }
     }
 );
@@ -95,7 +100,8 @@ export const {
     addMeMnemonic,
     updateMnemonic,
     deleteMeMnemonic,
-    updateExampleExist
+    updateExampleExist,
+    setCalcAccuracyMnemo
 } = mnemonicSlice.actions;
 
 export const getMnemonicAsync = (id:number): AppThunk => async (dispatch: any, getState) => {
@@ -113,9 +119,9 @@ export const deleteMnemonicLikeAsync = (id: number): AppThunk => async (dispatch
     dispatch (deleteMnemonicLike(id))
 };
 
-export const addMnemonicAsync = (engWordId: number, phrase:string, hl:Array<number>): AppThunk => async (dispatch: any) => {
+export const addMnemonicAsync = (engWordId: number, phrase:string, hl:Array<number>, accuracy: number): AppThunk => async (dispatch: any) => {
     try {
-        await MnemonicClient.addMnemonic(engWordId, phrase, hl);
+        await MnemonicClient.addMnemonic(engWordId, phrase, hl, accuracy);
         dispatch(resetMnemonic())
         dispatch(getMnemonicAsync(engWordId))
     } catch (error) {
@@ -124,9 +130,9 @@ export const addMnemonicAsync = (engWordId: number, phrase:string, hl:Array<numb
     }
 };
 
-export const updateMnemonicAsync = (mnemonicId: number, mnemonicPhrase: string, highlight: Array<number>): AppThunk => async (dispatch: any) => {
+export const updateMnemonicAsync = (mnemonicId: number, mnemonicPhrase: string, highlight: Array<number>, accuracy: number): AppThunk => async (dispatch: any) => {
     try {
-        const response = await MnemonicClient.updateMnemonic(mnemonicId, mnemonicPhrase, highlight);
+        const response = await MnemonicClient.updateMnemonic(mnemonicId, mnemonicPhrase, highlight, accuracy);
         dispatch(updateMnemonic(response))
     } catch (error) {
         // @ts-ignore
@@ -148,6 +154,9 @@ export const deleteMeMnemonicAsync = (id: number): AppThunk => async  (dispatch:
     await MnemonicClient.deleteMeMnemonic(id);
     dispatch(deleteMeMnemonic(id))
 };
-
+export const calcAccuracyAsync = (engWordId: number, mnemonicPhrase: string): AppThunk => async  (dispatch: any) => {
+   let result = await MnemonicClient.calcAccuracy(engWordId, mnemonicPhrase);
+    dispatch(setCalcAccuracyMnemo(result))
+};
 export default mnemonicSlice.reducer
 

@@ -10,13 +10,15 @@ import {showAndHideAlert} from "./alertsSlise";
 interface EngWordState {
     engWord: IEngWord | null,
     suggestions: Array<IEngWordSuggest>,
-    engWordVocabulary: IEngWordVocabulary | null
+    engWordVocabulary: IEngWordVocabulary | null,
+    currentPage: number
 }
 
 const initialState: EngWordState = {
     engWord: null,
     suggestions: [],
     engWordVocabulary: null,
+    currentPage: 0
 };
 
 export const engWordSlice = createSlice(
@@ -32,7 +34,8 @@ export const engWordSlice = createSlice(
                 state.suggestions = action.payload
             },
             setVocabulary: (state, action: PayloadAction<IEngWordVocabulary>) => {
-                state.engWordVocabulary = action.payload
+                state.engWordVocabulary = {...state.engWordVocabulary, ...action.payload}
+                state.currentPage = state.currentPage + 1
             }
         }
     }
@@ -64,8 +67,10 @@ export const getEngWordSuggestAsync = (word:string): AppThunk => async (dispatch
     dispatch(setEngWordAuto(result))
 }
 
-export const getEngWordVocabulary = ():AppThunk => async  (dispatch: any) => {
-    let result = await MnemonicClient.vocabulary()
+export const getEngWordVocabulary = ():AppThunk => async  (dispatch: any, getState) => {
+    const engWordReducer = getState().engWordReducer
+    let currentPage = engWordReducer.currentPage
+    let result = await MnemonicClient.vocabulary(currentPage)
     dispatch(setVocabulary(result))
 }
 
