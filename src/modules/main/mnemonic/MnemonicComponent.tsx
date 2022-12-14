@@ -8,7 +8,8 @@ import {
     addMnemonicLikeAsync,
     deleteMeMnemonicAsync,
     deleteMnemonicAsync,
-    deleteMnemonicLikeAsync
+    deleteMnemonicLikeAsync,
+    setCalcAccuracyUpdateMnemo
 } from "../../../store/mnemonicSlice";
 import {ReactComponent as HeartNo} from "../../../import/icons/heart.svg"
 import {ReactComponent as HeartYes} from "../../../import/icons/heart-clicked.svg"
@@ -30,10 +31,10 @@ type PropsType = {
     mnemonic: IMnemonic
     auth: boolean
     engWord: IEngWord
+    isEdit: boolean
 }
 const MnemonicComponent: FC<PropsType> = (props) => {
     const [bold, setBold] = useState<boolean>(false);
-    const [edit, setEdit] = useState<boolean>(false);
     const [showDeleteModal, setShowDeleteModal] = useState(false)
     const { height, width } = useWindowDimensions();
     const isMobileScreen = width < 600
@@ -59,7 +60,6 @@ const MnemonicComponent: FC<PropsType> = (props) => {
             navigate(`/login`)
         }
     };
-
     let deleteMnemonic = () => {
         dispatch(deleteMnemonicAsync(props.mnemonic.mnemonicId))
         setShowDeleteModal(false)
@@ -73,9 +73,13 @@ const MnemonicComponent: FC<PropsType> = (props) => {
     };
 
     let editMnemo = () => {
-        setEdit(true)
-    };
-
+        dispatch(setCalcAccuracyUpdateMnemo({
+            mnemonicId: props.mnemonic.mnemonicId,
+            mnemonicPhrase: props.mnemonic.phrase,
+            accuracy: 0,
+            highlight: []
+        }));
+    }
     const addDelete = () => {
         return props.mnemonic.added ? <Minus/> : <Add/>;
     }
@@ -95,7 +99,7 @@ const MnemonicComponent: FC<PropsType> = (props) => {
 
     return (
         <div className={s.mnemonicComponent}>
-            {!edit ?
+            {!props.isEdit ?
                 <>
                     <div className={s.box}>
                         <div className={s.highlightWord}>
@@ -160,7 +164,6 @@ const MnemonicComponent: FC<PropsType> = (props) => {
                     <UpdateMnemonic
                         mnemonicId={props.mnemonic.mnemonicId}
                         mnemonicPhrase={props.mnemonic.phrase}
-                        setEdit={setEdit}
                         engWord={props.engWord}
                     />
                 </>

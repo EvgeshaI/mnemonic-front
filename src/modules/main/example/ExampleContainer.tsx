@@ -11,7 +11,7 @@ type PropsType = {
     engWord: IEngWord
     mnemonics: Array<IMnemonic>
     examples: Array<IExample>
-    updateExample: IExample | null
+    // updateExample: IExample | null
     checkedExample: IExample | null
     updateExamples: Array<IExample>
     isAuth: boolean

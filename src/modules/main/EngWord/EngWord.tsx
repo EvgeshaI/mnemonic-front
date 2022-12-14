@@ -21,13 +21,13 @@ const EngWord: FC<any> = () => {
         engWord,
     } = useAppSelector((state) => state.engWordReducer);
     const {
-        mnemonics,
+        mnemonics
     } = useAppSelector((state) => state.mnemonicReducer);
     const hasMoreMnemonics = useAppSelector((state) => state.mnemonicReducer).hasMore
     const {
         examples,
         checkedExample,
-        updateExample,
+        // updateExample,
         updateExamples
     } = useAppSelector((state) => state.exampleReducer);
     const hasMoreExample = useAppSelector((state) => state.exampleReducer).hasMore;
@@ -172,7 +172,7 @@ const EngWord: FC<any> = () => {
                                     engWord={engWord}
                                     mnemonics={mnemonics}
                                     examples={examples}
-                                    updateExample={updateExample}
+                                    // updateExample={updateExample}
                                     updateExamples={updateExamples}
                                     checkedExample={checkedExample}
                                     isAuth={isAuth}

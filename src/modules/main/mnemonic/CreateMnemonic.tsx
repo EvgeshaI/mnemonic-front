@@ -1,10 +1,18 @@
-import React, {FC, useState} from "react";
+import React, {FC, useEffect, useState} from "react";
 import {useAppDispatch, useAppSelector} from "../../../store";
 import s from './mnemonic.module.scss'
 import SeparatedLetter from "./SeparatedLetter";
-import {IEngWord} from "../../../shared/models/engWordTypes";
+import {IEngWord, statusType} from "../../../shared/models/engWordTypes";
 import MyTranslit from "./MyTranslit";
-import {addMnemonicAsync, calcAccuracyAsync} from "../../../store/mnemonicSlice";
+import {
+    addMnemonicAsync,
+    calcAccuracyCreateAsync,
+    clearCalcAccuracyMnemo,
+    clearClearCreateHighlight,
+    deleteCreateHighlight,
+    updateCalcAccuracyCreateMnemo,
+    updateCreateHighlight
+} from "../../../store/mnemonicSlice";
 import {CloseBtn} from "../../util/CloseBtn";
 import HighlightMnemonic from "./HighlightMnemonic";
 
@@ -13,93 +21,71 @@ type CreateMnemonicPropsType = {
     afterFinishClicked: () => void;
 }
 
+
 const CreateMnemonic:FC<CreateMnemonicPropsType> = (props) => {
     const {
-        calcAccuracyMnemo
+        calcAccuracyCreateMnemo
     } = useAppSelector((state) => state.mnemonicReducer);
+    useEffect(() => {
+        dispatch(calcAccuracyCreateAsync(props.engWord.id, ""))
+        return () => {
+            dispatch(clearCalcAccuracyMnemo())
+        }
+    },[])
     const dispatch = useAppDispatch();
-    let [mnemo, setMnemo] = useState("");
-    let [check, setCheck] = useState(false);
-    let [chooseConsonance, setChooseConsonance] = useState(false);
-    let [highlight, setHighlight] = useState<Array<number>>([]);
-    let [displaySaveBtn, setDisplaySaveBtn] = useState(false)
+    let [status, setStatus] = useState(statusType.INIT);
 
     let updateMnemo = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setMnemo(e.target.value);
-        // setEntered(false)
-        setHighlight([])
+        dispatch(updateCalcAccuracyCreateMnemo(e.target.value))
     };
-    // let saveMnemo = () => {
-    //     if(entered) {
-    //         dispatch(addMnemonicAsync(props.engWord.id, mnemo, highlight));
-    //         setMnemo("");
-    //         setHighlight([]);
-    //         props.afterFinishClicked();
-    //     }
-    // };
     let saveMnemo = () => {
-        dispatch(addMnemonicAsync(props.engWord.id, calcAccuracyMnemo!.mnemonicPhrase, calcAccuracyMnemo!.highlight, calcAccuracyMnemo!.accuracy))
-        props.afterFinishClicked();
-        setMnemo("");
-        setHighlight([]);
+        dispatch(addMnemonicAsync(props.engWord.id, calcAccuracyCreateMnemo!.mnemonicPhrase, calcAccuracyCreateMnemo!.highlight, calcAccuracyCreateMnemo!.accuracy))
         props.afterFinishClicked()
     }
     let closeForm = () => {
-        setMnemo("");
-        setHighlight([]);
         props.afterFinishClicked();
     }
-
     let chooseMnemoLetters = () => {
-        setMnemo(mnemo.replace(/\s+/g, ' '))
-        setChooseConsonance(true)
+        dispatch(clearClearCreateHighlight())
+        // setMnemo(calcAccuracyMnemo!.mnemonicPhrase.replace(/\s+/g, ' '))
+        setStatus(statusType.CONSONANCE)
     };
     let calcAccuracy = () => {
-        dispatch(calcAccuracyAsync(props.engWord.id, mnemo))
-        setCheck(true);
+        dispatch(calcAccuracyCreateAsync(props.engWord.id, calcAccuracyCreateMnemo!.mnemonicPhrase))
+        setStatus(statusType.CHECK)
     }
     let addNumber = (i:number) => {
-        setHighlight([...highlight, i])
+        dispatch(updateCreateHighlight(i))
     };
     let deleteNumber = (i: number) => {
-        setHighlight(highlight.filter(el => el !== i))
+        dispatch(deleteCreateHighlight(i))
     };
-    let canSaveMnemonic = (accuracy: number) => {
-        if(accuracy >= 25){
-            setDisplaySaveBtn(true)
-        } else {
-            setDisplaySaveBtn(false)
-        }
-    }
-
     return (
+
         <div className={s.createMnemonic}>
             <CloseBtn close={closeForm}/>
-            {check && calcAccuracyMnemo && !chooseConsonance ?
-                <div className={s.myTransliteration}>
-                    {Math.round(calcAccuracyMnemo.accuracy)}%
-                    {!displaySaveBtn &&
-                        <div className={s.accuracyMessage}>точность мнемоники должна быть не менее 25%</div>
-                    }
-                </div>
-                :
+            {(status === "CONSONANCE" || status === "CHECK")  &&
                 <ul className={s.transContainer}>
-                <MyTranslit word={mnemo}
-                            highlight={highlight}
-                            canSaveMnemonic = {canSaveMnemonic}
-                            trans={props.engWord.transcriptions.flatMap(t => t.transliterations)}
-                />
-            </ul>
+                    <MyTranslit word={calcAccuracyCreateMnemo.mnemonicPhrase}
+                                highlight={calcAccuracyCreateMnemo.highlight}
+                                accuracy={calcAccuracyCreateMnemo.accuracy}
+                                isCreate={true}
+                                trans={props.engWord.transcriptions.flatMap(t => t.transliterations)}
+                    />
+                </ul>
             }
-            {check && calcAccuracyMnemo && !chooseConsonance &&
-                <div style={{fontSize: 22, margin: 10}}>
-                    <HighlightMnemonic highlight={calcAccuracyMnemo.highlight} mnemonic={calcAccuracyMnemo.mnemonicPhrase}/>
+            {calcAccuracyCreateMnemo.accuracy < 25 && (status === "CHECK" || status === "CONSONANCE" ) &&
+                <div className={s.accuracyMessage}>точность мнемоники должна быть не менее 25%</div>
+            }
+            {status === "CHECK" &&
+                <div style={{fontSize: 22, margin: 10, cursor: "pointer"}} onClick={() => setStatus(statusType.INIT)}>
+                    <HighlightMnemonic highlight={calcAccuracyCreateMnemo.highlight} mnemonic={calcAccuracyCreateMnemo.mnemonicPhrase}/>
                 </div>
             }
-            {(!check || chooseConsonance) &&
+            {(status === "INIT" || status === "CONSONANCE") &&
                 <div>
                     <input
-                    value={mnemo}
+                    value={calcAccuracyCreateMnemo.mnemonicPhrase}
                     onChange={updateMnemo}
                     className={s.mnemonicInput}
                     placeholder={"добавить мнемонику"}
@@ -107,17 +93,16 @@ const CreateMnemonic:FC<CreateMnemonicPropsType> = (props) => {
                     />
                 </div>
             }
-            {check && calcAccuracyMnemo && !chooseConsonance &&
-            <div>
-                <div className={s.buttonStyle} onClick={saveMnemo}>Сохранить</div>
-                <div className={s.buttonStyleConsonance} onClick={chooseMnemoLetters}>
-                    выбрать созвучие вручную
-                </div>
-            </div>
-            }
-            {chooseConsonance && calcAccuracyMnemo &&
+            {status === "INIT" && calcAccuracyCreateMnemo.mnemonicPhrase.length > 0 &&
                 <div>
-                    {mnemo.split("").map((l, index) => <SeparatedLetter
+                    <button className={s.buttonStyle} onClick={calcAccuracy}>
+                        Проверить
+                    </button>
+                </div>
+            }
+            {status === "CONSONANCE" &&
+                <div>
+                    {calcAccuracyCreateMnemo.mnemonicPhrase.split("").map((l, index) => <SeparatedLetter
                         deleteNumber ={deleteNumber}
                         addNumber ={addNumber}
                         letter={l}
@@ -125,22 +110,14 @@ const CreateMnemonic:FC<CreateMnemonicPropsType> = (props) => {
                         key={index}/>)}
                 </div>
             }
-            {!check && mnemo.length > 0 &&
-            <div>
-                <button className={s.buttonStyle} onClick={calcAccuracy}>
-                    Проверить
-                </button>
-            </div>
+            {(status === "CHECK" || status === "CONSONANCE") && calcAccuracyCreateMnemo.accuracy > 25 &&
+                <div className={s.buttonStyle} onClick={saveMnemo}>Сохранить</div>
             }
-            <div>
-                {chooseConsonance &&
-                <button onClick={saveMnemo}
-                        className={s.buttonStyle}
-                        disabled={!mnemo}>
-                    Сохранить
-                </button>
-                }
-            </div>
+            {status === "CHECK" && calcAccuracyCreateMnemo.accuracy > 25 &&
+                <div className={s.buttonStyleConsonance} onClick={chooseMnemoLetters}>
+                    выбрать созвучие вручную
+                </div>
+            }
         </div>
     )
 };

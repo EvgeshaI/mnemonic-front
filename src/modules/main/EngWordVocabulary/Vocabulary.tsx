@@ -6,7 +6,6 @@ import {IVocabulary} from "../../../shared/models/engWordTypes";
 type VocabularyPropsType = {
     letter: string,
     vocabularies: Array<IVocabulary>
-
 }
 export const Vocabulary: FC<VocabularyPropsType> = (props) => {
     const navigate = useNavigate()

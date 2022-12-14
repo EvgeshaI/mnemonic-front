@@ -36,13 +36,17 @@ export interface IMnemonic {
     added: boolean,
     myExampleExists: boolean,
     created: string,
-    accuracy: number
+    accuracy: number,
 }
 
 export interface ICalcAccuracyMnemo {
     mnemonicPhrase: string,
     accuracy: number,
     highlight: Array<number>
+}
+
+export interface ICalcAccuracyMnemoWithId extends ICalcAccuracyMnemo{
+    mnemonicId: number
 }
 
 export interface IExample {
@@ -233,3 +237,8 @@ export interface IVocabulary {
     examples: number
 }
 export type RepetitionType = repetitionType.EXPONENTIAL | repetitionType.EBBINGHAUS | repetitionType.DOUBLE
+export enum statusType {
+    INIT = "INIT",
+    CHECK = "CHECK",
+    CONSONANCE = "CONSONANCE"
+}

@@ -1,5 +1,5 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {IEngWord, IEngWordSuggest, IEngWordVocabulary} from "../shared/models/engWordTypes";
+import {IEngWord, IEngWordSuggest, IVocabulary} from "../shared/models/engWordTypes";
 import {AppThunk} from "./index";
 import {MnemonicClient} from "../api/MnemonicClient";
 import {getMnemonicAsync} from "./mnemonicSlice";
@@ -10,14 +10,14 @@ import {showAndHideAlert} from "./alertsSlise";
 interface EngWordState {
     engWord: IEngWord | null,
     suggestions: Array<IEngWordSuggest>,
-    engWordVocabulary: IEngWordVocabulary | null,
+    engWordVocabulary: Array<IVocabulary>,
     currentPage: number
 }
 
 const initialState: EngWordState = {
     engWord: null,
     suggestions: [],
-    engWordVocabulary: null,
+    engWordVocabulary: [],
     currentPage: 0
 };
 
@@ -33,9 +33,13 @@ export const engWordSlice = createSlice(
             setEngWordAuto: (state, action: PayloadAction<Array<IEngWordSuggest>> ) => {
                 state.suggestions = action.payload
             },
-            setVocabulary: (state, action: PayloadAction<IEngWordVocabulary>) => {
-                state.engWordVocabulary = {...state.engWordVocabulary, ...action.payload}
+            setVocabulary: (state, action: PayloadAction<Array<IVocabulary>>) => {
+                state.engWordVocabulary = [...state.engWordVocabulary, ...action.payload]
                 state.currentPage = state.currentPage + 1
+            },
+            resetVocabulary: (state) => {
+                state.currentPage = 0
+                state.engWordVocabulary = []
             }
         }
     }
@@ -44,7 +48,8 @@ export const engWordSlice = createSlice(
 export const {
     setEngWord,
     setEngWordAuto,
-    setVocabulary
+    setVocabulary,
+    resetVocabulary
 } = engWordSlice.actions;
 
 export const getEngWordAsync = (word:string): AppThunk => async (dispatch: any) => {
@@ -71,7 +76,7 @@ export const getEngWordVocabulary = ():AppThunk => async  (dispatch: any, getSta
     const engWordReducer = getState().engWordReducer
     let currentPage = engWordReducer.currentPage
     let result = await MnemonicClient.vocabulary(currentPage)
-    dispatch(setVocabulary(result))
+    dispatch(setVocabulary(result.vocabulary))
 }
 
 

@@ -1,37 +1,41 @@
 import React, {FC, useEffect, useState} from "react";
 import s from './mnemonic.module.scss';
 import {ITransliteration} from "../../../shared/models/engWordTypes";
+import {useAppDispatch} from "../../../store";
+import {updateAccuracy, updateCreateAccuracy} from "../../../store/mnemonicSlice";
 
 type PropsType = {
     word: string,
     highlight: Array<number>,
-    trans: Array<ITransliteration>
-    canSaveMnemonic: (accuracy: number) => void
+    accuracy: number,
+    trans: Array<ITransliteration>,
+    isCreate: boolean
 }
 
 const MyTranslit: FC<PropsType> = (props) => {
+    const dispatch = useAppDispatch()
     let [myTranslit, setMyTranslit] = useState('')
-    let [accuracy, setAccuracy] = useState(0)
 
     let myMnemo = () => {
-        let highlight = props.highlight.sort((a,b) => a-b)
-        let selected = []
-        for (let i =0; i< highlight.length; i++){
-            const number = highlight[i];
-            selected.push(props.word[number].toLowerCase())
-        }
-        setMyTranslit(selected.join(''))
+            let highlight = [...props.highlight].sort((a,b) => a-b)
+            let selected = []
+            for (let i =0; i< highlight.length; i++){
+                const number = highlight[i];
+                selected.push(props.word[number].toLowerCase())
+            }
+            setMyTranslit(selected.join(''))
     }
 
     useEffect(() => {
         myMnemo()
     },[props.highlight])
     useEffect(() => {
-        setAccuracy(calculateAccuracy())
+        if(props.isCreate) {
+            dispatch(updateCreateAccuracy(calculateAccuracy()))
+        }else {
+            dispatch(updateAccuracy(calculateAccuracy()))
+        }
     },[myTranslit])
-    useEffect(() => {
-        props.canSaveMnemonic(accuracy)
-    }, [accuracy])
 
     let calculateAccuracy = () => {
         return findMaxPoint(myTranslit, props.trans)
@@ -66,7 +70,7 @@ const MyTranslit: FC<PropsType> = (props) => {
 
     return (
         <li className={s.myTransliteration}>
-            {`${myTranslit} ${Math.round(accuracy)}%`}
+            {`${myTranslit} ${Math.round(props.accuracy)}%`}
         </li>
     )
 };

@@ -9,7 +9,7 @@ import {getReadyToPractice} from "./appSlice";
 interface ExampleState {
     checkedExample: IExample | null
     examples: Array<IExample>
-    updateExample: IExample | null
+    // updateExample: IExample | null
     updateExamples: Array<IExample>
     currentPage: number
     hasMore: boolean
@@ -18,7 +18,7 @@ interface ExampleState {
 const initialState: ExampleState = {
     examples: [],
     checkedExample: null,
-    updateExample: null,
+    // updateExample: null,
     currentPage: 0,
     hasMore: false,
     updateExamples: []
@@ -83,9 +83,9 @@ export const exampleSlice = createSlice(
             checkExample: (state, action: PayloadAction<IExample>) => {
                 state.checkedExample = action.payload;
             },
-            setUpdateExample: (state, action: PayloadAction<IExample>) => {
-                state.updateExample = action.payload;
-            },
+            // setUpdateExample: (state, action: PayloadAction<IExample>) => {
+            //     state.updateExample = action.payload;
+            // },
             addUpdateExample:(state, action: PayloadAction<IExample>) => {
                 state.updateExamples = [...state.updateExamples, action.payload]
             },

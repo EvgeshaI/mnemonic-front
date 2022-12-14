@@ -4,7 +4,7 @@ import MnemonicComponent from "./MnemonicComponent";
 import s from './mnemonic.module.scss'
 import CreateMnemonic from "./CreateMnemonic";
 import {useNavigate} from "react-router";
-import {useAppDispatch} from "../../../store";
+import {useAppDispatch, useAppSelector} from "../../../store";
 import {getMnemonicAsync} from "../../../store/mnemonicSlice";
 
 type PropsType = {
@@ -14,6 +14,9 @@ type PropsType = {
     hasMoreMnemonics: boolean
 }
 const MnemonicContainer: FC<PropsType> = (props) => {
+    const {
+        calcAccuracyUpdateMnemo,
+    } = useAppSelector((state) => state.mnemonicReducer);
     const dispatch = useAppDispatch()
     let [clickCreateMnemonic, setClickCreateMnemonic] = useState(false);
     const navigate = useNavigate()
@@ -38,6 +41,7 @@ const MnemonicContainer: FC<PropsType> = (props) => {
                     engWord={props.engWord}
                     auth={props.isAuth}
                     mnemonic={m}
+                    isEdit={calcAccuracyUpdateMnemo.mnemonicId === m.mnemonicId}
                 />
             )}
             {clickCreateMnemonic ?
