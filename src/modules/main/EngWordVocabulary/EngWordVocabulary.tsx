@@ -8,8 +8,10 @@ import {IVocabulary} from "../../../shared/models/engWordTypes";
 export const EngWordVocabulary = () => {
     const dispatch = useAppDispatch()
     const {
-        engWordVocabulary
+        engWordVocabulary,
+        hasMore
     } = useAppSelector((state) => state.engWordReducer);
+
     useEffect(() => {
         dispatch(getEngWordVocabulary())
     }, [])
@@ -35,25 +37,11 @@ export const EngWordVocabulary = () => {
     const loadMnemo = () => {
         dispatch(getEngWordVocabulary())
     }
-    // function checkPosition() {
-    //     const height = document.body.offsetHeight
-    //     const screenHeight = window.innerHeight
-    //     const scrolled = window.scrollY
-    //     const threshold = height - screenHeight / 4
-    //     const position = scrolled + screenHeight
-    //     if (position >= threshold) {
-    //         dispatch(getEngWordVocabulary())
-    //     }
-    // }
-    // (() => {
-    //     window.addEventListener('scroll', checkPosition)
-    //     window.addEventListener('resize', checkPosition)
-    // })()
     return (
         <div className={s.engWordVocabulary}>
             {Array.from(letterAndVocabulary.keys()).map(letter =>
                 <Vocabulary key={letter} letter={letter} vocabularies={letterAndVocabulary.get(letter)!}/>)}
-            <button onClick={loadMnemo}>load</button>
+            {hasMore && <button onClick={loadMnemo}>load</button> }
         </div>
     )
 }

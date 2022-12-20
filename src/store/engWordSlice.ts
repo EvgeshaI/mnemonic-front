@@ -11,14 +11,16 @@ interface EngWordState {
     engWord: IEngWord | null,
     suggestions: Array<IEngWordSuggest>,
     engWordVocabulary: Array<IVocabulary>,
-    currentPage: number
+    currentPage: number,
+    hasMore: boolean
 }
 
 const initialState: EngWordState = {
     engWord: null,
     suggestions: [],
     engWordVocabulary: [],
-    currentPage: 0
+    currentPage: 0,
+    hasMore: false
 };
 
 export const engWordSlice = createSlice(
@@ -28,7 +30,6 @@ export const engWordSlice = createSlice(
         reducers: {
             setEngWord: (state, action: PayloadAction<IEngWord> ) => {
                 state.engWord = action.payload
-
             },
             setEngWordAuto: (state, action: PayloadAction<Array<IEngWordSuggest>> ) => {
                 state.suggestions = action.payload
@@ -36,6 +37,7 @@ export const engWordSlice = createSlice(
             setVocabulary: (state, action: PayloadAction<Array<IVocabulary>>) => {
                 state.engWordVocabulary = [...state.engWordVocabulary, ...action.payload]
                 state.currentPage = state.currentPage + 1
+                state.hasMore = action.payload.length > 0
             },
             resetVocabulary: (state) => {
                 state.currentPage = 0

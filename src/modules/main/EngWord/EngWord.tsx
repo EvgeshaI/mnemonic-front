@@ -27,7 +27,6 @@ const EngWord: FC<any> = () => {
     const {
         examples,
         checkedExample,
-        // updateExample,
         updateExamples
     } = useAppSelector((state) => state.exampleReducer);
     const hasMoreExample = useAppSelector((state) => state.exampleReducer).hasMore;

@@ -111,7 +111,7 @@ export const mnemonicSlice = createSlice(
             deleteCreateHighlight: (state, action: PayloadAction<number>) => {
                 state.calcAccuracyCreateMnemo!.highlight = state.calcAccuracyCreateMnemo!.highlight.filter(el => el !== action.payload)
             },
-            clearClearCreateHighlight: (state) => {
+            clearCreateHighlight: (state) => {
                 state.calcAccuracyCreateMnemo!.highlight =[]
                 state.calcAccuracyCreateMnemo!.accuracy = 0
             },
@@ -147,6 +147,10 @@ export const mnemonicSlice = createSlice(
                     highlight: []
                 }
             },
+            clearUpdateHighlight: (state) => {
+                state.calcAccuracyUpdateMnemo!.highlight =[]
+                state.calcAccuracyUpdateMnemo!.accuracy = 0
+            },
             updateHighlightUpdate: (state, action: PayloadAction<number>) => {
                 state.calcAccuracyUpdateMnemo!.highlight = [...state.calcAccuracyUpdateMnemo!.highlight, action.payload].sort()
             },
@@ -171,13 +175,14 @@ export const {
     updateCalcAccuracyCreateMnemo,
     updateCreateHighlight,
     deleteCreateHighlight,
-    clearClearCreateHighlight,
+    clearCreateHighlight,
     updateCreateAccuracy,
     clearCalcAccuracyMnemo,
     setCalcAccuracyUpdateMnemo,
     resetCalcAccuracyUpdateMnemo,
     deleteUpdateHighlight,
     updateCalcAccuracyUpdateMnemo,
+    clearUpdateHighlight,
     updateHighlightUpdate,
     updateAccuracy
 } = mnemonicSlice.actions;
