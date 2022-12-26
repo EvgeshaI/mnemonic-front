@@ -4,6 +4,8 @@ import s from "./vocabulary.module.scss"
 import {Vocabulary} from "./Vocabulary";
 import {getEngWordVocabulary, resetVocabulary} from "../../../store/engWordSlice";
 import {IVocabulary} from "../../../shared/models/engWordTypes";
+import InfiniteScroll from "react-infinite-scroll-component";
+import {Preloader} from "../Preloader/Preloader";
 
 export const EngWordVocabulary = () => {
     const dispatch = useAppDispatch()
@@ -15,9 +17,23 @@ export const EngWordVocabulary = () => {
     useEffect(() => {
         dispatch(getEngWordVocabulary())
     }, [])
+
+
     useEffect(() => {
         return () => {dispatch(resetVocabulary())}
     }, [])
+    //
+    // const checkPosition = () =>  {
+    //     const height = document.body.offsetHeight
+    //     const screenHeight = window.innerHeight
+    //     const scrolled = window.scrollY
+    //     const threshold = height - screenHeight / 4
+    //     const position = scrolled + screenHeight
+    //     if (position >= threshold) {
+    //         dispatch(getEngWordVocabulary())
+    //     }
+    // }
+
     const vocabularies = () => {
         let map = new Map<string, Array<IVocabulary>>()
         if(engWordVocabulary){
@@ -39,9 +55,14 @@ export const EngWordVocabulary = () => {
     }
     return (
         <div className={s.engWordVocabulary}>
-            {Array.from(letterAndVocabulary.keys()).map(letter =>
-                <Vocabulary key={letter} letter={letter} vocabularies={letterAndVocabulary.get(letter)!}/>)}
-            {hasMore && <button onClick={loadMnemo}>load</button> }
+                <InfiniteScroll dataLength={letterAndVocabulary.size}
+                                next={loadMnemo}
+                                hasMore={hasMore}
+                                loader={<Preloader/>}
+                >
+                    {Array.from(letterAndVocabulary.keys()).map((letter, i) =>
+                        <Vocabulary key={i} letter={letter} vocabularies={letterAndVocabulary.get(letter)!}/>)}
+                </InfiniteScroll>
         </div>
     )
 }

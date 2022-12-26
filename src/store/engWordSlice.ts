@@ -37,7 +37,7 @@ export const engWordSlice = createSlice(
             setVocabulary: (state, action: PayloadAction<Array<IVocabulary>>) => {
                 state.engWordVocabulary = [...state.engWordVocabulary, ...action.payload]
                 state.currentPage = state.currentPage + 1
-                state.hasMore = action.payload.length > 0
+                state.hasMore = action.payload.length === 300
             },
             resetVocabulary: (state) => {
                 state.currentPage = 0
