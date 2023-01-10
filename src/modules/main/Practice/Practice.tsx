@@ -12,6 +12,7 @@ import {IconsResult} from "./IconsResult";
 import {IPracticeExample, PartTypes} from "../../../shared/models/engWordTypes";
 import {getReadyToPractice} from "../../../store/appSlice";
 import {AudioComponent} from "../EngWord/AudioComponent";
+import {ExampleFormat} from "../example/ExampleFormat";
 
 export const Practice:FC<{practices: Array<IPracticeExample>}> = (props) => {
 
@@ -187,7 +188,7 @@ export const Practice:FC<{practices: Array<IPracticeExample>}> = (props) => {
         return 0
     }
     let mnemo = currentExample?.parts.filter(el => el.type === PartTypes.MNEMONIC).map(el => el.part).join("")
-
+    let isFinishSentence = ((engWordCorrect && translateCorrect) || checkedCount > 2)
     return (
         <div className={s.practiceContainer}>
             {count <= examplesPractice.length - 1 &&
@@ -211,27 +212,36 @@ export const Practice:FC<{practices: Array<IPracticeExample>}> = (props) => {
             {count <= examplesPractice.length - 1 ?
                 <div className={s.practiceBox}>
                     <div className={s.sentenceBox}>
-                        <div className={s.sentence}>
-                            <Sentence
-                                addWordToTranslate={addWordToTranslate}
-                                currentExample={currentExample}
-                                count={keyCount}
-                            />
-                        </div>
-                        <div className={s.keyBox}>
-                            <div
-                                onClick={getKey}
-                                className={s.keyIcon}>
-                                <Key/>
+                        {isFinishSentence ?
+                            <div className={s.sentenceRight}>
+                                {props.practices.map(el => <ExampleFormat parts={el.parts}/>)}
                             </div>
-                            <div className={s.count}>{keyCount}</div>
-                        </div>
-                        {keyCount === 1 &&
+                            :
+                            <div className={s.sentence}>
+                                <Sentence
+                                    addWordToTranslate={addWordToTranslate}
+                                    currentExample={currentExample}
+                                    count={keyCount}
+                                />
+                            </div>
+                        }
+                        {!isFinishSentence &&
+                            <div className={s.keyBox}>
+                                <div
+                                    onClick={getKey}
+                                    className={s.keyIcon}>
+                                    <Key/>
+                                </div>
+                                <div className={s.count}>{keyCount}</div>
+                            </div>
+                        }
+
+                        {keyCount === 1 && !isFinishSentence &&
                             <div className={s.prompt}>
                                 {currentExample.mnemonicInSentence}
                             </div>
                         }
-                        {keyCount<1 &&
+                        {keyCount<1 && !isFinishSentence &&
                             <div className={s.prompt}>
                                 {mnemo}
                             </div>
@@ -242,7 +252,7 @@ export const Practice:FC<{practices: Array<IPracticeExample>}> = (props) => {
                         <div className={s.inputBox}>
                             <div className={s.inputName}>
                                 слово
-                                {((engWordCorrect && translateCorrect) || checkedCount > 2)
+                                {isFinishSentence
                                     &&
                                     <div className={s.sound}><AudioComponent audioFile={currentExample.audioFile}/></div>
                                 }
@@ -254,7 +264,7 @@ export const Practice:FC<{practices: Array<IPracticeExample>}> = (props) => {
                                 onChange={changeEngWord}
                                 className={engWordStyle()}
                             />
-                            {((engWordCorrect && translateCorrect) || checkedCount > 2) &&
+                            {isFinishSentence &&
                                 <div className={s.transcription}>[{currentExample.transcription}]</div>
                             }
                         </div>
@@ -290,7 +300,7 @@ export const Practice:FC<{practices: Array<IPracticeExample>}> = (props) => {
                             ответ
                         </div>
                     }
-                    {((engWordCorrect && translateCorrect) || checkedCount > 2) &&
+                    {isFinishSentence &&
                         <div className={s.practiceButton}
                              onClick={nextSentence}>
                             Далее
