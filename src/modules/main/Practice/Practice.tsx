@@ -225,16 +225,18 @@ export const Practice:FC<{practices: Array<IPracticeExample>}> = (props) => {
                                 />
                             </div>
                         }
-                        {!isFinishSentence &&
                             <div className={s.keyBox}>
-                                <div
-                                    onClick={getKey}
-                                    className={s.keyIcon}>
-                                    <Key/>
-                                </div>
-                                <div className={s.count}>{keyCount}</div>
+                                {!isFinishSentence &&
+                                    <>
+                                        <div
+                                            onClick={getKey}
+                                            className={s.keyIcon}>
+                                            <Key/>
+                                        </div>
+                                        <div className={s.count}>{keyCount}</div>
+                                    </>
+                                }
                             </div>
-                        }
 
                         {keyCount === 1 && !isFinishSentence &&
                             <div className={s.prompt}>

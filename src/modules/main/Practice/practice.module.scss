@@ -59,6 +59,11 @@
   display: flex;
   justify-content: center;
   margin: 5px 0 0 0;
+  height: 30px;
+}
+.keyBoxHid{
+  visibility: hidden;
+  margin: 5px 0 0 0;
 }
 .keyIcon{
   width: 15px;
