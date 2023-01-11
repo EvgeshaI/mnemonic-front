@@ -214,7 +214,7 @@ export const Practice:FC<{practices: Array<IPracticeExample>}> = (props) => {
                     <div className={s.sentenceBox}>
                         {isFinishSentence ?
                             <div className={s.sentenceRight}>
-                                {props.practices.map(el => <ExampleFormat parts={el.parts}/>)}
+                                <ExampleFormat parts={currentExample.parts}/>
                             </div>
                             :
                             <div className={s.sentence}>
